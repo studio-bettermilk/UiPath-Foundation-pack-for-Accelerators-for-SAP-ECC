@@ -1,0 +1,10 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "entryPoints": [
+    {
+      "filePath": "Sample_SRC_BAPIv2.2_REGISTER.xaml",
+      "uniqueId": "edad3e7c-acb1-446b-8ae3-d9cac309b151",
+      "type": "process"
+    }
+  ]
+}

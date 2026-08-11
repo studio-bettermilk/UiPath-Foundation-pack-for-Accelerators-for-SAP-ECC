@@ -1,0 +1,369 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GetErrorHeader"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_dt_GetData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="io_RowCounter" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>GetErrorHeader_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Get  header information from  &quot;Runtime Error Long Text&quot; screen.&#xA;(There are header informations at the top of screen.)&#xA;&#xA;- Input/Output&#xA;in_Config as  Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xA;out_dt_GetData as Acquired data &lt;Datatable&gt;&#xA;io_RowCounter as Row Counter &lt;Int32&gt;" DisplayName="Get header informantion" sap2010:WorkflowViewState.IdRef="Sequence_805">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="GetErrorHeader" Name="WorkflowName" />
+      <Variable x:TypeArguments="sd:DataRow" Name="GetDataRow" />
+      <Variable x:TypeArguments="x:Int32" Name="ErrorRowCount" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Assign DisplayName="Assign Create out_dt_GetData" sap2010:WorkflowViewState.IdRef="Assign_780">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[out_dt_GetData]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[new DataTable]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Create output DataTable" DisplayName="For Each - Add Data Column" Values="[in_Config(&quot;MSG_GetErrorHeader_001&quot;).ToString.Split(&quot;,&quot;c).ToList]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+          </ActivityAction.Argument>
+          <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[item]" DataTable="[out_dt_GetData]" DisplayName="Add Data Column" MaxLength="-1" Unique="False" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+        </ActivityAction>
+      </ui:ForEach.Body>
+      <sap2010:WorkflowViewState.IdRef>ForEach`1_2</sap2010:WorkflowViewState.IdRef>
+    </ui:ForEach>
+    <Assign DisplayName="Assign New Row" sap2010:WorkflowViewState.IdRef="Assign_778">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataRow">[GetDataRow]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataRow">[out_dt_GetData.NewRow]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:Annotation.AnnotationText="Number of rows for error acquisition">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[ErrorRowCount]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">6</InArgument>
+      </Assign.Value>
+      <sap2010:WorkflowViewState.IdRef>Assign_782</sap2010:WorkflowViewState.IdRef>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:Int32" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get header information from top of screen." DisplayName="For Each" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Enumerable.Range(0, ErrorRowCount)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Int32">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Int32" Name="RowCounter" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_824">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="ui:GenericValue" Name="ItemName" />
+              <Variable x:TypeArguments="x:Boolean" Name="ElementExists" />
+            </Sequence.Variables>
+            <ui:UiElementExists DisplayName="Element Exists Selector" Exists="[ElementExists]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+              <ui:UiElementExists.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[string.Format( in_Config(&quot;LBL_GetErrorHeader_0001&quot;).ToString, RowCounter.ToString)]" TimeoutMS="1000" WaitForReady="COMPLETE" />
+              </ui:UiElementExists.Target>
+            </ui:UiElementExists>
+            <If Condition="[Not ElementExists]" DisplayName="If Does the selector exist?" sap2010:WorkflowViewState.IdRef="If_6">
+              <If.Then>
+                <ui:Break sap2010:WorkflowViewState.IdRef="Break_1" />
+              </If.Then>
+            </If>
+            <Assign DisplayName="Assign RowCounter" sap2010:WorkflowViewState.IdRef="Assign_774">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[io_RowCounter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[RowCounter]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text ItemName " sap2010:WorkflowViewState.IdRef="GetValue_21">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e157a1df6f26fb8622153bc5f8bf6784" Selector="[string.Format( in_Config(&quot;LBL_GetErrorHeader_0001&quot;).ToString, RowCounter.ToString)]" WaitForReady="INTERACTIVE" />
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[ItemName]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <If Condition="[ItemName.ToString.Trim = in_Config(&quot;MSG_GetErrorHeader_002&quot;).ToString]" DisplayName="If  - Check &quot;Date&quot; and &quot;Time&quot; fields." sap2010:WorkflowViewState.IdRef="If_4">
+              <If.Then>
+                <Sequence DisplayName="Sequence - Get &quot;Date&quot; and &quot;Time&quot;" sap2010:WorkflowViewState.IdRef="Sequence_822">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="Dating" />
+                    <Variable x:TypeArguments="x:String" Name="Time" />
+                  </Sequence.Variables>
+                  <ui:GetValue ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Date" DisplayName="Get Text Date" sap2010:WorkflowViewState.IdRef="GetValue_22">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="ad061754c3d1e25b13e06298c2b5dc61" Selector="[string.Format( in_Config(&quot;LBL_GetErrorHeader_0002&quot;).ToString, RowCounter.ToString)]" WaitForReady="INTERACTIVE" />
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="x:String">[Dating]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <Assign DisplayName="Assign Date" sap2010:WorkflowViewState.IdRef="Assign_781">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[GetDataRow.Item(out_dt_GetData.Columns.IndexOf(in_Config("MSG_GetErrorHeader_003").ToString))]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">[Dating]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:GetValue ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Time" DisplayName="Get Text  Time" sap2010:WorkflowViewState.IdRef="GetValue_23">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="ecb02d6903463911bad848759cbc24af" Selector="[string.Format( in_Config(&quot;LBL_GetErrorHeader_0003&quot;).ToString, RowCounter.ToString)]" WaitForReady="INTERACTIVE" />
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="x:String">[Time]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <Assign DisplayName="Assign Time" sap2010:WorkflowViewState.IdRef="Assign_777">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[GetDataRow.Item(out_dt_GetData.Columns.IndexOf(in_Config("MSG_GetErrorHeader_004").ToString))]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">[Time]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="Sequence - Get error text" sap2010:WorkflowViewState.IdRef="Sequence_823">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="ColumnValue" />
+                  </Sequence.Variables>
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text Error " sap2010:WorkflowViewState.IdRef="GetValue_24">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="dc85e9ffdf0bda55fd012e08b03aa3c6" Selector="[string.Format( in_Config(&quot;LBL_GetErrorHeader_0002&quot;).ToString, RowCounter.ToString)]" WaitForReady="INTERACTIVE" />
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="x:String">[ColumnValue]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <Assign DisplayName="Assign Error" sap2010:WorkflowViewState.IdRef="Assign_768">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[GetDataRow.Item(out_dt_GetData.Columns.IndexOf(ItemName.ToString.Trim))]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">[ColumnValue]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[GetDataRow]" DataTable="[out_dt_GetData]" DisplayName="Add Data Row" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d1RDOlwwMV/moYjku7ZcMTJfU1QyMlxTUkNfRFVNUExPR19FWFBPUlRcRUNDXFNSQ19EVU1QTE9HX0VYUE9SVF9FXEdldEVycm9ySGVhZGVyLnhhbWw9XQP1AQ4CAQFfNF9EAgECYwVjowECAVlkBWsOAgFVbAV2EgIBTncFfg4CAUp/BYcBDgIBRogBBfEBEgIBC/IBBfIBqAECAQbzAQXzAZ8BAgEDY3pjoAECAVppNGlDAgFYZjVmRQIBVmywAWyHAgIBVHILcq4CAgFPfDJ8SQIBTXkzeT8CAUuEAS+EATACAUmBATCBAT8CAUeIAd4BiAGEAgIBRY4BC+4BFgIBDPIBMPIBPgIBCfIBSfIBWwIBB/MBePMBnAECAQRylgFyngECAVJyqQFyuwECAVCTAQ2XASICAT6YAQ2cARICATqdAQ2kARYCATWlAQ2sARsCAS+tAQ3tARICAQ2VAVKVAbIBAgFClQG9AZUBwwECAUGTAU6TAV8CAT+YARuYATACATuaARGaAUcCAT2iATeiAUMCATifATifAUcCATaqAUCqAUoCATCnAaABpwGAAgIBMq0BG60BbgIBDq8BEdQBHAIBGtcBEesBHAIBD7QBE7sBIQIBKbwBE8MBHAIBJcQBE8sBIQIBH8wBE9MBHAIBG9sBE+IBIQIBFOMBE+oBHAIBELkBP7kBRwIBKrYBpgG2AYYCAgEswQE+wQFGAgEnvgE/vgGeAQIBJskBP8kBRQIBIMYBpgHGAYYCAgEi0QE+0QFEAgEdzgE/zgGeAQIBHOABP+ABTAIBFd0BpgHdAYYCAgEX6AE+6AFLAgES5QE/5QGIAQIBEQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="735,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_780" sap:VirtualizedContainerService.HintSize="735,60" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="735,221">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_778" sap:VirtualizedContainerService.HintSize="735,60" />
+      <sap2010:ViewStateData Id="Assign_782" sap:VirtualizedContainerService.HintSize="735,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="697,68" />
+      <sap2010:ViewStateData Id="Break_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="697,208" />
+      <sap2010:ViewStateData Id="Assign_774" sap:VirtualizedContainerService.HintSize="697,60" />
+      <sap2010:ViewStateData Id="GetValue_21" sap:VirtualizedContainerService.HintSize="697,106">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetValue_22" sap:VirtualizedContainerService.HintSize="314,133">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_781" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="GetValue_23" sap:VirtualizedContainerService.HintSize="314,133">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_777" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_822" sap:VirtualizedContainerService.HintSize="336,630">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetValue_24" sap:VirtualizedContainerService.HintSize="314,106">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_768" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_823" sap:VirtualizedContainerService.HintSize="336,330">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="697,778">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_824" sap:VirtualizedContainerService.HintSize="719,1504">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="735,1665">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddDataRow_1" sap:VirtualizedContainerService.HintSize="735,22" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="735,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_805" sap:VirtualizedContainerService.HintSize="757,2833">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetErrorHeader_1" sap:VirtualizedContainerService.HintSize="797,2913" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

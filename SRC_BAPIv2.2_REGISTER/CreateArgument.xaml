@@ -1,0 +1,389 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="CreateArgument"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ColumnCount" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_TargetType" Type="InArgument(scg:KeyValuePair(x:String, x:String))" />
+    <x:Property Name="io_Import" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_DataTable" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="in_BAPINameSheet" Type="InArgument(x:String)" />
+    <x:Property Name="in_InputData" Type="InArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="in_HeaderIndex" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Body_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Create BAPI Arguments.&#xA;&#xA;- Input/Output&#xA;in_ColumnCount as Column Count &lt;Int32&gt;&#xA;in_TargetType as Target Type &lt;KeyValuePair&lt;String,String&gt;&gt;&#xA;in_BAPINameSheet as BAPI Name Sheet &lt;String&gt;&#xA;in_InputData as Input Data &lt;Dictionary&lt;String,DataTable&gt;&#xA;in_HeaderIndex as Header Data Index &lt;String&gt;&#xA;io_Import as API Argument. Type Object &lt;Dictionary&lt;String,Object&gt;&#xA;io_DataTable as BAPI Argument. Type DataTable &lt;Dictionary&lt;String,DataTable&gt;&#xA;" DisplayName="CreateArgument" sap2010:WorkflowViewState.IdRef="Sequence_666">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="CreateArgument" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Determine the subsequent process according to Argument type." DisplayName="Switch" Expression="[in_TargetType.Value]" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+      <Switch.Default>
+        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw" Exception="[new UiPath.Core.BusinessRuleException(&quot;Unsupported DataType.[&quot; &amp; in_TargetType.Value &amp; &quot;]&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+      </Switch.Default>
+      <Sequence x:Key="String" DisplayName="Sequence String" sap2010:WorkflowViewState.IdRef="Sequence_704">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="ui:GenericValue" Name="ValueTemp" />
+        </Sequence.Variables>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the value of column specified by the argument (in_Column) of in_DataRow." DisplayName="Invoke GetValueFromDataRow Workflow File (Type String)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\GetValueFromDataRow.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataRow[]" x:Key="in_DataRow">[in_InputData(in_BAPINamesheet).Select("No = '" &amp; in_HeaderIndex &amp; "'")]</InArgument>
+            <OutArgument x:TypeArguments="ui:GenericValue" x:Key="out_GetValue">[ValueTemp]</OutArgument>
+            <InArgument x:TypeArguments="x:Int32" x:Key="in_Column">[in_ColumnCount]</InArgument>
+            <InArgument x:TypeArguments="ui:GenericValue" x:Key="in_InitialValue">[""]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <Assign DisplayName="Assign Set Output" sap2010:WorkflowViewState.IdRef="Assign_678">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Object">[io_Import(in_TargetType.Key)]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Object">[ValueTemp]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Integer" DisplayName="Sequence Integer" sap2010:WorkflowViewState.IdRef="Sequence_705">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="ui:GenericValue" Name="ValueTemp" />
+        </Sequence.Variables>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the value of column specified by the argument (in_Column) of in_DataRow." DisplayName="Invoke GetValueFromDataRow Workflow File (Type Integer)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\GetValueFromDataRow.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataRow[]" x:Key="in_DataRow">[in_InputData(in_BAPINamesheet).Select("No = '" &amp; in_HeaderIndex &amp; "'")]</InArgument>
+            <OutArgument x:TypeArguments="ui:GenericValue" x:Key="out_GetValue">[ValueTemp]</OutArgument>
+            <InArgument x:TypeArguments="x:Int32" x:Key="in_Column">[in_ColumnCount]</InArgument>
+            <InArgument x:TypeArguments="ui:GenericValue" x:Key="in_InitialValue">[0]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <Assign DisplayName="Assign Integer" sap2010:WorkflowViewState.IdRef="Assign_679">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Object">[io_Import(in_TargetType.Key)]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Object">[ValueTemp]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="Decimal" DisplayName="Sequence Decimal" sap2010:WorkflowViewState.IdRef="Sequence_706">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="ui:GenericValue" Name="ValueTemp" />
+        </Sequence.Variables>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the value of column specified by the argument (in_Column) of in_DataRow." DisplayName="Invoke GetValueFromDataRow Workflow File (Type Decimal)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\GetValueFromDataRow.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataRow[]" x:Key="in_DataRow">[in_InputData(in_BAPINamesheet).Select("No = '" &amp; in_HeaderIndex &amp; "'")]</InArgument>
+            <OutArgument x:TypeArguments="ui:GenericValue" x:Key="out_GetValue">[ValueTemp]</OutArgument>
+            <InArgument x:TypeArguments="x:Int32" x:Key="in_Column">[in_ColumnCount]</InArgument>
+            <InArgument x:TypeArguments="ui:GenericValue" x:Key="in_InitialValue">[0]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <Assign DisplayName="Assign Decimal" sap2010:WorkflowViewState.IdRef="Assign_680">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Object">[io_Import(in_TargetType.Key)]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Object">[ValueTemp]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence x:Key="DataRow" DisplayName="Sequence DataRow" sap2010:WorkflowViewState.IdRef="Sequence_707">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="sd:DataTable" Name="dt_DataTableTemp" />
+        </Sequence.Variables>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Assign the value of DataRow array into DataTable." DisplayName="Invoke CopyDataRowToDataTable Workflow File (Type DataRow)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\CopyDataRowToDataTable.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataRow[]" x:Key="in_DataRow">[in_InputData(in_TargetType.Key).Select("No = '" &amp; in_HeaderIndex &amp; "'")]</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_GetValue">[dt_DataTableTemp]</OutArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_GetValueClone">[in_InputData(in_TargetType.Key).Clone]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Delete the columns (No, Name) that are unnecessary for BAPI execution from DataTable." DisplayName="Invoke Deletecolumn Workflow File (Type DataRow)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\DeleteColumn.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_DeleteColumn">[new list(of string) from{"No", "Name"}]</InArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Target">[dt_DataTableTemp]</InOutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <If Condition="[dt_DataTableTemp.Rows.Count &gt; 0]" DisplayName="If : Check if the the target data exists" sap2010:WorkflowViewState.IdRef="If_280">
+          <If.Then>
+            <Assign DisplayName="Assign Exist(Type DataRow)" sap2010:WorkflowViewState.IdRef="Assign_681">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[io_Import(in_TargetType.Key)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">[dt_DataTableTemp.Rows(0)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Then>
+          <If.Else>
+            <Assign DisplayName="Assign Not Exist(Type DataRow)" sap2010:WorkflowViewState.IdRef="Assign_682">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[io_Import(in_TargetType.Key)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">[dt_DataTableTemp.NewRow]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Else>
+        </If>
+      </Sequence>
+      <Sequence x:Key="DataTable" DisplayName="Sequence DataTable" sap2010:WorkflowViewState.IdRef="Sequence_708">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="sd:DataTable" Name="dt_DataTableTemp" />
+        </Sequence.Variables>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Assign the value of DataRow array into DataTable." DisplayName="Invoke Sequence Workflow File (Type DataTable)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\CopyDataRowToDataTable.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataRow[]" x:Key="in_DataRow">[in_InputData(in_TargetType.Key).Select("No = '" &amp; in_HeaderIndex &amp; "'")]</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_GetValue">[dt_DataTableTemp]</OutArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_GetValueClone">[in_InputData(in_TargetType.Key).Clone]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Delete the columns (No, Name) that are unnecessary for BAPI execution from DataTable." DisplayName="Invoke DeleteColumn Workflow File (Type DataTable)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\DeleteColumn.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_DeleteColumn">[new list(of string) from{"No", "Name"}]</InArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Target">[dt_DataTableTemp]</InOutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <Assign DisplayName="Assign DataTable" sap2010:WorkflowViewState.IdRef="Assign_683">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[io_DataTable(in_TargetType.Key)]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dt_DataTableTemp]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <ui:Comment x:Key="BapiRet2" DisplayName="Comment BapiRet2" sap2010:WorkflowViewState.IdRef="Comment_9" Text="// // Do not set as a BAPI Argument." />
+      <ui:Comment x:Key="List_BapiRet1" DisplayName="Comment List_BapiRet1" sap2010:WorkflowViewState.IdRef="Comment_10" Text="// // Do not set as a BAPI Argument." />
+      <ui:Comment x:Key="List_BapiRet2" DisplayName="Comment List_BapiRet2" sap2010:WorkflowViewState.IdRef="Comment_11" Text="// // Do not set as a BAPI Argument." />
+      <ui:Comment x:Key="List_BapiReturn" DisplayName="Comment List_BapiReturn" sap2010:WorkflowViewState.IdRef="Comment_12" Text="// Do not set as a BAPI Argument." />
+      <ui:Comment x:Key="List_BapiReturn1" DisplayName="Comment List_BapiReturn1" sap2010:WorkflowViewState.IdRef="Comment_13" Text="// Do not set as a BAPI Argument." />
+    </Switch>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d2xDOlxVc2Vyc1x5dWppLm1peWFtYS5VSVBBVEhcRGVza3RvcFwyMDE5MDkyNV9TUkNfQkFQSXYyLjJfUkVHSVNURVJcU1JDX0JBUEl2Mi4yX1JFR0lTVEVSXENyZWF0ZUFyZ3VtZW50LnhhbWxMYAPyAQ4CAQFiNGJEAgECZAVkpAECAWhlBe8BDgIBBvABBfABoAECAQNke2ShAQIBaWWpAWXAAQIBB2kHfRICAVp+B5IBEgIBTJMBB6cBEgIBPqgBB88BEgIBJNABB+kBEgIBEOoBB+oBnQECAQ/rAQfrAagBAgEO7AEH7AGoAQIBDe0BB+0BqQECAQzuAQfuAasBAgELZwlnkAICAQnwAXnwAZ0BAgEEbQl0IQIBYHUJfBICAVuCAQmJASECAVKKAQmRARICAU2XAQmeASECAUSfAQmmARICAT+sAQmyASECATazAQm4ASECATG5AQnOAQ4CASXUAQnaASECARzbAQngASECARfhAQnoARICARFnaGfjAQIBCnFFcVUCAWZwUXBcAgFkb0tvmwECAWNtyQJt+QICAWJyU3JXAgFhejR6PwIBX3c1d1MCAVyGAUWGAVUCAViFAVGFAVwCAVaEAUuEAZsBAgFVggHKAoIB+gICAVSHAVOHAVYCAVOPATSPAT8CAVGMATWMAVMCAU6bAUWbAVUCAUqaAVGaAVwCAUiZAUuZAZsBAgFHlwHKApcB+gICAUacAVOcAVYCAUWkATSkAT8CAUOhATWhAVMCAUCvAVGvAWMCATywAVSwAXsCATmuAUuuAZwBAgE4rAGyAqwB5QICATe2AVC2AWICATS1AVa1AX4CATOzAcwCswH1AgIBMrkBF7kBPQIBJrsBDcIBFgIBLMUBDcwBFgIBJ9cBUdcBYwIBItgBVNgBewIBH9YBS9YBnAECAR7UAaYC1AHZAgIBHd4BUN4BYgIBGt0BVt0BfgIBGdsBzgLbAfcCAgEY5gE45gFKAgEV4wE54wFaAgESwAE4wAFSAgEwvQE5vQFXAgEtygE4ygFRAgErxwE5xwFXAgEo</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="477,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_16" sap:VirtualizedContainerService.HintSize="314,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_678" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_704" sap:VirtualizedContainerService.HintSize="336,311">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_17" sap:VirtualizedContainerService.HintSize="314,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_679" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_705" sap:VirtualizedContainerService.HintSize="336,311">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_18" sap:VirtualizedContainerService.HintSize="314,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_680" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_706" sap:VirtualizedContainerService.HintSize="336,311">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_19" sap:VirtualizedContainerService.HintSize="509,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_20" sap:VirtualizedContainerService.HintSize="509,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_681" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_682" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_280" sap:VirtualizedContainerService.HintSize="509,208" />
+      <sap2010:ViewStateData Id="Sequence_707" sap:VirtualizedContainerService.HintSize="531,628">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_21" sap:VirtualizedContainerService.HintSize="314,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_22" sap:VirtualizedContainerService.HintSize="314,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_683" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_708" sap:VirtualizedContainerService.HintSize="336,507">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_9" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="Comment_10" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="Comment_11" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="Comment_12" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="Comment_13" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="Switch`1_3" sap:VirtualizedContainerService.HintSize="477,363">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="477,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_666" sap:VirtualizedContainerService.HintSize="499,941">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Body_1" sap:VirtualizedContainerService.HintSize="539,1021" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,323 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_InputByType" this:SRC_InputByType.in_DelayTime="300"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:this="clr-namespace:"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Selector" Type="InArgument(x:String)" />
+    <x:Property Name="in_Value" Type="InArgument(x:String)" />
+    <x:Property Name="in_NullException" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_DelayTime" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_ItemType" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>TypeItemCommon_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Set values on the screen consisting only of text boxes, combo boxes, check boxes, Radio buttons.&#xA;&#xA;- Input/Output&#xA;in_Selector as Selector to set&lt;String&gt; &#xA;in_Value as Value to set&lt;Strign&gt; &#xA;in_NullException as True  Generate Exception    &#xA;                                   False Do not raise Exception &lt;Boolean&gt;&#xA;in_DelayTime as Wait time before start and after start &lt;int32&gt;&#xA;in_ItemType as item selector type &lt;int32&gt;" DisplayName="SRC_InputByType" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_InputByType.xaml" Name="WorkflowName" />
+      <Variable x:TypeArguments="x:Boolean" Name="ElementExists" />
+      <Variable x:TypeArguments="x:Int32" Name="ItemType" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <ui:UiElementExists sap2010:Annotation.AnnotationText="Confirm existence of selector" DisplayName="Element Exists for in_Selector" Exists="[ElementExists]" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[In_Selector]" TimeoutMS="500" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[ElementExists = False]" DisplayName="If selector doesn't exist" sap2010:WorkflowViewState.IdRef="If_15">
+      <If.Then>
+        <If sap2010:Annotation.AnnotationText="If NullException flags is set True throw an Exception." Condition="[in_NullException]" DisplayName="If NullException flag is set True" sap2010:WorkflowViewState.IdRef="If_14">
+          <If.Then>
+            <Throw DisplayName="Throw selector not found" Exception="[New SelectorNotFoundException(&quot;Selector not found [ &quot; &amp; in_Selector &amp; &quot; ]&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+          </If.Then>
+          <If.Else>
+            <Assign DisplayName="Assign ItemType (Do nothing)" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[ItemType]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">4</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Else>
+        </If>
+      </If.Then>
+      <If.Else>
+        <Assign DisplayName="Assign ItemType" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[ItemType]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[in_ItemType]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </If.Else>
+    </If>
+    <Switch x:TypeArguments="x:Int32" sap2010:Annotation.AnnotationText="Default = Throw selector not supported exception&#xA;case 0 = txt     (Text box)&#xA;case 1 = cmb  (Combo box)&#xA;case 2 = chk   (Check box)&#xA;case 3 = rad    (Radio buttons)&#xA;case 4 = Do nothing" DisplayName="Switch by item selector type" Expression="[ItemType]" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+      <Switch.Default>
+        <Throw DisplayName="Throw selector not supported" Exception="[New SelectorNotFoundException(&quot;Selector not supported [ &quot; &amp; In_Selector &amp; &quot; ]&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+      </Switch.Default>
+      <If x:Key="0" sap2010:Annotation.AnnotationText="Check if in_Value is blank to decide Simulate Type must be enabled or disabled." Condition="[String.IsNullOrWhiteSpace(in_Value)]" DisplayName="If in_Value is blank" sap2010:WorkflowViewState.IdRef="If_19">
+        <If.Then>
+          <ui:TypeInto DelayBetweenKeys="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Type Into activity property Simulate Type must be disabled when the input value is blank. &#xA;&quot;DelayBefore&quot; and &quot;DelayAfter&quot; property is set from the argument." ClickBeforeTyping="False" DelayBefore="[in_DelayTime]" DelayMS="[in_DelayTime]" DisplayName="Type into with a blank value" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_8" SendWindowMessages="False" SimulateType="False">
+            <ui:TypeInto.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[In_Selector]" WaitForReady="COMPLETE" />
+            </ui:TypeInto.Target>
+            <ui:TypeInto.Text>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </ui:TypeInto.Text>
+          </ui:TypeInto>
+        </If.Then>
+        <If.Else>
+          <ui:TypeInto DelayBetweenKeys="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="SimulateType is enabled.&#xA;&quot;DelayBefore&quot; and &quot;DelayAfter&quot; property is set from the argument." ClickBeforeTyping="False" DelayBefore="[in_DelayTime]" DelayMS="[in_DelayTime]" DisplayName="Type Into with in_Value" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_9" SendWindowMessages="False" SimulateType="True" Text="[in_Value]">
+            <ui:TypeInto.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[In_Selector]" WaitForReady="COMPLETE" />
+            </ui:TypeInto.Target>
+          </ui:TypeInto>
+        </If.Else>
+      </If>
+      <ui:SelectItem ContinueOnError="{x:Null}" Items="{x:Null}" x:Key="1" sap2010:Annotation.AnnotationText="Set input value for combo box.&#xA;&quot;DelayBefore&quot; and &quot;DelayAfter&quot; property is set from the argument." DelayAfter="[in_DelayTime]" DelayBefore="[in_DelayTime]" DisplayName="Select Item for in_Value" sap2010:WorkflowViewState.IdRef="SelectItem_2" Item="[in_Value]">
+        <ui:SelectItem.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[In_Selector]" WaitForReady="INTERACTIVE" />
+        </ui:SelectItem.Target>
+      </ui:SelectItem>
+      <If x:Key="2" Condition="[in_Value.ToUpper =  &quot;X&quot;]" DisplayName="If in_Value is marked checked (CheckBox)" sap2010:WorkflowViewState.IdRef="If_16">
+        <If.Then>
+          <ui:Check ContinueOnError="{x:Null}" Action="Check" sap2010:Annotation.AnnotationText="Check the Check box&#xA;&quot;DelayBefore&quot; and &quot;DelayAfter&quot; property is set from the argument." DelayAfter="[in_DelayTime]" DelayBefore="[in_DelayTime]" DisplayName="Check with Action &quot;Check&quot; for CheckBox" sap2010:WorkflowViewState.IdRef="Check_4">
+            <ui:Check.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[In_Selector]" WaitForReady="INTERACTIVE" />
+            </ui:Check.Target>
+          </ui:Check>
+        </If.Then>
+        <If.Else>
+          <ui:Check ContinueOnError="{x:Null}" Action="Uncheck" sap2010:Annotation.AnnotationText="Uncheck the Check box&#xA;&quot;DelayBefore&quot; and &quot;DelayAfter&quot; property is set from the argument." DelayAfter="[in_DelayTime]" DelayBefore="[in_DelayTime]" DisplayName="Check with Action &quot;Uncheck&quot; for CheckBox" sap2010:WorkflowViewState.IdRef="Check_5">
+            <ui:Check.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[In_Selector]" WaitForReady="INTERACTIVE" />
+            </ui:Check.Target>
+          </ui:Check>
+        </If.Else>
+      </If>
+      <If x:Key="3" Condition="[in_Value.ToUpper =  &quot;X&quot;]" DisplayName="If in_Value is marked checked (Radio Button)" sap2010:WorkflowViewState.IdRef="If_17">
+        <If.Then>
+          <ui:Check ContinueOnError="{x:Null}" Action="Check" sap2010:Annotation.AnnotationText="Check the Radio button.&#xA;&quot;DelayBefore&quot; and &quot;DelayAfter&quot; property is set from the argument." DelayAfter="[in_DelayTime]" DelayBefore="[in_DelayTime]" DisplayName="Check with Action &quot;Check&quot; for Radio Button" sap2010:WorkflowViewState.IdRef="Check_6">
+            <ui:Check.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[In_Selector]" WaitForReady="INTERACTIVE" />
+            </ui:Check.Target>
+          </ui:Check>
+        </If.Then>
+      </If>
+      <x:Null x:Key="4" />
+    </Switch>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d05DOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRG9jdW1lbnRzXERldmVsb3BtZW50XFNSQ19Db21tb25cU1JDX0lucHV0QnlUeXBlLnhhbWw8AWcBawECXQPBAQ4CAQFfNF9KAgECYwVjowECAVpkBWgaAgFUaQWFAQoCAUOGAQW+AQ4CAQa/AQW/AZ8BAgEDY3pjoAECAVtmSmZZAgFYZmRmaQIBV2SPAWSgAQIBVWkTaSwCAURrCXkOAgFLfAmDARICAUaGAcsChgHXAgIBB4oBB54BDAIBL58BB6MBFwIBJqQBB7MBDAIBFbQBB7wBDAIBC4gBCYgB8AECAQm/AXi/AZwBAgEEa3JrhgECAUxtDW3sAQIBUnANdxYCAU6BATOBAUACAUl+NH4+AgFHigGTAYoBugECATCMAQuVARkCATuYAQucARkCATKfAfQBnwGEAgIBK58BkQKfAaECAgEpnwH9Ap8BiQMCASehAWGhAXACAS2kAR+kAUQCARamAQuqARYCAR+tAQuxARYCARi0AR+0AUQCAQy2AQu6ARYCAQ6IAUWIAcMBAgEKbUVtvwECAVN1N3U4AgFRcjhyQgIBT44BZY4BdAIBQYwB3AKMAewCAgE/kgERkgFAAgE+jAHDAowB0wICATyaAWWaAXQCATmYAZoCmAGqAgIBN5gBxAOYAdADAgE1mAGBApgBkQICATOmAdwBpgHsAQIBIqYB+QGmAYkCAgEgqAFlqAF0AgEkrQHgAa0B8AECARutAf0BrQGNAgIBGa8BZa8BdAIBHbYB4AG2AfABAgERtgH9AbYBjQICAQ+4AWW4AXQCARM=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="734,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_2" sap:VirtualizedContainerService.HintSize="734,95">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_14" sap:VirtualizedContainerService.HintSize="467,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_15" sap:VirtualizedContainerService.HintSize="734,383">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="TypeInto_8" sap:VirtualizedContainerService.HintSize="314,168">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TypeInto_9" sap:VirtualizedContainerService.HintSize="314,153">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_19" sap:VirtualizedContainerService.HintSize="653,343">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SelectItem_2" sap:VirtualizedContainerService.HintSize="314,153">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Check_4" sap:VirtualizedContainerService.HintSize="314,125">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Check_5" sap:VirtualizedContainerService.HintSize="314,125">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_16" sap:VirtualizedContainerService.HintSize="653,273" />
+      <sap2010:ViewStateData Id="Check_6" sap:VirtualizedContainerService.HintSize="314,125">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_17" sap:VirtualizedContainerService.HintSize="464,273" />
+      <sap2010:ViewStateData Id="Switch`1_2" sap:VirtualizedContainerService.HintSize="734,1337">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="734,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="756,2443">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TypeItemCommon_1" sap:VirtualizedContainerService.HintSize="796,2523">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

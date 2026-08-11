@@ -1,0 +1,460 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SetPartnerFunctions"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TargetSelector" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_dt_TargetValue" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_StartIndex" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetSegment_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>ClosedXML</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Input the data  on Partner functions screen&#xA;&#xA;- Input/Output&#xA;in_TargetSelector as Input Fields Selector &lt;DataRow&gt; &#xA;in_dt_TargetValue as Data table containing the content to be input &lt;DataTable&gt;&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xA;in_StartIndex as Start Index of the TargetValue DataRow &lt;int32&gt;" DisplayName="SetPartnerFunctions" sap2010:WorkflowViewState.IdRef="Sequence_55">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SetPartnerFunctions" Name="WorkflowName" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_TemporaryData" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_GetScrrenData" />
+      <Variable x:TypeArguments="x:Int32" Name="InputRowNumber" />
+      <Variable x:TypeArguments="x:Int32" Name="RowCount" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)]" Name="ColumnSelectors" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence DisplayName="Initial Processing" sap2010:WorkflowViewState.IdRef="Sequence_56">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="TableSelector" />
+      </Sequence.Variables>
+      <Assign sap2010:Annotation.AnnotationText="Create a temporary registration table from the ”in_dt_TargetValue”." DisplayName="Assign dt_TemporaryData (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_70">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dt_TemporaryData]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[in_dt_TargetValue]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="Remove &quot;' /&gt;&quot;  part from table selector information." DisplayName="Assign TableSelector (Remove end part)" sap2010:WorkflowViewState.IdRef="Assign_75">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[TableSelector]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_TargetSelector.Item(in_StartIndex).ToString.Substring(0, in_TargetSelector.Item(in_StartIndex).ToString.LastIndexOf(" /&gt;"))]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="Remove all from last slash &quot;/&quot; part and append &quot;'/&gt;&quot; at end of string." DisplayName="Assign TableSelector (Remove tbl part)" sap2010:WorkflowViewState.IdRef="Assign_76">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[TableSelector]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[TableSelector.Substring(0, TableSelector.LastIndexOf("/")) &amp; "' /&gt;"]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Sequence sap2010:Annotation.AnnotationText="Store screen information values ​​in a DataTable." DisplayName="Get Screen item" sap2010:WorkflowViewState.IdRef="Sequence_52">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:Int32" Name="ColumnNumber" />
+        </Sequence.Variables>
+        <ui:ExtractData NextLinkSelector="{x:Null}" DataTable="[dt_GetScrrenData]" DelayBetweenPagesMS="300" DisplayName="Extract Structured Data 'GuiCTextField'" ExtractMetadata="&lt;extract-table get_columns_name='0' get_empty_columns='1' /&gt;" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100">
+          <ui:ExtractData.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[TableSelector]" WaitForReady="INTERACTIVE" />
+          </ui:ExtractData.Target>
+        </ui:ExtractData>
+        <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="[ColumnNumber]" DisplayName="For Each Rename column name" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[dt_GetScrrenData.Columns]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="x:Object">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+              </ActivityAction.Argument>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_80">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[dt_GetScrrenData.Columns(item.ToString).ColumnName]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["Column" &amp; ColumnNumber.ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+        <ui:FilterDataTable sap2010:Annotation.AnnotationText="Remove extra blank lines" DataTable="[dt_GetScrrenData]" DisplayName="Filter Data Table dt_GetScrrenData" FilterRowsMode="Keep" OutputDataTable="[dt_GetScrrenData]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTEQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">[dt_GetScrrenData.Columns(0).ColumnName]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">[""]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+          <sap2010:WorkflowViewState.IdRef>FilterDataTable_1</sap2010:WorkflowViewState.IdRef>
+        </ui:FilterDataTable>
+        <Assign sap2010:Annotation.AnnotationText="Set the initial position of the insert row" DisplayName="Assign InputRowNumber (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_77">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[InputRowNumber]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[dt_GetScrrenData.Rows.Count]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <ui:ForEach x:TypeArguments="x:Int32" CurrentIndex="{x:Null}" DisplayName="For Each 3 column selector" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Enumerable.Range(0, 3)]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="x:Int32">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Int32" Name="item" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Get Column Selector" sap2010:WorkflowViewState.IdRef="Sequence_57">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="TemporarySelector" />
+              </Sequence.Variables>
+              <Assign DisplayName="Assign TemporarySelector (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_78">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[TemporarySelector]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_TargetSelector(in_StartIndex+item).ToString.Substring(in_TargetSelector(in_StartIndex+item).ToString.LastIndexOf("[")+1)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign TemporarySelector" sap2010:WorkflowViewState.IdRef="Assign_79">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[TemporarySelector]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[String.Format("{0} tableCol='{1}' tableRow='{2}' /&gt;", TableSelector.Substring(0, TableSelector.LastIndexOf(" /&gt;")), TemporarySelector.Substring(0, TemporarySelector.LastIndexOf(",")), "{0}")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <AddToCollection x:TypeArguments="x:String" Collection="[ColumnSelectors]" DisplayName="Add Column Selector" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[TemporarySelector]" />
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+    </Sequence>
+    <ui:ForEachRow sap2010:Annotation.AnnotationText="If the screen contents and the PR of the temporary table match, update the row value" CurrentIndex="[RowCount]" DataTable="[dt_GetScrrenData]" DisplayName="For Each Row (Update process)" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Special screen Update process" sap2010:WorkflowViewState.IdRef="Sequence_53">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="GetAttributeAastate" />
+              <Variable x:TypeArguments="sd:DataRow[]" Name="SelectDataRow" />
+            </Sequence.Variables>
+            <Assign DisplayName="Assign SelectDataRow" sap2010:WorkflowViewState.IdRef="Assign_72">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataRow[]">[SelectDataRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataRow[]">[dt_TemporaryData.select(dt_TemporaryData.Columns(2).ColumnName &amp; " = '" &amp; row(0).ToString &amp; "' " , dt_TemporaryData.Columns(1).ColumnName &amp; " ASC")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[SelectDataRow.Count = 0]" DisplayName="If there is no data to be updated" sap2010:WorkflowViewState.IdRef="If_40">
+              <If.Then>
+                <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_2" />
+              </If.Then>
+            </If>
+            <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="aastate" DisplayName="Get Attribute - aastate (second Column)" sap2010:WorkflowViewState.IdRef="GetAttribute_9">
+              <ui:GetAttribute.Result>
+                <OutArgument x:TypeArguments="x:String">[GetAttributeAastate]</OutArgument>
+              </ui:GetAttribute.Result>
+              <ui:GetAttribute.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[String.Format(ColumnSelectors(1), RowCount.ToString)]" WaitForReady="INTERACTIVE" />
+              </ui:GetAttribute.Target>
+            </ui:GetAttribute>
+            <If Condition="[instr(GetAttributeAastate,&quot;editable&quot;) &gt; 0 and SelectDataRow(0).Item(in_StartIndex+1).ToString &lt;&gt; &quot;#SKIP#&quot;]" DisplayName="If the second column can be updated" sap2010:WorkflowViewState.IdRef="If_42">
+              <If.Then>
+                <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into - second Column" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_20" SendWindowMessages="False" SimulateType="True" Text="[SelectDataRow(0).Item(in_StartIndex+1).ToString]">
+                  <ui:TypeInto.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[String.Format(ColumnSelectors(1), RowCount.ToString)]" WaitForReady="INTERACTIVE" />
+                  </ui:TypeInto.Target>
+                </ui:TypeInto>
+              </If.Then>
+            </If>
+            <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="aastate" DisplayName="Get Attribute - aastate (third Column)" sap2010:WorkflowViewState.IdRef="GetAttribute_10">
+              <ui:GetAttribute.Result>
+                <OutArgument x:TypeArguments="x:String">[GetAttributeAastate]</OutArgument>
+              </ui:GetAttribute.Result>
+              <ui:GetAttribute.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[String.Format(ColumnSelectors(2), RowCount.ToString)]" WaitForReady="INTERACTIVE" />
+              </ui:GetAttribute.Target>
+            </ui:GetAttribute>
+            <If Condition="[instr(GetAttributeAastate,&quot;editable&quot;) &gt; 0 and SelectDataRow(0).Item(in_StartIndex+2).ToString &lt;&gt; &quot;#SKIP#&quot;]" DisplayName="If the third column can be updated" sap2010:WorkflowViewState.IdRef="If_43">
+              <If.Then>
+                <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into - third Column" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_21" SendWindowMessages="False" SimulateType="True" Text="[SelectDataRow(0).Item(in_StartIndex+2).ToString]">
+                  <ui:TypeInto.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[String.Format(ColumnSelectors(2), RowCount.ToString)]" WaitForReady="INTERACTIVE" />
+                  </ui:TypeInto.Target>
+                </ui:TypeInto>
+              </If.Then>
+            </If>
+            <ui:RemoveDataRow RowIndex="{x:Null}" sap2010:Annotation.AnnotationText="The row information whose screen information has been changed is deleted from the temporary table" DataTable="[dt_TemporaryData]" DisplayName="Remove Data Row" sap2010:WorkflowViewState.IdRef="RemoveDataRow_2" Row="[SelectDataRow(0)]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="If the contents of the screen and the PR of the temporary table do not match, add a row value." DataTable="[dt_TemporaryData]" DisplayName="For Each Row (Insert procedure)" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Special screen Insert procedure" sap2010:WorkflowViewState.IdRef="Sequence_54">
+            <ui:ForEach x:TypeArguments="x:Int32" CurrentIndex="{x:Null}" DisplayName="For Each 3 column selector (Insert)" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[Enumerable.Range(0, 3)]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:Int32">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Int32" Name="item" />
+                  </ActivityAction.Argument>
+                  <If Condition="[row.Item(in_StartIndex + item).ToString &lt;&gt; &quot;#SKIP#&quot;]" DisplayName="If the column can be insert" sap2010:WorkflowViewState.IdRef="If_44">
+                    <If.Then>
+                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into - insert" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_22" SendWindowMessages="False" SimulateType="True" Text="[row.Item(in_StartIndex + item).ToString]">
+                        <ui:TypeInto.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[String.Format(ColumnSelectors(item), InputRowNumber.ToString)]" WaitForReady="INTERACTIVE" />
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                    </If.Then>
+                  </If>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
+            <Assign DisplayName="Assign InputRowNumber" sap2010:WorkflowViewState.IdRef="Assign_74">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[InputRowNumber]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[InputRowNumber + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3FDOlwwMV/liJ3mnJ9cMDNf5L2c5qWtXOODk+OCuOODjeOCueODkeODvOODiOODiuODvFxTUkNfQ1NUX01TVFJfQ1JUX0VcU1JDX0NTVF9NU1RSX0NSVF9FXFNldFBhcnRuZXJGdW5jdGlvbnMueGFtbF5QA7MCDgIBAVI0UkkCAQNXPldVAgECWQVZpAEDAYgBWgXMARACAUjNAQWLAhUCARqMAgWwAhUCAQexAgWxAp8BAgEEWXtZoQEDAYkBXgdlEAMBgwFmB20QAgF/bgd1EAIBeXYHrAESAgFdrQEHywEUAgFJzQGaAc0BpgECAUbNAbEBzQHFAQIBRNMBC4gCFgIBG4wCuQGMAs0BAgEYkgILrQIWAgEIsQJ5sQKcAQIBBWM2Y0kDAYYBYDdgSQMBhAFrMmu1AQMBggFoM2hCAwGAAXMyc34CAXxwM3BCAgF6egl+GgIBcX8JjwEWAgFpkAEJowEeAgFipAEJqwESAgFerQGjAa0BvQECAVyzAQ3IARgCAUrYAQ3fARYCAUDgAQ3kARICAT3lAQ3sAR8CATbtAQ31ARICAS/2AQ39AR8CASj+AQ2GAhICASGHAg2HAsMCAgEckwINpAIaAgEOpQINrAIWAgEJerwCesECAgF4fGN8dAIBdnpoem0CAXV6P3pTAgFzerQBevgBAgFyf60Bf8kBAgFwfz1/TQIBboUBD4wBGAIBapUBOpUBYgIBaJgBOpgBPgIBZ5AB0AGQAeQBAgFlkAFkkAF4AgFjqQEzqQFQAgFhpgE0pgFEAgFftwEPvgEYAgFYvwEPxgEYAgFQxwEPxwHPAQIBS90BPN0B4QECAUPaAT3aAUwCAUHgARvgATYCAT7iARHiAU0CAT/lAUPlAUwCATnnATnnAU4CATfqAWfqAZ8BAgE67QEb7QGlAQIBMO8BEfMBHwIBMfYBQ/YBTAIBK/gBOfgBTgIBKfsBZ/sBnwECASz+ARv+AaUBAgEigAIRhAIfAgEjhwKsAocCwAICAR+HAsMBhwLXAQIBHZMCsgGTAswBAgEXmQIToQIYAgEPqgI3qgJLAgEMpwI4pwJIAgEKigE6igFgAgFshwE7hwFvAgFrvAE6vAG3AQIBW7kBO7kBTgIBWcQBOsQBgAICAVPBATvBAU4CAVHHAUbHAVkCAU7HAbcBxwHMAQIBTPEBa/EBowECATPvAaoC7wHdAgIBMoICa4ICowECASWAAqkCgALcAgIBJJkCIZkCaAIBEJsCF58CJQIBEZ0CcZ0CsgECARObAqoCmwLVAgIBEg==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="532,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_70" sap:VirtualizedContainerService.HintSize="336,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_75" sap:VirtualizedContainerService.HintSize="336,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_76" sap:VirtualizedContainerService.HintSize="336,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExtractData_2" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Assign_80" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="314,194" />
+      <sap2010:ViewStateData Id="FilterDataTable_1" sap:VirtualizedContainerService.HintSize="314,86">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_77" sap:VirtualizedContainerService.HintSize="314,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_52" sap:VirtualizedContainerService.HintSize="336,721">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_78" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_79" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Sequence_57" sap:VirtualizedContainerService.HintSize="264,346">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="336,480" />
+      <sap2010:ViewStateData Id="Sequence_56" sap:VirtualizedContainerService.HintSize="532,1791">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_72" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Continue_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_40" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="GetAttribute_9" sap:VirtualizedContainerService.HintSize="464,96" />
+      <sap2010:ViewStateData Id="TypeInto_20" sap:VirtualizedContainerService.HintSize="314,96" />
+      <sap2010:ViewStateData Id="If_42" sap:VirtualizedContainerService.HintSize="464,244" />
+      <sap2010:ViewStateData Id="GetAttribute_10" sap:VirtualizedContainerService.HintSize="464,96" />
+      <sap2010:ViewStateData Id="TypeInto_21" sap:VirtualizedContainerService.HintSize="314,96" />
+      <sap2010:ViewStateData Id="If_43" sap:VirtualizedContainerService.HintSize="464,244" />
+      <sap2010:ViewStateData Id="RemoveDataRow_2" sap:VirtualizedContainerService.HintSize="464,94">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_53" sap:VirtualizedContainerService.HintSize="486,1406">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_3" sap:VirtualizedContainerService.HintSize="532,1581">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TypeInto_22" sap:VirtualizedContainerService.HintSize="314,96" />
+      <sap2010:ViewStateData Id="If_44" sap:VirtualizedContainerService.HintSize="464,244" />
+      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="480,378" />
+      <sap2010:ViewStateData Id="Assign_74" sap:VirtualizedContainerService.HintSize="480,60" />
+      <sap2010:ViewStateData Id="Sequence_54" sap:VirtualizedContainerService.HintSize="502,602">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_4" sap:VirtualizedContainerService.HintSize="532,792">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="532,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_55" sap:VirtualizedContainerService.HintSize="554,4762">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetSegment_1" sap:VirtualizedContainerService.HintSize="594,4842">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,1061 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_BAPI_ROUTING_CREATE_v2_2_E"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:usba="clr-namespace:UiPath.SAP.BAPI.Activities;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbam="clr-namespace:UiPath.SAP.BAPI.Activities.Model;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI"
+ xmlns:usbcss="clr-namespace:UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes;assembly=UiPath.SAP.BAPI"
+ xmlns:usbm="clr-namespace:UiPath.SAP.BAPI.Model;assembly=UiPath.SAP.BAPI"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SapConnection" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property Name="out_RegisterReturn" Type="OutArgument(scg:List(scg:Dictionary(x:String, x:String)))" />
+    <x:Property Name="in_Import" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_DataTable" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ForEach_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Run &quot;Invoke SAP BAPI&quot;&#xA;&#xA;When this BAPI is completed, GROUP and GROUPCOUNTER are outputted in the log file.&#xA;&#xA;- Input/Output&#xA;in_SapConnection as SAP Connect Info &lt;IConnectionService&gt; &#xA;out_RegisterReturn  as  BAPI return message &lt;List&lt;Dictionary&lt;String,Object&gt;&gt;&gt; &#xA;in_Import as BAPI input parameters &lt;Dictionary&lt;String,Object&gt;&gt; &#xA;io_DataTable as BAPI in/Out parameter Dictionary data table&lt;String,DataTable&gt;&gt; &#xA;io_Option as DataTable for optional parameter Dictionary&lt;Dictionary&lt;String,DataTable&gt;&gt;&#xA;" DisplayName="SRC_BAPI_ROUTING_CREATE_v2.2_E" sap2010:WorkflowViewState.IdRef="Sequence_429">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_BAPI_ROUTING_CREATE_v2.2_E" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:List(usbcss:BapiRet2)" Name="BAPIResult" />
+      <Variable x:TypeArguments="x:String" Name="GroupKey" />
+      <Variable x:TypeArguments="x:String" Name="GroupCounter" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <usba:SapApplicationScope AdvancedParameters="{x:Null}" AppServer="{x:Null}" Client="{x:Null}" Language="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" Password="{x:Null}" SapConnectionService="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" StatefulConnection="{x:Null}" SystemId="{x:Null}" SystemNumber="{x:Null}" User="{x:Null}" DisplayName="SAP Application Scope" ExistingConnectionService="[in_SapConnection]" sap2010:WorkflowViewState.IdRef="SapApplicationScope_2">
+      <usba:SapApplicationScope.Body>
+        <ActivityAction x:TypeArguments="usbc:IConnectionService">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+          </ActivityAction.Argument>
+          <usba:InvokeSapBapi BapiDescription="{x:Null}" BapiName="BAPI_ROUTING_CREATE" BapiSelected="True" DisplayName="BAPI_ROUTING_CREATE" sap2010:WorkflowViewState.IdRef="InvokeSapBapi_3">
+            <usba:InvokeSapBapi.AllArguments>
+              <scg:Dictionary x:TypeArguments="x:String, usbam:BapiArgumentUiModel">
+                <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="GROUP" x:Name="__ReferenceID0" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Key for task list group" Direction="Out" DirectionAsString="Out" IsSelected="False" Length="8" Name="GROUP" Optional="False" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <OutArgument x:TypeArguments="x:String">[GroupKey]</OutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="GROUPCOUNTER" x:Name="__ReferenceID1" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Group counter" Direction="Out" DirectionAsString="Out" IsSelected="False" Length="2" Name="GROUPCOUNTER" Optional="False" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <OutArgument x:TypeArguments="x:String">[GroupCounter]</OutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="APPLICATION" x:Name="__ReferenceID18" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="BOM application" Direction="In" DirectionAsString="In" IsSelected="False" Length="4" Name="APPLICATION" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String">[CType(in_Import("APPLICATION"), String)]</InArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="BOMUSAGE" x:Name="__ReferenceID17" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="BOM usage" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="BOMUSAGE" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String">[CType(in_Import("BOMUSAGE"), String)]</InArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="PROFILE" x:Name="__ReferenceID16" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Profile To Be Used" Direction="In" DirectionAsString="In" IsSelected="False" Length="7" Name="PROFILE" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String">[CType(in_Import("PROFILE"), String)]</InArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="TESTRUN" x:Name="__ReferenceID15" DataType="DataRow" DataTypeAsString="DataRow" DecimalLength="0" Description="Switch to Simulation Session for Write BAPIs" Direction="In" DirectionAsString="In" IsSelected="False" Name="TESTRUN" Optional="True" ServiceDataType="BAPIFLAG">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="sd:DataRow">[CType(in_Import("TESTRUN"), DataRow)]</InArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Single-Character Indicator" Length="1" Name="BAPIFLAG" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="COMPONENTALLOCATION" x:Name="__ReferenceID14" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Component assignment in CREATE-BAPI for routing" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="COMPONENTALLOCATION" Optional="True" ServiceDataType="BAPI1012_COM_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("COMPONENTALLOCATION")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="64">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="BOM category" Length="1" Name="BOM_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Bill of material" Length="8" Name="BOM_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Alternative BOM" Length="2" Name="ALTERNATIVE_BOM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item ID" Length="8" Name="ITEM_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="BOM Item Number" Length="4" Name="ITEM_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Integral divisor for cutting measures" Length="5" Name="CUTTING_MEASURE_DIVISOR" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Cutting measure 1" Length="7" Name="CUTTING_MEASURE_1" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Cutting measure 2" Length="7" Name="CUTTING_MEASURE_2" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Cutting measure 3" Length="7" Name="CUTTING_MEASURE_3" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for cutting measures" Length="3" Name="CUTTING_MEASURE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="CUTTING_MEASURE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Component quantity" Length="7" Name="COMP_QTY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Component unit of measure" Length="3" Name="COMP_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="COMP_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: Backflush" Length="1" Name="BACKFLUSH" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Material Number" Length="18" Name="MATERIAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Order level" Length="2" Name="ORDER_LVL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Order path" Length="2" Name="ORDER_PATH" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="BOM category" Length="1" Name="BOM_TYPE_ROOT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Bill of material" Length="8" Name="BOM_NO_ROOT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Alternative BOM" Length="2" Name="ALTERNATIVE_BOM_ROOT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Path in exploded BOM tree" Length="6" Name="PATH" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Long Material Number for MATERIAL Field" Length="40" Name="MATERIAL_EXTERNAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="External GUID for MATERIAL Field" Length="32" Name="MATERIAL_GUID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Version Number for MATERIAL Field" Length="10" Name="MATERIAL_VERSION" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="INSPCHARACTERISTIC" x:Name="__ReferenceID13" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Inspection Characteristics in CREATE-BAPI for Routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="INSPCHARACTERISTIC" Optional="True" ServiceDataType="BAPI1012_CHA_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("INSPCHARACTERISTIC")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="128">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Inspection Characteristic Number" Length="4" Name="INSPCHAR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Quantitative Characteristic" Length="1" Name="QUANTITATIVE_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key Containing Preset Characteristic Control Indicators" Length="4" Name="PRESET_CTRL_INDS_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Master Inspection Characteristics" Length="8" Name="MSTR_CHAR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PMSTR_CHAR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Mode for Reference to Master Inspection Characteristic" Length="1" Name="CHA_MASTER_IMPORT_MODUS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Short Text for Inspection Characteristic" Length="40" Name="CHAR_DESCR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Inspection Method" Length="8" Name="METHOD" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant for Inspection Method" Length="4" Name="PMETHOD" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Tolerance Key" Length="4" Name="TOLERANCE_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Measured Values Must Be Recorded" Length="1" Name="MEAS_VALUE_CONFIRM_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference to Characteristic Attribute Required" Length="1" Name="ATTRIBUTE_REQUIRED_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Upper Specification Limit" Length="1" Name="UP_TOL_LMT_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Lower Specification Limit" Length="1" Name="LW_TOL_LMT_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Check Target Value" Length="1" Name="TARGET_VAL_CHECK_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Inspection Scope" Length="1" Name="SCOPE_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Long-Term Inspection" Length="1" Name="LONG_TERM_INSP_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Recording Type" Length="1" Name="RESULT_RECORDING_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Documentation Required for Inspection Results" Length="1" Name="DOCU_REQU" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Characteristic Category" Length="1" Name="CONFIRMATION_CATEGORY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sample Quantity Is Added" Length="1" Name="ADD_SAMPLE_QUANTITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Destructive Inspection" Length="1" Name="DESTRUCTIVE_INSP_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Calculated Characteristic" Length="1" Name="FORMULA_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sampling Procedure is Required" Length="1" Name="SAMPLING_PROCEDURE_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Characteristic Relevant for Qual. Score and Scrap Share" Length="1" Name="QSCORE_AND_SHARE_RELEVANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Recording the Number of Defects" Length="1" Name="DEFECT_NO_CONFIRMATION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Assignment of Test Equipment Required" Length="1" Name="INSP_TOOL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defects Recording Automatically Called Up" Length="1" Name="AUTO_DEFCT_RECORDING" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Create Change Documents During Results Recording" Length="1" Name="CHANGE_DOCUMENTS_REQ" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="SPC Characteristic" Length="1" Name="SPC_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Print" Length="1" Name="PRINT_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Weighting of the Characteristic" Length="2" Name="CH_WGT_COD" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Partial Sample No. for Inspection Charac. in Task List" Length="3" Name="PHYS_SMPL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Inspector Qualification" Length="5" Name="INSPECTOR_QUALIF" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Text Line for Additional Information" Length="10" Name="INFOFIELD1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Text Line for Additional Information" Length="20" Name="INFOFIELD2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Text Line for Additional Information" Length="40" Name="INFOFIELD3" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Characteristic Description for Quality Data Exchange" Length="40" Name="CHARACTERISTIC_NAME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Planned Results Data Origin" Length="2" Name="RES_ORG" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Fraction Calculation" Length="2" Name="SHARE_CALC" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item Number for Production Resource/Tool" Length="4" Name="ITEM_NO_OF_PRODUCTION_RESOURCE" />
+                      <usbm:FieldArgument DataType="Integer" DecimalLength="0" Description="Number of Places to the Right of a Decimal Point (Accuracy)" Length="1" Name="DEC_PLACES" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Measurement Unit in Which Quantitative Data Is Maintained" Length="6" Name="MEAS_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="MEAS_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Target Value for a Quantitative Characteristic" Length="16" Name="TARGET_VAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Upper Specification Limit" Length="16" Name="UP_TOL_LMT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Lower Specification Limit" Length="16" Name="LW_TOL_LMT" />
+                      <usbm:FieldArgument DataType="Integer" DecimalLength="0" Description="Number of Value Classes for Inspection Results" Length="1" Name="NO_OF_VALUE_CLASSES" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Class Width" Length="16" Name="CLASS_WIDTH" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Class Midpoint" Length="16" Name="CLASS_MIDPOINT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="First Upper Specification Limit" Length="16" Name="UP_LMT_1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="First Lower Specification Limit" Length="16" Name="LW_LMT_1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Second Upper Specification Limit" Length="16" Name="UP_LMT_2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Second Lower Specification Limit" Length="16" Name="LW_LMT_2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Upper Plausibility Limit" Length="16" Name="UP_PLS_LMT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Lower Plausibility Limit" Length="16" Name="LW_PLS_LMT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Check and Calculate Formula in QM" Length="1" Name="FORMULA_CHECK_BY_SAP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Formula Field" Length="60" Name="FORMULA_FIELD_1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Formula Field" Length="60" Name="FORMULA_FIELD_2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Assigned Code Group or Selected Set" Length="8" Name="SEL_SET1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant of the Assigned Selected Set" Length="4" Name="PSEL_SET1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Catalog Type of Assigned Code Group or Selected Set" Length="1" Name="CAT_TYPE2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Assigned Code Group" Length="8" Name="CODE_GROUP2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Catalog Type of Assigned Code Group or Selected Set" Length="1" Name="CAT_TYPE3" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Assigned Code Group" Length="8" Name="CODE_GROUP3" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Catalog Type of Assigned Code Group or Selected Set" Length="1" Name="CAT_TYPE4" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Assigned Code Group" Length="8" Name="CODE_GROUP4" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Catalog Type of Assigned Code Group or Selected Set" Length="1" Name="CAT_TYPE5" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Assigned Code Group" Length="8" Name="CODE_GROUP5" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defect Code Group for General Rejection" Length="8" Name="DEF_CODE_GRP_GENERAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defect Code for Rejection: General" Length="4" Name="DEF_CODE_GENERAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defect Code Group for Rejection at Lower Tolerance" Length="8" Name="LW_DEF_CODE_GRP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defect Code for Rejection at Lower Specification Limit" Length="4" Name="LW_DEF_CODE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defect Code Group for Rejection at Upper Tolerance" Length="8" Name="UP_DEF_CODE_GRP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Defect Code for Rejection at Upper Specification Limit" Length="4" Name="UP_DEF_CODE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sampling Procedure in Inspection Characteristic" Length="8" Name="SMPL_PROCEDURE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sample Unit of Measure" Length="3" Name="SMPL_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="SMPL_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="2" Description="Sample Quantity Factor for Sample(Mult. Sample Unit of Msr.)" Length="3" Name="SMPL_QUANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="SPC Criterion" Length="3" Name="SPC_CRITERION_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Dynamic Modification Rule" Length="3" Name="DYN_MODIF_RULE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Characteristic (in Plan) whose Q-Level Will Be Copied" Length="4" Name="DYN_MODIF_REF_CHA" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Vendor Considered for Dynamic Modification" Length="1" Name="DYN_MODIF_BY_VENDOR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Manufacturer Considered for Dynamic Modification" Length="1" Name="DYN_MODIF_BY_MANUFAC" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Customer Considered for Dynamic Modification" Length="1" Name="DYN_MODIF_BY_CUSTOMR" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="MATERIALTASKALLOCATION" x:Name="__ReferenceID12" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Material task list assignment in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="MATERIALTASKALLOCATION" Optional="True" ServiceDataType="BAPI1012_MTK_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("MATERIALTASKALLOCATION")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="16">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Material Number" Length="18" Name="MATERIAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sales Document" Length="10" Name="DOC_NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sales Document Item" Length="6" Name="ITM_NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Work breakdown structure element (WBS element)" Length="8" Name="WORK_BREAKDOWN_STRUCT_ELEMENT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Long Material Number for MATERIAL Field" Length="40" Name="MATERIAL_EXTERNAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="External GUID for MATERIAL Field" Length="32" Name="MATERIAL_GUID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Version Number for MATERIAL Field" Length="10" Name="MATERIAL_VERSION" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="OPERATION" x:Name="__ReferenceID11" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Operations in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="OPERATION" Optional="True" ServiceDataType="BAPI1012_OPR_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("OPERATION")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="256">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Control key" Length="4" Name="CONTROL_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object ID" Length="8" Name="OBJ_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object types of the CIM resource" Length="2" Name="OBJECT_TYPE_CIM_RESOURCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Work center" Length="8" Name="WORK_CNTR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Standard text key" Length="7" Name="STANDARD_TEXT_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation short text" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of Measure for Activity/Operation" Length="3" Name="OPERATION_MEASURE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="OPERATION_MEASURE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Denominator for converting rtg and op units of measure" Length="3" Name="DENOMINATOR" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Numerator for converting task list and oper. un. of measure" Length="3" Name="NOMINATOR" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Base Quantity" Length="7" Name="BASE_QUANTITY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Break" Length="5" Name="BREAK_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the break time" Length="3" Name="BREAK_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="BREAK_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_01_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_02_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_03" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_03" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_03_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_03" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_04_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_05_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_06_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Type of standard value calculation" Length="5" Name="STD_VALUE_CALCULATION_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Date when the standard value was calculated" Length="4" Name="STD_VALUE_YEAR_OF_CALCULATION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference number for standard value code" Length="6" Name="STD_VALUE_CODE_REFERENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Basis for standard value calculation" Length="5" Name="STD_VALUE_CALCULATION_BASIS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Number of confirmation slips" Length="3" Name="NO_OF_CONFIRMATION_SLIPS" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Number of Time Tickets" Length="2" Name="NO_OF_TIME_TICKETS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Wage Type" Length="4" Name="WAGETYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Suitability" Length="2" Name="SUITABILITY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="2" Description="Number of employees" Length="3" Name="NO_OF_EMPLOYEE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Setup group key" Length="10" Name="SETUP_GROUP_CATEGORY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Setup group key" Length="10" Name="SETUP_GROUP_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Setup Type Key" Length="2" Name="SETUP_TYPE_KEY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Scrap factor" Length="3" Name="SCRAP_FACTOR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Wage group" Length="3" Name="WAGEGROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Required overlapping" Length="1" Name="REQUIRED_OVERLAPPING" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Optional overlapping" Length="1" Name="OPTIONAL_OVERLAPPING" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: continuous flow production" Length="1" Name="IND_CONT_FLOW_PRODUCTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the minimum overlap time" Length="3" Name="MIN_OVERLAP_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="MIN_OVERLAP_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Minimum overlap time" Length="5" Name="MIN_OVERLAP_TIME" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Minimum Send-Ahead Quantity" Length="7" Name="MIN_SEND_AHEAD_QTY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Required splitting" Length="1" Name="IND_SPLITTING_REQRD" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Maximum number of splits" Length="2" Name="MAX_NO_OF_SPLITS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the minimum processing time" Length="3" Name="MIN_PROCESSING_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="MIN_PROCESSING_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Minimum processing time" Length="5" Name="MIN_PROCESSING_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the maximum wait time" Length="3" Name="MAX_WAIT_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="MAX_WAIT_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Maximum wait time" Length="5" Name="MAX_WAIT_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the required wait time" Length="3" Name="REQUIRED_WAIT_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="REQUIRED_WAIT_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Minimum wait time" Length="5" Name="REQUIRED_WAIT_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the standard queue time" Length="3" Name="STANDARD_QUEUE_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STANDARD_QUEUE_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard queue time" Length="5" Name="STANDARD_QUEUE_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the minumum queue time" Length="3" Name="MIN_QUEUE_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="MIN_QUEUE_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Minimum queue time" Length="5" Name="MIN_QUEUE_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the standard move time" Length="3" Name="STANDARD_MOVE_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STANDARD_MOVE_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard move time" Length="5" Name="STANDARD_MOVE_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the minimum move time" Length="3" Name="MIN_MOVE_TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="MIN_MOVE_TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Minimum move time" Length="5" Name="MIN_MOVE_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: simultaneous teardown and wait" Length="1" Name="TEARDOWN_AND_WAIT_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reduction strategy per operation/activity" Length="2" Name="REDUCTION_STRATEGY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sort Term for Non-Stock Info Records" Length="10" Name="SORTED_BY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Account Number of Vendor or Creditor" Length="10" Name="VENDOR_NO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Planned Delivery Time in Days" Length="2" Name="PLND_DELRY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="4" Description="Currency amount in BAPI interfaces" Length="12" Name="INFO_REC_NET_PRICE" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Price Unit" Length="3" Name="PRICE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Cost Element" Length="10" Name="COST_ELEM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Currency Key" Length="5" Name="CURRENCY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO currency code" Length="3" Name="CURRENCY_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Number of Purchasing Info Record" Length="10" Name="INFO_REC" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Purchasing Organization" Length="4" Name="PURCH_ORG" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Purchasing group for external processing" Length="3" Name="PURCH_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: fixed lot external processing" Length="1" Name="FIXED_LOT_EXT_PROCESS_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Material Group" Length="9" Name="MATL_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key word ID for user-defined fields" Length="7" Name="USERFIELDS_KEYWORD_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 20 characters" Length="20" Name="USERFIELD_CH20_00" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 20 characters" Length="20" Name="USERFIELD_CH20_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 10 characters" Length="10" Name="USERFIELD_CH10_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 10 characters" Length="10" Name="USERFIELD_CH10_03" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="User field for quantity (length 10.3)" Length="7" Name="USERFIELD_QUAN_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for quantity fields" Length="3" Name="USERFIELD_UNIT_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="USERFIELD_UNIT_04_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="User field for quantity (length 10.3)" Length="7" Name="USERFIELD_QUAN_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for quantity fields" Length="3" Name="USERFIELD_UNIT_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="USERFIELD_UNIT_05_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="4" Description="Currency amount in BAPI interfaces" Length="12" Name="USERFIELD_CURR_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for value fields" Length="5" Name="USERFIELD_CURRENCY_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO currency code" Length="3" Name="USERFIELD_CURRENCY_06_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="4" Description="Currency amount in BAPI interfaces" Length="12" Name="USERFIELD_CURR_07" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for value fields" Length="5" Name="USERFIELD_CURRENCY_07" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO currency code" Length="3" Name="USERFIELD_CURRENCY_07_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field for date" Length="8" Name="USERFIELD_DATE_08" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field for date" Length="8" Name="USERFIELD_DATE_09" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User-defined field: Indicator for reports" Length="1" Name="USERFIELD_FLAG_10" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User-defined field: Indicator for reports" Length="1" Name="USERFIELD_FLAG_11" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator for Relevancy to Costing" Length="1" Name="COST_RELEVANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Purchasing Document Number" Length="10" Name="PO_NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item Number of Purchasing Document" Length="5" Name="PO_ITEM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Business Process" Length="12" Name="CO_BUSPROC" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Grouping Category" Length="1" Name="CUMULATION_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Suboper. do not apply to order" Length="1" Name="SUB_ACT_NOT_IN_ORDER_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: Externally processed op. with subcontracting" Length="1" Name="EXT_PROC_WITH_SUBCONTRACT_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Inspection Type" Length="8" Name="INSPTYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Recording View" Length="2" Name="RECORDING_VIEW" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Interval Without Reference to Time or Quantity" Length="1" Name="FREE_GRID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Interval = Time (Time-Related)" Length="1" Name="TIME_GRID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Creation Cycle = Quantity  (Quantity-Reference)" Length="1" Name="QUANT_GRID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Quantity Confirmation for Each Partial Lot" Length="1" Name="QUANTONCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Time Unit" Length="3" Name="TIME_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="TIME_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="2" Description="Time Factor" Length="3" Name="TIME_FACTOR" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Quantity Between Two Inspections" Length="7" Name="QTY_BTW_TWO_INSPECTIONS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Grid Unit of Measure" Length="3" Name="QUANT_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="QUANT_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation with Stock-Related Partial Lot Assignment" Length="1" Name="STOCK_RELATED_PARTIAL_LOT_ASSG" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Flow Variants for Inspection Point Completion" Length="1" Name="INSP_POINT_COMPLT_FLOW_VARIANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group operation" Length="1" Name="GROUP_OPERATION" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="PRODUCTIONRESOURCE" x:Name="__ReferenceID10" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="PRT assignments in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="PRODUCTIONRESOURCE" Optional="True" ServiceDataType="BAPI1012_PRT_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("PRODUCTIONRESOURCE")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="64">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item counter for production resources/tools" Length="8" Name="PRT_ITEM_COUNT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object types of the CIM resource" Length="2" Name="OBJECT_TYPE_CIM_RESOURCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object ID of the resource" Length="8" Name="OBJECT_ID_CIM_RESOURCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object of a task list" Length="1" Name="OBJECT_OF_TASK_LIST" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item Number for Production Resource/Tool" Length="4" Name="ITEM_NO_OF_PRODUCTION_RESOURCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Control key for management of production resources/tools" Length="4" Name="CTRL_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: Create load records for prod. resources/tools" Length="1" Name="CREATE_LOAD_RECS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference date to start of production resource/tool usage" Length="2" Name="START_REF_DATE" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Offset to start of production resource/tool usage" Length="3" Name="START_OFFSET" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Offset unit for start of prod. resource/tool usage" Length="3" Name="START_OFFSET_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="START_OFFSET_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference date for end of production resource/tool usage" Length="2" Name="END_REF_DATE" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Offset to finish of production resource/tool usage" Length="3" Name="END_OFFSET" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Offset unit for end of production resource/tool usage" Length="3" Name="END_OFFSET_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="END_OFFSET_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Quantity unit of production resource/tool" Length="3" Name="PRT_MEASURE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="PRT_MEASURE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard value for the PRT quantity" Length="5" Name="STD_VALUE_FOR_PRT_QTY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Formula for calculating the total quantity of PRT" Length="6" Name="FORMULA_TOT_QTY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Usage value unit of the production resource/tool" Length="3" Name="PRT_USAGE_VALUE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="PRT_USAGE_VALUE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard usage value for production resources/tools" Length="5" Name="STD_USAGE_VALUE_FOR_PRT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Formula for calculating the total usage value of PRT" Length="6" Name="FORMULA_TOT_USAGE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Standard text key for production resources/tools" Length="7" Name="STD_TEXT_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="First line of text for production resources/tools" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Production resources/tools category" Length="1" Name="PRT_CATEGORY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Production resource/tool number" Length="33" Name="PRT_NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Production resources/tools in plant" Length="4" Name="PRT_PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Material Number" Length="18" Name="MATERIAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Production resources and tools" Length="18" Name="MISCELLANEOUS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Document Type" Length="3" Name="DOCUMENT_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Document number" Length="25" Name="DOCUMENT_NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Document Part" Length="3" Name="DOCUMENT_PART" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Document Version" Length="2" Name="DOCUMENT_VERSION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Equipment Number" Length="18" Name="EQUIPMENT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Long Material Number for MATERIAL Field" Length="40" Name="MATERIAL_EXTERNAL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="External GUID for MATERIAL Field" Length="32" Name="MATERIAL_GUID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Version Number for MATERIAL Field" Length="10" Name="MATERIAL_VERSION" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="REFERENCEOPERATION" x:Name="__ReferenceID9" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Reference to operation set in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="REFERENCEOPERATION" Optional="True" ServiceDataType="BAPI1012_REF_OPR_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("REFERENCEOPERATION")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="16">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group of the referenced task list" Length="8" Name="REFERENCED_TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group counter of the referenced task list" Length="2" Name="REFERENCED_GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Increment between referenced operations" Length="2" Name="REFERENCED_ACTIVITY_INCREMENT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Standard text key" Length="7" Name="STANDARD_TEXT_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation short text" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group operation" Length="1" Name="GROUP_OPERATION" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="RETURN" x:Name="__ReferenceID3" DataType="List_BapiRet2" DataTypeAsString="List&lt;BapiRet2&gt;" DecimalLength="0" Description="Return parameter" Direction="InOut" DirectionAsString="In/Out" IsSelected="True" Name="RETURN" Optional="True" ServiceDataType="BAPIRET2">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[BAPIResult]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="16">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message type: S Success, E Error, W Warning, I Info, A Abort" Length="1" Name="TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Class" Length="20" Name="ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Number" Length="3" Name="NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Text" Length="220" Name="MESSAGE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Application log: log number" Length="20" Name="LOG_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Application log: Internal message serial number" Length="6" Name="LOG_MSG_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V3" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V4" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Parameter Name" Length="32" Name="PARAMETER" />
+                      <usbm:FieldArgument DataType="Integer" DecimalLength="0" Description="Lines in parameter" Length="4" Name="ROW" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Field in parameter" Length="30" Name="FIELD" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Logical system from which message originates" Length="10" Name="SYSTEM" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="SEQUENCE" x:Name="__ReferenceID8" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Task list sequences in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="SEQUENCE" Optional="True" ServiceDataType="BAPI1012_SEQ_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("SEQUENCE")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="32">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence category" Length="1" Name="SEQUENCE_CATEGORY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference sequence for a sequence" Length="6" Name="REFERENCE_SEQUENCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence description" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="From lot size" Length="7" Name="LOT_SZ_MIN" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="To lot size" Length="7" Name="LOT_SZ_MAX" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Task list unit of measure" Length="3" Name="TASK_MEASURE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="TASK_MEASURE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Alignment key for scheduling" Length="1" Name="ALIGNMENT_KEY_FOR_SCHEDULING" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Number of the branch operation" Length="4" Name="BRANCH_OPERATION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Number of the return operation" Length="4" Name="RETURN_OPERATION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="BRANCH_OPERATION_IDENT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="RETURN_OPERATION_IDENT" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="SUBOPERATION" x:Name="__ReferenceID7" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Sub operations in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="SUBOPERATION" Optional="True" ServiceDataType="BAPI1012_SUB_OPR_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("SUBOPERATION")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="128">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="SUB_ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="SUB_OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Control key" Length="4" Name="CONTROL_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object ID" Length="8" Name="OBJ_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Object types of the CIM resource" Length="2" Name="OBJECT_TYPE_CIM_RESOURCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Work center" Length="8" Name="WORK_CNTR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Standard text key" Length="7" Name="STANDARD_TEXT_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation short text" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of Measure for Activity/Operation" Length="3" Name="OPERATION_MEASURE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="OPERATION_MEASURE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Denominator for converting rtg and op units of measure" Length="3" Name="DENOMINATOR" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Numerator for converting task list and oper. un. of measure" Length="3" Name="NOMINATOR" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Base Quantity" Length="7" Name="BASE_QUANTITY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Break" Length="5" Name="BREAK_TIME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for the break time" Length="3" Name="BREAK_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="BREAK_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_01_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_02_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_03" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_03" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_03_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_03" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_04_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_05_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Activity Type" Length="6" Name="ACTTYPE_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit of measure for the standard value" Length="3" Name="STD_UNIT_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="STD_UNIT_06_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Standard Value" Length="5" Name="STD_VALUE_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Type of standard value calculation" Length="5" Name="STD_VALUE_CALCULATION_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Date when the standard value was calculated" Length="4" Name="STD_VALUE_YEAR_OF_CALCULATION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference number for standard value code" Length="6" Name="STD_VALUE_CODE_REFERENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Basis for standard value calculation" Length="5" Name="STD_VALUE_CALCULATION_BASIS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Number of confirmation slips" Length="3" Name="NO_OF_CONFIRMATION_SLIPS" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Number of Time Tickets" Length="2" Name="NO_OF_TIME_TICKETS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Wage Type" Length="4" Name="WAGETYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Suitability" Length="2" Name="SUITABILITY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="2" Description="Number of employees" Length="3" Name="NO_OF_EMPLOYEE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Setup group key" Length="10" Name="SETUP_GROUP_CATEGORY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Setup group key" Length="10" Name="SETUP_GROUP_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Setup Type Key" Length="2" Name="SETUP_TYPE_KEY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Scrap factor" Length="3" Name="SCRAP_FACTOR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Wage group" Length="3" Name="WAGEGROUP" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Offset to sub-operation start" Length="3" Name="OFFSET_START" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for offset to start" Length="3" Name="OFFSET_START_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="OFFSET_START_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Offset to sub-operation finish" Length="3" Name="OFFSET_END" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Unit for offset to finish" Length="3" Name="OFFSET_END_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="OFFSET_END_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sort Term for Non-Stock Info Records" Length="10" Name="SORTED_BY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Account Number of Vendor or Creditor" Length="10" Name="VENDOR_NO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Planned Delivery Time in Days" Length="2" Name="PLND_DELRY" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="4" Description="Currency amount in BAPI interfaces" Length="12" Name="INFO_REC_NET_PRICE" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Price Unit" Length="3" Name="PRICE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Cost Element" Length="10" Name="COST_ELEM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Currency Key" Length="5" Name="CURRENCY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO currency code" Length="3" Name="CURRENCY_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Number of Purchasing Info Record" Length="10" Name="INFO_REC" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Purchasing Organization" Length="4" Name="PURCH_ORG" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Purchasing group for external processing" Length="3" Name="PURCH_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: fixed lot external processing" Length="1" Name="FIXED_LOT_EXTERNAL_PROCESSING" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Material Group" Length="9" Name="MATL_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key word ID for user-defined fields" Length="7" Name="USERFIELDS_KEYWORD_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 20 characters" Length="20" Name="USERFIELD_CH20_00" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 20 characters" Length="20" Name="USERFIELD_CH20_01" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 10 characters" Length="10" Name="USERFIELD_CH10_02" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field with 10 characters" Length="10" Name="USERFIELD_CH10_03" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="User field for quantity (length 10.3)" Length="7" Name="USERFIELD_QUAN_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for quantity fields" Length="3" Name="USERFIELD_UNIT_04" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="USERFIELD_UNIT_04_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="User field for quantity (length 10.3)" Length="7" Name="USERFIELD_QUAN_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for quantity fields" Length="3" Name="USERFIELD_UNIT_05" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="USERFIELD_UNIT_05_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="4" Description="Currency amount in BAPI interfaces" Length="12" Name="USERFIELD_CURR_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for value fields" Length="5" Name="USERFIELD_CURRENCY_06" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO currency code" Length="3" Name="USERFIELD_CURRENCY_06_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="4" Description="Currency amount in BAPI interfaces" Length="12" Name="USERFIELD_CURR_07" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field: Unit for value fields" Length="5" Name="USERFIELD_CURRENCY_07" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO currency code" Length="3" Name="USERFIELD_CURRENCY_07_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field for date" Length="8" Name="USERFIELD_DATE_08" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User field for date" Length="8" Name="USERFIELD_DATE_09" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User-defined field: Indicator for reports" Length="1" Name="USERFIELD_FLAG_10" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="User-defined field: Indicator for reports" Length="1" Name="USERFIELD_FLAG_11" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator for Relevancy to Costing" Length="1" Name="COST_RELEVANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Purchasing Document Number" Length="10" Name="PO_NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item Number of Purchasing Document" Length="5" Name="PO_ITEM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Business Process" Length="12" Name="CO_BUSPROC" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Indicator: Externally processed op. with subcontracting" Length="1" Name="EXT_PROCESSED_WITH_SUBCONTRACT" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="TASK" x:Name="__ReferenceID2" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Task list header data in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="TASK" Optional="False" ServiceDataType="BAPI1012_TSK_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("TASK")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="32">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Task list usage" Length="3" Name="TASK_LIST_USAGE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Status" Length="3" Name="TASK_LIST_STATUS" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Task list unit of measure" Length="3" Name="TASK_MEASURE_UNIT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for unit of measurement" Length="3" Name="TASK_MEASURE_UNIT_ISO" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="From Lot Size" Length="7" Name="LOT_SIZE_FROM" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="To Lot Size" Length="7" Name="LOT_SIZE_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Responsible planner group/department" Length="3" Name="RESP_PLANNER_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Task list description" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Old number" Length="20" Name="OLD_NUMBER_OF_TASK_LIST" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Recalculate standard values at order creation using CAPP" Length="1" Name="RECALC_STD_VALUES" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Level at Which Dynamic Modification Parameters Are Defined" Length="1" Name="DYN_MODIF_LEVEL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Dynamic Modification Rule" Length="3" Name="DYN_MODIF_RULE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Vendor Considered for Dynamic Modification" Length="1" Name="DYN_MODIF_BY_VENDOR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Manufacturer Considered for Dynamic Modification" Length="1" Name="DYN_MODIF_BY_MANUFACT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Customer Considered for Dynamic Modification" Length="1" Name="DYN_MODIF_BY_CUSTOMR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sample-Drawing Procedure" Length="8" Name="SAMPLE_DRAWING_PROCEDURE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="External Numbering of Units to be Inspected" Length="1" Name="IND_UNITS_EXT_NUMBERING" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Identification for the Inspection Point Field Combination" Length="3" Name="IDENT_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Partial Lot Assignment in an Inspection During Production" Length="1" Name="INSPPOINT_PARTIALLOT_ASSGNMT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change rule" Length="1" Name="CHANGE_RULE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Type for Object" Length="3" Name="OBJECT_CHANGE_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Work center for capacity planning" Length="8" Name="PLANNING_WORK_CENTER" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="TEXT" x:Name="__ReferenceID6" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Long text lines in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="TEXT" Optional="True" ServiceDataType="BAPI1012_TXT_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("TEXT")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Tag column" Length="2" Name="FORMAT_COL" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Text Line" Length="132" Name="TEXT_LINE" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="TEXTALLOCATION" x:Name="__ReferenceID5" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Text assignment (int. format) for Direct Input in the EWB" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="TEXTALLOCATION" Optional="True" ServiceDataType="BAPI1012_TXT_HDR_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("TEXTALLOCATION")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="32">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Target type for Direct Input into the EWB" Length="2" Name="OBJECT_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Suboperation" Length="4" Name="SUB_ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item Number for Production Resource/Tool" Length="4" Name="ITEM_NO_OF_PRODUCTION_RESOURCE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Item counter for production resources/tools" Length="8" Name="PRT_ITEM_COUNT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Inspection Characteristic Number" Length="4" Name="INSP_CHAR_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Single-Character Indicator" Length="1" Name="CHA_TEXT_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Language Key" Length="1" Name="LANGU" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="2-Character SAP Language Code" Length="2" Name="LANGU_ISO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Text index from" Length="8" Name="LINE_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Text index to" Length="8" Name="LINE_TO" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="WORKCENTERREFERENCE" x:Name="__ReferenceID4" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Standard tasks in CREATE-BAPI for routings" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="WORKCENTERREFERENCE" Optional="True" ServiceDataType="BAPI1012_WC_REF_OPR_C">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("WORKCENTERREFERENCE")]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="32">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Key for Task List Group" Length="8" Name="TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group Counter" Length="2" Name="GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sequence" Length="6" Name="SEQUENCE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Change Number" Length="12" Name="CHANGE_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-From Date" Length="8" Name="VALID_FROM" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="To change number" Length="12" Name="CHANGE_NO_TO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Valid-to date" Length="8" Name="VALID_TO_DATE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Deletion Indicator" Length="1" Name="DEL_IND" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation ID" Length="8" Name="OPERATION_ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation/Activity Number" Length="4" Name="ACTIVITY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group of the referenced task list" Length="8" Name="REFERENCED_TASK_LIST_GROUP" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group counter of the referenced task list" Length="2" Name="REFERENCED_GROUP_COUNTER" />
+                      <usbm:FieldArgument DataType="Decimal" DecimalLength="0" Description="Increment between referenced operations" Length="2" Name="REFERENCED_ACTIVITY_INCREMENT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Work center" Length="8" Name="WORK_CNTR" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Plant" Length="4" Name="PLANT" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Control key" Length="4" Name="CONTROL_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Grouping Category" Length="1" Name="CUMULATION_TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Standard text key" Length="7" Name="STANDARD_TEXT_KEY" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Operation short text" Length="40" Name="DESCRIPTION" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Group operation" Length="1" Name="GROUP_OPERATION" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+              </scg:Dictionary>
+            </usba:InvokeSapBapi.AllArguments>
+            <usba:InvokeSapBapi.OptionalArguments>
+              <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="0" />
+            </usba:InvokeSapBapi.OptionalArguments>
+            <usba:InvokeSapBapi.SelectedArgumentList>
+              <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="19">
+                <x:Reference>__ReferenceID0</x:Reference>
+                <x:Reference>__ReferenceID1</x:Reference>
+                <x:Reference>__ReferenceID2</x:Reference>
+                <x:Reference>__ReferenceID3</x:Reference>
+                <x:Reference>__ReferenceID4</x:Reference>
+                <x:Reference>__ReferenceID5</x:Reference>
+                <x:Reference>__ReferenceID6</x:Reference>
+                <x:Reference>__ReferenceID7</x:Reference>
+                <x:Reference>__ReferenceID8</x:Reference>
+                <x:Reference>__ReferenceID9</x:Reference>
+                <x:Reference>__ReferenceID10</x:Reference>
+                <x:Reference>__ReferenceID11</x:Reference>
+                <x:Reference>__ReferenceID12</x:Reference>
+                <x:Reference>__ReferenceID13</x:Reference>
+                <x:Reference>__ReferenceID14</x:Reference>
+                <x:Reference>__ReferenceID15</x:Reference>
+                <x:Reference>__ReferenceID16</x:Reference>
+                <x:Reference>__ReferenceID17</x:Reference>
+                <x:Reference>__ReferenceID18</x:Reference>
+              </scg:List>
+            </usba:InvokeSapBapi.SelectedArgumentList>
+          </usba:InvokeSapBapi>
+        </ActivityAction>
+      </usba:SapApplicationScope.Body>
+      <usba:SapApplicationScope.DesignAdvancedParameters>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAdvancedParameters>
+      <usba:SapApplicationScope.DesignAppServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAppServer>
+      <usba:SapApplicationScope.DesignClient>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignClient>
+      <usba:SapApplicationScope.DesignLanguage>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLanguage>
+      <usba:SapApplicationScope.DesignLogonGroup>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLogonGroup>
+      <usba:SapApplicationScope.DesignMessageServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignMessageServer>
+      <usba:SapApplicationScope.DesignPassword>
+        <ss:SecureString />
+      </usba:SapApplicationScope.DesignPassword>
+      <usba:SapApplicationScope.DesignSapRouterString>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSapRouterString>
+      <usba:SapApplicationScope.DesignSncLibraryPath>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncLibraryPath>
+      <usba:SapApplicationScope.DesignSncMode>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncMode>
+      <usba:SapApplicationScope.DesignSncPartnerName>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncPartnerName>
+      <usba:SapApplicationScope.DesignSncQOP>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncQOP>
+      <usba:SapApplicationScope.DesignSncSso>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncSso>
+      <usba:SapApplicationScope.DesignSystemId>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemId>
+      <usba:SapApplicationScope.DesignSystemNumber>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemNumber>
+      <usba:SapApplicationScope.DesignUser>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignUser>
+    </usba:SapApplicationScope>
+    <ui:ForEach x:TypeArguments="usbcss:BapiRet2" CurrentIndex="{x:Null}" DisplayName="For Each" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[BAPIResult]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="usbcss:BapiRet2">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="usbcss:BapiRet2" Name="item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Set the values to BAPIResult" sap2010:WorkflowViewState.IdRef="Sequence_430">
+            <Assign DisplayName="Assign GROUP" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[item.Message]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[item.Message &amp; " GROUP=" &amp; GroupKey]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign GROUPCOUNTER" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[item.Message]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[item.Message &amp; " GROUPCOUNTER=" &amp; GroupCounter]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <Assign DisplayName="Assign out_RegisterReturn" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[out_RegisterReturn]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[new List(of Dictionary(of String, String))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow [ConvertBAPILogToBAPILogFormat]" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\ConvertBAPILogToBAPILogFormat.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))" x:Key="out_ConvertedData">[out_RegisterReturn]</OutArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_ConvertData">[BAPIResult]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d4ABQzpcVXNlcnNcc2F5YS5va2Ftb3RvXERlc2t0b3Bc5LiK5pu444GN44GX44Gm5YmK6Zmk44GZ44KLX0VDQ1xTUkNfQkFQSV9ST1VUSU5HX0NSRUFURV92Mi4yX0VcU1JDX0JBUElfUk9VVElOR19DUkVBVEVfdjIuMl9FLnhhbWw7aAPrBw4CAQFqNGpUAgECbwVvowECAU9wBb8HIAIBGMAHBdoHEgIBD9sHBeIHDgIBC+MHBegHHQIBBukHBekHnwECAQNvem+gAQIBUJkHC5kHOgIBTrwHC7wHOgIBTfgGC/gGOgIBTIIHC4IHOgIBS6gHC6gHOgIBSpQHC5QHOgIBSbcHC7cHOgIBSIcHC4cHOgIBR60HC60HOgIBRp4HC54HOgIBRfMGC/MGOgIBRHD5A3CNBAIBQv0GC/0GOgIBQbIHC7IHOgIBQKMHC6MHOgIBP4wHC4wHOgIBPnYL7gYgAgEZwAeXAcAHpQECARfGBwvXBxYCARDgB1TgB4ABAgEO3QdV3QdnAgEM5Qdv5QeBAQIBCeYHR+YHUwIBCOMHzAHjB4YCAgEH6Qd46QecAQIBBJQBPpQBZAIBPcsBQ8sBZwIBO70EUL0EXAIBOooBPIoBYgIBOLcGQ7cGaAIBNtQEQ9QEXQIBNI8GQ48GWQIBMns9e0cCATDrA0PrA2cCAS6FATyFAWUCASzoBUPoBVkCASqkBEOkBGcCASiaBkOaBmMCASazAkOzAmsCASSeAUOeAWgCASLLAkPLAl4CASCPATyPAWECAR7xBEPxBGECARyAAT2AAUsCARrHBw3OBxYCARTPBw3WBxYCARHMBzjMB2UCARbJBznJB0cCARXUBzjUB3ACARPRBznRB0cCARI=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="414,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeSapBapi_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="SapApplicationScope_2" sap:VirtualizedContainerService.HintSize="414,168" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_430" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="414,418">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="414,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="414,87" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="414,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_429" sap:VirtualizedContainerService.HintSize="436,1491">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach_1" sap:VirtualizedContainerService.HintSize="476,1611">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

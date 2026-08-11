@@ -1,0 +1,891 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ScreenCheckAndOperation"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_TextOrSpreadSheet" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ExportExcel_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart sap2010:Annotation.AnnotationText="- Overview&#xA;Screen transition process after saving&#xA;&#xA;- Arguments&#xA;in_Config as Config Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;in_TextOrSpreadSheet as Text Or SpreadSheet String &lt;String&gt;" DisplayName="ScreenCheckAndOperation" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="x:String" Name="ProcessResult" />
+      <Variable x:TypeArguments="x:String" Default="ScreenCheckAndOperation" Name="WorkflowName" />
+      <Variable x:TypeArguments="x:TimeSpan" Name="ProcessingTime" />
+      <Variable x:TypeArguments="s:DateTime" Name="StartTime" />
+      <Variable x:TypeArguments="s:DateTime" Name="CurrentTime" />
+      <Variable x:TypeArguments="x:Int32" Default="180" Name="Timeout" />
+    </Flowchart.Variables>
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_32">
+        <ui:LogMessage DisplayName="Log Message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_38">
+            <Sequence DisplayName="CheckWindow(After saving)" sap2010:WorkflowViewState.IdRef="Sequence_25">
+              <Assign DisplayName="Assign(StartTime - After saving)" sap2010:WorkflowViewState.IdRef="Assign_29">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:DateTime">[StartTime]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <DoWhile DisplayName="Check Element(After saving)" sap2010:WorkflowViewState.IdRef="DoWhile_5">
+                <DoWhile.Variables>
+                  <Variable x:TypeArguments="x:Boolean" Default="True" Name="CheckWindow" />
+                </DoWhile.Variables>
+                <DoWhile.Condition>[CheckWindow]</DoWhile.Condition>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_24">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Boolean" Name="ExistsGuiSecurity" />
+                    <Variable x:TypeArguments="x:Boolean" Name="ExistsOverwrite" />
+                    <Variable x:TypeArguments="x:Boolean" Name="ExistsSelectFormat" />
+                    <Variable x:TypeArguments="x:Boolean" Name="ExistsSaveButton" />
+                  </Sequence.Variables>
+                  <Switch x:TypeArguments="x:String" DisplayName="Switch Export Type 1" Expression="[in_TextOrSpreadSheet]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                    <Sequence x:Key="Text" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                      <ui:UiElementExists DisplayName="Element Exists(Select Text - After saving)" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_20">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_Tab_Text&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <ui:UiElementExists DisplayName="Element Exists(Save Button) Text" Exists="[ExistsSaveButton]" sap2010:WorkflowViewState.IdRef="UiElementExists_18">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Text_Replace&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <Assign DisplayName="Assign ExistsOverwrite Set False " sap2010:WorkflowViewState.IdRef="Assign_42">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[ExistsOverwrite]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                    <Sequence x:Key="Excel" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                      <ui:UiElementExists DisplayName="Element Exists(Save Button) Excel" Exists="[ExistsSaveButton]" sap2010:WorkflowViewState.IdRef="UiElementExists_23">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_Save&quot;).ToString()]" TimeoutMS="0" WaitForReady="COMPLETE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <ui:UiElementExists DisplayName="Element Exists(Select Spreadsheet Excel - After saving)" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_22">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_Select_all_available_formats&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <ui:UiElementExists DisplayName="Element Exists(Overwrite save message) Excel" Exists="[ExistsOverwrite]" sap2010:WorkflowViewState.IdRef="UiElementExists_26">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_OverWrite_Yes&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                    </Sequence>
+                    <Sequence x:Key="Mhtml" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                      <ui:UiElementExists DisplayName="Element Exists(Save Button) Mhtml" Exists="[ExistsSaveButton]" sap2010:WorkflowViewState.IdRef="UiElementExists_25">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_Save&quot;).ToString()]" TimeoutMS="0" WaitForReady="COMPLETE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <ui:UiElementExists DisplayName="Element Exists(Select Spreadsheet Mhtml - After saving)" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_24">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_MHTML&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <ui:UiElementExists DisplayName="Element Exists(Overwrite save message) Mhtml" Exists="[ExistsOverwrite]" sap2010:WorkflowViewState.IdRef="UiElementExists_21">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_OverWrite_Yes&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                    </Sequence>
+                  </Switch>
+                  <ui:UiElementExists DisplayName="Element Exists(GUI Security)" Exists="[ExistsGuiSecurity]" sap2010:WorkflowViewState.IdRef="UiElementExists_19">
+                    <ui:UiElementExists.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_SAP_GUI_Security_Allow&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                    </ui:UiElementExists.Target>
+                  </ui:UiElementExists>
+                  <If Condition="[ExistsGuiSecurity]" DisplayName="If - Is the SAP GUI Security Screen displayed?(After saving)" sap2010:WorkflowViewState.IdRef="If_17">
+                    <If.Then>
+                      <Assign DisplayName="Assign(ProcessResult - GuiSecurity)1" sap2010:WorkflowViewState.IdRef="Assign_30">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">GuiSecurity</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                  </If>
+                  <If Condition="[ExistsSelectFormat = False _&#xA;AndAlso ExistsSaveButton = False _&#xA;AndAlso ExistsOverwrite = False _&#xA;AndAlso ExistsGuiSecurity = False]" DisplayName="If - Is the save screen all gone and is the process complete?(After saving)" sap2010:WorkflowViewState.IdRef="If_18">
+                    <If.Then>
+                      <Assign DisplayName="Assign(ProcessResult - SaveComplete)1" sap2010:WorkflowViewState.IdRef="Assign_31">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">SaveComplete</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                  </If>
+                  <If Condition="[ExistsOverwrite]" DisplayName="If - Is the overwrite screen displayed?(After saving)" sap2010:WorkflowViewState.IdRef="If_19">
+                    <If.Then>
+                      <Assign DisplayName="Assign(ProcessResult - Overwrite)1" sap2010:WorkflowViewState.IdRef="Assign_32">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">Overwrite</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                  </If>
+                  <If Condition="[Not String.IsNullOrEmpty(ProcessResult)]" DisplayName="If - Exit the loop when the screen appears" sap2010:WorkflowViewState.IdRef="If_20">
+                    <If.Then>
+                      <Assign DisplayName="Assign(CheckWindow)1" sap2010:WorkflowViewState.IdRef="Assign_33">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[CheckWindow]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                  </If>
+                  <Assign DisplayName="Assign(CurrentTime - After saving)" sap2010:WorkflowViewState.IdRef="Assign_34">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:DateTime">[CurrentTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign(ProcessingTime - After saving)" sap2010:WorkflowViewState.IdRef="Assign_35">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:TimeSpan">[ProcessingTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:TimeSpan">[CurrentTime - StartTime]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <If Condition="[ProcessingTime.TotalSeconds &gt; Timeout]" DisplayName="If - Whether the processing time exceeds the specified value(After saving) " sap2010:WorkflowViewState.IdRef="If_21">
+                    <If.Then>
+                      <Throw DisplayName="Throw(After saving)" Exception="[New System.Exception]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </DoWhile>
+            </Sequence>
+            <FlowStep.Next>
+              <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID2" DisplayName="Screen Type(After saving)" Expression="[ProcessResult]" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_6">
+                <FlowStep x:Key="Overwrite" x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_37">
+                  <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="There is a delay after completing the activity, because SAP may freeze at the start of the next process" ClickBeforeTyping="False" DelayMS="1000" DisplayName="Send Hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="enter" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+                    <ui:SendHotkey.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_OverWrite_Yes&quot;).ToString()]" WaitForReady="COMPLETE" />
+                    </ui:SendHotkey.Target>
+                  </ui:SendHotkey>
+                  <FlowStep.Next>
+                    <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_30">
+                      <Sequence DisplayName="Check Window(After Overwrite)" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                        <Assign DisplayName="Assign(Initialize - After Overwrite)" sap2010:WorkflowViewState.IdRef="Assign_24">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">
+                              <Literal x:TypeArguments="x:String" Value="" />
+                            </InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Assign(StartTime - After Overwrite)" sap2010:WorkflowViewState.IdRef="Assign_36">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="s:DateTime">[StartTime]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <DoWhile DisplayName="Check Element(After Overwrite)" sap2010:WorkflowViewState.IdRef="DoWhile_4">
+                          <DoWhile.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Default="True" Name="CheckWindow" />
+                          </DoWhile.Variables>
+                          <DoWhile.Condition>[CheckWindow]</DoWhile.Condition>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_22">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Boolean" Name="ExistsGuiSecurity" />
+                              <Variable x:TypeArguments="x:Boolean" Name="ExistsSelectFormat" />
+                              <Variable x:TypeArguments="x:Boolean" Name="ExistsSaveButton" />
+                            </Sequence.Variables>
+                            <Switch x:TypeArguments="x:String" DisplayName="Switch Export Type 2" Expression="[in_TextOrSpreadSheet]" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                              <Sequence x:Key="Excel" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                                <ui:UiElementExists DisplayName="Element Exists(Select Spreadsheet Excel - After Overwrite)" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_27">
+                                  <ui:UiElementExists.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_Select_all_available_formats&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                  </ui:UiElementExists.Target>
+                                </ui:UiElementExists>
+                                <ui:UiElementExists DisplayName="Element Exists(Save Button - After Overwrite) Excel" Exists="[ExistsSaveButton]" sap2010:WorkflowViewState.IdRef="UiElementExists_28">
+                                  <ui:UiElementExists.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_Save&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                  </ui:UiElementExists.Target>
+                                </ui:UiElementExists>
+                              </Sequence>
+                              <Sequence x:Key="Mhtml" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                                <ui:UiElementExists DisplayName="Element Exists(Select Spreadsheet Mhtml - After Overwrite)" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_16">
+                                  <ui:UiElementExists.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_MHTML&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                  </ui:UiElementExists.Target>
+                                </ui:UiElementExists>
+                                <ui:UiElementExists DisplayName="Element Exists(Save Button - After Overwrite) Mhtml" Exists="[ExistsSaveButton]" sap2010:WorkflowViewState.IdRef="UiElementExists_14">
+                                  <ui:UiElementExists.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_Spreadsheet_Save&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                  </ui:UiElementExists.Target>
+                                </ui:UiElementExists>
+                              </Sequence>
+                            </Switch>
+                            <ui:UiElementExists DisplayName="Element Exists(GUI Security - After Overwrite)" Exists="[ExistsGuiSecurity]" sap2010:WorkflowViewState.IdRef="UiElementExists_15">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_SAP_GUI_Security_Allow&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                            <If Condition="[ExistsGuiSecurity]" DisplayName="If - Is the SAP GUI Security Screen displayed?(After Overwrite)" sap2010:WorkflowViewState.IdRef="If_13">
+                              <If.Then>
+                                <Assign DisplayName="Assign(ProcessResult - GuiSecurity)2" sap2010:WorkflowViewState.IdRef="Assign_25">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">GuiSecurity</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </If.Then>
+                            </If>
+                            <If Condition="[ExistsSelectFormat = False _&#xA;AndAlso ExistsSaveButton = False _&#xA;AndAlso ExistsGuiSecurity = False]" DisplayName="If - Is the save screen all gone and is the process complete?(After Overwrite)" sap2010:WorkflowViewState.IdRef="If_14">
+                              <If.Then>
+                                <Assign DisplayName="Assign(ProcessResult - SaveComplete)2" sap2010:WorkflowViewState.IdRef="Assign_26">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">SaveComplete</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </If.Then>
+                            </If>
+                            <If Condition="[Not String.IsNullOrEmpty(ProcessResult)]" DisplayName="If - Exit the loop when the screen appears(After Overwrite)" sap2010:WorkflowViewState.IdRef="If_16">
+                              <If.Then>
+                                <Assign DisplayName="Assign(CheckWindow)2" sap2010:WorkflowViewState.IdRef="Assign_28">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Boolean">[CheckWindow]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </If.Then>
+                            </If>
+                            <Assign DisplayName="Assign(CurrentTime - After Overwrite)" sap2010:WorkflowViewState.IdRef="Assign_37">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="s:DateTime">[CurrentTime]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign DisplayName="Assign(ProcessingTime - After Overwrite)" sap2010:WorkflowViewState.IdRef="Assign_38">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:TimeSpan">[ProcessingTime]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:TimeSpan">[CurrentTime - StartTime]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <If Condition="[ProcessingTime.TotalSeconds &gt; Timeout]" DisplayName="If - Whether the processing time exceeds the specified value (After Overwrite)" sap2010:WorkflowViewState.IdRef="If_22">
+                              <If.Then>
+                                <Throw DisplayName="Throw(After Overwrite)" Exception="[New System.Exception]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                        </DoWhile>
+                      </Sequence>
+                      <FlowStep.Next>
+                        <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID6" DisplayName="Screen Type(After Overwrite)" Expression="[ProcessResult]" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_8">
+                          <FlowStep x:Key="GuiSecurity" x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_36">
+                            <ui:Click DelayBefore="{x:Null}" sap2010:Annotation.AnnotationText="There is a delay after completing the activity, because SAP may freeze at the start of the next process" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click(Allow writing)" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;BTN_SAP_GUI_Security_Allow&quot;).ToString()]" WaitForReady="COMPLETE" />
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <FlowStep.Next>
+                              <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_29">
+                                <Sequence DisplayName="Check Window(After GUI Security) " sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                  <Assign DisplayName="Assign(ProcessResult - After GUI Security)" sap2010:WorkflowViewState.IdRef="Assign_18">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">
+                                        <Literal x:TypeArguments="x:String" Value="" />
+                                      </InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Assign DisplayName="Assign(StartTime - After GUI Security)" sap2010:WorkflowViewState.IdRef="Assign_39">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="s:DateTime">[StartTime]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <DoWhile DisplayName="Check Element(After GUI Security)" sap2010:WorkflowViewState.IdRef="DoWhile_3">
+                                    <DoWhile.Variables>
+                                      <Variable x:TypeArguments="x:Boolean" Default="True" Name="CheckWindow" />
+                                    </DoWhile.Variables>
+                                    <DoWhile.Condition>[CheckWindow]</DoWhile.Condition>
+                                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                      <Sequence.Variables>
+                                        <Variable x:TypeArguments="x:Boolean" Name="ExistsGuiSecurity" />
+                                        <Variable x:TypeArguments="x:Boolean" Name="ExistsSelectFormat" />
+                                      </Sequence.Variables>
+                                      <Switch x:TypeArguments="x:String" DisplayName="Switch Export Type 3" Expression="[in_TextOrSpreadSheet]" sap2010:WorkflowViewState.IdRef="Switch`1_3">
+                                        <ui:UiElementExists x:Key="Text" DisplayName="Element Exists(Select Text)3" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_12">
+                                          <ui:UiElementExists.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_Tab_Text&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                          </ui:UiElementExists.Target>
+                                        </ui:UiElementExists>
+                                        <ui:UiElementExists x:Key="Excel" DisplayName="Element Exists(Select Spreadsheet) Excel 3" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_31">
+                                          <ui:UiElementExists.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_Select_all_available_formats&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                          </ui:UiElementExists.Target>
+                                        </ui:UiElementExists>
+                                        <ui:UiElementExists x:Key="Mhtml" DisplayName="Element Exists(Select Spreadsheet) Mhtml 3" Exists="[ExistsSelectFormat]" sap2010:WorkflowViewState.IdRef="UiElementExists_32">
+                                          <ui:UiElementExists.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;CHK_MHTML&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                          </ui:UiElementExists.Target>
+                                        </ui:UiElementExists>
+                                      </Switch>
+                                      <ui:UiElementExists DisplayName="Element Exists(GUI Security)3" Exists="[ExistsGuiSecurity]" sap2010:WorkflowViewState.IdRef="UiElementExists_11">
+                                        <ui:UiElementExists.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Config(&quot;BTN_SAP_GUI_Security_Allow&quot;).ToString()]" TimeoutMS="0" WaitForReady="NONE" />
+                                        </ui:UiElementExists.Target>
+                                      </ui:UiElementExists>
+                                      <If Condition="[ExistsGuiSecurity]" DisplayName="If - Is the SAP GUI Security Screen displayed?(After GUI Security)" sap2010:WorkflowViewState.IdRef="If_9">
+                                        <If.Then>
+                                          <Assign DisplayName="Assign(ProcessResult - GuiSecurity)3" sap2010:WorkflowViewState.IdRef="Assign_19">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">GuiSecurity</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </If.Then>
+                                      </If>
+                                      <If Condition="[ExistsSelectFormat = False AndAlso ExistsGuiSecurity = False]" DisplayName="If - Is the save screen all gone and is the process complete?(After GUI Security)" sap2010:WorkflowViewState.IdRef="If_10">
+                                        <If.Then>
+                                          <Assign DisplayName="Assign(ProcessResult - SaveComplete)3" sap2010:WorkflowViewState.IdRef="Assign_20">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[ProcessResult]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">SaveComplete</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </If.Then>
+                                      </If>
+                                      <If Condition="[Not String.IsNullOrEmpty(ProcessResult)]" DisplayName="If - Exit the loop when the screen appears(After GUI Security)" sap2010:WorkflowViewState.IdRef="If_12">
+                                        <If.Then>
+                                          <Assign DisplayName="Assign(CheckWindow)3" sap2010:WorkflowViewState.IdRef="Assign_22">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Boolean">[CheckWindow]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </If.Then>
+                                      </If>
+                                      <Assign DisplayName="Assign(CurrentTime - After GUI Security)" sap2010:WorkflowViewState.IdRef="Assign_40">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="s:DateTime">[CurrentTime]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <Assign DisplayName="Assign(ProcessingTime - After GUI Security)" sap2010:WorkflowViewState.IdRef="Assign_41">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:TimeSpan">[ProcessingTime]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:TimeSpan">[CurrentTime - StartTime]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <If Condition="[ProcessingTime.TotalSeconds &gt; Timeout]" DisplayName="If - Whether the processing time exceeds the specified value(After GUI Security) " sap2010:WorkflowViewState.IdRef="If_23">
+                                        <If.Then>
+                                          <Throw DisplayName="Throw(After GUI Security)" Exception="[New System.Exception]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                                        </If.Then>
+                                      </If>
+                                    </Sequence>
+                                  </DoWhile>
+                                </Sequence>
+                                <FlowStep.Next>
+                                  <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID3" DisplayName="Screen Type(After GUI Security)" Expression="[ProcessResult]" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_7">
+                                    <FlowSwitch.Default>
+                                      <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_33">
+                                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click(Deny execution)" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                          <ui:Click.CursorPosition>
+                                            <ui:CursorPosition Position="Center">
+                                              <ui:CursorPosition.OffsetX>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetX>
+                                              <ui:CursorPosition.OffsetY>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetY>
+                                            </ui:CursorPosition>
+                                          </ui:Click.CursorPosition>
+                                          <ui:Click.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="7511f1495d8c121ef3c9d00fc6a7f6bc" Selector="[in_Config(&quot;BTN_SAP_GUI_Security_Deny&quot;).ToString()]" WaitForReady="COMPLETE" />
+                                          </ui:Click.Target>
+                                        </ui:Click>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_34">
+                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click(Continue)" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="0f2522443389b18bfd9b0f0e0a5b20b9" Selector="[in_Config(&quot;BTN_SAP_GUI_Security_Continue&quot;).ToString()]" WaitForReady="COMPLETE" />
+                                              </ui:Click.Target>
+                                            </ui:Click>
+                                            <FlowStep.Next>
+                                              <x:Reference>__ReferenceID0</x:Reference>
+                                            </FlowStep.Next>
+                                          </FlowStep>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowSwitch.Default>
+                                    <FlowStep x:Key="SaveComplete" x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_35">
+                                      <ui:LogMessage DisplayName="Log Message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+                                    </FlowStep>
+                                  </FlowSwitch>
+                                </FlowStep.Next>
+                              </FlowStep>
+                            </FlowStep.Next>
+                          </FlowStep>
+                          <x:Reference>__ReferenceID0<x:Key>SaveComplete</x:Key></x:Reference>
+                        </FlowSwitch>
+                      </FlowStep.Next>
+                    </FlowStep>
+                  </FlowStep.Next>
+                </FlowStep>
+                <x:Reference>__ReferenceID1<x:Key>GuiSecurity</x:Key></x:Reference>
+                <x:Reference>__ReferenceID0<x:Key>SaveComplete</x:Key></x:Reference>
+              </FlowSwitch>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID2</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID4</x:Reference>
+    <x:Reference>__ReferenceID5</x:Reference>
+    <x:Reference>__ReferenceID6</x:Reference>
+    <x:Reference>__ReferenceID7</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID8</x:Reference>
+    <x:Reference>__ReferenceID9</x:Reference>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID10</x:Reference>
+    <x:Reference>__ReferenceID11</x:Reference>
+    <sads:DebugSymbol.Symbol>d2dDOlxVc2Vyc1x5dWtpLnlhbWF6YWtpXERlc2t0b3BcU1JDX0NNX0dFVF9UQkxfRVxTUkNfQ01fR0VUX1RCTF9FXEV4ZWN1dGlvblxTY3JlZW5DaGVja0FuZE9wZXJhdGlvbi54YW1s2QFJA8UEDwIBAUw0TE0CAQNQM1A4AgECVAlUpwEDAbwCVw3wARgDAcMB8gGBAfIBkgEDAcEBowQnowTBAQMBvgH3Ah2FAygDAboBiAMh9gMsAgFr+AObAfgDrAECAWn7AymJBDQCAWaMBC2aBDgCAWP0ARP4ASMCAV77ARfzAiICAQb1Ao4B9QKfAQIBBFR/VKQBAwG9AlgPXxgDAbgCYA/vARkDAcQBowSbAaMEvgEDAb8BgwN3gwO3AQMBvAH3AusB9wLxAQMBuwGJAyOSAywDAbYBkwMjmgMsAwGyAZsDI/UDLQIBbIcEvAGHBPsBAgFnmATAAZgEgwICAWT2AW32AbABAgFh9AGTAvQBmQICAWD0AfoC9AGBAwIBX/wBGYUCIgIBWoYCGY0CIgIBVo4CGfICIwIBB108XVEDAbsCWj1aSAMBuQJiQWJHAwHFAWQkZDEDAbYCZRHuARwDAcYBjwMpjwNYAwG5AYsDT4sDXgMBtwGYA1CYA2UDAbUBlQNRlQNcAwGzAZ0DVZ0DWwIBbZ8DOJ8DRQMBsAGgAyX0AzACAW6CAh+CAk4CAV3+AUX+AVQCAVuLAkaLAlsCAVmIAkeIAlICAVeQAkuQAlECAQiSAi6SAjsCAVSTAhvxAiYCAQlsE6MBHAMB/AGkAROoASgDAfYBqQETtAEYAwHvAbUBE8ABGAMB5QHBARPMARgDAd4BzQET2AEYAwHXAdkBE+ABHAMB0wHhARPoARwDAc0B6QET7QEYAwHHAaUDJ7UDMAMBmwG2Aye6AzwDAZUBuwMnxgMsAwGOAccDJ9IDLAMBhgHTAyfeAywCAX/fAyfmAzACAXvnAyfuAzACAXXvAyfzAywCAW+ZAh2yAiYCATezAh23AjICATG4Ah3DAiICASrEAh3PAiICASHQAh3bAiICARrcAh3jAiYCARbkAh3rAiYCARDsAh3wAiICAQpsZGx8AwH9AW0VgAEgAwGlAoEBFZEBIAMBkgKSARWiASADAf8BpgFYpgGYAQMB+gGmAaMBpgGmAQMB+QGkAVmkAW4DAfcBqQEhqQE2AwHwAasBF7IBIAMB8gG1ASG1AbQBAwHmAbcBF74BIAMB6wHBASHBATQDAd8BwwEXygEgAwHhAc0BIc0BTAMB2AHPARfWASADAdoB3gFA3gFVAwHWAdsBQdsBTgMB1AHmAUDmAVkDAdAB4wFB4wFRAwHOAekBIekBTQMByAHrARfrAY8BAwHLAaUDeKUDkAEDAZwBpgMpqgM+AwGqAasDKa8DPgMBpAGwAym0Az4DAZ4BuANsuAOsAQMBmQG4A7cBuAO6AQMBmAG2A262A4MBAwGWAbsDNbsDSgMBjwG9AyvEAzQDAZEBxwM1xwN1AwGHAckDK9ADNAMBigHTAzXTA2ADAYAB1QMr3AM0AwGCAeQDVOQDaQIBfuEDVeEDYgIBfOwDVOwDbQIBeOkDVekDZQIBdu8DNe8DYQIBcPEDK/EDqQECAXOZAm6ZAoYBAgE4mgIfpQIqAgFHpgIfsQIqAgE6tQJitQKiAQIBNbUCrQG1ArABAgE0swJ1swKKAQIBMrgCK7gCQAIBK7oCIcECKgIBLcQCK8QCmAECASLGAiHNAioCASbQAivQAlYCARvSAiHZAioCAR3hAkrhAl8CARneAkveAlgCARfpAkrpAmMCARPmAkvmAlsCARHsAivsAlcCAQvuAiHuApwBAgEObhdyLAMBsAJzF3csAwGqAngXfyADAaYCggEXhgEsAwGfAocBF4sBLAMBmQKMAReQASwDAZMCkwEXlwEsAwGMApgBF5wBLAMBhgKdARehASwDAYACsAFCsAFNAwH1Aa0BQ60BUgMB8wG8AUK8AU4DAe4BuQFDuQFSAwHsAcgBQsgBSwMB5AHFAUPFAVIDAeIB1AFD1AFIAwHdAdEBRNEBUQMB2wHrAUrrAWIDAcwBqANuqAOgAQMBrgGoA6sBqAOuAQMBrQGmA3ymA5IBAwGrAa0Dbq0DtAEDAagBrQO/Aa0DwgEDAacBqwOLAasDoQEDAaUBsgNusgOdAQMBogGyA6gBsgOrAQMBoQGwA4sBsAOhAQMBnwHCA1bCA2EDAZQBvwNXvwNmAwGSAc4DVs4DYgMBjQHLA1fLA2YDAYsB2gNX2gNcAwGFAdcDWNcDZQMBgwHxA2TxA3wCAXSbAiGfAjYCAU6gAiGkAjYCAUinAiGrAjYCAUGsAiGwAjYCATu/Aky/AlcCATC8Ak28AlwCAS7LAkzLAlgCASnIAk3IAlwCASfXAk3XAlICASDUAk7UAlsCAR7uAlfuAm8CAQ9wXHCOAQMBtAJwmQFwnAEDAbMCbmtugQEDAbECdVx1kgEDAa4CdZ0BdaABAwGtAnNhc3UDAasCfUN9SAMBqQJ6RHpVAwGnAoQBXIQBlgEDAaMChAGhAYQBpAEDAaICggFiggF2AwGgAokBXIkBogEDAZ0CiQGtAYkBsAEDAZwChwF4hwGOAQMBmgKOAVyOAZ8BAwGXAo4BqgGOAa0BAwGWAowBbYwBgAEDAZQClQFclQGWAQMBkAKVAaEBlQGkAQMBjwKTAWKTAXYDAY0CmgFcmgGLAQMBigKaAZYBmgGZAQMBiQKYAXiYAY4BAwGHAp8BXJ8BnwEDAYQCnwGqAZ8BrQEDAYMCnQFtnQGAAQMBgQKdAmadAqwBAgFSnQK3AZ0CugECAVGbAoUBmwKbAQIBT6ICZqICoAECAUyiAqsBogKuAQIBS6ACfqACkgECAUmpAmapApUBAgFFqQKgAakCowECAUSnAoUBpwKbAQIBQq4CZq4CoAECAT+uAqsBrgKuAQIBPqwCfqwCkgECATw=</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="525,60" />
+      <sap2010:ViewStateData Id="UiElementExists_20" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_18" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Assign_42" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="336,400">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_23" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_22" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_26" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="336,408">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_25" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_24" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_21" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Sequence_28" sap:VirtualizedContainerService.HintSize="336,408">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="477,628" />
+      <sap2010:ViewStateData Id="UiElementExists_19" sap:VirtualizedContainerService.HintSize="477,68" />
+      <sap2010:ViewStateData Id="Assign_30" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_17" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_18" sap:VirtualizedContainerService.HintSize="477,212" />
+      <sap2010:ViewStateData Id="Assign_32" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_19" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_33" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_20" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_34" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Assign_35" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_21" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Sequence_24" sap:VirtualizedContainerService.HintSize="499,2304">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_5" sap:VirtualizedContainerService.HintSize="525,2466">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_25" sap:VirtualizedContainerService.HintSize="547,2690">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_4" sap:VirtualizedContainerService.HintSize="200,123">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="525,60" />
+      <sap2010:ViewStateData Id="Assign_36" sap:VirtualizedContainerService.HintSize="525,60" />
+      <sap2010:ViewStateData Id="UiElementExists_27" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_28" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Sequence_30" sap:VirtualizedContainerService.HintSize="336,300">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UiElementExists_16" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_14" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Sequence_31" sap:VirtualizedContainerService.HintSize="336,300">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_2" sap:VirtualizedContainerService.HintSize="477,506" />
+      <sap2010:ViewStateData Id="UiElementExists_15" sap:VirtualizedContainerService.HintSize="477,68" />
+      <sap2010:ViewStateData Id="Assign_25" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_13" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_26" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_14" sap:VirtualizedContainerService.HintSize="477,212" />
+      <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_16" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_37" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_22" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="499,1934">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_4" sap:VirtualizedContainerService.HintSize="525,2096" />
+      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="200,123">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_18" sap:VirtualizedContainerService.HintSize="525,60" />
+      <sap2010:ViewStateData Id="Assign_39" sap:VirtualizedContainerService.HintSize="525,60" />
+      <sap2010:ViewStateData Id="UiElementExists_12" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_31" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="UiElementExists_32" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Switch`1_3" sap:VirtualizedContainerService.HintSize="477,296" />
+      <sap2010:ViewStateData Id="UiElementExists_11" sap:VirtualizedContainerService.HintSize="477,68" />
+      <sap2010:ViewStateData Id="Assign_19" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_20" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_10" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_12" sap:VirtualizedContainerService.HintSize="477,208" />
+      <sap2010:ViewStateData Id="Assign_40" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Assign_41" sap:VirtualizedContainerService.HintSize="477,60" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_23" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="499,1720">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_3" sap:VirtualizedContainerService.HintSize="525,1882" />
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="547,2206">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_18" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="FlowStep_34">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">180,1455</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">280,1507 280,1537 990,1537 990,1594</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_33">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">180,1364</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">280,1416 280,1455</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_35">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">890,1594</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowSwitch`1_7" sap:VirtualizedContainerService.HintSize="160,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">430,1235</av:Point>
+            <av:Size x:Key="ShapeSize">160,87</av:Size>
+            <av:PointCollection x:Key="GuiSecurityConnector">759,963.5 550,963.5 550,1124.5</av:PointCollection>
+            <av:PointCollection x:Key="OverwriteConnector">810,1007 810,1124.5</av:PointCollection>
+            <av:PointCollection x:Key="Default">430,1278.5 280,1278.5 280,1364</av:PointCollection>
+            <x:String x:Key="DefaultCaseDisplayName">GuiSecurity</x:String>
+            <av:PointCollection x:Key="SaveCompleteConnector">590,1278.5 990,1278.5 990,1594</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_29">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">410,1134</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">510,1185 510,1235</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_36">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">410,974</av:Point>
+            <av:Size x:Key="ShapeSize">200,123</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">510,1097 510,1134</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowSwitch`1_8" sap:VirtualizedContainerService.HintSize="156,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">722,885</av:Point>
+            <av:Size x:Key="ShapeSize">156,87</av:Size>
+            <av:PointCollection x:Key="GuiSecurityConnector">722,928.5 510,928.5 510,974</av:PointCollection>
+            <av:PointCollection x:Key="OverwriteConnector">820,1017 820,1134.5</av:PointCollection>
+            <av:PointCollection x:Key="SaveCompleteConnector">878,928.5 990,928.5 990,1594</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_30">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">700,784</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">800,835 800,885</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_37">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">700,604</av:Point>
+            <av:Size x:Key="ShapeSize">200,123</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">800,727 800,784</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowSwitch`1_6" sap:VirtualizedContainerService.HintSize="139,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">730.5,399.5</av:Point>
+            <av:Size x:Key="ShapeSize">139,87</av:Size>
+            <av:PointCollection x:Key="SaveCompleteConnector">869.5,443 990,443 990,1594</av:PointCollection>
+            <av:PointCollection x:Key="GuiSecurityConnector">730.5,443 510,443 510,974</av:PointCollection>
+            <av:PointCollection x:Key="OverwriteConnector">800,486.5 800,604</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_38">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">700,298.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">800,349.5 800,399.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_32">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">700,197.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">800,248.5 800,298.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="1312,1833">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">770,72.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">800,147.5 800,197.5</av:PointCollection>
+            <x:Double x:Key="Width">1298</x:Double>
+            <x:Double x:Key="Height">1695</x:Double>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExportExcel_1" sap:VirtualizedContainerService.HintSize="1352,1913" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

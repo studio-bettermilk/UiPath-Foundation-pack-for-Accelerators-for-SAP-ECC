@@ -1,0 +1,309 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_CM_SAP_LOGON_E"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_LoginUser" Type="InArgument(x:String)" />
+    <x:Property Name="in_SecurePassword" Type="InArgument(ss:SecureString)" />
+    <x:Property Name="in_ResourceFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_ServerName" Type="InArgument(x:String)" />
+    <x:Property Name="in_Client" Type="InArgument(x:String)" />
+    <x:Property Name="in_Language" Type="InArgument(x:String)" />
+    <x:Property Name="in_SAPLogonFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_SettingFilePath" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ForEach_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+      <x:String>System.Security</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>ClosedXML</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Start SAP and log on&#xA;&#xA;- Input/Output&#xA;in_LoginUser as SAP Logon User &lt;String&gt;&#xA;in_SecurePassword as SAP Logon Password &lt;SecureString&gt;&#xA;in_ResourceFilePath as Resource File Path &lt;String&gt;&#xA;in_ServerName as the server name &lt;String&gt;&#xA;in_Client as client name &lt;String&gt;&#xA;in_Language as the logon language &lt;String&gt;&#xA;in_SAPLogonFilePath as the file path where the SAP executable file is stored &lt;String&gt;&#xA;in_SettingFilePath as Setting FilePath &lt;String&gt;" DisplayName="SRC_CM_SAP_LOGON_E" sap2010:WorkflowViewState.IdRef="Sequence_429">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_CM_SAP_LOGON_E" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[new Dictionary(of String, Object)]" Name="Config" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="Messages" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="[Initial process]&#xA;1. Get the message stored in Message_File.xlsx.&#xA;2. Check Argument parameters consistency, such as file path.&#xA;3. Read Component Resources file and store in Dictionary Config." DisplayName="Initialization" sap2010:WorkflowViewState.IdRef="Sequence_812">
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="1. Get the message stored in Message_File.xlsx." DisplayName="Invoke SRC_LocalizedText Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_144" UnSafe="False" WorkflowFileName="SRC_Common\SRC_LocalizedText.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="out_Messages">[Messages]</OutArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="2. Check Argument parameters consistency, such as file path." DisplayName="Invoke Workflow File [CheckArguments]" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_142" UnSafe="False" WorkflowFileName="SRC_CM_SAP_LOGON_E\CheckArguments.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Messages">[Messages]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_ResourceFilePath">[in_ResourceFilePath]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_ServerName">[in_ServerName]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Client">[in_Client]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Language">[in_Language]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_SAPLogonFilePath">[in_SAPLogonFilePath]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <Sequence sap2010:Annotation.AnnotationText="3. Read Component Resources file and store in Dictionary Config." DisplayName="Get ComponentResources" sap2010:WorkflowViewState.IdRef="Sequence_833">
+        <ui:ForEach x:TypeArguments="ce:IXLWorksheet" CurrentIndex="{x:Null}" DisplayName="For Each Sheet in Excel File" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[New XLWorkbook(in_ResourceFilePath).Worksheets]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="ce:IXLWorksheet">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="ce:IXLWorksheet" Name="sheet" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Add Sheet Name into Collection" sap2010:WorkflowViewState.IdRef="Sequence_841">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="sd:DataTable" Name="dt_ConfigTable" />
+                </Sequence.Variables>
+                <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_ConfigTable]" DisplayName="Read Range ComponentResources" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="[sheet.Name.ToString]" WorkbookPath="[in_ResourceFilePath]" />
+                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_ConfigTable]" DisplayName="For each row in ComponentResources" sap2010:WorkflowViewState.IdRef="ForEachRow_8">
+                  <ui:ForEachRow.Body>
+                    <ActivityAction x:TypeArguments="sd:DataRow">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                      </ActivityAction.Argument>
+                      <If Condition="[NOT String.IsNullOrEmpty(row(&quot;Name&quot;).ToString.Trim)]" DisplayName="If Name in ComponentResources is empty or null" sap2010:WorkflowViewState.IdRef="If_293">
+                        <If.Then>
+                          <Assign DisplayName="Add key/value pair ComponentResources" sap2010:WorkflowViewState.IdRef="Assign_749">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Object">[Config(row("Name").ToString.Trim)]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Object">[row("Value")]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                      </If>
+                    </ActivityAction>
+                  </ui:ForEachRow.Body>
+                </ui:ForEachRow>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+      </Sequence>
+    </Sequence>
+    <Sequence DisplayName="Main Processing" sap2010:WorkflowViewState.IdRef="Sequence_840">
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File [SapLogon]" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_145" UnSafe="False" WorkflowFileName="SRC_CM_SAP_LOGON_E\SapLogon.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_LoginUser">[in_LoginUser]</InArgument>
+          <InArgument x:TypeArguments="ss:SecureString" x:Key="in_SecurePassword">[in_SecurePassword]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_ServerName">[in_ServerName]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Client">[in_Client]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_Language">[in_Language]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Messages">[Messages]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_SAPLogonFilePath">[in_SAPLogonFilePath]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File [PopUpMessageProcessing]" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_146" UnSafe="False" WorkflowFileName="SRC_CM_SAP_LOGON_E\PopUpMessageProcessing.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Messages">[Messages]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_SettingFilePath">[in_SettingFilePath]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3hDOlxVc2Vyc1x5dWtpLnlhbWF6YWtpXERlc2t0b3BcU1JDX0NNX1NBUF9MT0dPTl9FXzIwMTkxMTA4XFNSQ19DTV9TQVBfTE9HT05fRVxTUkNfQ01fU0FQX0xPR09OX0VcU1JDX0NNX1NBUF9MT0dPTl9FLnhhbWwyZwO8AQ4CAQFpNGlIAgEDak5qcwIBAm0FbaMBAgFHbgWkARACASKlAQW5ARACAQe6AQW6AaABAgEEbXttoAECAUhvB3MfAgFDdAd9HwIBNX4HowESAgEjpgEHsQEfAgEQsgEHuAEfAgEIugF6ugGdAQIBBXFicWwCAUVvmwJvvgICAUR3TndjAgFBeEh4VwIBP3tOe2MCAT15RHlPAgE7ekZ6UwIBOXZgdmoCATd0pwJ0zwICATZ/CaIBFgIBJKsBSKsBVwIBIK8BTq8BYwIBHqwBRKwBTwIBHKkBR6kBVQIBGqoBU6oBZgIBGK0BRq0BUwIBFqgBXqgBZgIBFK4BYK4BagIBEqYBwAGmAeIBAgERtAFetAFmAgEOtgFNtgFhAgEMtQFgtQFqAgEKsgHOAbIB/gECAQl/rwF/4QECATSFAQ+fARoCASWJARGJAYICAgEuigERngEhAgEmiQFMiQFeAgEyiQHDAYkB2gECATGJAegBiQH/AQIBL4oBQooBVAIBLJABF5sBHAIBJ5ABJZABZgIBKJIBG5kBJAIBKZcBRpcBVAIBK5QBR5QBagIBKg==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="576,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_144" sap:VirtualizedContainerService.HintSize="554,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_142" sap:VirtualizedContainerService.HintSize="554,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadRange_5" sap:VirtualizedContainerService.HintSize="494,87" />
+      <sap2010:ViewStateData Id="Assign_749" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_293" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="ForEachRow_8" sap:VirtualizedContainerService.HintSize="494,356">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_841" sap:VirtualizedContainerService.HintSize="516,607">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="532,741">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_833" sap:VirtualizedContainerService.HintSize="554,892">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_812" sap:VirtualizedContainerService.HintSize="576,1411">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_145" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_146" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_840" sap:VirtualizedContainerService.HintSize="576,338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_19" sap:VirtualizedContainerService.HintSize="576,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_429" sap:VirtualizedContainerService.HintSize="598,2367">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach_1" sap:VirtualizedContainerService.HintSize="638,2447">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,582 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SetParticularScreen" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SelectorData" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_InputData" Type="InArgument(sd:DataRow[])" />
+    <x:Property Name="in_AppMainSelector" Type="InArgument(x:String)" />
+    <x:Property Name="in_StartIndex" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_PagesSelector" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetNextScreen_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,95" Id="FindChildren_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_13" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_14" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_15" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_30" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,102" Id="Assign_16">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,102" Id="Assign_17">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,768" Id="Sequence_20">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,60" Id="Assign_31" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,60" Id="Assign_32" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="603,68" Id="WaitUiElementAppear_6" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_33" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_34" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,284" Id="Sequence_21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,68" Id="GetValue_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="603,432" Id="If_13" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,96" Id="TypeInto_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,109" Id="RemoveDataRow_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,22" Id="Break_3" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,431" Id="Sequence_17">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,579" Id="If_14">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="603,754" Id="ForEachRow_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_35" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="603,208" Id="If_15">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="603,60" Id="Assign_36" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="625,1806" Id="Sequence_18">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,1964" Id="While_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_37" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,60" Id="Assign_28" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,116" Id="SendHotkey_4" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,68" Id="GetValue_3" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,60" Id="Assign_29" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_38" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,208" Id="If_17" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="486,796" Id="Sequence_19">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,944" Id="If_16">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="775,3272" Id="Sequence_16">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,3430" Id="While_2" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="200,49" Id="Throw_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,235" Id="If_18">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,95" Id="FindChildren_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="200,49" Id="Throw_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,280" Id="If_12">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="801,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="823,5666" Id="Sequence_15">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="863,5746" Id="SetNextScreen_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Enter data on segment register screens.&#xA;If &quot;Receiver Rule&quot; is &quot;Variable portions&quot;, According &quot;Cost center&quot; value, input &quot;Portion/Percent&quot; value.&#xA;If &quot;Receiver Rule&quot; is &quot;Fixed percentages&quot;, According &quot;Cost center&quot; value, input &quot;Weighting Factor&quot; value. &#xA;&#xA;- Input/Output&#xA;in_SelectorData as Selector Data &lt;DataRow&gt;&#xA;in_InputData as Input Data&lt;DataRow[]&gt;&#xA;in_AppMainSelector as Application main selector&lt;String&gt;&#xA;in_StartIndex as Start Index of the TargetValue DataRow &lt;int32&gt;&#xA;In_PagesSelector as a screen item selector that displays the current number of pages&lt;String&gt;" DisplayName="SetParticularScreen" sap2010:WorkflowViewState.IdRef="Sequence_15">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SetParticularScreen" Name="WorkflowName" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Temporary" />
+      <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="ElementsBefore" />
+      <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="ElementsAfter" />
+      <Variable x:TypeArguments="x:String" Name="SelectorTitle" />
+      <Variable x:TypeArguments="x:String" Name="SelectorValue" />
+      <Variable x:TypeArguments="x:String" Name="PageNumberBefore" />
+      <Variable x:TypeArguments="x:String" Name="PageNumberAfter" />
+      <Variable x:TypeArguments="x:Boolean" Name="IsPageLoop" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <ui:FindChildren sap2010:Annotation.AnnotationText="Get the number of screens before processing" Children="[ElementsBefore]" DisplayName="Find children in SAP table (Before)" Filter="&lt;wnd/&gt;" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_PROCESS">
+      <ui:FindChildren.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5bb267e2-9ec7-488c-9536-9aaefe39bad8" Selector="[in_AppMainSelector]" WaitForReady="INTERACTIVE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:FindChildren.Target>
+    </ui:FindChildren>
+    <Sequence DisplayName="Initial Processing" sap2010:WorkflowViewState.IdRef="Sequence_20">
+      <Assign DisplayName="Assign dt_Temporary" sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dt_Temporary]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[in_InputData.CopyToDataTable]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign SelectorTitle" sap2010:WorkflowViewState.IdRef="Assign_14">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[SelectorTitle]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_SelectorData.Item(in_StartIndex).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign SelectorValue" sap2010:WorkflowViewState.IdRef="Assign_15">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[SelectorValue]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_SelectorData.Item(in_StartIndex+1).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign IsPageLoop (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_30">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Boolean">[IsPageLoop]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="This variable is used to distinguish before and after entering the screen." DisplayName="Assign PageNumberBefore (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_16">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[PageNumberBefore]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">0</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="This variable is used to distinguish before and after entering the screen." DisplayName="Assign PageNumberAfter (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_17">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[PageNumberAfter]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">1</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <While DisplayName="While Page Loop" sap2010:WorkflowViewState.IdRef="While_2">
+      <While.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="IsRowLoop" />
+      </While.Variables>
+      <While.Condition>[IsPageLoop]</While.Condition>
+      <Sequence DisplayName="Process each Page" sap2010:WorkflowViewState.IdRef="Sequence_16">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:Int32" Name="RowCounter" />
+        </Sequence.Variables>
+        <Assign DisplayName="Assign IsRowLoop (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_31">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Boolean">[IsRowLoop]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign DisplayName="Assign RowCounter (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_32">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[RowCounter]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">0</InArgument>
+          </Assign.Value>
+        </Assign>
+        <While DisplayName="While Row Loop" sap2010:WorkflowViewState.IdRef="While_1" Condition="[IsRowLoop]">
+          <Sequence DisplayName="Process each Row" sap2010:WorkflowViewState.IdRef="Sequence_18">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="ui:GenericValue" Name="GetTitle" />
+              <Variable x:TypeArguments="ui:UiElement" Name="ElementExists" />
+            </Sequence.Variables>
+            <ui:WaitUiElementAppear ContinueOnError="True" DisplayName="Find Element Grid item selector" FoundElement="[ElementExists]" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_6" WaitActive="False" WaitVisible="False">
+              <ui:WaitUiElementAppear.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="cfe564a7-16f7-4194-bcb9-35123ee6dd79" Selector="[SelectorTitle.Replace(&quot;[0,&quot;, &quot;[&quot; &amp; RowCounter.ToString &amp; &quot;,&quot;)]" TimeoutMS="500" WaitForReady="INTERACTIVE" />
+              </ui:WaitUiElementAppear.Target>
+            </ui:WaitUiElementAppear>
+            <If Condition="[ElementExists Is Nothing]" DisplayName="If there's no more item selector" sap2010:WorkflowViewState.IdRef="If_13">
+              <If.Then>
+                <Sequence DisplayName="ElementExists is nothing exit the row loop" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                  <Assign DisplayName="Assign GetTitle (Nothing)" sap2010:WorkflowViewState.IdRef="Assign_33">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[GetTitle]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="ui:GenericValue">[""]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign IsRowLoop (ElementExists Nothing)" sap2010:WorkflowViewState.IdRef="Assign_34">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[IsRowLoop]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text Grid item selector" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                  <ui:GetValue.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[ElementExists]" Id="1a8656e6-97df-4b38-9da8-fe43b8ebdb9a" WaitForReady="INTERACTIVE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:GetValue.Target>
+                  <ui:GetValue.Value>
+                    <OutArgument x:TypeArguments="ui:GenericValue">[GetTitle]</OutArgument>
+                  </ui:GetValue.Value>
+                </ui:GetValue>
+              </If.Else>
+            </If>
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Repeat this process for as many input data." DataTable="[dt_Temporary]" DisplayName="For Each values in dt_Temporary" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="values" />
+                  </ActivityAction.Argument>
+                  <If Condition="[GetTitle.Contains(values.Item(in_StartIndex).ToString)]" DisplayName="If the input data matches the title displayed on the screen" sap2010:WorkflowViewState.IdRef="If_14">
+                    <If.Then>
+                      <Sequence DisplayName="Set Input Field Values" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" AlterIfDisabled="True" ClickBeforeTyping="False" DisplayName="Type Into Text" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="True" Text="[values.Item(in_StartIndex+1).ToString]">
+                          <ui:TypeInto.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4dc97f16-5a8c-47d3-8156-3f2c898141c1" Selector="[SelectorValue.Replace(&quot;[0,&quot;, &quot;[&quot; &amp; RowCounter.ToString &amp; &quot;,&quot;)]" WaitForReady="COMPLETE">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                            </ui:Target>
+                          </ui:TypeInto.Target>
+                        </ui:TypeInto>
+                        <ui:RemoveDataRow RowIndex="{x:Null}" sap2010:Annotation.AnnotationText="Delete the entered data from dt_Temporary.&#xA;This process is performed to finish the registration process when all values ​​are entered." DataTable="[dt_Temporary]" DisplayName="Remove Data Row" sap2010:WorkflowViewState.IdRef="RemoveDataRow_2" Row="[values]" />
+                        <ui:Break DisplayName="Break - For Each values in dt_Temporary" sap2010:WorkflowViewState.IdRef="Break_3" />
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <If Condition="[dt_Temporary.Rows.Count &lt; 1]" DisplayName="If all values ​​are entered, exit the row loop" sap2010:WorkflowViewState.IdRef="If_15">
+              <If.Then>
+                <Assign DisplayName="Assign IsRowLoop (all values)" sap2010:WorkflowViewState.IdRef="Assign_35">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[IsRowLoop]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+            </If>
+            <Assign DisplayName="Assign RowCounter" sap2010:WorkflowViewState.IdRef="Assign_36">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[RowCounter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[RowCounter + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </While>
+        <If Condition="[dt_Temporary.Rows.Count &lt; 1]" DisplayName="If all values ​​are entered, exit the page loop" sap2010:WorkflowViewState.IdRef="If_16">
+          <If.Then>
+            <Assign DisplayName="Assign IsPageLoop (all values)" sap2010:WorkflowViewState.IdRef="Assign_37">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[IsPageLoop]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Execute Page Down" sap2010:WorkflowViewState.IdRef="Sequence_19">
+              <Assign DisplayName="Assign PageNumberBefore" sap2010:WorkflowViewState.IdRef="Assign_28">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[PageNumberBefore]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[PageNumberAfter]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey pgdn" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_4" Key="pgdn" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+                <ui:SendHotkey.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f284b647-ac4a-4d77-993b-7b4061d8dd42" Selector="[SelectorTitle]" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:SendHotkey.Target>
+              </ui:SendHotkey>
+              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text Pages" sap2010:WorkflowViewState.IdRef="GetValue_3">
+                <ui:GetValue.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="68244c7b-0dc2-4885-88d7-17fa29762470" Selector="[in_PagesSelector]" WaitForReady="INTERACTIVE">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                  </ui:Target>
+                </ui:GetValue.Target>
+                <ui:GetValue.Value>
+                  <OutArgument x:TypeArguments="x:String">[PageNumberAfter]</OutArgument>
+                </ui:GetValue.Value>
+              </ui:GetValue>
+              <Assign DisplayName="Assign PageNumberAfter" sap2010:WorkflowViewState.IdRef="Assign_29">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[PageNumberAfter]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[PageNumberAfter.Trim]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <If Condition="[PageNumberBefore = PageNumberAfter]" DisplayName="If the page number has not changed, exit page loop" sap2010:WorkflowViewState.IdRef="If_17">
+                <If.Then>
+                  <Assign DisplayName="Assign IsPageLoop (No page change)" sap2010:WorkflowViewState.IdRef="Assign_38">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[IsPageLoop]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </If.Then>
+              </If>
+            </Sequence>
+          </If.Else>
+        </If>
+      </Sequence>
+    </While>
+    <If sap2010:Annotation.AnnotationText="If all input data cannot be entered on the screen, throw an error." Condition="[dt_Temporary.Rows.Count &gt; 0]" DisplayName="If the dt_Temporary Rows Count is greater then 0" sap2010:WorkflowViewState.IdRef="If_18">
+      <If.Then>
+        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw - Input data not found" Exception="[New UiPath.Core.BusinessRuleException(&quot;There is an error in the input data.'&quot; &amp; dt_Temporary.Rows(0).Item(2).ToString &amp; &quot;' not found&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_6" />
+      </If.Then>
+    </If>
+    <ui:FindChildren sap2010:Annotation.AnnotationText="Get the number of screens after processing" Children="[ElementsAfter]" DisplayName="Find children in SAP table (After)" Filter="&lt;wnd/&gt;" sap2010:WorkflowViewState.IdRef="FindChildren_2" Scope="FIND_PROCESS">
+      <ui:FindChildren.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e5421aeb-81c2-4004-8f61-4b10908efd8c" Selector="[in_AppMainSelector]" WaitForReady="INTERACTIVE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:FindChildren.Target>
+    </ui:FindChildren>
+    <If sap2010:Annotation.AnnotationText="Compare the number of screens of SAP before and after processing.&#xA;If there is a difference in the number of screens, it is determined that SAP is displaying an error message.&#xA;In that case, it is treated as an error." Condition="[ElementsBefore.Count &lt;&gt; ElementsAfter.Count]" DisplayName="If the number of screens before and after execution match" sap2010:WorkflowViewState.IdRef="If_12">
+      <If.Then>
+        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw - There is an error in the input data" Exception="[New UiPath.Core.BusinessRuleException(&quot;There is an error in the input data&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_5" />
+      </If.Then>
+    </If>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
+  </Sequence>
+</Activity>

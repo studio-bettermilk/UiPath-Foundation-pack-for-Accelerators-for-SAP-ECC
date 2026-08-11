@@ -1,0 +1,6 @@
+{
+  "Name": "UiPath Foundation pack for Accelerators for SAP ECC",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Sample_SRC_BAPIv2.2_REGISTER.xaml"
+}

@@ -1,0 +1,284 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_BBP_RFC_READ_TABLE_v2_2"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:usba="clr-namespace:UiPath.SAP.BAPI.Activities;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbam="clr-namespace:UiPath.SAP.BAPI.Activities.Model;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI"
+ xmlns:usbm="clr-namespace:UiPath.SAP.BAPI.Model;assembly=UiPath.SAP.BAPI"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SAPService" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property Name="in_QueryTableStr" Type="InArgument(x:String)" />
+    <x:Property Name="io_dt_Data" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dt_Fields" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dt_Options" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>GetRecReadTable_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Execute BBP_RFC_READ_TABLE in SAP Activities.&#xA;&#xA;- Input/Output&#xA;in_SAPService as SAP Connect Info  &lt;IConnectionService&gt; &#xA;in_QueryTableStr as  Parameter  &quot;QUERY_TABLE&quot; &lt;String&gt;&#xA;io_dt_Fields as  Parameter  &quot;FIELDS&quot;  &lt;Datatable&gt;&#xA;io_dt_Options as  Parameter  &quot;OPTIONS&quot;  &lt;Datatable&gt;&#xA;io_dt_Data as Parameter  &quot;DATA&quot;  &lt;Datatable&gt;&#xA;" DisplayName="BBP_RFC_READ_TABLE_v2.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_BBP_RFC_READ_TABLE_v2_2" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <usba:SapApplicationScope AdvancedParameters="{x:Null}" AppServer="{x:Null}" Client="{x:Null}" Language="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" Password="{x:Null}" SapConnectionService="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" StatefulConnection="{x:Null}" SystemId="{x:Null}" SystemNumber="{x:Null}" User="{x:Null}" DisplayName="SAP Application Scope" ExistingConnectionService="[in_SAPService]" sap2010:WorkflowViewState.IdRef="SapApplicationScope_1">
+      <usba:SapApplicationScope.Body>
+        <ActivityAction x:TypeArguments="usbc:IConnectionService">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+          </ActivityAction.Argument>
+          <usba:InvokeSapBapi BapiDescription="Create Bank" BapiName="BBP_RFC_READ_TABLE" BapiSelected="True" DisplayName="BBP_RFC_READ_TABLE" sap2010:WorkflowViewState.IdRef="InvokeSapBapi_1">
+            <usba:InvokeSapBapi.AllArguments>
+              <scg:Dictionary x:TypeArguments="x:String, usbam:BapiArgumentUiModel">
+                <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Key="DELIMITER" x:Name="__ReferenceID0" DataType="String" DataTypeAsString="String" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="DELIMITER" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String" />
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Key="NO_DATA" x:Name="__ReferenceID1" DataType="String" DataTypeAsString="String" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="NO_DATA" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String" />
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Key="QUERY_TABLE" x:Name="__ReferenceID4" DataType="String" DataTypeAsString="String" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="30" Name="QUERY_TABLE" Optional="False" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String">[in_QueryTableStr]</InArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Key="ROWCOUNT" x:Name="__ReferenceID2" DataType="Integer" DataTypeAsString="Int32" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="4" Name="ROWCOUNT" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Key="ROWSKIPS" x:Name="__ReferenceID3" DataType="Integer" DataTypeAsString="Int32" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="4" Name="ROWSKIPS" Optional="True" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" Length="{x:Null}" x:Key="DATA" x:Name="__ReferenceID5" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="DATA" Optional="False" ServiceDataType="TAB512">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_dt_Data]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="文字項目の長さ 512" Length="512" Name="WA" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" Length="{x:Null}" x:Key="FIELDS" x:Name="__ReferenceID6" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="FIELDS" Optional="False" ServiceDataType="RFC_DB_FLD">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_dt_Fields]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="8">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="項目名" Length="30" Name="FIELDNAME" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="項目のオフセット" Length="6" Name="OFFSET" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="長さ (文字数)" Length="6" Name="LENGTH" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ABAP データ型 (C,D,N,...)" Length="1" Name="TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="リポジトリオブジェクトの内容説明" Length="60" Name="FIELDTEXT" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Description="{x:Null}" Length="{x:Null}" x:Key="OPTIONS" x:Name="__ReferenceID7" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="OPTIONS" Optional="False" ServiceDataType="RFC_DB_OPT">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="sd:DataTable">[io_dt_Options]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="SAPoffice: メッセージのテキスト行" Length="72" Name="TEXT" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+              </scg:Dictionary>
+            </usba:InvokeSapBapi.AllArguments>
+            <usba:InvokeSapBapi.OptionalArguments>
+              <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="4">
+                <x:Reference>__ReferenceID0</x:Reference>
+                <x:Reference>__ReferenceID1</x:Reference>
+                <x:Reference>__ReferenceID2</x:Reference>
+                <x:Reference>__ReferenceID3</x:Reference>
+              </scg:List>
+            </usba:InvokeSapBapi.OptionalArguments>
+            <usba:InvokeSapBapi.SelectedArgumentList>
+              <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="4">
+                <x:Reference>__ReferenceID4</x:Reference>
+                <x:Reference>__ReferenceID5</x:Reference>
+                <x:Reference>__ReferenceID6</x:Reference>
+                <x:Reference>__ReferenceID7</x:Reference>
+              </scg:List>
+            </usba:InvokeSapBapi.SelectedArgumentList>
+          </usba:InvokeSapBapi>
+        </ActivityAction>
+      </usba:SapApplicationScope.Body>
+      <usba:SapApplicationScope.DesignAdvancedParameters>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAdvancedParameters>
+      <usba:SapApplicationScope.DesignAppServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAppServer>
+      <usba:SapApplicationScope.DesignClient>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignClient>
+      <usba:SapApplicationScope.DesignLanguage>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLanguage>
+      <usba:SapApplicationScope.DesignLogonGroup>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLogonGroup>
+      <usba:SapApplicationScope.DesignMessageServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignMessageServer>
+      <usba:SapApplicationScope.DesignPassword>
+        <ss:SecureString />
+      </usba:SapApplicationScope.DesignPassword>
+      <usba:SapApplicationScope.DesignSapRouterString>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSapRouterString>
+      <usba:SapApplicationScope.DesignSncLibraryPath>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncLibraryPath>
+      <usba:SapApplicationScope.DesignSncMode>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncMode>
+      <usba:SapApplicationScope.DesignSncPartnerName>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncPartnerName>
+      <usba:SapApplicationScope.DesignSncQOP>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncQOP>
+      <usba:SapApplicationScope.DesignSncSso>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncSso>
+      <usba:SapApplicationScope.DesignSystemId>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemId>
+      <usba:SapApplicationScope.DesignSystemNumber>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemNumber>
+      <usba:SapApplicationScope.DesignUser>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignUser>
+    </usba:SapApplicationScope>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3dDOlxmalxVaXBhdGhcMDVfU0FQ6YOo5ZOB6ZaL55m644OW44Oq44O844OV44Kj44Oz44KwXDAzX+S9nOalrVwwMV/kvZzmiJBcMjZfU1JDX0NvbW1vblxTUkNfQkJQX1JGQ19SRUFEX1RBQkxFX3YyLjIueGFtbBxNA/wBDgIBAU80T1ECAQJRBVGkAQIBIVIF+QEgAgEG+gEF+gGgAQIBA1F7UaEBAgEi0wEL0wE6AgEg9gEL9gE6AgEfsgELsgE6AgEevAELvAE6AgEd4gEL4gE6AgEczgELzgE6AgEb8QEL8QE6AgEawQELwQE6AgEZ5wEL5wE6AgEY2AEL2AE6AgEXrQELrQE6AgEWUvkDUooEAgEUtwELtwE6AgET7AEL7AE6AgES3QEL3QE6AgERxgELxgE6AgEQWAuoASACAQf6AXn6AZ0BAgEEjgFDjgFSAgEOdkN2TwIBDIABQ4ABUQIBCmc8Z04CAQg=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="414,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeSapBapi_1" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="SapApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,168" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="414,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="436,716">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetRecReadTable_1" sap:VirtualizedContainerService.HintSize="476,796" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

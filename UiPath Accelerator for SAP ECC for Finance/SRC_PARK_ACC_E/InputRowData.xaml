@@ -1,0 +1,290 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="InputRowData"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Controller" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_RowIndex" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_TableSelector" Type="InArgument(x:String)" />
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ForEachselectorinTargetSelector_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Enter the value of the argument &quot;in_TargetValue&quot; into the grid&#xA;&#xA;- Input/Output&#xA;in_Controller as Parameters used to control SAP GUI screen &lt;DataRow&gt;&#xA;in_RowIndex as Row Index &lt;Int32&gt;&#xA;in_TableSelector as Table Selector &lt;String&gt;&#xA;in_TargetValue  as  Target Value &lt;DataRow&gt;&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;" DisplayName="InputRowData" sap2010:WorkflowViewState.IdRef="Sequence_25">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="StartIndex" />
+      <Variable x:TypeArguments="x:Int32" Name="ItemCount" />
+      <Variable x:TypeArguments="x:String" Default="InputRowData" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Assign DisplayName="Assign StartIndex" sap2010:WorkflowViewState.IdRef="Assign_35">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[StartIndex]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(in_Controller("StartIndex"))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="[ItemCount]" DisplayName="For Each  selector in_TargetValue" sap2010:WorkflowViewState.IdRef="ForEach`1_9" Values="[in_TargetValue.ItemArray()]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_30">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="ItemType" />
+              <Variable x:TypeArguments="x:String" Name="TargetSelector" />
+            </Sequence.Variables>
+            <If Condition="[ItemCount &lt; StartIndex or in_TargetValue(ItemCount).ToString = &quot;#SKIP#&quot;]" DisplayName="If condition to skip process" sap2010:WorkflowViewState.IdRef="If_21">
+              <If.Then>
+                <ui:Continue DisplayName="Continue For Each in_TargetValue" sap2010:WorkflowViewState.IdRef="Continue_4" />
+              </If.Then>
+            </If>
+            <If Condition="[in_Config.ContainsKey(in_Controller(&quot;SheetName&quot;).Tostring &amp; &quot;_&quot; &amp; in_TargetValue.Table.Columns(ItemCount).ColumnName.ToString)]" DisplayName="If Does the column exist" sap2010:WorkflowViewState.IdRef="If_22">
+              <If.Then>
+                <Assign DisplayName="Assign TargetSelector" sap2010:WorkflowViewState.IdRef="Assign_40">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[TargetSelector]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[String.Format(in_TableSelector, " tableCol='" &amp; in_Config(in_Controller("SheetName").Tostring &amp; "_" &amp; in_TargetValue.Table.Columns(ItemCount).ColumnName.ToString).ToString &amp; "' tableRow='" &amp; in_RowIndex.ToString &amp; "'")]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+              <If.Else>
+                <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Column Not Found" Exception="[New UiPath.Core.BusinessRuleException(&quot;Column Not Found [Column=&quot; &amp; in_TargetValue.Table.Columns(ItemCount).ColumnName.ToString &amp; &quot;]&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+              </If.Else>
+            </If>
+            <Sequence sap2010:Annotation.AnnotationText="Get the attribute and edit it as an argument of &quot;SRC_InputByType&quot;" DisplayName="Get ItemType" sap2010:WorkflowViewState.IdRef="Sequence_32">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="ui:GenericValue" Name="InputType" />
+              </Sequence.Variables>
+              <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="type" DisplayName="Get Attribute" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
+                <ui:GetAttribute.Result>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[InputType]</OutArgument>
+                </ui:GetAttribute.Result>
+                <ui:GetAttribute.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[TargetSelector]" WaitForReady="INTERACTIVE" />
+                </ui:GetAttribute.Target>
+              </ui:GetAttribute>
+              <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="" DisplayName="Switch Change Attribute" Expression="[InputType.ToString.Trim]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                <Switch.Default>
+                  <Assign DisplayName="Assign Default" sap2010:WorkflowViewState.IdRef="Assign_44">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[InputType]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="ui:GenericValue">[4]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Switch.Default>
+                <Assign x:Key="GuiCTextField" DisplayName="Assign GuiCTextField" sap2010:WorkflowViewState.IdRef="Assign_45">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[ItemType]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign x:Key="GuiComboBox" DisplayName="Assign GuiComboBox" sap2010:WorkflowViewState.IdRef="Assign_46">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[ItemType]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">1</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign x:Key="GuiTextField" DisplayName="Assign GuiTextField" sap2010:WorkflowViewState.IdRef="Assign_47">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[ItemType]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign x:Key="GuiCheckBox" DisplayName="Assign GuiCheckBox" sap2010:WorkflowViewState.IdRef="Assign_48">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[ItemType]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">2</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Switch>
+            </Sequence>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File [SRC_InputByType]" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_Common\SRC_InputByType.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Selector">[TargetSelector]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Value">[in_TargetValue(ItemCount).ToString]</InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="in_NullException">[Convert.ToBoolean(in_Controller("NullException"))]</InArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="in_DelayTime">[Convert.ToInt32(in_Controller("DelayTime"))]</InArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="in_ItemType">[ItemType]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d0VDOlwwMV/moYjku7ZcMTNfRlY1MFxIQU5BXFNSQ19QQVJLX0FDQ1xTUkNfUEFSS19BQ0NcSW5wdXRSb3dEYXRhLnhhbWw0XQPTAQ4CAQFhNGFCAgECYwVjpAECAUBkBWsOAgE8bAXQARICAQbRAQXRAaABAgEDY3tjoQECAUFpL2ldAgE/ZjBmPAIBPWysAWzKAQIBO2w5bEYCATlyC80BFgIBB9EBedEBnQECAQR3DXsSAgE2fA2KARICAS6LAQ3DARgCARHEAQ3MASUCAQh3G3dzAgE3eRF5fAIBOHwbfLkBAgEvfhGFARoCATKIARGIAeMCAgEwjwEPlgEhAgEolwEPwgEYAgESyQFMyQF5AgEQxgFMxgFcAgEOxwFJxwFtAgENyAFSyAGFAQIBDMoBS8oBVQIBCsQBywHEAewBAgEJgwE8gwGwAgIBNYABPYABTQIBM4gBgQGIAbYCAgExjwFFjwFLAgErkQFCkQFNAgEplAFplAF7AgEslwGIAZcBowECAROiARGpARoCASSqARGxARoCASCyARG5ARoCARy6ARHBARoCARiZAROgARwCARSnATunATwCASekATykAUYCASWvATuvATwCASOsATysAUYCASG3ATu3ATwCAR+0ATy0AUYCAR2/ATu/ATwCARu8ATy8AUYCARmeAUWeAUgCARebAUabAVECARU=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="537,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_35" sap:VirtualizedContainerService.HintSize="537,60" />
+      <sap2010:ViewStateData Id="Continue_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_21" sap:VirtualizedContainerService.HintSize="499,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_40" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_22" sap:VirtualizedContainerService.HintSize="499,208" />
+      <sap2010:ViewStateData Id="GetAttribute_1" sap:VirtualizedContainerService.HintSize="477,96" />
+      <sap2010:ViewStateData Id="Assign_44" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_45" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_46" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_47" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_48" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="477,337">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_32" sap:VirtualizedContainerService.HintSize="499,624">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="499,87" />
+      <sap2010:ViewStateData Id="Sequence_30" sap:VirtualizedContainerService.HintSize="521,1371">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_9" sap:VirtualizedContainerService.HintSize="537,1505" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="537,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_25" sap:VirtualizedContainerService.HintSize="559,2138">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachselectorinTargetSelector_1" sap:VirtualizedContainerService.HintSize="599,2218" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,212 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ConvertColumnToDataRow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_TargetSelector" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_ColumnRange" Type="InArgument(scg:List(x:Int32))" />
+    <x:Property Name="out_ConvertedTargetValue" Type="OutArgument(sd:DataRow)" />
+    <x:Property Name="out_ConvertedSelector" Type="OutArgument(sd:DataRow)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ConvertColumnToDataTable_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Get a data row with range specification and convert it into DataRow type that can be used in SRC_SetValues.xaml. (to support multiple screens in one sheet)&#xA;&#xA;- Input/Output&#xA;in_TargetValue as Input Data&lt;DataRow&gt;&#xA;in_TargetSelecto as Selector Data&lt;DataRow&gt;&#xA;in_ColumnRange as Index of target column&lt;List(Of integer)&gt;&#xA;out_ConvertedTargetValue as stored extracted data&lt;DataRow&gt;&#xA;out_ConvertedSelector as stored extracted selector&lt;DataRow&gt;" DisplayName="ConvertColumnToDataRow" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:List(x:String)" Name="Value" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="Selector" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_TmpTargetValue" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_TmpTargetSelector" />
+    </Sequence.Variables>
+    <Assign DisplayName="Initialize dt_TmpTargetValue" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dt_TmpTargetValue]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[New DataTable()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Initialize dt_TmpTargetSelector" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dt_TmpTargetSelector]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[New DataTable()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Initialize Value" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(x:String)">[Value]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of String)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Initialize Selector" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(x:String)">[Selector]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of String)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:Int32" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the value and selector by specifing read range. Store the obtained value and selector in variables." DisplayName="For each" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[in_ColumnRange]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Int32">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Int32" Name="index" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[in_TargetValue.Table.Columns(index).ToString]" DataTable="[dt_TmpTargetValue]" DisplayName="Add column to DataTable for value" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_4" MaxLength="-1" Unique="True" />
+            <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[in_TargetValue.Table.Columns(index).ToString]" DataTable="[dt_TmpTargetSelector]" DisplayName="Add column to DataTable for selector" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_5" MaxLength="-1" Unique="True" />
+            <AddToCollection x:TypeArguments="x:String" Collection="[Value]" DisplayName="Add value" sap2010:WorkflowViewState.IdRef="AddToCollection`1_4" Item="[in_TargetValue.Item(index).ToString()]" />
+            <AddToCollection x:TypeArguments="x:String" Collection="[Selector]" DisplayName="Add Selector" sap2010:WorkflowViewState.IdRef="AddToCollection`1_5" Item="[in_TargetSelector.Item(index).ToString()]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[Value.ToArray]" DataTable="[dt_TmpTargetValue]" DisplayName="Insert value into DataTable" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[Selector.ToArray]" DataTable="[dt_TmpTargetSelector]" DisplayName="Insert Selector into DataTable" sap2010:WorkflowViewState.IdRef="AddDataRow_5" />
+    <Assign DisplayName="Save dt_TmpTargetValue in the return value variable" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataRow">[out_ConvertedTargetValue]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataRow">[dt_TmpTargetValue(0)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Save dt_TmpTargetSelector in the return value variable" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataRow">[out_ConvertedSelector]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataRow">[dt_TmpTargetSelector(0)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <sads:DebugSymbol.Symbol>d15DOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRGVza3RvcFxTUkNfREVGSU5FX0pPQl9FXFNSQ19ERUZJTkVfSk9CX0VcQ29udmVydENvbHVtblRvRGF0YVJvdy54YW1sKF0DpgEOAgEBZAVrDgIBNGwFcw4CATB0BXsOAgEsfAWDAQ4CASiEAQWSARICARSTAQWTAb0BAgEPlAEFlAHGAQIBCpUBBZwBDgIBBp0BBaQBDgIBAmk0aUUCATdmNWZIAgE1cTRxRQIBM241bksCATF5OnlPAgEvdjt2QgIBLYEBOoEBTwIBK347fkUCASmEAZsChAGtAgIBJooBC48BFgIBFZMBTJMBYQIBEpMBMJMBQQIBEJQBT5QBZwIBDZQBMJQBRAIBC5oBMpoBSAIBCZcBM5cBTQIBB6IBMqIBSwIBBZ8BM58BSgIBA4sBDYsB7AICASKMAQ2MAfICAgEejQENjQHNAQIBGo4BDY4B1gECARaLAZgBiwHIAQIBJYsB0wGLAegBAgEjjAGYAYwByAECASGMAdMBjAHrAQIBH40BRI0BTQIBHI0BoQGNAcoBAgEbjgFEjgFQAgEYjgGnAY4B0wECARc=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_5" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddToCollection`1_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddToCollection`1_5" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="222,332">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="287,523">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddDataRow_3" sap:VirtualizedContainerService.HintSize="287,22" />
+      <sap2010:ViewStateData Id="AddDataRow_5" sap:VirtualizedContainerService.HintSize="287,22" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="309,1608">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ConvertColumnToDataTable_1" sap:VirtualizedContainerService.HintSize="349,1688">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,479 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="AddArgumentKey"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_LoginPassword" Type="InOutArgument(ss:SecureString)" />
+    <x:Property Name="io_LoginUser" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>CheckSAPConnectionArgument_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Check the existence of Key of Dictionary type argument.&#xA;If the arguments required are not defined, Key is assigned with the corresponding item name and Value is assigned with &quot;&quot;.&#xA;&#xA;- Input/Output&#xA;io_Config as Config Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;io_Option as Option Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;io_LoginUser as Login User Data &lt;String&gt;&#xA;io_LoginPassword as Login Password &lt;SecureString&gt;&#xA;" DisplayName="AddArgumentKey" sap2010:WorkflowViewState.IdRef="Sequence_701">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="AddArgumentKey" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="Check the existence of the Dictionary type io_Config argument with the SAP connection information. If it does not exist, add the Key/Value." DisplayName="Check existence of SAP connection information" sap2010:WorkflowViewState.IdRef="Sequence_702">
+      <If Condition="[Not io_Config.ContainsKey(&quot;Client&quot;)]" DisplayName="If : Check Client" sap2010:WorkflowViewState.IdRef="If_303">
+        <If.Then>
+          <Assign DisplayName="Assign Client" sap2010:WorkflowViewState.IdRef="Assign_685">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("Client")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;Language&quot;)]" DisplayName="If : Check Language" sap2010:WorkflowViewState.IdRef="If_304">
+        <If.Then>
+          <Assign DisplayName="Assign Language" sap2010:WorkflowViewState.IdRef="Assign_686">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("Language")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[io_LoginPassword is Nothing]" DisplayName="If : Check io_LoginPassword" sap2010:WorkflowViewState.IdRef="If_318">
+        <If.Then>
+          <Assign DisplayName="Assign io_LoginPassword (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_701">
+            <Assign.To>
+              <OutArgument x:TypeArguments="ss:SecureString">[io_LoginPassword]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="ss:SecureString">[new SecureString]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncLibraryPath&quot;)]" DisplayName="If : Check SncLibraryPath" sap2010:WorkflowViewState.IdRef="If_295">
+        <If.Then>
+          <Assign DisplayName="Assign SncLibraryPath" sap2010:WorkflowViewState.IdRef="Assign_677">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SncLibraryPath")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncMode&quot;)]" DisplayName="If : Check SncMode" sap2010:WorkflowViewState.IdRef="If_296">
+        <If.Then>
+          <Assign DisplayName="Assign SncMode" sap2010:WorkflowViewState.IdRef="Assign_678">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SncMode")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncPartnerName&quot;)]" DisplayName="If : Check SncPartnerName" sap2010:WorkflowViewState.IdRef="If_297">
+        <If.Then>
+          <Assign DisplayName="Assign SncPartnerName" sap2010:WorkflowViewState.IdRef="Assign_679">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SncPartnerName")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncQOP&quot;)]" DisplayName="If : Check SncQOP" sap2010:WorkflowViewState.IdRef="If_298">
+        <If.Then>
+          <Assign DisplayName="Assign SncQOP" sap2010:WorkflowViewState.IdRef="Assign_680">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SncQOP")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncSSO&quot;)]" DisplayName="If : Check SncSSO" sap2010:WorkflowViewState.IdRef="If_299">
+        <If.Then>
+          <Assign DisplayName="Assign SncSSO" sap2010:WorkflowViewState.IdRef="Assign_681">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SncSSO")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[string.IsNullOrWhiteSpace(io_LoginUser)]" DisplayName="If : Check io_LoginUser" sap2010:WorkflowViewState.IdRef="If_319">
+        <If.Then>
+          <Assign DisplayName="Assign io_LoginUser" sap2010:WorkflowViewState.IdRef="Assign_700">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[io_LoginUser]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;AdvancedParameters&quot;)]" DisplayName="If : Check AdvancedParameters" sap2010:WorkflowViewState.IdRef="If_300">
+        <If.Then>
+          <Assign DisplayName="Assign AdvancedParameters" sap2010:WorkflowViewState.IdRef="Assign_682">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("AdvancedParameters")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;AppServer&quot;)]" DisplayName="If : Check AppServer" sap2010:WorkflowViewState.IdRef="If_305">
+        <If.Then>
+          <Assign DisplayName="Assign AppServer" sap2010:WorkflowViewState.IdRef="Assign_687">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("AppServer")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;LogonGroup&quot;)]" DisplayName="If : Check LogonGroup" sap2010:WorkflowViewState.IdRef="If_301">
+        <If.Then>
+          <Assign DisplayName="Assign LogonGroup" sap2010:WorkflowViewState.IdRef="Assign_683">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("LogonGroup")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;MessageServer&quot;)]" DisplayName="If : Check MessageServer" sap2010:WorkflowViewState.IdRef="If_306">
+        <If.Then>
+          <Assign DisplayName="Assign MessageServer" sap2010:WorkflowViewState.IdRef="Assign_688">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("MessageServer")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SAPRouter&quot;)]" DisplayName="If : Check SAPRouter" sap2010:WorkflowViewState.IdRef="If_302">
+        <If.Then>
+          <Assign DisplayName="Assign SAPRouter" sap2010:WorkflowViewState.IdRef="Assign_684">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SAPRouter")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[io_Config.ContainsKey(&quot;StatefulConnection&quot;)]" DisplayName="If : Check StatefulConnection" sap2010:WorkflowViewState.IdRef="If_307">
+        <If.Then>
+          <If Condition="[io_Config(&quot;StatefulConnection&quot;).ToString = &quot;&quot;]" DisplayName="If : Check StatefulConnection is equal &quot;&quot;" sap2010:WorkflowViewState.IdRef="If_320">
+            <If.Then>
+              <Assign DisplayName="Assign StatefulConnection" sap2010:WorkflowViewState.IdRef="Assign_702">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[io_Config("StatefulConnection")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">["True"]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+          </If>
+        </If.Then>
+        <If.Else>
+          <Assign DisplayName="Assign StatefulConnection (Key check)" sap2010:WorkflowViewState.IdRef="Assign_689">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("StatefulConnection")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">["True"]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Else>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SystemID&quot;)]" DisplayName="If : Check SystemID" sap2010:WorkflowViewState.IdRef="If_308">
+        <If.Then>
+          <Assign DisplayName="Assign SystemID" sap2010:WorkflowViewState.IdRef="Assign_690">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SystemID")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;SystemNumber&quot;)]" DisplayName="If : Check SystemNumber" sap2010:WorkflowViewState.IdRef="If_309">
+        <If.Then>
+          <Assign DisplayName="Assign SystemNumber" sap2010:WorkflowViewState.IdRef="Assign_691">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Config("SystemNumber")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+    </Sequence>
+    <Sequence sap2010:Annotation.AnnotationText="Check the existence of io_Option argument of Dictionary type and add Key/Value if it does not exist.&#xA;&#xA;* [BAPIUser] [PasswordSuffix] is used only for specific BAPI components,&#xA;   so it has been changed from required items to optional functions.&#xA;   Accordingly, processing has been added so that the current version can run the previous version." DisplayName="Check existence of io_Option argument" sap2010:WorkflowViewState.IdRef="Sequence_703">
+      <If Condition="[io_Option is Nothing]" DisplayName="If : Check io_Option is nothing" sap2010:WorkflowViewState.IdRef="If_316">
+        <If.Then>
+          <Assign DisplayName="Assign io_Option (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_698">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[io_Option]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[new Dictionary(of String, object)]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Config.ContainsKey(&quot;BAPIUser&quot;)]" DisplayName="If : Check BAPIUser in io_Config" sap2010:WorkflowViewState.IdRef="If_314">
+        <If.Then>
+          <If Condition="[Not io_Option.ContainsKey(&quot;BAPIUser&quot;)]" DisplayName="If : Check BAPIUser in io_Option" sap2010:WorkflowViewState.IdRef="If_310">
+            <If.Then>
+              <Assign DisplayName="Assign BAPIUser to io_Option" sap2010:WorkflowViewState.IdRef="Assign_692">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[io_Option("BAPIUser")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+          </If>
+        </If.Then>
+        <If.Else>
+          <Assign DisplayName="Assign BAPIUser of io_Config to io_Option" sap2010:WorkflowViewState.IdRef="Assign_696">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Option("BAPIUser")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[io_Config("BAPIUser")]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Else>
+      </If>
+      <If Condition="[io_Config.ContainsKey(&quot;PasswordSuffix&quot;)]" DisplayName="If : Check PasswordSuffix" sap2010:WorkflowViewState.IdRef="If_311">
+        <If.Then>
+          <Assign DisplayName="Assign PasswordSuffix" sap2010:WorkflowViewState.IdRef="Assign_693">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Option("PasswordSuffix")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[io_Config("PasswordSuffix").ToString.Trim]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Option.ContainsKey(&quot;Commit&quot;)]" DisplayName="If : Check Commit" sap2010:WorkflowViewState.IdRef="If_312">
+        <If.Then>
+          <Assign DisplayName="Assign Commit" sap2010:WorkflowViewState.IdRef="Assign_694">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Option("Commit")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[io_Config("Commit").ToString.ToUpper.Trim]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+      <If Condition="[Not io_Option.ContainsKey(&quot;ResultType&quot;)]" DisplayName="If : Check ResultType" sap2010:WorkflowViewState.IdRef="If_313">
+        <If.Then>
+          <Assign DisplayName="Assign ResultType" sap2010:WorkflowViewState.IdRef="Assign_695">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[io_Option("ResultType")]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+      </If>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d09DOlx3b3JrXzFcZGVsaXZhcmFibGVfcmVc5pys5L2T5pS55L+uXFNSQ19CQVBJdjIuMl9SRUdJU1RFUlxBZGRBcmd1bWVudEtleS54YW1sgAFPA4ADDgIBAVE0UUQCAQJTBVOkAQMBswFUBbECEAIBNLICBf0CEAIBBv4CBf4CoAECAQNTe1OhAQMBtAFVB2AMAwGsAWEHbAwDAaUBbQd4DAMBngF5B4QBDAMBlwGFAQeQAQwDAZABkQEHnAEMAwGJAZ0BB6gBDAMBggGpAQe0AQwCAXu1AQfCAQwCAXTDAQfOAQwCAW3PAQfaAQwCAWbbAQfmAQwCAV/nAQfyAQwCAVjzAQf+AQwCAVH/AQeYAgwCAUOZAgekAgwCATylAgewAgwCATWzAge+AgwCAS2/AgfYAgwCAR7ZAgfkAgwCARblAgfwAgwCAQ7xAgf8AgwCAQf+Ann+Ap0BAgEEVRVVRgMBrQFXC14UAwGvAWEVYUgDAaYBYwtqFAMBqAFtFW00AwGfAW8LdhQDAaEBeRV5TgMBmAF7C4IBFAMBmgGFARWFAUcDAZEBhwELjgEUAwGTAZEBFZEBTgMBigGTAQuaARQDAYwBnQEVnQFGAwGDAZ8BC6YBFAMBhQGpARWpAUYCAXyrAQuyARQCAX61ARW1AUACAXW3AQvAARQCAXfDARXDAVICAW7FAQvMARQCAXDPARXPAUkCAWfRAQvYARQCAWnbARXbAUoCAWDdAQvkARQCAWLnARXnAU0CAVnpAQvwARQCAVvzARXzAUkCAVL1AQv8ARQCAVT/ARX/AU4CAUSBAguMAhACAUqPAguWAhQCAUaZAhWZAkgCAT2bAguiAhQCAT+lAhWlAkwCATanAguuAhQCATizAhWzAi0CAS61Agu8AhQCATC/AhW/AkgCAR/BAgvMAhACASbPAgvWAhQCASHZAhXZAkoCARfbAgviAhQCARnlAhXlAkYCAQ/nAgvuAhQCARHxAhXxAkoCAQjzAgv6AhQCAQpcNlw6AwGyAVk3WUwDAbABaDZoOgMBqwFlN2VOAwGpAXQ9dE8DAaQBcT5xUAMBogGAATaAAToDAZ0BfTd9VAMBmwGMATaMAToDAZYBiQE3iQFNAwGUAZgBNpgBOgMBjwGVATeVAVQDAY0BpAE2pAE6AwGIAaEBN6EBTAMBhgGwATawAToDAYEBrQE3rQFMAgF/vQERvQFAAgF6uQE3uQFFAgF4ygE2ygE6AgFzxwE3xwFYAgFx1gE21gE6AgFs0wE30wFPAgFq4gE24gE6AgFl3wE33wFQAgFj7gE27gE6AgFe6wE36wFTAgFc+gE2+gE6AgFX9wE39wFPAgFVgQIZgQJeAgFLgwIPigIYAgFNlAI2lAI+AgFJkQI3kQJYAgFHoAI2oAI6AgFCnQI3nQJOAgFArAI2rAI6AgE7qQI3qQJSAgE5ugJQugJzAgEztwJRtwJcAgExwQIZwQJMAgEnwwIPygIYAgEp1AI21AJNAgEk0QI30QJOAgEi4AI24AJhAgEc3QI33QJUAgEa7AI27AJhAgEU6QI36QJMAgES+AI2+AI6AgEN9QI39QJQAgELiAI6iAJCAgFQhQI7hQJcAgFOyAI6yAI+AgEsxQI7xQJSAgEq</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="753,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_685" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_303" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_686" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_304" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_701" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_318" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_677" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_295" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_678" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_296" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_679" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_297" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_680" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_298" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_681" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_299" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_700" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_319" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_682" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_300" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_687" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_305" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_683" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_301" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_688" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_306" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_684" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_302" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_702" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_320" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Assign_689" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_307" sap:VirtualizedContainerService.HintSize="731,356" />
+      <sap2010:ViewStateData Id="Assign_690" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_308" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_691" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_309" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Sequence_702" sap:VirtualizedContainerService.HintSize="753,4490">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_698" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_316" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_692" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_310" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Assign_696" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_314" sap:VirtualizedContainerService.HintSize="731,356" />
+      <sap2010:ViewStateData Id="Assign_693" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_311" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_694" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_312" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Assign_695" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_313" sap:VirtualizedContainerService.HintSize="731,208" />
+      <sap2010:ViewStateData Id="Sequence_703" sap:VirtualizedContainerService.HintSize="753,1559">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="753,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_701" sap:VirtualizedContainerService.HintSize="775,6637">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CheckSAPConnectionArgument_1" sap:VirtualizedContainerService.HintSize="815,6717" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

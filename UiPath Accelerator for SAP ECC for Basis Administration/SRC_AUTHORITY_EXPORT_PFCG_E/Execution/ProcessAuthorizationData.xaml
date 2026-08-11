@@ -1,0 +1,447 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ProcessAuthorizationData"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Controller" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetAuthorizationData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Format input Authorization Data to process each distinct Authorization Object and Field Name .&#xA;&#xA;&lt;Worksheet Schema : in_TargetValue&gt;&#xA;-------------------------------------------------&#xA;Column Index     |   Item Name&#xA;-------------------------------------------------&#xA;0                           |    No&#xA;1                           |    Role&#xA;-------------------------------------------------&#xA;&#xA;- Input/Output&#xA;in_TargetValue as Target Values &lt;DataRow[]&gt;&#xA;in_Controller as Parameters used to control SAP GUI screen &lt;DataRow&gt;&#xA;in_Config as Config Data&lt;Dictionary&lt;String, Object&gt;&gt;" DisplayName="ProcessAuthorizationData" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="ProcessAuthorizationData" Name="WorkflowName" />
+      <Variable x:TypeArguments="x:String" Name="HeaderLabel" />
+      <Variable x:TypeArguments="x:Int32" Name="PageSize" />
+      <Variable x:TypeArguments="x:Int32" Name="CurrentPosition" />
+      <Variable x:TypeArguments="x:Int32" Name="LastPosition" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the very top label selector." DisplayName="Invoke GetSelectorByLabelText workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="SRC_AUTHORITY_EXPORT_PFCG_E\Utils\GetSelectorByLabelText.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_SearchText">[in_TargetValue(1).ToString]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_TargetSelector">[HeaderLabel]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LabelColumnIndex">1</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set Focus on Header Label" sap2010:WorkflowViewState.IdRef="SetFocus_1">
+      <ui:SetFocus.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[HeaderLabel]" WaitForReady="INTERACTIVE" />
+      </ui:SetFocus.Target>
+    </ui:SetFocus>
+    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Press Ctrl+Shift+F11 to expand list." ClickBeforeTyping="False" DisplayName="Send Hotkey Ctrl+Shift+F11" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="f11" KeyModifiers="Ctrl, Shift" SendWindowMessages="False" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;WND_Main&quot;).ToString]" WaitForReady="INTERACTIVE" />
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <Sequence DisplayName="Initialize GuiVerticalScrollbar" sap2010:WorkflowViewState.IdRef="Sequence_9">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Int32" Name="MaximumPosition" />
+      </Sequence.Variables>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Set VerticalScroll to initial position" DisplayName="Invoke SRC_Set_GuiVerticalScrollbar workflow (Set to initial Position)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Set_GuiVerticalScrollbar.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">0</InArgument>
+          <InArgument x:TypeArguments="x:Int32" x:Key="in_Position">0</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get Maximum and PageSize property" DisplayName="Invoke SRC_Get_GuiVerticalScrollbar workflow (Get initial properties)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiVerticalScrollbar.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <OutArgument x:TypeArguments="x:Int32" x:Key="out_Maximum">[MaximumPosition]</OutArgument>
+          <OutArgument x:TypeArguments="x:Int32" x:Key="out_Minimum" />
+          <OutArgument x:TypeArguments="x:Int32" x:Key="out_PageSize">[PageSize]</OutArgument>
+          <OutArgument x:TypeArguments="x:Int32" x:Key="out_Position" />
+          <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">0</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <Assign DisplayName="Assign CurrentPosition (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[CurrentPosition]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign LastPosition" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[LastPosition]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">[MaximumPosition + PageSize]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <DoWhile DisplayName="Do While page is scrollable" sap2010:WorkflowViewState.IdRef="DoWhile_1" Condition="[CurrentPosition &lt; LastPosition]">
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)]" Name="SelectorList" />
+          <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="PageElements" />
+          <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="ObjectElements" />
+        </Sequence.Variables>
+        <ui:FindChildren Children="[PageElements]" DisplayName="Find Children" Filter="&lt;sap /&gt;" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_CHILDREN">
+          <ui:FindChildren.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;WND_UserArea&quot;).ToString]" WaitForReady="INTERACTIVE" />
+          </ui:FindChildren.Target>
+        </ui:FindChildren>
+        <Assign sap2010:Annotation.AnnotationText="Filter by Authorization Object Status Label elements, located at Column No.16" DisplayName="Assign FieldElements" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign.To>
+            <OutArgument x:TypeArguments="scg:IEnumerable(ui:UiElement)">[ObjectElements]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="scg:IEnumerable(ui:UiElement)">[PageElements.Where(Function(element) element.Selector.ToString.Contains("lbl[16,"))]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each Selector in ObjectElements" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[ObjectElements]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="ui:UiElement">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="ui:UiElement" Name="item" />
+              </ActivityAction.Argument>
+              <AddToCollection x:TypeArguments="x:String" Collection="[SelectorList]" DisplayName="Add To Collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[item.Selector.ToString]" />
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Label in SelectorList" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[SelectorList]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Search for Profile Status Icons" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="IconName" />
+                  <Variable x:TypeArguments="x:String" Name="LabelPosition" />
+                </Sequence.Variables>
+                <ui:Replace sap2010:Annotation.AnnotationText="Get the position index from selector information." sap2010:WorkflowViewState.IdRef="Replace_2" Input="[item]" Pattern="(?:^|])([^[\]]+)(?:\[|$)" RegexOption="IgnoreCase, Compiled" Result="[LabelPosition]">
+                  <ui:Replace.Replacement>
+                    <InArgument x:TypeArguments="x:String">
+                      <Literal x:TypeArguments="x:String" Value="" />
+                    </InArgument>
+                  </ui:Replace.Replacement>
+                </ui:Replace>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SRC_Get_GuiLabel workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiLabel.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ControlID">[String.Format(in_Config("LabelControlID").ToString, LabelPosition)]</InArgument>
+                    <OutArgument x:TypeArguments="x:Int32" x:Key="out_ColorIndex" />
+                    <OutArgument x:TypeArguments="x:Boolean" x:Key="out_ColorIntensified" />
+                    <OutArgument x:TypeArguments="x:String" x:Key="out_DisplayedText" />
+                    <OutArgument x:TypeArguments="x:String" x:Key="out_IconName">[IconName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="out_Tooltip" />
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <If Condition="[Not String.IsNullOrWhiteSpace(IconName)]" DisplayName="If Label has an icon" sap2010:WorkflowViewState.IdRef="If_4">
+                  <If.Then>
+                    <Sequence DisplayName="Get Authorization Data" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="s:String[]" Name="TargetRowPosition" />
+                        <Variable x:TypeArguments="x:String" Name="MaintenanceFieldStatus" />
+                      </Sequence.Variables>
+                      <Assign DisplayName="Assign TargetRowPosition" sap2010:WorkflowViewState.IdRef="Assign_6">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[TargetRowPosition]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[LabelPosition.Split(","c)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SetGuiLabelClickLink workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="SRC_AUTHORITY_EXPORT_PFCG_E\Utils\SetGuiLabelClickLink.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_ControlID">[String.Format(in_Config("ActionLinkControlID").ToString, TargetRowPosition(1))]</InArgument>
+                          <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenID">0</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                      <Assign sap2010:Annotation.AnnotationText="Add Profile Status Icon name into Config collection." DisplayName="Assign ProfileStatusIcon" sap2010:WorkflowViewState.IdRef="Assign_7">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Object">[in_Config("ProfileStatusIcon")]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Object">[IconName]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text on Maintenance Field Status" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                        <ui:GetValue.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[String.Format(in_Config(&quot;LBL_MaintenanceFieldStatus&quot;).ToString, TargetRowPosition(1))]" WaitForReady="INTERACTIVE" />
+                        </ui:GetValue.Target>
+                        <ui:GetValue.Value>
+                          <OutArgument x:TypeArguments="x:String">[MaintenanceFieldStatus]</OutArgument>
+                        </ui:GetValue.Value>
+                      </ui:GetValue>
+                      <Assign DisplayName="Assign MaintenanceFieldStatus" sap2010:WorkflowViewState.IdRef="Assign_8">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Object">[in_Config("MaintenanceFieldStatus")]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Object">[MaintenanceFieldStatus]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetAuthorizationData workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="SRC_AUTHORITY_EXPORT_PFCG_E\Execution\GetAuthorizationData.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+        <Sequence DisplayName="Get VerticalScroll position" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get PageSize and Current Position property." DisplayName="Invoke SRC_Get_GuiVerticalScrollbar workflow (Get Properties after Search Text)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiVerticalScrollbar.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <OutArgument x:TypeArguments="x:Int32" x:Key="out_Maximum" />
+              <OutArgument x:TypeArguments="x:Int32" x:Key="out_Minimum" />
+              <OutArgument x:TypeArguments="x:Int32" x:Key="out_PageSize">[PageSize]</OutArgument>
+              <OutArgument x:TypeArguments="x:Int32" x:Key="out_Position">[CurrentPosition]</OutArgument>
+              <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">0</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Assign DisplayName="Assign CurrentPosition (Increment Page)" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[CurrentPosition]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[CurrentPosition + PageSize + 1]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Set VerticalScroll position to next page" DisplayName="Invoke SRC_Set_GuiVerticalScrollbar workflow (Set Position to scroll one page)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Set_GuiVerticalScrollbar.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">0</InArgument>
+              <InArgument x:TypeArguments="x:Int32" x:Key="in_Position">[CurrentPosition]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </Sequence>
+    </DoWhile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3JDOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRG9jdW1lbnRzXERldmVsb3BtZW50XFNSQ19BVVRIT1JJVFlfRVhQT1JUX1BGQ0dfRVxFeGVjdXRpb25cUHJvY2Vzc0F1dGhvcml6YXRpb25EYXRhLnhhbWxgTgOdAg4CAQFQNFBOAgECVgVWpAEDAYcBVwVeHQIBf18FYxMCAXxkBWgVAgF4aQWMARACAWKNAQWaAg8CAQabAgWbAp8BAgEDVntWoQEDAYgBWUZZYgMBhgFbTFtZAwGEAVpcWmcDAYIBV4kCV8gCAwGBAVxMXE0DAYABYV9hbgIBfWZfZosBAgF6ZLwCZMECAgF5bQdyHwIBdHMHex8CAW18B4MBEAIBaYQBB4sBEAIBY40Bbo0BkwECAV+OAQeZAhICAQebAnmbApwBAgEEb0VvRgIBd3BFcEYCAXZtsQJt3wICAXV3R3dRAgFyeUV5RgIBcXVGdVcCAW9zqwJz2QICAW6BATGBATICAWx+Mn5DAgFqiQExiQFNAgFmhgEyhgFAAgFkkAFCkAFZAgEIlAEJmAEbAgFamQEJoAESAgFXoQEJqgEWAgFRqwEJ/wEWAgEcgAIJmAIUAgEJlgFjlgGTAQIBXZQBV5QBZgIBXJQBI5QBMwIBW54BSZ4BngECAVmbAUqbAVoCAVihAbMBoQHFAQIBVqcBD6cBzwECAVKrAaoBqwG6AQIBT7EBD/wBGgIBHYECC4kCIwIBFYoCC5ECFAIBD5ICC5cCIwIBCqcBRqcBVgIBVKcBsgGnAcwBAgFTtgERvAEeAgFIvQERxgEpAgFBxwER+wEWAgEehQJLhQJVAgEahwJJhwJKAgEZgQLDAoEC8QICARiGAkuGAlwCARaPAjWPAlUCARKMAjaMAkcCARCUAkmUAkoCAQ6VAkmVAloCAQySAr8CkgLtAgIBC7YBpQG2Aa0BAgFNuQEXuQFGAgFMtgH7AbYBjAICAUq2AbYBtgHQAQIBScMBUsMBXAIBRr8BUb8BlQECAUO9AcoBvQHsAQIBQscBH8cBSgIBH8kBFfkBIAIBIc4BF9UBIAIBPNYBF9sBLwIBNtwBF+MBIAIBMeQBF+sBJQIBK+wBF/MBIAIBJvQBF/gBLwIBItMBRNMBXwIBP9ABRdABWAIBPdkBVdkBVgIBO9gBV9gBpwECATjWAdQB1gGRAgIBN+EBQuEBTAIBNN4BQ94BYwIBMukBQ+kBWwIBLOYBceYB1AECAS7xAULxAVoCASnuAUPuAWgCASf2AW72AXkCAST0AdQB9AGVAgIBIw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="550,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_13" sap:VirtualizedContainerService.HintSize="550,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFocus_1" sap:VirtualizedContainerService.HintSize="550,68" />
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="550,143">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_17" sap:VirtualizedContainerService.HintSize="314,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_18" sap:VirtualizedContainerService.HintSize="314,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="550,592">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FindChildren_1" sap:VirtualizedContainerService.HintSize="502,68" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="502,117">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="502,194" />
+      <sap2010:ViewStateData Id="Replace_2" sap:VirtualizedContainerService.HintSize="464,64">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_19" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_23" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetValue_1" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_20" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="336,788">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,936">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="486,1291">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_4" sap:VirtualizedContainerService.HintSize="502,1425" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_21" sap:VirtualizedContainerService.HintSize="314,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_22" sap:VirtualizedContainerService.HintSize="314,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="502,492">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="524,2580">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="550,2742" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="550,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="572,4442">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetAuthorizationData_1" sap:VirtualizedContainerService.HintSize="612,4522" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

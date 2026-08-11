@@ -1,0 +1,426 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SetPeriodValue"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_TargetSelector" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_ColumnRange" Type="InArgument(scg:Dictionary(x:String, scg:List(x:Int32)))" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetPeriodValue_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Overview&#xD;&#xA;Button click and data insertion for each type of period value&#xD;&#xA;&#xD;&#xA;Arguments&#xD;&#xA;in_TargetValue as Target Values &lt;DataRow[]&gt;&#xA;in_TargetSelector as Target Selector &lt;DataRow&gt;&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xD;&#xA;in_ColumnRange as Target column number&lt;Dictionary&lt;String, List(Int32)&gt;" DisplayName="SetPeriodValue" sap2010:WorkflowViewState.IdRef="Sequence_100">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SetPeriodValue" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <If Condition="[Not String.IsNullOrWhiteSpace(in_TargetValue.Item(in_ColumnRange(&quot;Period_Values_Type&quot;)(0)).ToString())]" sap2010:WorkflowViewState.IdRef="If_22">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_97">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="PeriodValuesType" />
+          </Sequence.Variables>
+          <Assign DisplayName="Assign - PeriodValuesType" sap2010:WorkflowViewState.IdRef="Assign_130">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[PeriodValuesType]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TargetValue.Item(in_ColumnRange("Period_Values_Type")(0)).ToString().Substring(0,1)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <If sap2010:Annotation.AnnotationText="If period values type contains a value between 1 and 5, input processing is performed." Condition="[{&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;}.Contains(PeriodValuesType)]" DisplayName="If - Check Period Values Type" sap2010:WorkflowViewState.IdRef="If_13">
+            <If.Then>
+              <Sequence sap2010:Annotation.AnnotationText="Input period values type" sap2010:WorkflowViewState.IdRef="Sequence_80">
+                <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [Period Values] Button" sap2010:WorkflowViewState.IdRef="Click_73" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_StartTime_btn_PeriodValues&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                  </ui:Click.Target>
+                </ui:Click>
+                <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Click the button for each period values type." DisplayName="Switching the Period Values Type" Expression="[PeriodValuesType]" sap2010:WorkflowViewState.IdRef="Switch`1_8">
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" x:Key="1" ClickType="CLICK_SINGLE" DisplayName="Click [Hourly] Button" sap2010:WorkflowViewState.IdRef="Click_61" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_PeriodValues_btn_Hourly&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" x:Key="2" ClickType="CLICK_SINGLE" DisplayName="Click [Daily] Button" sap2010:WorkflowViewState.IdRef="Click_62" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_PeriodValues_btn_Daily&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" x:Key="3" ClickType="CLICK_SINGLE" DisplayName="Click [Weekly] Button" sap2010:WorkflowViewState.IdRef="Click_63" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_PeriodValues_btn_Weekly&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" x:Key="4" ClickType="CLICK_SINGLE" DisplayName="Click [Monthly] Button" sap2010:WorkflowViewState.IdRef="Click_64" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_PeriodValues_btn_Monthly&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" x:Key="5" ClickType="CLICK_SINGLE" DisplayName="Click [Other period] Button" sap2010:WorkflowViewState.IdRef="Click_65" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_PeriodValues_btn_OtherPeriod&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                    </ui:Click.Target>
+                  </ui:Click>
+                </Switch>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Throw DisplayName="Throw - BusinessRuleException(Period Values Type is not define)" Exception="[New UiPath.Core.BusinessRuleException(&quot;[&quot; &amp; in_TargetValue.Table.Columns(in_ColumnRange(&quot;Period_Values_Type&quot;)(0)).ToString &amp; &quot;] is not defined&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            </If.Else>
+          </If>
+          <If sap2010:Annotation.AnnotationText="Operation for period values type [Other]" Condition="[PeriodValuesType = &quot;5&quot;]" DisplayName="if - Processing Other Period" sap2010:WorkflowViewState.IdRef="If_14">
+            <If.Then>
+              <Sequence DisplayName="Insert PeriodValue" sap2010:WorkflowViewState.IdRef="Sequence_81">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="sd:DataRow" Name="TargetValue" />
+                  <Variable x:TypeArguments="sd:DataRow" Name="TargetSelector" />
+                  <Variable x:TypeArguments="scg:List(x:Int32)" Name="TargetIndexList" />
+                </Sequence.Variables>
+                <Assign DisplayName="Assign - Stores cell number of Period Values" sap2010:WorkflowViewState.IdRef="Assign_129">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="scg:List(x:Int32)">[TargetIndexList]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="scg:List(x:Int32)">[in_ColumnRange("Period_Values")]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Extract Period Values data and selector" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ConvertColumnToDataRow.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[in_TargetValue]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+                    <InArgument x:TypeArguments="scg:List(x:Int32)" x:Key="in_ColumnRange">[TargetIndexList]</InArgument>
+                    <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_ConvertedTargetValue">[TargetValue]</OutArgument>
+                    <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_ConvertedSelector">[TargetSelector]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Insert Period Values" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="SRC_Common\SRC_SetValues.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[TargetSelector]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[TargetValue]</InArgument>
+                    <InArgument x:TypeArguments="x:Boolean" x:Key="in_NullException">True</InArgument>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_StartIndex">0</InArgument>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_EndIndex">[TargetValue.Table.Columns.Count]</InArgument>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_DelayTime">0</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ClickCheckButton workflow(Other Period)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_29" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ClickToCheck.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ThrowMessage">[in_Config("MSG_SetScreenDataFlow_001").ToString()]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_MainWindowSelector">[in_Config("WND_AppMain").ToString()]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ClickButtonSelector">[in_Config("SetStartCondition_ExplicitPeriodValue_btn_Check").ToString()]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [Save] Button(ScreenName : ExplicitPeriodValue)" sap2010:WorkflowViewState.IdRef="Click_67" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_ExplicitPeriodValue_btn_Save&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                  </ui:Click.Target>
+                </ui:Click>
+                <ui:WaitUiElementVanish sap2010:Annotation.AnnotationText="Wait for the screen vanish" DisplayName="Wait Element Vanish (ScreenName : ExplicitPeriodValue)" sap2010:WorkflowViewState.IdRef="WaitUiElementVanish_2" WaitNotActive="False" WaitNotVisible="True">
+                  <ui:WaitUiElementVanish.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_ExplicitPeriodValue_wnd&quot;).ToString()]" WaitForReady="COMPLETE" />
+                  </ui:WaitUiElementVanish.Target>
+                </ui:WaitUiElementVanish>
+              </Sequence>
+            </If.Then>
+          </If>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ClickCheckButton workflow(Period Values)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_30" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ClickToCheck.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ThrowMessage">[in_Config("MSG_SetScreenDataFlow_001").ToString()]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_MainWindowSelector">[in_Config("WND_AppMain").ToString()]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ClickButtonSelector">[in_Config("SetStartCondition_PeriodValues_btn_Check").ToString()]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [Save] Button(ScreenName : PeriodValuesTitle)" sap2010:WorkflowViewState.IdRef="Click_79" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStartCondition_PeriodValues_btn_Save&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+            </ui:Click.Target>
+          </ui:Click>
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3JDOlxVc2Vyc1xGVUtVVEFSTyBNQVRBS0lcRG93bmxvYWRzXFNSQ19ERUZJTkVfSk9CX0VfMjAxOTEwMDFcU1JDX0RFRklORV9KT0JfRVxTUkNfREVGSU5FX0pPQl9FXFNldFBlcmlvZFZhbHVlLnhhbWxEXgOyAg4CAQFgNGBEAgECYgViowECAV9jBa8CCgIBBrACBbACngECAQNiemKgAQIBYGMTY4cBAgEHZQmtAhQCAQiwAniwApsBAgEEaQtwFAIBW3EL1QEQAgFB1gELlgIQAgEUlwILnQIjAgEMngILrAIWAgEJbjZujgECAV5rN2tJAgFccZQBcfoBAgFCcw/QARoCAUXTAQ/TAeQCAgFD1gFm1gGKAQIBFdgBD5QCGgIBF5sCVZsClwECARKaAlSaAnkCARCXAtMBlwL3AQIBD5kCTpkCgQECAQ2qAmWqArIBAgEKdBGCARwCAViDARHPARoCAUbTAW7TAbcCAgFE3gER5QEaAgE85gER7gEpAgEw7wER+AEpAgEm+QER/wEpAgEegAIRjgIcAgEbjwIRkwIqAgEYgAFrgAG9AQIBWYMBwAGDAdQBAgFHhAETkgEeAgFVkwEToQEeAgFSogETsAEeAgFPsQETvwEeAgFMwAETzgEeAgFJ4wFF4wFmAgE/4AFG4AFXAgE96AFV6AFlAgE67AFd7AFtAgE46gFc6gFtAgE26QFY6QFrAgE06wFg6wFtAgEy5gHRAeYB/wECATH2AVD2AVECAS/0AVH0AVICAS7yAVXyAWICASzxAVjxAWgCASrzAVbzAVoCASn1AU/1AXACASjvAb4B7wHdAQIBJ/0BW/0BpAECAST8AVr8AX8CASL5AdgB+QH8AQIBIfsBVPsBhwECAR+MAmuMAr8BAgEckQJrkQK6AQIBGZABbZABvAECAVafAW2fAbsBAgFTrgFtrgG8AQIBUL0Bbb0BvQECAU3MAW3MAcEBAgFK</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="871,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_130" sap:VirtualizedContainerService.HintSize="724,60" />
+      <sap2010:ViewStateData Id="Click_73" sap:VirtualizedContainerService.HintSize="477,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_61" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Click_62" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Click_63" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Click_64" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Click_65" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Switch`1_8" sap:VirtualizedContainerService.HintSize="477,253">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_80" sap:VirtualizedContainerService.HintSize="499,512">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_13" sap:VirtualizedContainerService.HintSize="724,687">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_129" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_22" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_23" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_29" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Click_67" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="WaitUiElementVanish_2" sap:VirtualizedContainerService.HintSize="314,95">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_81" sap:VirtualizedContainerService.HintSize="336,808">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_14" sap:VirtualizedContainerService.HintSize="724,983">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_30" sap:VirtualizedContainerService.HintSize="724,87" />
+      <sap2010:ViewStateData Id="Click_79" sap:VirtualizedContainerService.HintSize="724,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_97" sap:VirtualizedContainerService.HintSize="746,2169">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_22" sap:VirtualizedContainerService.HintSize="871,2317" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="871,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_100" sap:VirtualizedContainerService.HintSize="893,2835">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetPeriodValue_1" sap:VirtualizedContainerService.HintSize="933,2679" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,334 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SetStep"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow[])" />
+    <x:Property Name="in_TargetSelector" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_Controller" Type="InArgument(sd:DataRow)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetFreeSelection_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Set values for [Step] worksheet &#xA;&#xA;- Input/Output&#xA;in_TargetValue as Target Values &lt;DataRow[]&gt;&#xA;in_TargetSelector as Target Selector &lt;DataRow&gt;&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xA;in_Controller as Parameters used to control SAP GUI screen &lt;DataRow&gt;" DisplayName="SetStep" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SetStep" Name="WorkflowName" />
+      <Variable x:TypeArguments="x:Int32" Name="ItemIndex" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))" Name="ColumnRange" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence sap2010:Annotation.AnnotationText="Set each column of the StartCondition sheet to corresponding screen." DisplayName="Column Range Mapping" sap2010:WorkflowViewState.IdRef="Sequence_135">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dt_ColumnMapping" />
+      </Sequence.Variables>
+      <Assign DisplayName="Initialize ColumnRange" sap2010:WorkflowViewState.IdRef="Assign_167">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))">[ColumnRange]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))">[New Dictionary(Of String, List(Of Integer))]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:BuildDataTable sap2010:Annotation.AnnotationText="- RangeName : Screen, Input range name&#xA;- ColmunList : Column range" DataTable="[dt_ColumnMapping]" DisplayName="Range of column numbers for each category" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;RangeName&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;ColumnList&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;User&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;2&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;Program_Type&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;3&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;Abap_Program&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;4,5,6&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;External_Command&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;7,8,9,10&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;External_Program&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;11,12,13&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;Print_Specifications&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;14,15,16,17,18,19,20,21,22&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;RangeName&gt;Control_Flags&lt;/RangeName&gt;&#xA;    &lt;ColumnList&gt;23,24,25,26&lt;/ColumnList&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_ColumnMapping]" DisplayName="Convert DataTable to Dictionary" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Assign DisplayName="Save column number ranges for each category" sap2010:WorkflowViewState.IdRef="Assign_168">
+              <Assign.To>
+                <OutArgument x:TypeArguments="scg:List(x:Int32)">[ColumnRange(row.Item(0).ToString)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="scg:List(x:Int32)">[row.Item(1).ToString.Split(","c).ToList().ConvertAll(Function(chr) Int32.Parse(chr))]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+      </ui:ForEachRow>
+    </Sequence>
+    <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="[ItemIndex]" DisplayName="Register the step corresponding to the job" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[in_TargetValue]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Create Step" sap2010:WorkflowViewState.IdRef="Sequence_129">
+            <If sap2010:Annotation.AnnotationText="Click the [Create] button for step registration of 2 records or more, and the screen transitions." Condition="[ItemIndex &gt; 0]" DisplayName="Processing after the second line" sap2010:WorkflowViewState.IdRef="If_33">
+              <If.Then>
+                <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [Create] Button" sap2010:WorkflowViewState.IdRef="Click_96" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_StepListOverview_btn_Create&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                  </ui:Click.Target>
+                </ui:Click>
+              </If.Then>
+            </If>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SetUser workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_51" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\SetUser.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))" x:Key="in_ColumnRange">[ColumnRange]</InArgument>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[row]</InArgument>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SetProgramType workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_52" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\SetProgramType.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))" x:Key="in_ColumnRange">[ColumnRange]</InArgument>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[row]</InArgument>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SetPrintSpecifications workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_53" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\SetPrintSpecifications.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[row]</InArgument>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))" x:Key="in_ColumnRange">[ColumnRange]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SetControlFlags workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_54" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\SetControlFlags.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[row]</InArgument>
+                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:Int32))" x:Key="in_ColumnRange">[ColumnRange]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ClickCheckButton workflow(CreateStep)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_49" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ClickToCheck.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ThrowMessage">[in_Config("MSG_SetScreenDataFlow_001").ToString()]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_MainWindowSelector">[in_Config("WND_AppMain").ToString()]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ClickButtonSelector">[in_Config("SetStep_CreateStep_btn_Check").ToString()]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [Save] Button(ScreenName : CreateStep)" sap2010:WorkflowViewState.IdRef="Click_92" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_CreateStep_btn_Save&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:WaitUiElementVanish DisplayName="Wait Element Vanish([Save] Button)" sap2010:WorkflowViewState.IdRef="WaitUiElementVanish_2" WaitNotActive="True" WaitNotVisible="False">
+              <ui:WaitUiElementVanish.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_CreateStep_btn_Save&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+              </ui:WaitUiElementVanish.Target>
+            </ui:WaitUiElementVanish>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="When all steps are registered, return to the first screen." ClickBeforeTyping="False" DisplayName="Return to the first screen" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_17" Key="f3" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_StepListOverview_wnd&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <ui:WaitUiElementVanish DisplayName="Wait until the screen disappears(Step List Overview)" sap2010:WorkflowViewState.IdRef="WaitUiElementVanish_1" WaitNotActive="True" WaitNotVisible="True">
+      <ui:WaitUiElementVanish.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_StepListOverview_wnd&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+      </ui:WaitUiElementVanish.Target>
+    </ui:WaitUiElementVanish>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>dzdDOlx0ZXN0eGFtbFxTUkNfREVGSU5FX0pPQl9FXFNSQ19ERUZJTkVfSk9CX0VcU3RlcC54YW1sPk4D2AEOAgEBUDRQPQIBAlQFVKMBAgFaVQVzEAIBTHQFywESAgENzAEF0AEVAgEJ0QEF1QEeAgEG1gEF1gGfAQIBA1R6VKABAgFbWQdgEAIBVmEHYdITAgFTYgdyFwIBTXS3AXTJAQIBS3Q7dEgCAUl6C8gBFgIBDs4BX84BoQECAQvMAdMCzAHXAgIBCtMBX9MBoQECAQfWAXjWAZwBAgEEXlVeggECAVlbVltjAgFXYY8BYaMBAgFUYjhiTAIBUWgNbxYCAU57DY0BEgIBQ44BDZQBJQIBO5UBDZwBJQIBMZ0BDaQBJQIBJ6UBDawBJQIBHa0BDbMBJQIBFbQBDcIBGAIBEsMBDccBJgIBD21BbZcBAgFQakJqZQIBT3uhAXu1AQIBRH0RiwEcAgFGkQFRkQFWAgFBkAFykAF/AgE/kgFUkgFnAgE9jgG9AY4B3AECATyYAVGYAVYCATmXAXKXAX8CATeZAVSZAWcCATWaAWSaAW8CATOVAcQBlQHqAQIBMp8BUZ8BVgIBL6EBcqEBfwIBLaABVKABZwIBK6IBZKIBbwIBKZ0BzAGdAfoBAgEopwFRpwFWAgElqQFyqQF/AgEjqAFUqAFnAgEhqgFkqgFvAgEfpQHFAaUB7AECAR6xAVexAY0BAgEbsAFWsAF7AgEZrQHSAa0B9gECARivAVCvAYMBAgEWwAFnwAGoAQIBE8UBZ8UBqAECARCJAWuJAbQBAgFH</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="502,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_167" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="BuildDataTable_2" sap:VirtualizedContainerService.HintSize="314,101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_168" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="314,208" />
+      <sap2010:ViewStateData Id="Sequence_135" sap:VirtualizedContainerService.HintSize="502,108">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_96" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="If_33" sap:VirtualizedContainerService.HintSize="464,258">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_51" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_52" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_53" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_54" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_49" sap:VirtualizedContainerService.HintSize="464,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_92" sap:VirtualizedContainerService.HintSize="464,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WaitUiElementVanish_2" sap:VirtualizedContainerService.HintSize="464,68" />
+      <sap2010:ViewStateData Id="Sequence_129" sap:VirtualizedContainerService.HintSize="486,1233">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_5" sap:VirtualizedContainerService.HintSize="502,1367">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_17" sap:VirtualizedContainerService.HintSize="502,158">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WaitUiElementVanish_1" sap:VirtualizedContainerService.HintSize="502,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="502,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="524,2339">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetFreeSelection_1" sap:VirtualizedContainerService.HintSize="564,2419">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

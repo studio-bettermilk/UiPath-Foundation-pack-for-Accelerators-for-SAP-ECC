@@ -1,0 +1,436 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GetJobOverview"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SAPService" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property Name="in_dt_Options" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_JobOverview" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_TimeRange" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>GetJobHeader_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Get logs from [TBTCO] using the function module [RFC_READ_TABLE].&#xA;&#xA;- Input/Output&#xA;in_SAPConnection as session info&lt;IConnectionService&gt; &#xA;in_dt_Options as query searching&lt;DataTable&gt;&#xA;out_dt_JobOverview as search results&lt;DataTable&gt;" DisplayName="GetJobOverview" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Fields" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Data" />
+      <Variable x:TypeArguments="x:String" Default="GetJobOverview" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Set the table value [DATA] to be set for RFC_READ_TABLE." DataTable="[dt_Data]" DisplayName="Set DATA" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;WA&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Set the field value [FIELD] to be set for RFC_READ_TABLE." DataTable="[dt_Fields]" DisplayName="Set FIELD" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FIELDNAME&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;JOBNAME&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;JOBCOUNT&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;SDLSTRTDT&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;SDLSTRTTM&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;SDLUNAME&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;STRTDATE&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;STRTTIME&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;ENDDATE&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;ENDTIME&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;STATUS&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;AUTHCKMAN&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;EVENTID&lt;/FIELDNAME&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SRC_RFC_READ_TABLE_v2.2 Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SRC_Common\SRC_RFC_READ_TABLE_v2.2.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_QueryTableStr">TBTCO</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Data">[dt_Data]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Fields">[dt_Fields]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Options">[in_dt_Options]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[dt_Data.Rows.Count &gt; 0]" DisplayName="If : Check if dt_Data Data Exists" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="s:DateTime" Name="MaxDate" />
+            <Variable x:TypeArguments="s:DateTime" Name="MinDate" />
+            <Variable x:TypeArguments="scg:List(x:String)" Name="RetWAList" />
+            <Variable x:TypeArguments="scg:List(x:String)" Name="RetLengList" />
+          </Sequence.Variables>
+          <Sequence sap2010:Annotation.AnnotationText="・Save query execution results in List format.&#xA;・Save the number of digits for each field in List format." DisplayName="Convert list to DataTable" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Assign DisplayName="Assign - RetWAList" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="scg:List(x:String)">[RetWAList]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="scg:List(x:String)">[dt_Data.AsEnumerable().Select(Function(r) r("WA").ToString()).ToList()]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign - RetLengList" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="scg:List(x:String)">[RetLengList]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="scg:List(x:String)">[dt_Fields.AsEnumerable().Select(Function(r) r("LENGTH").ToString()).ToList()]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Convert the search results from List format to DataTable." DisplayName="Invoke SRC_MakeTextListToDataTable Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_Common\SRC_MakeTextListToDataTable.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Text">[RetWAList]</InArgument>
+              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Len_Str">[RetLengList]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Fields">[dt_Fields]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_OutputData">[out_dt_JobOverview]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Sequence sap2010:Annotation.AnnotationText="Add summary items not included in the query results to DataTable." DisplayName="Add Data Column" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="AGGREGATE_DURATION" DataTable="[out_dt_JobOverview]" DisplayName="Add Data Column (AGGREGATE_DURATION)" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="100" Unique="False" />
+            <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="AGGREGATE_DELAY" DataTable="[out_dt_JobOverview]" DisplayName="Add Data Column (AGGREGATE_DELAY)" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_4" MaxLength="100" Unique="False" />
+            <ui:AddDataColumn x:TypeArguments="s:DateTime" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="AGGREGATE_SDLDATETIME" DataTable="[out_dt_JobOverview]" DisplayName="Add Data Column (AGGREGATE_SDLDATETIME)" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_3" MaxLength="100" Unique="False" />
+          </Sequence>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AggregateItem Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_JOBLOG_EXPORT_E\AggregateItem.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_JobOverview">[out_dt_JobOverview]</InOutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Sequence DisplayName="Get minimum and maximum values" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataRow[]" Name="MaxRow" />
+              <Variable x:TypeArguments="sd:DataRow[]" Name="MinRow" />
+            </Sequence.Variables>
+            <Assign DisplayName="Assign - MinRow" sap2010:WorkflowViewState.IdRef="Assign_23">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataRow[]">[MinRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataRow[]">[out_dt_JobOverview.Select("AGGREGATE_SDLDATETIME = Min(AGGREGATE_SDLDATETIME)")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign - MaxRow" sap2010:WorkflowViewState.IdRef="Assign_25">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataRow[]">[MaxRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataRow[]">[out_dt_JobOverview.Select("AGGREGATE_SDLDATETIME = Max(AGGREGATE_SDLDATETIME)")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign - MinDate" sap2010:WorkflowViewState.IdRef="Assign_24">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:DateTime">[MinDate]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:DateTime">[Convert.ToDateTime(MinRow(0)("AGGREGATE_SDLDATETIME"))]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign - MaxDate" sap2010:WorkflowViewState.IdRef="Assign_26">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:DateTime">[MaxDate]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:DateTime">[Convert.ToDateTime(MaxRow(0)("AGGREGATE_SDLDATETIME"))]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+          <ui:FilterDataTable sap2010:Annotation.AnnotationText="1. Filtering with scheduled date&#xA;    Scheduled date &gt;= (the minimun date of search results + From Time)&#xA;    Scheduled date &lt;= (the maximum date of search results + To Time)&#xA;&#xA;2. Change the column order for output." DataTable="[out_dt_JobOverview]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_dt_JobOverview]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument BooleanOperator="And" Operator="GTE">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["AGGREGATE_SDLDATETIME"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                  <ui:FilterOperationArgument.Operand>
+                    <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(MinDate.ToString("yyyyMMdd") + in_TimeRange("FromTime"),"yyyyMMddHHmmss",nothing)]</InArgument>
+                  </ui:FilterOperationArgument.Operand>
+                </ui:FilterOperationArgument>
+                <ui:FilterOperationArgument BooleanOperator="And" Operator="LTE">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["AGGREGATE_SDLDATETIME"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                  <ui:FilterOperationArgument.Operand>
+                    <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(MaxDate.ToString("yyyyMMdd") + in_TimeRange("ToTime"),"yyyyMMddHHmmss",nothing)]</InArgument>
+                  </ui:FilterOperationArgument.Operand>
+                </ui:FilterOperationArgument>
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="16">
+                <InArgument x:TypeArguments="x:String">["JOBNAME"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["JOBCOUNT"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["SDLUNAME"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["STATUS"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["STRTDATE"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["STRTTIME"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["AGGREGATE_DURATION"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["AGGREGATE_DELAY"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["AUTHCKMAN"]</InArgument>
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+          </ui:FilterDataTable>
+          <Sequence sap2010:Annotation.AnnotationText="Change the column name to the name displayed on the SAP screen (SM37)." sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <Assign DisplayName="Assign : ColumnName (Job Name)" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("JOBNAME").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Job Name</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Job No.)" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("JOBCOUNT").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Job No.</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Job CreatedBy)" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("SDLUNAME").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Job CreatedBy</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Status)" sap2010:WorkflowViewState.IdRef="Assign_10">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("STATUS").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Status</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Start Date)" sap2010:WorkflowViewState.IdRef="Assign_11">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("STRTDATE").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Start Date</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Start Time)" sap2010:WorkflowViewState.IdRef="Assign_12">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("STRTTIME").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Start Time</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Duration(sec.))" sap2010:WorkflowViewState.IdRef="Assign_13">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("AGGREGATE_DURATION").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Duration(sec.)</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Delay(sec.))" sap2010:WorkflowViewState.IdRef="Assign_14">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("AGGREGATE_DELAY").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Delay(sec.)</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign : ColumnName (Client)" sap2010:WorkflowViewState.IdRef="Assign_15">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_dt_JobOverview.Columns("AUTHCKMAN").ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">Client</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3NDOlxVc2Vyc1x5dWtpLnlhbWF6YWtpXERlc2t0b3BcU2FtcGxlX1NSQ19CQVBJdjIuMl9KT0JMT0dfRVhQT1JUX0VcU1JDX0JBUEl2Mi4yX0pPQkxPR19FWFBPUlRfRVxHZXRKb2JPdmVydmlldy54YW1sZ1EDqAIOAgEBVTRVRAIBAlcFV6MBAgF9WAVYywkCAXpZBVmPEwIBd1oFYh0CAWxjBaUCCgIBBqYCBaYCnwECAQNXelegAQIBflh/WIoBAgF7WYABWY0BAgF4XFVcZAIBdWBNYFwCAXNdSV1OAgFyX0xfVwIBcF5KXlMCAW5ayQFa8gECAW1jE2MwAgEHZQmjAhQCAQimAnimApwBAgEEbAt9FgIBY34LhQEjAgFZhgELigEWAgFMiwELjwEjAgFIkAELtQEWAgE3tgEL2AEgAgEl2QELogIWAgEJbQ10FgIBaHUNfBYCAWSBAVOBAWACAWGAAVCAAVsCAV+DAVWDAWkCAV1+sQJ+3gICAVyCAU+CAVoCAVqHAQ2HAdYCAgFViAENiAHQAgIBUYkBDYkB3gICAU2NAVeNAWsCAUqLAcUBiwH2AQIBSZUBDZwBFgIBRJ0BDaQBFgIBQKUBDawBFgIBPK0BDbQBFgIBOMMBPMMBVQIBNtUBONUBRQIBNcYBPsYBowECATS7ATy7AVUCATO+AT6+AaUBAgEytgHJA7YB3wMCATDRATjRAUQCAS/SATjSAUQCAS62AbgCtgHOAgIBLNMBONMBTgIBK9QBONQBSwIBKs0BOM0BQwIBKc4BOM4BRAIBKM8BOM8BRAIBJ9ABONABQgIBJtoBDeEBFgIBIuIBDekBFgIBH+oBDfEBFgIBHPIBDfkBFgIBGfoBDYECFgIBFoICDYkCFgIBE4oCDZECFgIBEJICDZkCFgIBDZoCDaECFgIBCnJCcooBAgFrb0NvTgIBaXpCepABAgFnd0N3UAIBZYcBmAGHAawBAgFYhwG3AYcBzQECAVaIAZgBiAGpAQIBVIgBtAGIAcoBAgFSiQGaAYkBsQECAVCJAbwBiQHSAQIBTpoBPJoBjQECAUeXAT2XAUUCAUWiATyiAY0BAgFDnwE9nwFFAgFBqgE6qgFyAgE/pwE7pwFEAgE9sgE6sgFyAgE7rwE7rwFEAgE53wE43wFAAgEk3AE53AFrAgEj5wE45wE/AgEh5AE55AFsAgEg7wE47wFFAgEe7AE57AFsAgEd9wE49wE+AgEb9AE59AFqAgEa/wE4/wFCAgEY/AE5/AFsAgEXhwI4hwJCAgEVhAI5hAJsAgEUjwI4jwJGAgESjAI5jAJ2AgERlwI4lwJDAgEPlAI5lAJzAgEOnwI4nwI+AgEMnAI5nAJtAgEL</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="464,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BuildDataTable_2" sap:VirtualizedContainerService.HintSize="464,101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BuildDataTable_1" sap:VirtualizedContainerService.HintSize="464,101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="464,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="314,356">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddDataColumn`1_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="314,312">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_25" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_26" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="314,484">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FilterDataTable_1" sap:VirtualizedContainerService.HintSize="314,176">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_15" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="314,1026">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="336,2934">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,3082">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="464,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,3994">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetJobHeader_1" sap:VirtualizedContainerService.HintSize="526,4074" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

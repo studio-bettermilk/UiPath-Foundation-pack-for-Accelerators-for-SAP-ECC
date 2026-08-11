@@ -1,0 +1,307 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SetProgramType"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ColumnRange" Type="InArgument(scg:Dictionary(x:String, scg:List(x:Int32)))" />
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_TargetSelector" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetProgramType_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Overview&#xD;&#xA;Input data for each program type&#xD;&#xA;&#xD;&#xA;Arguments&#xD;&#xA;in_TargetValue as Target Values &lt;DataRow[]&gt;&#xA;in_TargetSelector as Target Selector &lt;DataRow&gt;&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xD;&#xA;in_ColumnRange as Target column number&lt;Dictionary&lt;String, List(Int32)&gt;" DisplayName="SetProgramType" sap2010:WorkflowViewState.IdRef="Sequence_121">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SetProgramType" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:List(x:Int32)" Name="TargetIndexList" />
+      <Variable x:TypeArguments="sd:DataRow" Name="TargetValue" />
+      <Variable x:TypeArguments="sd:DataRow" Name="TargetSelector" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot; start&quot;]" />
+    <If Condition="[Not String.IsNullOrWhiteSpace(in_TargetValue(in_ColumnRange(&quot;Program_Type&quot;)(0)).ToString())]" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_122">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="ProgramType" />
+          </Sequence.Variables>
+          <Assign sap2010:Annotation.AnnotationText="Cut the first character from the &quot;program type&quot; string of input data and save it so that it can be used as a branch condition" DisplayName="Assign - ProgramType" sap2010:WorkflowViewState.IdRef="Assign_158">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[ProgramType]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TargetValue(in_ColumnRange("Program_Type")(0)).ToString.Substring(0,1)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="-Click the button for each start time type&#xA;-Specify the input data range for each type" DisplayName="Switching the Program Type" Expression="[ProgramType]" sap2010:WorkflowViewState.IdRef="Switch`1_9">
+            <Switch.Default>
+              <Throw DisplayName="BusinessRuleException(Program Type is not define)_ConditionTrue" Exception="[New UiPath.Core.BusinessRuleException(&quot;[&quot; &amp; in_TargetValue.Table.Columns(in_ColumnRange(&quot;Program_Type&quot;)(0)).ToString &amp; &quot;] is not defined&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            </Switch.Default>
+            <Sequence x:Key="1" sap2010:WorkflowViewState.IdRef="Sequence_118">
+              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [ABAP program] Button" sap2010:WorkflowViewState.IdRef="Click_86" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_CreateStep_btn_ABAPprogram&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                </ui:Click.Target>
+              </ui:Click>
+              <Assign DisplayName="Stores cell number of Abap_Program" sap2010:WorkflowViewState.IdRef="Assign_155">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="scg:List(x:Int32)">[TargetIndexList]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="scg:List(x:Int32)">[in_ColumnRange("Abap_Program")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+            <Sequence x:Key="2" sap2010:WorkflowViewState.IdRef="Sequence_119">
+              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [External command] Button" sap2010:WorkflowViewState.IdRef="Click_87" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_CreateStep_btn_Externalcommand&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                </ui:Click.Target>
+              </ui:Click>
+              <Assign DisplayName="Stores cell number of External_Command" sap2010:WorkflowViewState.IdRef="Assign_156">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="scg:List(x:Int32)">[TargetIndexList]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="scg:List(x:Int32)">[in_ColumnRange("External_Command")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+            <Sequence x:Key="3" sap2010:WorkflowViewState.IdRef="Sequence_120">
+              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [External program] Button" sap2010:WorkflowViewState.IdRef="Click_88" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_CreateStep_btn_Externalprogram&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                </ui:Click.Target>
+              </ui:Click>
+              <Assign DisplayName="Stores cell number of External_Program" sap2010:WorkflowViewState.IdRef="Assign_157">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="scg:List(x:Int32)">[TargetIndexList]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="scg:List(x:Int32)">[in_ColumnRange("External_Program")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </Switch>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Throw DisplayName="BusinessRuleException(Program Type is not define)_ConditionFalse" Exception="[New UiPath.Core.BusinessRuleException(&quot;[&quot; &amp; in_TargetValue.Table.Columns(in_ColumnRange(&quot;Program_Type&quot;)(0)).ToString &amp; &quot;] is not defined&quot;, New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+      </If.Else>
+    </If>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Extract Program Type data and selector" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_38" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ConvertColumnToDataRow.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[in_TargetValue]</InArgument>
+        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+        <InArgument x:TypeArguments="scg:List(x:Int32)" x:Key="in_ColumnRange">[TargetIndexList]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_ConvertedTargetValue">[TargetValue]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_ConvertedSelector">[TargetSelector]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Insert Program Type" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_39" UnSafe="False" WorkflowFileName="SRC_Common\SRC_SetValues.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[TargetSelector]</InArgument>
+        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[TargetValue]</InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="in_NullException">True</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="in_StartIndex">0</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="in_EndIndex">[TargetValue.Table.Columns.Count -1]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="in_DelayTime">0</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d3JDOlxVc2Vyc1xGVUtVVEFSTyBNQVRBS0lcRG93bmxvYWRzXFNSQ19ERUZJTkVfSk9CX0VfMjAxOTEwMDFcU1JDX0RFRklORV9KT0JfRVxTUkNfREVGSU5FX0pPQl9FXFNldFByb2dyYW1UeXBlLnhhbWwzXAPdAQ4CAQFeNF5EAgECYwVjogECAUVkBccBCgIBHMgBBdABHQIBENEBBdoBHQIBBtsBBdsBngECAQNjemOfAQIBRmQTZHwCAR1mCcIBFAIBIMUBCcUB2QICAR7KAUnKAVkCARrOAVHOAWECARjMAVDMAWECARbLAUzLAV8CARTNAVTNAWECARLIAcQByAHyAQIBEdgBRNgBRQIBD9YBRdYBRgIBDtQBSdQBVgIBDNMBTNMBXAIBCtUBStUBTgIBCdcBQ9cBZwIBCNEBsQHRAdABAgEH2wF42wGbAQIBBGoLcRQCAUFyC8EBFAIBIcUBacUBrAICAR9vNm+BAQIBRGw3bEQCAUJy4QFy8AECASJ2DY4BGAIBOI8BDacBGAIBL6gBDcABGAIBJnQPdN4CAgEkdw+FARoCAT6GAQ+NARgCATmQAQ+eARoCATWfAQ+mARgCATCpAQ+3ARoCASy4AQ+/ARgCASd0bnSxAgIBJYMBaYMBsQECAT+LAUOLAWMCATyIAUSIAVUCATqcAWmcAbUBAgE2pAFDpAFnAgEzoQFEoQFVAgExtQFptQG1AQIBLb0BQ70BZwIBKroBRLoBVQIBKA==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="724,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_158" sap:VirtualizedContainerService.HintSize="477,132">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Click_86" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Assign_155" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_118" sap:VirtualizedContainerService.HintSize="336,292">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_87" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Assign_156" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_119" sap:VirtualizedContainerService.HintSize="336,292">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_88" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="Assign_157" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_120" sap:VirtualizedContainerService.HintSize="336,292">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_9" sap:VirtualizedContainerService.HintSize="477,328">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_122" sap:VirtualizedContainerService.HintSize="499,624">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="724,772" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_38" sap:VirtualizedContainerService.HintSize="724,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_39" sap:VirtualizedContainerService.HintSize="724,87" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="724,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_121" sap:VirtualizedContainerService.HintSize="746,1544">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetProgramType_1" sap:VirtualizedContainerService.HintSize="786,1624" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

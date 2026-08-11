@@ -1,0 +1,282 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="CheckScreenPageDown"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Selector" Type="InArgument(x:String)" />
+    <x:Property Name="in_Target" Type="InArgument(x:String)" />
+    <x:Property Name="in_ScreenId" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>testKeyWord_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;If the argument string (in_Target) does not exist, the page will be paged down.&#xA;&#xA;- Input&#xA;in_Target as Target string &lt;String&gt;&#xA;in_Selector  as Screen Selector &lt;String&gt;&#xA;in_ScreenId as SAP screen Id  &lt;Int32&gt; ０・・・Parent screen    &#xA;                                                                   1～・・・Pop-up screen" DisplayName="CheckScreenPageDown" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="FindPositionCheck" />
+      <Variable x:TypeArguments="x:String" Default="CheckScreenPageDown" Name="WorkflowName" />
+      <Variable x:TypeArguments="x:Boolean" Name="IsEnabled" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <ui:TextExists DisplayName="Text Exists" FormattedText="False" sap2010:WorkflowViewState.IdRef="TextExists_1" Occurrence="1" Result="[FindPositionCheck]" Text="[in_Target]">
+      <ui:TextExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Selector]" TimeoutMS="500" WaitForReady="NONE" />
+      </ui:TextExists.Target>
+    </ui:TextExists>
+    <Assign DisplayName="Assign IsEnabled" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Boolean">[IsEnabled]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+      </Assign.Value>
+    </Assign>
+    <DoWhile DisplayName="Do While String search loop" sap2010:WorkflowViewState.IdRef="DoWhile_1" Condition="[IsEnabled]">
+      <If Condition="[Not FindPositionCheck]" DisplayName="If FindPositionCheck" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="String search" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="Minimum" />
+              <Variable x:TypeArguments="x:Int32" Name="Maximum" />
+              <Variable x:TypeArguments="x:Int32" Name="PageSize" />
+              <Variable x:TypeArguments="x:Int32" Name="Position" />
+              <Variable x:TypeArguments="x:Int32" Name="BeforeMaximum" />
+              <Variable x:TypeArguments="x:Int32" Name="BeforeMinimum" />
+              <Variable x:TypeArguments="x:Int32" Name="BeforePageSize" />
+              <Variable x:TypeArguments="x:Int32" Name="BeforePosition" />
+            </Sequence.Variables>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get information before pgdn" DisplayName="Invoke Workflow File (SRC_Get_GuiVerticalScrollbar Before)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiVerticalScrollbar.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Maximum">[BeforeMaximum]</OutArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Minimum">[BeforeMinimum]</OutArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_PageSize">[BeforePageSize]</OutArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Position">[BeforePosition]</OutArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">[in_ScreenId]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="SimulateType is setted off." ClickBeforeTyping="False" DisplayName="Type into" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="%[k(pgdn)]">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Selector]" WaitForReady="INTERACTIVE" />
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <ui:TextExists DisplayName="Text Exists (Loop)" FormattedText="False" sap2010:WorkflowViewState.IdRef="TextExists_2" Occurrence="1" Result="[FindPositionCheck]" Text="[in_Target]">
+              <ui:TextExists.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[in_Selector]" TimeoutMS="500" WaitForReady="NONE" />
+              </ui:TextExists.Target>
+            </ui:TextExists>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="For confirmation of the last page&#xA;Get Maximum and Position" DisplayName="Invoke Workflow File (SRC_Get_GuiVerticalScrollbar)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiVerticalScrollbar.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Maximum">[Maximum]</OutArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Minimum">[Minimum]</OutArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_PageSize">[PageSize]</OutArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Position">[Position]</OutArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">[in_ScreenId]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <If sap2010:Annotation.AnnotationText="An error occurs if the page has not changed despite the page being down&#xA;(For infinite loop avoidance)" Condition="[Position = BeforePosition and Not FindPositionCheck]" DisplayName="If Error handling" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Then>
+                <Sequence DisplayName="Set Custom Exception" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="ui:BusinessRuleException" Name="CustomException" />
+                  </Sequence.Variables>
+                  <Assign DisplayName="Assign Initialize CustomException when SaveStep" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="ui:BusinessRuleException">[CustomException]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="ui:BusinessRuleException">[new UiPath.Core.BusinessRuleException()]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign CustomException.Data(&quot;StatusMessage&quot;)" sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[CustomException.Data("StatusMessage")]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">[WorkflowName &amp; " Text does not exist:" &amp; in_Target]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign CustomException.Data(&quot;MessageNo&quot;)" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[CustomException.Data("MessageNo")]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">[""]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Error Messege" Exception="[CustomException]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                </Sequence>
+              </If.Then>
+            </If>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Assign DisplayName="Assign False" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Boolean">[IsEnabled]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Else>
+      </If>
+    </DoWhile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d1dDOlxUZXN0XFByYVRlc3RfU1JDX0NNX0ZOQ01ETF9FWEVcU1JDX0NNX0ZOQ01ETF9FWEVcVmFsaWRhdGlvblxDaGVja1NjcmVlblBhZ2VEb3duLnhhbWw8SAO4AQ4CAQFLNEtJAgECTgVOpAECAVdPBVMVAgFOVAVbDgIBSlwFtQEPAgEGtgEFtgGgAQIBA057TqEBAgFYT6QBT7EBAgFST4kBT54BAgFQT35PgQECAU9RSlFZAgFVUWRRaQIBVFkxWTUCAU1WMlY9AgFLXG5cewIBSF0HtAEMAgEHtgF5tgGdAQIBBF0VXS4CAQhfC6gBFgIBDqsBC7IBFAIBCmoNciUCATxzDXcbAgE4eA18HQIBL30NhQElAgEjhgENpwESAgEPsAE3sAE8AgENrQE4rQFDAgELbk1uXQIBRnBLcFgCAURsTGxbAgFCbUxtWwIBQGqfAmrNAgIBP29Nb10CAT11Z3V2AgE6c9cCc+MCAgE5eLMBeMABAgEzeJgBeK0BAgExeI0BeJABAgEwelJ6YQIBNnpsenECATWBAU2BAVcCAS2DAUuDAVgCASt/TH9VAgEpgAFMgAFVAgEnfbsCfekCAgEmggFNggFXAgEkhgGpAYYB4AECARCIARGlARwCARSMAROTARwCAR+UARObARwCARqcAROjARwCARekAROkAcABAgEVkQFOkQF3AgEijgFPjgFgAgEgmQE+mQF6AgEclgE/lgFmAgEboQE+oQFCAgEZngE/ngFiAgEYpAGAAaQBkwECARY=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="779,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TextExists_1" sap:VirtualizedContainerService.HintSize="779,96" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="779,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="464,114">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="464,123">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TextExists_2" sap:VirtualizedContainerService.HintSize="464,96" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="464,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="242,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="464,250">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486,996">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="753,1144">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="779,1306" />
+      <sap2010:ViewStateData Id="LogMessage_3" sap:VirtualizedContainerService.HintSize="779,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="801,2060">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="testKeyWord_1" sap:VirtualizedContainerService.HintSize="841,2140" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,171 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="CheckArgument"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ConvertFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_UomFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_UomSheetName" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>CheckArgument_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Check config parameters consistency.&#xA;&#xA;- Arguments&#xA;   in_ConvertFilePath as Target file path to convert&lt;String&gt;&#xA;   in_UomFilePath as Internal unit of measure conversion file path&lt;String&gt;&#xA;   in_UomSheetName as Internal unit of measure conversion sheet name&lt;String&gt;" DisplayName="CheckArgument" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="CheckArgument" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)]" Name="CheckResults" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
+    <If sap2010:Annotation.AnnotationText="Check Conversion Target  File Path " Condition="[Not System.IO.File.Exists(in_ConvertFilePath)]" DisplayName="If Check Path Exists for ConvertFilePath" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection InputFile Error Message(ConvertFilePath)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[&quot;Path '&quot;+ in_ConvertFilePath+&quot;' doesn't exist(in_ConvertFilePath)&quot;]" />
+      </If.Then>
+    </If>
+    <If sap2010:Annotation.AnnotationText="Check UoM File Path " Condition="[Not System.IO.File.Exists(in_UomFilePath)]" DisplayName="If Check Path Exists for UoM_FilePath" sap2010:WorkflowViewState.IdRef="If_7">
+      <If.Then>
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection InputFile Error Message(UoM_FilePath)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[&quot;Path '&quot;+ in_UomFilePath +&quot;' doesn't exist(in_UomFilePath)&quot;]" />
+      </If.Then>
+    </If>
+    <If Condition="[String.IsNullOrWhiteSpace(in_UomSheetName)]" DisplayName="If - Whether sheet name is set" sap2010:WorkflowViewState.IdRef="If_8">
+      <If.Then>
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection InputFile Error Message(UoM_SheetName)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_3" Item="Sheet Name is not entered(in_UomSheetName)" />
+      </If.Then>
+    </If>
+    <If Condition="[CheckResults.Count &gt; 0]" DisplayName="If Result Check" sap2010:WorkflowViewState.IdRef="If_6">
+      <If.Then>
+        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Argument Errors" Exception="[New UiPath.Core.BusinessRuleException(String.Format(&quot;The following errors was found in Config Arguments:&quot; &amp; vbCr &amp; &quot;{0}&quot;, String.Join(vbCrLf, CheckResults)))]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+      </If.Then>
+    </If>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d4wBQzpc57+76Kiz5LitXFNSQ19JTlBVVF9GSUxFX1ZBTF9DTlZcU1JDX0lOUFVUX0ZJTEVfVkFMX0NOVlxFQ0NcU1JDX0lOUFVUX0ZJTEVfVkFMX0NOVl9FXzIwMTkxMTIwXFNSQ19JTlBVVF9GSUxFX1ZBTF9DTlZfRVxDaGVja0FyZ3VtZW50LnhhbWwaTANoDgIBAU40TkMCAQNPPk9VAgECUQVRowECASNSBVYKAgEbVwVbCgIBE1wFYAoCAQxhBWUKAgEHZgVmnwECAQRRe1GgAQIBJFJbUowBAgEcVAlUsgICAR5XTFd5AgEUWQlZqAICARZcE1xBAgENXgleggICAQ9hE2EwAgEIYwlj4gICAQpmeWacAQIBBVRAVFACASFU1QFUrwICAR9ZQFlQAgEZWdIBWaUCAgEXXkBeUAIBEV7TAV7/AQIBEGN4Y7UCAgEL</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="464,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddToCollection`1_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="464,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddToCollection`1_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="464,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="464,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1509">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CheckArgument_1" sap:VirtualizedContainerService.HintSize="526,1589" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

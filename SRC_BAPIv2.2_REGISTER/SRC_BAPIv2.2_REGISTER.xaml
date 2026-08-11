@@ -1,0 +1,606 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_BAPIv2_2_REGISTER"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:usba="clr-namespace:UiPath.SAP.BAPI.Activities;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ConfigFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_LoginUser" Type="InArgument(x:String)" />
+    <x:Property Name="in_LoginPassword" Type="InArgument(ss:SecureString)" />
+    <x:Property Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ForEach_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>ClosedXML</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Connect to SAP and invoke subsequent Workflow Files to execute BAPI.&#xA;&#xA;- Input/Output&#xA;in_ConfigFilePath as File path for Config &lt;String&gt;&#xA;in_LoginUser  as SAP Login User &lt;String&gt;&#xA;in_LoginPassword  as SAP Login Password &lt;SecureString&gt;&#xA;io_Option as Optional data of sheet [Option] in the argument file &lt;Dictionary&lt;String&gt;&lt;Object&gt;&gt;&#xA;" DisplayName="SRC_BAPIv2.2_REGISTER" sap2010:WorkflowViewState.IdRef="Sequence_429">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_BAPIv2.2_REGISTER" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(of String, String)]" Name="TargetItemInfo" />
+      <Variable x:TypeArguments="x:Int32" Name="FirstDataRow" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" Name="InputDataSheet" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[new Dictionary(of String, Object)]" Name="Config" />
+      <Variable x:TypeArguments="usbc:IConnectionService" Name="SAPService" />
+      <Variable x:TypeArguments="x:String" Name="LogFileName" />
+      <Variable x:TypeArguments="x:Int32" Name="RowCounter" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence DisplayName="Initialization" sap2010:WorkflowViewState.IdRef="Sequence_711">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="scg:List(x:String)" Name="SheetNames" />
+      </Sequence.Variables>
+      <Sequence DisplayName="Get Local Settings" sap2010:WorkflowViewState.IdRef="Sequence_706">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="sd:DataTable" Name="dt_ConfigTable" />
+        </Sequence.Variables>
+        <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_ConfigTable]" DisplayName="Read range settings" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Settings" WorkbookPath="[in_ConfigFilePath]" />
+        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_ConfigTable]" DisplayName="For each row" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+          <ui:ForEachRow.Body>
+            <ActivityAction x:TypeArguments="sd:DataRow">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+              </ActivityAction.Argument>
+              <Assign DisplayName="Add key/value pair" sap2010:WorkflowViewState.IdRef="Assign_686">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[Config(row("Name").ToString.Trim)]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[row("Value")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </ActivityAction>
+          </ui:ForEachRow.Body>
+        </ui:ForEachRow>
+      </Sequence>
+      <Assign sap2010:Annotation.AnnotationText="Assign Log File Name with current timestamp." DisplayName="Assign LogFileName" sap2010:WorkflowViewState.IdRef="Assign_691">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[LogFileName]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[Now.ToString("yyMMdd_HHmmss") &amp; "_" &amp; Config("LogFileName").ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Check Config Arguments.&#xA;In case of error, throw BusinessRuleException." DisplayName="Invoke CheckArgument Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_112" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\CheckArgument.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Check the existence of Key of Dictionary type argument." DisplayName="Invoke AddArgumentKey Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_118" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\AddArgumentKey.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Config">[Config]</InOutArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Option">[io_Option]</InOutArgument>
+          <InOutArgument x:TypeArguments="ss:SecureString" x:Key="io_LoginPassword">[in_LoginPassword]</InOutArgument>
+          <InOutArgument x:TypeArguments="x:String" x:Key="io_LoginUser">[in_LoginUser]</InOutArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get data from input file, which is used in the subsequent Argument creation processes." DisplayName="Invoke LoadExcelData Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_113" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\LoadExcelData.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="in_InputFilePath">[Config("InputFilePath").ToString]</InArgument>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="out_InputDataSheet">[InputDataSheet]</OutArgument>
+          <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_SheetNames">[SheetNames]</OutArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Check the existence of required Sheet and data for subsequent processes." DisplayName="Invoke CheckRequiredfield Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_116" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\CheckRequiredfield.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="in_InputDataSheet">[InputDataSheet]</InArgument>
+          <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_SheetNames">[SheetNames]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get the Dictionary value (Name : Key, DataType : Value) from input file." DisplayName="Invoke GetTargetItem Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_106" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\GetNameAndDataType.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_BAPINameSheet">[InputDataSheet(Config("BAPIName").ToString)]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="out_NameAndDataType">[TargetItemInfo]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <If sap2010:Annotation.AnnotationText="The first data row number is different between &quot;BAPINameSheet&quot; and other sheets.&#xA;If the Dictionary value, Config (&quot;DataCountSheet&quot;) is &quot;BAPINameSheet&quot;, set the True value to the row number. If not, set the False value." Condition="[Config(&quot;DataCountSheet&quot;).ToString.Contains(Config(&quot;BAPIName&quot;).ToString)]" DisplayName="If Check the sheet name and assign first data row number" sap2010:WorkflowViewState.IdRef="If_276">
+        <If.Then>
+          <Assign DisplayName="Assign BAPI Name Sheet" sap2010:WorkflowViewState.IdRef="Assign_666">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[FirstDataRow]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">5</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Then>
+        <If.Else>
+          <Assign DisplayName="Assign Other than BAPI Name Sheet" sap2010:WorkflowViewState.IdRef="Assign_667">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[FirstDataRow]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">3</InArgument>
+            </Assign.Value>
+          </Assign>
+        </If.Else>
+      </If>
+    </Sequence>
+    <usba:SapApplicationScope ExistingConnectionService="{x:Null}" AdvancedParameters="[Config(&quot;AdvancedParameters&quot;).ToString]" sap2010:Annotation.AnnotationText="Connect to SAP.&#xA;The output (SAPConnection) is used in subsequent processes." AppServer="[Config(&quot;AppServer&quot;).ToString]" Client="[Config(&quot;Client&quot;).ToString]" DisplayName="SAP Application Scope" sap2010:WorkflowViewState.IdRef="SapApplicationScope_1" Language="[Config(&quot;Language&quot;).ToString]" LogonGroup="[Config(&quot;LogonGroup&quot;).ToString]" MessageServer="[Config(&quot;MessageServer&quot;).ToString]" Password="[in_LoginPassword]" SapConnectionService="[SAPService]" SapRouterString="[Config(&quot;SAPRouter&quot;).ToString]" SncLibraryPath="[Config(&quot;SncLibraryPath&quot;).ToString]" SncMode="[Config(&quot;SncMode&quot;).ToString]" SncPartnerName="[Config(&quot;SncPartnerName&quot;).ToString]" SncQop="[Config(&quot;SncQOP&quot;).ToString]" SncSso="[Config(&quot;SncSSO&quot;).ToString]" StatefulConnection="[Ctype(Config(&quot;StatefulConnection&quot;), Boolean)]" SystemId="[Config(&quot;SystemID&quot;).ToString]" SystemNumber="[Config(&quot;SystemNumber&quot;).ToString]" User="[in_LoginUser]">
+      <usba:SapApplicationScope.Body>
+        <ActivityAction x:TypeArguments="usbc:IConnectionService">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+          </ActivityAction.Argument>
+          <ui:ForEachRow sap2010:Annotation.AnnotationText="Read the Sheet defined on the Dictionary value, Config(&quot;DataCountSheet&quot;).&#xA;Repeat process according to the number of data of column No, on the Sheet." CurrentIndex="[RowCounter]" DataTable="[InputDataSheet(Config(&quot;DataCountSheet&quot;).ToString)]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:ForEachRow.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_691">
+                  <If sap2010:Annotation.AnnotationText="Continue till the first data line.&#xA;Insert this process to skip the data you want to exclude from the process." Condition="[RowCounter &lt; FirstDataRow]" DisplayName="If : Check if it is the first data line" sap2010:WorkflowViewState.IdRef="If_277">
+                    <If.Then>
+                      <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_1" />
+                    </If.Then>
+                  </If>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ExecuteBAPI Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_117" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\ExecuteBAPI.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+                      <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[SAPService]</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="in_InputDataSheet">[InputDataSheet]</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_TargetItemInfo">[TargetItemInfo]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_HeaderIndex">[row.Item(0).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:Int32" x:Key="in_RowCounter">[RowCounter]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_LogFileName">[LogFileName]</InArgument>
+                      <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="io_Option">[io_Option]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachRow.Body>
+          </ui:ForEachRow>
+        </ActivityAction>
+      </usba:SapApplicationScope.Body>
+      <usba:SapApplicationScope.DesignAdvancedParameters>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAdvancedParameters>
+      <usba:SapApplicationScope.DesignAppServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAppServer>
+      <usba:SapApplicationScope.DesignClient>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignClient>
+      <usba:SapApplicationScope.DesignLanguage>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLanguage>
+      <usba:SapApplicationScope.DesignLogonGroup>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLogonGroup>
+      <usba:SapApplicationScope.DesignMessageServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignMessageServer>
+      <usba:SapApplicationScope.DesignPassword>
+        <ss:SecureString />
+      </usba:SapApplicationScope.DesignPassword>
+      <usba:SapApplicationScope.DesignSapRouterString>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSapRouterString>
+      <usba:SapApplicationScope.DesignSncLibraryPath>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncLibraryPath>
+      <usba:SapApplicationScope.DesignSncMode>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncMode>
+      <usba:SapApplicationScope.DesignSncPartnerName>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncPartnerName>
+      <usba:SapApplicationScope.DesignSncQOP>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncQOP>
+      <usba:SapApplicationScope.DesignSncSso>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncSso>
+      <usba:SapApplicationScope.DesignSystemId>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemId>
+      <usba:SapApplicationScope.DesignSystemNumber>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemNumber>
+      <usba:SapApplicationScope.DesignUser>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignUser>
+    </usba:SapApplicationScope>
+    <Sequence sap2010:Annotation.AnnotationText="Read text log and output to input file (Excel) or text file (change header data and output file path)." DisplayName="WriteLlog" sap2010:WorkflowViewState.IdRef="Sequence_703">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="s:String[]" Default="[{&quot;DateTime&quot;,&quot;Status&quot;, &quot;No&quot;, &quot;SAP Message&quot;, &quot;Exception&quot;}]" Name="LogPattern" />
+        <Variable x:TypeArguments="x:Int32" Name="Counter" />
+        <Variable x:TypeArguments="sd:DataTable" Default="[new DataTable]" Name="dt_LogData" />
+      </Sequence.Variables>
+      <ui:ReadCsvFile sap2010:Annotation.AnnotationText="Read text log." DataTable="[dt_LogData]" Delimitator="Comma" DisplayName="Read CSV" Encoding="shift_jis" FilePath="[Config(&quot;LogFolderPath&quot;).ToString &amp; &quot;\&quot; &amp; LogFileName]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" IncludeColumnNames="False" />
+      <ui:ForEach x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Set output header." CurrentIndex="[Counter]" DisplayName="For Each Set Colum" sap2010:WorkflowViewState.IdRef="ForEach`1_24" Values="[LogPattern]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="x:String">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+            </ActivityAction.Argument>
+            <Assign DisplayName="Assign Set Item" sap2010:WorkflowViewState.IdRef="Assign_683">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[dt_LogData.Columns(Counter).ColumnName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[item]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+      <Sequence DisplayName="Delete [SRC_Log] worksheet" sap2010:WorkflowViewState.IdRef="Sequence_714">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="ce:XLWorkbook" Name="Workbook" />
+          <Variable x:TypeArguments="ce:IXLWorksheet" Name="Worksheet" />
+        </Sequence.Variables>
+        <Assign sap2010:Annotation.AnnotationText="Set the Dictionary value, Config (&quot;InputFilePath&quot;) into variable Workbook." DisplayName="Assign Create XLWorkbook" sap2010:WorkflowViewState.IdRef="Assign_692">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ce:XLWorkbook">[Workbook]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ce:XLWorkbook">[New XLWorkbook(Config("InputFilePath").ToString)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign DisplayName="Assign Set Nothing" sap2010:WorkflowViewState.IdRef="Assign_693">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ce:IXLWorksheet">[Worksheet]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ce:IXLWorksheet">[Nothing]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <If Condition="[Workbook.TryGetWorksheet(&quot;SRC_Log&quot;, Worksheet)]" DisplayName="If : Check if &quot;SRC_Log&quot; sheet exists in the input file" sap2010:WorkflowViewState.IdRef="If_280">
+          <If.Then>
+            <InvokeMethod sap2010:Annotation.AnnotationText="Delete the previous log." DisplayName="Invoke Method Delete" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Delete">
+              <InvokeMethod.TargetObject>
+                <InArgument x:TypeArguments="ce:IXLWorksheet">[Workbook.Worksheet("SRC_Log")]</InArgument>
+              </InvokeMethod.TargetObject>
+            </InvokeMethod>
+          </If.Then>
+        </If>
+        <InvokeMethod DisplayName="Invoke Method Save" sap2010:WorkflowViewState.IdRef="InvokeMethod_3" MethodName="Save">
+          <InvokeMethod.TargetObject>
+            <InArgument x:TypeArguments="ce:XLWorkbook">[Workbook]</InArgument>
+          </InvokeMethod.TargetObject>
+        </InvokeMethod>
+      </Sequence>
+      <If Condition="[Config(&quot;LogType&quot;).ToString.ToUpper = &quot;EXCEL&quot;]" DisplayName="If : Check if &quot;LogType&quot; of config file is &quot;EXCEL&quot;" sap2010:WorkflowViewState.IdRef="If_279">
+        <If.Then>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke WriteLogToExcelAndText Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_99" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\WriteLogToExcelAndText.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ExcelFilePath">[Config("InputFilePath").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:Int32" x:Key="in_ExcelOutputLine">[Convert.ToInt32(Config("LogOutputLine").ToString)]</InArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_LogData">[dt_LogData]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_TextFilePath">[System.IO.Path.GetDirectoryName(Config("InputFilePath").ToString)+ "\" + LogFileName]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </If.Then>
+        <If.Else>
+          <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dt_LogData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[System.IO.Path.GetDirectoryName(Config(&quot;InputFilePath&quot;).ToString)+ &quot;\&quot; + LogFileName]" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1" />
+        </If.Else>
+      </If>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d1ZDOlx3b3JrXzFcZGVsaXZhcmFibGVfcmVc5pys5L2T5pS55L+uXFNSQ19CQVBJdjIuMl9SRUdJU1RFUlxTUkNfQkFQSXYyLjJfUkVHSVNURVIueGFtbI0BaAOQAw4CAQFqNGpLAgEEa05rcwIBA25ObnMCAQJzBXOkAQMB0wF0Bc4BEAMBkAHPAQXBAiACAT/CAgWNAxACAQiOAwWOA6ABAgEFc3tzoQEDAdQBeAeOARIDAcYBjwEHlgEQAwHCAZcBB5sBHwMBvgGcAQejAR8DAbQBpAEHqgEfAwGsAasBB7EBHwMBpAGyAQe3AR8DAZ0BuAEHzQEMAwGRAc8BmQXPAacFAwGOAc8BmQfPAcAHAwGMAc8BqgbPAdIGAwGKAc8B4gbPAZEHAwGIAc8BuwLPAeICAwGGAc8BtwTPAeUEAwGEAZsCC5sCOgMBgwHPAbgFzwHiBQMBgQG+Agu+AjoDAYAB+gEL+gE6AgF/zwGxCc8BwQkCAX2EAguEAjoCAXzPAccIzwHwCAIBeqoCC6oCOgIBec8BiQLPAbMCAgF3lgILlgI6AgF2uQILuQI6AgF1zwHIB88B7wcCAXOJAguJAjoCAXKvAguvAjoCAXGgAgugAjoCAXD1AQv1AToCAW/PAVfPAYoBAgFtzwH+CM8BqwkCAWvPAe8EzwGDBQIBac8B/QPPAagEAgFnzwGDCM8BvQgCAWX/AQv/AToCAWTPAfIFzwGhBgIBYs8ByAPPAfEDAgFgtAILtAI6AgFfpQILpQI6AgFejgILjgI6AgFd1QEL8AEbAgFAxAI4xAKlAQIBCsYCOsYCSwIBCcgCB8gCzgICATjJAgfZAhQCAS/aAgf9AhICAR7+AgeMAwwCAQuOA3mOA50BAgEGfAl84QEDAc0BfQmNARkDAccBlAEylAGAAQMBxQGRATORAUADAcMBmQFemQFmAwHAAZcBsgKXAdwCAwG/AZ4BYZ4BaQMBvAGfAWGfAWwDAboBoAFVoAFnAwG4AaEBSqEBWAMBtgGcAaACnAHLAgMBtQGnAWynAXwDAbIBqAFUqAFgAwGwAaYBS6YBbQMBrgGkAb4CpAHoAgMBrQGuAVKuAV4DAaoBrQFqrQF6AwGoAa8BXq8BZgMBpgGrAbUCqwHkAgMBpQG0AVK0AX8DAaEBtQFotQF4AwGfAbIBsAKyAd8CAwGeAbgBtgK4AZUDAwGSAboBC8EBFAMBmQHEAQvLARQDAZUB1QHuAdUB/AECAVvVAYcC1QHGAgIBWNsBEe0BHAIBQcgClwHIAqIBAgE+yAJUyAJiAgE8yAKsAcgCgAICATnJAtUByQLjAQIBNskCcskCfQIBNM8CDdYCFgIBMN8CCeYCEgIBK+cCCe4CEgIBJ+8CCfcCDgIBIvgCCfwCGAIBH/4CFf4CWQIBDIADC4cDIwIBFIoDC4oDsAICAQ58RHxWAwHRAXyxAXy7AQMB0AF8yQF83gEDAc4BfTp9TAMBywGDAQ+KARgDAcgBvwE1vwE2AwGcAbwBNrwBRAMBmgHJATXJATYDAZgBxgE2xgFEAwGWAdwBE+ABGAIBU+EBE+wBKwIBQtQCONQCPgIBMtECOdECYQIBMeQCOeQCawIBLuECOuECRAIBLOwCO+wCRAIBKukCPOkCRwIBKO8CF+8CUwIBI/ECDfUCHAIBJPoCOfoCQwIBIIUDToUDpAECARuCA0+CA3ECARmEA1CEA1wCAReDA1CDA4MBAgEWgAPPAYADggICARWKA0yKA1oCARKKA5ABigP8AQIBD4gBOogBSAMBygGFATuFAV4DAckB3AG3AdwB1wECAVTeARfeAVMCAVfoAVPoAV8CAVHkAWPkAW8CAU/qAW3qAXgCAU3lAXblAYYBAgFL6QFV6QFiAgFJ5gFy5gGCAQIBR+MBauMBcgIBRecBVecBawIBROEBzQHhAfUBAgFD8wI/8wJeAgEl</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="675,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadRange_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_686" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="314,208" />
+      <sap2010:ViewStateData Id="Sequence_706" sap:VirtualizedContainerService.HintSize="509,459">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_691" sap:VirtualizedContainerService.HintSize="509,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_112" sap:VirtualizedContainerService.HintSize="509,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_118" sap:VirtualizedContainerService.HintSize="509,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_113" sap:VirtualizedContainerService.HintSize="509,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_116" sap:VirtualizedContainerService.HintSize="509,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_106" sap:VirtualizedContainerService.HintSize="509,129">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_666" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_667" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_276" sap:VirtualizedContainerService.HintSize="509,265">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_711" sap:VirtualizedContainerService.HintSize="675,1875">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_277" sap:VirtualizedContainerService.HintSize="464,250">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_117" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="Sequence_691" sap:VirtualizedContainerService.HintSize="486,501">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="516,691">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SapApplicationScope_1" sap:VirtualizedContainerService.HintSize="675,842">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadCsvFile_1" sap:VirtualizedContainerService.HintSize="653,86">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_683" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="ForEach`1_24" sap:VirtualizedContainerService.HintSize="653,221">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_692" sap:VirtualizedContainerService.HintSize="464,117">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_693" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="InvokeMethod_2" sap:VirtualizedContainerService.HintSize="217,159">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_280" sap:VirtualizedContainerService.HintSize="464,307">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeMethod_3" sap:VirtualizedContainerService.HintSize="464,132" />
+      <sap2010:ViewStateData Id="Sequence_714" sap:VirtualizedContainerService.HintSize="653,860">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_99" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WriteCsvFile_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="If_279" sap:VirtualizedContainerService.HintSize="653,235" />
+      <sap2010:ViewStateData Id="Sequence_703" sap:VirtualizedContainerService.HintSize="675,1673">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="675,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_429" sap:VirtualizedContainerService.HintSize="697,5003">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach_1" sap:VirtualizedContainerService.HintSize="737,5123">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

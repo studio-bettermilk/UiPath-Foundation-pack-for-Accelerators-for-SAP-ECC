@@ -1,0 +1,337 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_LoadExcelData"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_InputFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_SelectorFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="out_SheetNames" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="out_InputData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="out_SelectorData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>PotiPoti_ChackSelector_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>ClosedXML</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Store the input file and selector file values ​​in a data table object.&#xA;Also check the column name and number of columns in the input file and selector file match.&#xA;&#xA;- Input/Output&#xA;in_InputFilePath as file path of input file &lt;String&gt;&#xA;in_SelectorFilePath as file path of selector file &lt;String&gt;&#xA;out_SheetNames as List of sheet names &lt;List&lt;String&gt;&gt;&#xA;out_InputData as Data read from input file &lt;Dictionay&lt;String,DataTable&gt;&gt;&#xA;out_SelectorData as Data read from selector file &lt;Dictionay&lt;String,DataTable&gt;&gt;" DisplayName="SRC_LoadExcelData" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_LoadExcelData" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence DisplayName="Initialization" sap2010:WorkflowViewState.IdRef="Sequence_50">
+      <Assign DisplayName="Assign out_InputData (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[out_InputData]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[new Dictionary(of String, system.Data.DataTable)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign out_SelectorData (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[out_SelectorData]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[new Dictionary(of String, system.Data.DataTable)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign out_SheetNames (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_3">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(x:String)">[out_SheetNames]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(x:String)">[new List(of String)]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <ui:ForEach x:TypeArguments="ce:IXLWorksheet" CurrentIndex="{x:Null}" DisplayName="For Each Sheet in Excel File" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[New XLWorkbook(in_InputFilePath).Worksheets]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="ce:IXLWorksheet">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ce:IXLWorksheet" Name="sheet" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Add Sheet Name into Collection" sap2010:WorkflowViewState.IdRef="Sequence_51">
+            <ui:ReadRange AddHeaders="True" DataTable="[out_InputData(sheet.Name.ToString)]" DisplayName="Read Range InputData" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[sheet.Name.ToString]" WorkbookPath="[in_InputFilePath]">
+              <ui:ReadRange.Range>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </ui:ReadRange.Range>
+            </ui:ReadRange>
+            <AddToCollection x:TypeArguments="x:String" Collection="[out_SheetNames]" DisplayName="Add Sheet Name" sap2010:WorkflowViewState.IdRef="AddToCollection`1_4" Item="[sheet.Name.ToString]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <RemoveFromCollection x:TypeArguments="x:String" Collection="[out_SheetNames]" DisplayName="Remove &quot;SRC_Log&quot;" sap2010:WorkflowViewState.IdRef="RemoveFromCollection`1_2" Item="SRC_Log" />
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each eheet in out_SheetNames" sap2010:WorkflowViewState.IdRef="ForEach`1_20" Values="[out_SheetNames]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="sheet" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Loop Main Process" sap2010:WorkflowViewState.IdRef="Sequence_52">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dt_Temporary" />
+            </Sequence.Variables>
+            <Assign DisplayName="Assign out_SelectorData(sheet)" sap2010:WorkflowViewState.IdRef="Assign_18">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[out_SelectorData(sheet)]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[out_InputData(sheet).Clone]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{}]" DataTable="[out_SelectorData(sheet)]" DisplayName="Add Data Row" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+            <ui:ReadRange AddHeaders="True" DataTable="[dt_Temporary]" DisplayName="Read Range SelectorData" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="[sheet]" WorkbookPath="[in_SelectorFilePath]">
+              <ui:ReadRange.Range>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </ui:ReadRange.Range>
+            </ui:ReadRange>
+            <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Extract selectors from selector file.&#xA;Search condition is the same column name value as the input file." DisplayName="For Each column in out_SelectorData(sheet).Columns" sap2010:WorkflowViewState.IdRef="ForEach`1_19" Values="[out_SelectorData(sheet).Columns]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="sd:DataColumn">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
+                  </ActivityAction.Argument>
+                  <If sap2010:Annotation.AnnotationText="Skip processing when Column Name is &quot;No&quot; or &quot;SeqNo&quot;" Condition="[{&quot;No&quot;, &quot;SeqNo&quot;}.contains(column.ColumnName)]" DisplayName="If Column Name contains No or SeqNo" sap2010:WorkflowViewState.IdRef="If_8">
+                    <If.Then>
+                      <ui:Continue DisplayName="Continue For Each SelectorData" sap2010:WorkflowViewState.IdRef="Continue_3" />
+                    </If.Then>
+                    <If.Else>
+                      <If Condition="[dt_Temporary.select(&quot;[&quot; &amp; dt_Temporary.Columns(0).ColumnName &amp; &quot;] = '&quot; &amp; column.ColumnName &amp; &quot;'&quot;).Count &gt; 0]" DisplayName="If selector data columns match" sap2010:WorkflowViewState.IdRef="If_7">
+                        <If.Then>
+                          <Assign DisplayName="Assign out_SelectorData(sheet).Rows(0).Item(column.ColumnName)" sap2010:WorkflowViewState.IdRef="Assign_19">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Object">[out_SelectorData(sheet).Rows(0).Item(column.ColumnName)]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Object">[dt_Temporary.select("[" &amp; dt_Temporary.Columns(0).ColumnName &amp; "] = '" &amp; column.ColumnName &amp; "'").CopyToDataTable.Rows(0).Item(1)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Missing Column in SelectorData" Exception="[New UiPath.Core.BusinessRuleException(&quot;Missing column in selector file.  &quot; &amp; &quot;Column name [&quot; &amp; column.ColumnName &amp; &quot;]&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                        </If.Else>
+                      </If>
+                    </If.Else>
+                  </If>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
+            <ui:ForEachRow CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Check if selector data and input data have the same column name." DataTable="[dt_Temporary]" DisplayName="For Each row in dt_Temporary" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <If sap2010:Annotation.AnnotationText="If there is a column that doesn't match, throw an Exception." Condition="[out_SelectorData(sheet).Columns.Contains(row(0).ToString)]" DisplayName="If input data columns match" sap2010:WorkflowViewState.IdRef="If_9">
+                    <If.Then>
+                      <ui:Continue DisplayName="Continue For Each Row" sap2010:WorkflowViewState.IdRef="Continue_5" />
+                    </If.Then>
+                    <If.Else>
+                      <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Missing Column in InputData" Exception="[New UiPath.Core.BusinessRuleException(&quot;Missing column in input file.  &quot; &amp; &quot;Column name [&quot; &amp; row(0).ToString &amp; &quot;]&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                    </If.Else>
+                  </If>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d1BDOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRG9jdW1lbnRzXERldmVsb3BtZW50XFNSQ19Db21tb25cU1JDX0xvYWRFeGNlbERhdGEueGFtbD9TA9YBDgIBAVU0VUcCAQJXBVekAQIBUFgFcRACAUNyBYQBEgIBNoUBBYUByQECATKGAQXTARICAQbUAQXUAaABAgEDV3tXoQECAVFZB2AQAgFMYQdoEAIBSGkHcBACAURyrAFy2wECAUJ4C4EBFgIBN4UBQYUBUwIBNIUBvQGFAcYBAgEzhgGpAYYBuwECATCMAQvQARYCAQfUAXnUAZ0BAgEEXlBeggECAU9bUVtgAgFNZlBmggECAUtjUWNjAgFJbjxuUQIBR2s9a00CAUV5DX8cAgE8gAENgAHJAQIBOJABDZcBFgIBKZgBDZgBsQECASSZAQ2fARwCARygAQ2+ARoCARC/AQ3PAR0CAQh5N3ldAgFBfBN8QgIBQHm5AXnQAQIBP3neAXnyAQIBPYABRIABVgIBOoABrwGAAcYBAgE5lQE8lQFYAgEtkgE9kgFWAgEqmAFJmAFkAgEmmAE4mAE+AgElmQE3mQFHAgEinAETnAFCAgEhmQGmAZkBrwECAR+ZAb0BmQHUAQIBHaAB2AKgAfsCAgEbpgETuwEYAgERvwGjAb8BswECAQ7FARPMARgCAQmmAY0BpgHQAQIBEqgBF6gBgAECARqrARe5ARwCARPFAYIBxQG/AQIBCscBF8cBdwIBDcoBF8oB3wICAQurASWrAcUBAgEUrQEbtAEkAgEXtwEbtwHrAgIBFcoBkgHKAbICAgEMsgFGsgHZAQIBGa8BR68BgAECARi3AZkBtwG+AgIBFg==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_18" sap:VirtualizedContainerService.HintSize="746,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_50" sap:VirtualizedContainerService.HintSize="746,384">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadRange_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="AddToCollection`1_4" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_51" sap:VirtualizedContainerService.HintSize="336,273">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_12" sap:VirtualizedContainerService.HintSize="746,407">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="RemoveFromCollection`1_2" sap:VirtualizedContainerService.HintSize="746,22" />
+      <sap2010:ViewStateData Id="Assign_18" sap:VirtualizedContainerService.HintSize="708,60" />
+      <sap2010:ViewStateData Id="AddDataRow_3" sap:VirtualizedContainerService.HintSize="708,22" />
+      <sap2010:ViewStateData Id="ReadRange_5" sap:VirtualizedContainerService.HintSize="708,87" />
+      <sap2010:ViewStateData Id="Continue_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Assign_19" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="467,208" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="692,383">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_19" sap:VirtualizedContainerService.HintSize="708,559">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_5" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="464,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_5" sap:VirtualizedContainerService.HintSize="708,410">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_52" sap:VirtualizedContainerService.HintSize="730,1422">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_20" sap:VirtualizedContainerService.HintSize="746,1556" />
+      <sap2010:ViewStateData Id="LogMessage_20" sap:VirtualizedContainerService.HintSize="746,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="768,3037">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PotiPoti_ChackSelector_1" sap:VirtualizedContainerService.HintSize="808,3117">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

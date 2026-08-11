@@ -1,0 +1,365 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SetPrintSpecifications"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TargetValue" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_TargetSelector" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_ColumnRange" Type="InArgument(scg:Dictionary(x:String, scg:List(x:Int32)))" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetPrintSpecifications_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Overview&#xA;Insert Print Specifications data&#xA;&#xA;Arguments&#xA;in_TargetValue as Target Values &lt;DataRow[]&gt;&#xA;in_TargetSelector as Target Selector &lt;DataRow&gt;&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xA;in_ColumnRange as Target column number&lt;Dictionary&lt;String, List(Int32)&gt;" DisplayName="SetPrintSpecifications" sap2010:WorkflowViewState.IdRef="Sequence_124">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SetPrintSpecifications" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot; start&quot;]" />
+    <If Condition="[Not String.IsNullOrWhiteSpace(in_TargetValue.Item(in_ColumnRange(&quot;Program_Type&quot;)(0)).ToString())]" sap2010:WorkflowViewState.IdRef="If_37">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_125">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="ProgramType" />
+          </Sequence.Variables>
+          <Assign DisplayName="Assign - ProgramType" sap2010:WorkflowViewState.IdRef="Assign_161">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[ProgramType]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TargetValue.Item(in_ColumnRange("Program_Type")(0)).ToString().Substring(0,1)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <If Condition="[ProgramType = &quot;1&quot;]" DisplayName="Print settings screen" sap2010:WorkflowViewState.IdRef="If_36">
+            <If.Then>
+              <Sequence DisplayName="Input Print Specifications Window" sap2010:WorkflowViewState.IdRef="Sequence_123">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:Boolean" Default="False" Name="IsFoundValues" />
+                  <Variable x:TypeArguments="scg:List(x:Int32)" Name="TargetIndexList" />
+                  <Variable x:TypeArguments="sd:DataRow" Name="TargetValue" />
+                  <Variable x:TypeArguments="sd:DataRow" Name="TargetSelector" />
+                </Sequence.Variables>
+                <Assign sap2010:Annotation.AnnotationText="Column range setting for print settings" DisplayName="Stores cell number of Print_Specifications" sap2010:WorkflowViewState.IdRef="Assign_158">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="scg:List(x:Int32)">[TargetIndexList]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="scg:List(x:Int32)">[in_ColumnRange("Print_Specifications")]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Extract Print_Specifications data and selector" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_40" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ConvertColumnToDataRow.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[in_TargetValue]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[in_TargetSelector]</InArgument>
+                    <InArgument x:TypeArguments="scg:List(x:Int32)" x:Key="in_ColumnRange">[TargetIndexList]</InArgument>
+                    <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_ConvertedTargetValue">[TargetValue]</OutArgument>
+                    <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_ConvertedSelector">[TargetSelector]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap2010:WorkflowViewState.IdRef="ForEach`1_11" Values="[TargetValue.ItemArray()]">
+                  <ui:ForEach.Body>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                      </ActivityAction.Argument>
+                      <If sap2010:Annotation.AnnotationText="Check if at least one value is found in the DataRow" Condition="[Not String.IsNullOrWhiteSpace(item.ToString())]" DisplayName="Flag if item is not empty" sap2010:WorkflowViewState.IdRef="If_34">
+                        <If.Then>
+                          <Assign DisplayName=" Print specifications Flag" sap2010:WorkflowViewState.IdRef="Assign_159">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Boolean">[IsFoundValues]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                      </If>
+                    </ActivityAction>
+                  </ui:ForEach.Body>
+                </ui:ForEach>
+                <If sap2010:Annotation.AnnotationText="If there is print setting data, perform input processing." Condition="[IsFoundValues]" DisplayName="Processing when there is  Print specifications data" sap2010:WorkflowViewState.IdRef="If_35">
+                  <If.Then>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_122">
+                      <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click [Print specifications] Button" sap2010:WorkflowViewState.IdRef="Click_94" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_CreateStep_btn_Printspecifications&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" DisplayName="On Element Appear" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False" WaitActive="True" WaitVisible="False">
+                        <ui:OnUiElementAppear.Body>
+                          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_126">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="ElementsBefore" />
+                              <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="ElementsAfter" />
+                            </Sequence.Variables>
+                            <ui:FindChildren sap2010:Annotation.AnnotationText="Get the number of screens before saving." Children="[ElementsBefore]" DisplayName="Find children in SAP table (Before)" Filter="&lt;wnd/&gt;" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_PROCESS">
+                              <ui:FindChildren.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;WND_AppMain&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                              </ui:FindChildren.Target>
+                            </ui:FindChildren>
+                            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Insert Print specifications" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_41" UnSafe="False" WorkflowFileName="SRC_Common\SRC_SetValues.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetSelector">[TargetSelector]</InArgument>
+                                <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetValue">[TargetValue]</InArgument>
+                                <InArgument x:TypeArguments="x:Boolean" x:Key="in_NullException">False</InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="in_StartIndex">0</InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="in_EndIndex">[TargetValue.Table.Columns.Count -1]</InArgument>
+                                <InArgument x:TypeArguments="x:Int32" x:Key="in_DelayTime">0</InArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                            <ui:FindChildren sap2010:Annotation.AnnotationText="Get the number of screens after saving." Children="[ElementsAfter]" DisplayName="Find children in SAP table (After)" Filter="&lt;wnd/&gt;" sap2010:WorkflowViewState.IdRef="FindChildren_2" Scope="FIND_PROCESS">
+                              <ui:FindChildren.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;WND_AppMain&quot;).ToString()]" WaitForReady="INTERACTIVE" />
+                              </ui:FindChildren.Target>
+                            </ui:FindChildren>
+                            <If Condition="[ElementsBefore.Count &lt; ElementsAfter.Count]" DisplayName="If number of screens increase " sap2010:WorkflowViewState.IdRef="If_38">
+                              <If.Then>
+                                <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw - pop-up window was displayed(SetStartCondition)" Exception="[new UiPath.Core.BusinessRuleException(in_Config(&quot;MSG_SetScreenDataFlow_001&quot;).ToString(), New Exception)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                              </If.Then>
+                            </If>
+                            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ClickCheckButton workflow(Print specification)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_50" UnSafe="False" WorkflowFileName="SRC_DEFINE_JOB_E\ClickToCheck.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_ThrowMessage">[in_Config("MSG_SetScreenDataFlow_001").ToString()]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_MainWindowSelector">[in_Config("WND_AppMain").ToString()]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_ClickButtonSelector">[in_Config("SetStep_BackgroundPrintParameters_Continue").ToString()]</InArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </ui:OnUiElementAppear.Body>
+                        <ui:OnUiElementAppear.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;SetStep_BackgroundPrintParameters_Continue&quot;).ToString]" WaitForReady="INTERACTIVE" />
+                        </ui:OnUiElementAppear.Target>
+                      </ui:OnUiElementAppear>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+            </If.Then>
+          </If>
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d0lDOlx0ZXN0eGFtbFxTUkNfREVGSU5FX0pPQl9FXFNSQ19ERUZJTkVfSk9CX0VcU2V0UHJpbnRTcGVjaWZpY2F0aW9ucy54YW1sQ10D6QEOAgEBXzRfTAIBAmEFYaIBAgFYYgXmAQoCAQbnAQXnAZ4BAgEDYXphnwECAVliE2KBAQIBB2QJ5AEUAgEI5wF45wGbAQIBBGgLbxQCAVRwC+MBEAIBCW02bYgBAgFXajdqRAIBVXAZcDgCAQpyD+EBGgIBDHRBdEgCAQ15EYABGgIBT4EBEYkBKQIBQ4oBEZ4BHgIBOp8BEeABFgIBDn5Ffm0CAVJ7RntXAgFQgwFVgwFlAgFNhwFdhwFtAgFLhQFchQFtAgFJhAFYhAFrAgFHhgFghgFtAgFFgQHYAYEBhgICAUSKAZ0BigG4AQIBQpABF5sBHAIBO58BfZ8BjgECAQ+hARXeASACARGQAX2QAa8BAgE8kgEbmQEkAgE+ogEXsAEiAgE3sQEX3QEuAgESlwFHlwFLAgFBlAFIlAFXAgE/rgFxrgHBAQIBOLMBG9gBJgIBFrEBxAGxAcsBAgET2wFx2wG/AQIBFLgBHbwBLwIBMr0BHcYBNQIBKMcBHcsBLwIBI8wBHdABIgIBH9EBHdcBNQIBF7oBd7oBqAECATW4AdABuAHeAQIBNLgBhAG4AZYBAgEzxAFcxAFdAgExwgFdwgFeAgEwwAFhwAFuAgEuvwFkvwF0AgEswQFiwQFnAgErwwFbwwF/AgEqvQHRAb0B8AECASnJAXfJAagBAgEmxwHNAccB2wECASXHAYMBxwGUAQIBJMwBK8wBXAIBIM4BIc4B0wICASHVAWfVAasBAgEd1AFm1AGLAQIBG9EB6wHRAY8CAgEa0wFg0wGTAQIBGM4BsQHOAaYCAgEi</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="941,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_161" sap:VirtualizedContainerService.HintSize="794,60" />
+      <sap2010:ViewStateData Id="Assign_158" sap:VirtualizedContainerService.HintSize="647,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_40" sap:VirtualizedContainerService.HintSize="647,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_159" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_34" sap:VirtualizedContainerService.HintSize="464,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_11" sap:VirtualizedContainerService.HintSize="647,369" />
+      <sap2010:ViewStateData Id="Click_94" sap:VirtualizedContainerService.HintSize="500,68" />
+      <sap2010:ViewStateData Id="FindChildren_1" sap:VirtualizedContainerService.HintSize="464,95">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_41" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="FindChildren_2" sap:VirtualizedContainerService.HintSize="464,95">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_38" sap:VirtualizedContainerService.HintSize="464,207" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_50" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="Sequence_126" sap:VirtualizedContainerService.HintSize="486,855">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="OnUiElementAppear_1" sap:VirtualizedContainerService.HintSize="500,963" />
+      <sap2010:ViewStateData Id="Sequence_122" sap:VirtualizedContainerService.HintSize="522,1195">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_35" sap:VirtualizedContainerService.HintSize="647,1370">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_123" sap:VirtualizedContainerService.HintSize="669,2172">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_36" sap:VirtualizedContainerService.HintSize="794,2320">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_125" sap:VirtualizedContainerService.HintSize="816,2544">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_37" sap:VirtualizedContainerService.HintSize="941,2692" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="941,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_124" sap:VirtualizedContainerService.HintSize="963,3210">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetPrintSpecifications_1" sap:VirtualizedContainerService.HintSize="1003,3290" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

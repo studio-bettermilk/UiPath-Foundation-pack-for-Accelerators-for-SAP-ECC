@@ -1,0 +1,620 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_BAPI_OUTB_DELIVERY_CREATE_SLS_v2_2_E"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:usba="clr-namespace:UiPath.SAP.BAPI.Activities;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbam="clr-namespace:UiPath.SAP.BAPI.Activities.Model;assembly=UiPath.SAP.BAPI.Activities"
+ xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI"
+ xmlns:usbcss="clr-namespace:UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes;assembly=UiPath.SAP.BAPI"
+ xmlns:usbm="clr-namespace:UiPath.SAP.BAPI.Model;assembly=UiPath.SAP.BAPI"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SapConnection" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property Name="out_RegisterReturn" Type="OutArgument(scg:List(scg:Dictionary(x:String, x:String)))" />
+    <x:Property Name="in_Import" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_DataTable" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ForEach_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Run &quot;Invoke SAP BAPI&quot;&#xA;&#xA;If multiple records data will be registered, the error occurs when the first registration process is not completed and the second registration is executed.&#xA;The specific error code in SAP is returned as bellow.&#xA; - Error Id : VL&#xA; - Error Number : 045&#xA;In that case, BAPI retries up to five times after wait for one second and the number of retry count is outputted in the UiPath log file.&#xA; -&gt; Invoke workflow [CheckRetryCase]&#xA;&#xA;- Input/Output&#xA;in_SapConnection as SAP Connect Info &lt;IConnectionService&gt; &#xA;out_RegisterReturn  as  BAPI return message &lt;List&lt;Dictionary&lt;String,Object&gt;&gt;&gt; &#xA;in_Import as BAPI input parameters &lt;Dictionary&lt;String,Object&gt;&gt; &#xA;io_DataTable as BAPI in/Out parameter Dictionary data table&lt;String,DataTable&gt;&gt; &#xA;io_Option as DataTable for optional parameter Dictionary&lt;Dictionary&lt;String,DataTable&gt;&gt;&#xA;" DisplayName="SRC_BAPI_OUTB_DELIVERY_CREATE_SLS_v2.2_E" sap2010:WorkflowViewState.IdRef="Sequence_429">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_BAPI_OUTB_DELIVERY_CREATE_SLS_v2.2_E" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:List(usbcss:BapiRet2)" Name="BAPIResult" />
+      <Variable x:TypeArguments="x:Int32" Name="RertyCounter" />
+      <Variable x:TypeArguments="x:Int32" Name="MaxCount" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" Name="TemporaryDataTable" />
+      <Variable x:TypeArguments="scg:List(usbcss:BapiRet2)" Name="TemporaryBAPIResult" />
+      <Variable x:TypeArguments="x:String" Name="ErrorId" />
+      <Variable x:TypeArguments="x:String" Name="ErrorNumber" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence DisplayName="Initialization" sap2010:WorkflowViewState.IdRef="Sequence_430">
+      <Assign DisplayName="Assign RertyCounter" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[RertyCounter]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="Maximum count for retry" DisplayName="Assign MaxCount" sap2010:WorkflowViewState.IdRef="Assign_3">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[MaxCount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">5</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign ErrorId" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[ErrorId]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">VL</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign ErrorNumber" sap2010:WorkflowViewState.IdRef="Assign_5">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[ErrorNumber]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">045</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <Sequence sap2010:Annotation.AnnotationText="Store the initial data temporarily into variables." DisplayName="Set the temporary data" sap2010:WorkflowViewState.IdRef="Sequence_431">
+      <Assign DisplayName="Assign TemporaryDataTable" sap2010:WorkflowViewState.IdRef="Assign_6">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[TemporaryDataTable]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[io_DataTable]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign TemporaryBAPIResult" sap2010:WorkflowViewState.IdRef="Assign_7">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[TemporaryBAPIResult]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[BAPIResult]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <DoWhile DisplayName="Do While" sap2010:WorkflowViewState.IdRef="DoWhile_1">
+      <DoWhile.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="ErrorFlag" />
+      </DoWhile.Variables>
+      <DoWhile.Condition>[RertyCounter &lt; MaxCount]</DoWhile.Condition>
+      <Sequence DisplayName="Sequence - Main" sap2010:WorkflowViewState.IdRef="Sequence_435">
+        <Sequence sap2010:Annotation.AnnotationText="Assign the stored initial data to the arguments for resetting values." DisplayName="Set the arguments for resetting values" sap2010:WorkflowViewState.IdRef="Sequence_432">
+          <Assign DisplayName="Assign io_DataTable (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_8">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[io_DataTable]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[TemporaryDataTable]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Assign BAPIResult (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_9">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[BAPIResult]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[TemporaryBAPIResult]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+        <usba:SapApplicationScope AdvancedParameters="{x:Null}" AppServer="{x:Null}" Client="{x:Null}" Language="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" Password="{x:Null}" SapConnectionService="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" StatefulConnection="{x:Null}" SystemId="{x:Null}" SystemNumber="{x:Null}" User="{x:Null}" DisplayName="SAP Application Scope" ExistingConnectionService="[in_SapConnection]" sap2010:WorkflowViewState.IdRef="SapApplicationScope_2">
+          <usba:SapApplicationScope.Body>
+            <ActivityAction x:TypeArguments="usbc:IConnectionService">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+              </ActivityAction.Argument>
+              <usba:InvokeSapBapi BapiDescription="{x:Null}" BapiName="BAPI_OUTB_DELIVERY_CREATE_SLS" BapiSelected="True" DisplayName="BAPI_OUTB_DELIVERY_CREATE_SLS" sap2010:WorkflowViewState.IdRef="InvokeSapBapi_3">
+                <usba:InvokeSapBapi.AllArguments>
+                  <scg:Dictionary x:TypeArguments="x:String, usbam:BapiArgumentUiModel">
+                    <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="DELIVERY" x:Name="__ReferenceID0" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Delivery Number" Direction="Out" DirectionAsString="Out" IsSelected="False" Length="10" Name="DELIVERY" Optional="False" ServiceDataType="">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <OutArgument x:TypeArguments="x:String" />
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="NUM_DELIVERIES" x:Name="__ReferenceID1" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Number of created documents" Direction="Out" DirectionAsString="Out" IsSelected="False" Length="4" Name="NUM_DELIVERIES" Optional="False" ServiceDataType="">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <OutArgument x:TypeArguments="x:String" />
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="DEBUG_FLG" x:Name="__ReferenceID12" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Debugging Flag" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="DEBUG_FLG" Optional="True" ServiceDataType="">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InArgument x:TypeArguments="x:String">[CType(in_Import("DEBUG_FLG"), String)]</InArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="DUE_DATE" x:Name="__ReferenceID11" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Delivery Creation Date" Direction="In" DirectionAsString="In" IsSelected="False" Length="8" Name="DUE_DATE" Optional="True" ServiceDataType="">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InArgument x:TypeArguments="x:String">[CType(in_Import("DUE_DATE"), String)]</InArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="NO_DEQUEUE" x:Name="__ReferenceID10" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Indicator: Do Not Unlock" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="NO_DEQUEUE" Optional="True" ServiceDataType="">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InArgument x:TypeArguments="x:String">[CType(in_Import("NO_DEQUEUE"), String)]</InArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Key="SHIP_POINT" x:Name="__ReferenceID9" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="Shipping Point/Receiving Point" Direction="In" DirectionAsString="In" IsSelected="False" Length="4" Name="SHIP_POINT" Optional="True" ServiceDataType="">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InArgument x:TypeArguments="x:String">[CType(in_Import("SHIP_POINT"), String)]</InArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="CREATED_ITEMS" x:Name="__ReferenceID8" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Generated Delivery Items" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="CREATED_ITEMS" Optional="True" ServiceDataType="BAPIDLVITEMCREATED">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("CREATED_ITEMS")]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="16">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference document" Length="10" Name="REF_DOC" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference Item" Length="6" Name="REF_ITEM" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Delivery" Length="10" Name="DELIV_NUMB" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Delivery Item" Length="6" Name="DELIV_ITEM" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Material Number" Length="18" Name="MATERIAL" />
+                          <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Actual quantity delivered (in sales units)" Length="7" Name="DLV_QTY" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sales unit" Length="3" Name="SALES_UNIT" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for sales unit" Length="3" Name="SALES_UNIT_ISO" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Long Material Number for MATERIAL Field" Length="40" Name="MATERIAL_EXTERNAL" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="External GUID for MATERIAL Field" Length="32" Name="MATERIAL_GUID" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Version Number for MATERIAL Field" Length="10" Name="MATERIAL_VERSION" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="DELIVERIES" x:Name="__ReferenceID7" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Delivery Number" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="DELIVERIES" Optional="True" ServiceDataType="BAPISHPDELIVNUMB">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("DELIVERIES")]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Delivery" Length="10" Name="DELIV_NUMB" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="EXTENSION_IN" x:Name="__ReferenceID6" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Reference Structure for BAPI Parameters EXTENSIONIN/EXTENSIONOUT" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="EXTENSION_IN" Optional="True" ServiceDataType="BAPIPAREX">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("EXTENSION_IN")]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="8">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Structure name of  BAPI table extension" Length="30" Name="STRUCTURE" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART1" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART2" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART3" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART4" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="EXTENSION_OUT" x:Name="__ReferenceID5" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Reference Structure for BAPI Parameters EXTENSIONIN/EXTENSIONOUT" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="EXTENSION_OUT" Optional="True" ServiceDataType="BAPIPAREX">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("EXTENSION_OUT")]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="8">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Structure name of  BAPI table extension" Length="30" Name="STRUCTURE" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART1" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART2" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART3" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Data part of BAPI extension parameter" Length="240" Name="VALUEPART4" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="RETURN" x:Name="__ReferenceID3" DataType="List_BapiRet2" DataTypeAsString="List&lt;BapiRet2&gt;" DecimalLength="0" Description="Return Parameter(s)" Direction="InOut" DirectionAsString="In/Out" IsSelected="True" Name="RETURN" Optional="True" ServiceDataType="BAPIRET2">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[BAPIResult]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="16">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message type: S Success, E Error, W Warning, I Info, A Abort" Length="1" Name="TYPE" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Class" Length="20" Name="ID" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Number" Length="3" Name="NUMBER" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Text" Length="220" Name="MESSAGE" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Application log: log number" Length="20" Name="LOG_NO" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Application log: Internal message serial number" Length="6" Name="LOG_MSG_NO" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V1" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V2" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V3" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V4" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Parameter Name" Length="32" Name="PARAMETER" />
+                          <usbm:FieldArgument DataType="Integer" DecimalLength="0" Description="Lines in parameter" Length="4" Name="ROW" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Field in parameter" Length="30" Name="FIELD" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Logical system from which message originates" Length="10" Name="SYSTEM" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="SALES_ORDER_ITEMS" x:Name="__ReferenceID2" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Delivery Item with Reference to a Sales Order" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="SALES_ORDER_ITEMS" Optional="False" ServiceDataType="BAPIDLVREFTOSALESORDER">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("SALES_ORDER_ITEMS")]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="8">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference document" Length="10" Name="REF_DOC" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference Item" Length="6" Name="REF_ITEM" />
+                          <usbm:FieldArgument DataType="Decimal" DecimalLength="3" Description="Actual quantity delivered (in sales units)" Length="7" Name="DLV_QTY" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Sales unit" Length="3" Name="SALES_UNIT" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ISO code for sales unit" Length="3" Name="SALES_UNIT_ISO" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Delivery" Length="10" Name="DELIV_NUMB" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                    <usbam:BapiArgumentUiModel Length="{x:Null}" x:Key="SERIAL_NUMBERS" x:Name="__ReferenceID4" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Description="Serial Number" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="SERIAL_NUMBERS" Optional="True" ServiceDataType="BAPIDLVSERIALNUMBER">
+                      <usbam:BapiArgumentUiModel.ArgumentValue>
+                        <InOutArgument x:TypeArguments="sd:DataTable">[io_DataTable("SERIAL_NUMBERS")]</InOutArgument>
+                      </usbam:BapiArgumentUiModel.ArgumentValue>
+                      <usbam:BapiArgumentUiModel.FieldArguments>
+                        <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference document" Length="10" Name="REF_DOC" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Reference Item" Length="6" Name="REF_ITEM" />
+                          <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Serial Number" Length="18" Name="SERIALNO" />
+                        </scg:List>
+                      </usbam:BapiArgumentUiModel.FieldArguments>
+                    </usbam:BapiArgumentUiModel>
+                  </scg:Dictionary>
+                </usba:InvokeSapBapi.AllArguments>
+                <usba:InvokeSapBapi.OptionalArguments>
+                  <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="0" />
+                </usba:InvokeSapBapi.OptionalArguments>
+                <usba:InvokeSapBapi.SelectedArgumentList>
+                  <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="13">
+                    <x:Reference>__ReferenceID0</x:Reference>
+                    <x:Reference>__ReferenceID1</x:Reference>
+                    <x:Reference>__ReferenceID2</x:Reference>
+                    <x:Reference>__ReferenceID3</x:Reference>
+                    <x:Reference>__ReferenceID4</x:Reference>
+                    <x:Reference>__ReferenceID5</x:Reference>
+                    <x:Reference>__ReferenceID6</x:Reference>
+                    <x:Reference>__ReferenceID7</x:Reference>
+                    <x:Reference>__ReferenceID8</x:Reference>
+                    <x:Reference>__ReferenceID9</x:Reference>
+                    <x:Reference>__ReferenceID10</x:Reference>
+                    <x:Reference>__ReferenceID11</x:Reference>
+                    <x:Reference>__ReferenceID12</x:Reference>
+                  </scg:List>
+                </usba:InvokeSapBapi.SelectedArgumentList>
+              </usba:InvokeSapBapi>
+            </ActivityAction>
+          </usba:SapApplicationScope.Body>
+          <usba:SapApplicationScope.DesignAdvancedParameters>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignAdvancedParameters>
+          <usba:SapApplicationScope.DesignAppServer>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignAppServer>
+          <usba:SapApplicationScope.DesignClient>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignClient>
+          <usba:SapApplicationScope.DesignLanguage>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignLanguage>
+          <usba:SapApplicationScope.DesignLogonGroup>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignLogonGroup>
+          <usba:SapApplicationScope.DesignMessageServer>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignMessageServer>
+          <usba:SapApplicationScope.DesignPassword>
+            <ss:SecureString />
+          </usba:SapApplicationScope.DesignPassword>
+          <usba:SapApplicationScope.DesignSapRouterString>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSapRouterString>
+          <usba:SapApplicationScope.DesignSncLibraryPath>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSncLibraryPath>
+          <usba:SapApplicationScope.DesignSncMode>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSncMode>
+          <usba:SapApplicationScope.DesignSncPartnerName>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSncPartnerName>
+          <usba:SapApplicationScope.DesignSncQOP>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSncQOP>
+          <usba:SapApplicationScope.DesignSncSso>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSncSso>
+          <usba:SapApplicationScope.DesignSystemId>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSystemId>
+          <usba:SapApplicationScope.DesignSystemNumber>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignSystemNumber>
+          <usba:SapApplicationScope.DesignUser>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </usba:SapApplicationScope.DesignUser>
+        </usba:SapApplicationScope>
+        <ui:ForEach x:TypeArguments="usbcss:BapiRet2" CurrentIndex="{x:Null}" DisplayName="For Each" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[BAPIResult]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="usbcss:BapiRet2">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="usbcss:BapiRet2" Name="item" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Sequence - Check the retry case" sap2010:WorkflowViewState.IdRef="Sequence_436">
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow [CheckRetryCase]" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\CheckRetryCase.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:Int32" x:Key="in_RertyCount">[RertyCounter]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ErrorId">[ErrorId]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ErrorNumber">[ErrorNumber]</InArgument>
+                    <OutArgument x:TypeArguments="x:Boolean" x:Key="out_ErrorFlag">[ErrorFlag]</OutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_BAPIResultType">[item.Type.ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_BAPIResultId">[item.Id]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_BAPIResultNumber">[item.Number]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <If Condition="[ErrorFlag]" DisplayName="Execute Break - Check if ErrorFlag is True." sap2010:WorkflowViewState.IdRef="If_6">
+                  <If.Then>
+                    <ui:Break sap2010:WorkflowViewState.IdRef="Break_1" />
+                  </If.Then>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+        <If Condition="[ErrorFlag]" DisplayName="Loop Check - Check if ErrorFlag is True." sap2010:WorkflowViewState.IdRef="If_5">
+          <If.Then>
+            <Assign DisplayName="Assign RertyCounter to count up" sap2010:WorkflowViewState.IdRef="Assign_23">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[RertyCounter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[RertyCounter + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Then>
+          <If.Else>
+            <Assign DisplayName="Assign MaxCount to RetryCounter in other than retry case" sap2010:WorkflowViewState.IdRef="Assign_24">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[RertyCounter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[MaxCount]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </If.Else>
+        </If>
+      </Sequence>
+    </DoWhile>
+    <Assign DisplayName="Assign out_RegisterReturn" sap2010:WorkflowViewState.IdRef="Assign_10">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[out_RegisterReturn]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[new List(of Dictionary(of String, String))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow [ConvertBAPILogToBAPILogFormat] Case specific error" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\ConvertBAPILogToBAPILogFormat.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_ConvertData">[BAPIResult]</InArgument>
+        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))" x:Key="out_ConvertedData">[out_RegisterReturn]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d5QBQzpcVXNlcnNcc2F5YS5va2Ftb3RvXERlc2t0b3Bc5LiK5pu444GN44GX44Gm5YmK6Zmk44GZ44KLX0VDQ1xTUkNfQkFQSV9PVVRCX0RFTElWRVJZX0NSRUFURV9TTFNfdjIuMl9FXFNSQ19CQVBJX09VVEJfREVMSVZFUllfQ1JFQVRFX1NMU192Mi4yX0UueGFtbF9oA/4DDgIBAWo0al4CAQJzBXOjAQMBgAF0BZUBEAIBb5YBBacBEAIBZqgBBe0DDwIBD+4DBfUDDgIBC/YDBfsDHQIBBvwDBfwDnwECAQNzenOgAQMBgQF1B3wQAgF8fQeEARACAXiFAQeMARACAXSNAQeUARACAXCXAQeeARACAWqfAQemARACAWesARqsATYCAWOtAQfsAxICARDzA1TzA4ABAgEO8ANV8ANnAgEM+QNv+QOBAQIBCfgDR/gDUwIBCPYD4AH2A5oCAgEH/AN4/AOcAQIBBHoxejICAX93MndAAgF9ggExggEyAgF7fzJ/PAIBeYoBMooBNAIBd4cBM4cBPAIBdZIBMpIBNQIBc48BM48BQAIBcZwBUJwBXgIBbZkBUZkBZQIBa6QBQ6QBTwIBaaEBRKEBWQIBaK4BCb8BFAIBWsABCboDJAIBMrsDCdUDFgIBHtYDCesDDgIBEa8BC7YBFAIBXrcBC74BFAIBW5QDD5QDPgIBWbcDD7cDPgIBWPMCD/MCPgIBV/0CD/0CPgIBVqMDD6MDPgIBVY8DD48DPgIBVLIDD7IDPgIBU4IDD4IDPgIBUqgDD6gDPgIBUZkDD5kDPgIBUO4CD+4CPgIBT8AB/QPAAZEEAgFN+AIP+AI+AgFMrQMPrQM+AgFLngMPngM+AgFKhwMPhwM+AgFJxgEP6QIkAgEzuwObAbsDqQECATHBAw/SAxoCAR/WAxfWAyQCARLYAw3fAxYCARniAw3pAxYCARS0AVS0AWgCAWGxAVWxAWMCAV+8AUe8AVwCAV25AUi5AVQCAVzkAUDkAWgCAUejAlSjAmACAUbJAkfJAmcCAUTVAUDVAWcCAUKHAkeHAmUCAUDaAUDaAWYCAT79AUf9AWMCATyVAkeVAmYCATrfAUDfAWgCATjpAUfpAWYCATa6Ake6AmoCATTCAxHMAykCASTNAxHRAxYCASDdAzfdA0kCARzaAzjaA0YCARrnAzfnA0ECARfkAzjkA0YCARXHA1THA18CAS/KA1jKA2UCAS7FA0/FA1gCASzIA1bIA2oCASvEA1HEA18CASnJA1TJA10CASjCA8kBwgP0AQIBJ8YDU8YDYAIBJc0DH80DLAIBIc8DFc8DSwIBIw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="557,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_430" sap:VirtualizedContainerService.HintSize="557,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_431" sap:VirtualizedContainerService.HintSize="557,93">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_432" sap:VirtualizedContainerService.HintSize="509,108">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeSapBapi_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="SapApplicationScope_2" sap:VirtualizedContainerService.HintSize="509,168" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Break_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="314,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_436" sap:VirtualizedContainerService.HintSize="336,302">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="509,436" />
+      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="509,208" />
+      <sap2010:ViewStateData Id="Sequence_435" sap:VirtualizedContainerService.HintSize="531,1164">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="557,1326" />
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="557,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="557,87" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="557,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_429" sap:VirtualizedContainerService.HintSize="579,2460">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach_1" sap:VirtualizedContainerService.HintSize="619,2580">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
