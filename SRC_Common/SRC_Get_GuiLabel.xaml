@@ -1,14 +1,4 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_Get_GuiLabel"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_Get_GuiLabel" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_ControlID" Type="InArgument(x:String)" />
     <x:Property Name="out_ColorIndex" Type="OutArgument(x:Int32)" />
@@ -17,9 +7,9 @@
     <x:Property Name="out_IconName" Type="OutArgument(x:String)" />
     <x:Property Name="out_Tooltip" Type="OutArgument(x:String)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap2010:WorkflowViewState.IdRef>Test_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -46,41 +36,81 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Management.Automation</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
-      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,164" Id="InvokeCode_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,922" Id="Sequence_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="376,1002" Id="Test_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
   <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Return the specified properties of Gui Label Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;in_ControlID as Selector ID &lt;String&gt;&#xA;out_ColorIndex as Color Index &lt;Int32&gt;&#xA;out_ColorIntensified as Color Intensified &lt;Boolean&gt;&#xA;out_DisplayedText as Displayed Text &lt;String&gt;&#xA;out_IconName as Icon Name &lt;String&gt;&#xA;out_Tooltip as Tool tip &lt;String&gt;&#xA;&#xA;&#xA;* ColorIndex summary&#xA;&#xA;Color Index  |  Color (Type)&#xA;0                    |  Background Color (COL_BACKGROUND) &#xA;1                    |  Gray                         (COL_HEADING)&#xA;2                    |  Light Gray               (COL_NORMAL)&#xA;3                    |  Yellow                      (COL_TOTAL)&#xA;4                    |  Blue Green              (COL_KEY)&#xA;5                    |  Green                       (COL_POSITIVE)&#xA;6                    |  Red                          (COL_NEGATIVE)&#xA;7                    |  Purple                      (COL_GROUP)" DisplayName="SRC_Get_GuiLabel" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_Get_GuiLabel" Name="WorkflowName" />
     </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xD;&#xA;Dim SapGuiAuto As Object = Nothing&#xD;&#xA;Try&#xD;&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xD;&#xA; Dim application As Object = Nothing&#xD;&#xA; Try&#xD;&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xD;&#xA;  Dim connection As Object = Nothing&#xD;&#xA;  Try&#xD;&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xD;&#xA;   Dim session As Object = Nothing&#xD;&#xA;   Try&#xD;&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xD;&#xA;    Dim ControlID As Object = Nothing&#xD;&#xA;    Try&#xD;&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[0]/&quot; &amp; in_ControlID})&#xD;&#xA;     out_ColorIndex = CType(ControlID.GetType.InvokeMember(&quot;ColorIndex&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Integer)&#xD;&#xA;     out_ColorIntensified = CType(ControlID.GetType.InvokeMember(&quot;ColorIntensified&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Boolean)&#xD;&#xA;     out_DisplayedText = CType(ControlID.GetType.InvokeMember(&quot;DisplayedText&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;     out_IconName = CType(ControlID.GetType.InvokeMember(&quot;IconName&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;     out_Tooltip = CType(ControlID.GetType.InvokeMember(&quot;Tooltip&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;    Finally&#xD;&#xA;     Try&#xD;&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xD;&#xA;     Catch ex As Exception&#xD;&#xA;     End Try&#xD;&#xA;    End Try&#xD;&#xA;   Finally&#xD;&#xA;    Try&#xD;&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xD;&#xA;    Catch ex As Exception&#xD;&#xA;    End Try&#xD;&#xA;   End Try   &#xD;&#xA;  Finally&#xD;&#xA;   Try&#xD;&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xD;&#xA;   Catch ex As Exception&#xD;&#xA;   End Try&#xD;&#xA;  End Try  &#xD;&#xA; Finally&#xD;&#xA;  Try&#xD;&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xD;&#xA;  Catch ex As Exception&#xD;&#xA;  End Try&#xD;&#xA; End Try&#xD;&#xA;Finally&#xD;&#xA; Try&#xD;&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xD;&#xA;  System.GC.Collect()&#xD;&#xA;  System.GC.WaitForPendingFinalizers()&#xD;&#xA; Catch ex As Exception&#xD;&#xA; End Try&#xD;&#xA;End Try" DisplayName="Invoke code for GuiLabel" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xA;Dim SapGuiAuto As Object = Nothing&#xA;Try&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xA; Dim application As Object = Nothing&#xA; Try&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xA;  Dim connection As Object = Nothing&#xA;  Try&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xA;   Dim session As Object = Nothing&#xA;   Try&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xA;    Dim ControlID As Object = Nothing&#xA;    Try&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[0]/&quot; &amp; in_ControlID})&#xA;     out_ColorIndex = CType(ControlID.GetType.InvokeMember(&quot;ColorIndex&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Integer)&#xA;     out_ColorIntensified = CType(ControlID.GetType.InvokeMember(&quot;ColorIntensified&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Boolean)&#xA;     out_DisplayedText = CType(ControlID.GetType.InvokeMember(&quot;DisplayedText&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_IconName = CType(ControlID.GetType.InvokeMember(&quot;IconName&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_Tooltip = CType(ControlID.GetType.InvokeMember(&quot;Tooltip&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;    Finally&#xA;     Try&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xA;     Catch ex As Exception&#xA;     End Try&#xA;    End Try&#xA;   Finally&#xA;    Try&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xA;    Catch ex As Exception&#xA;    End Try&#xA;   End Try   &#xA;  Finally&#xA;   Try&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xA;   Catch ex As Exception&#xA;   End Try&#xA;  End Try  &#xA; Finally&#xA;  Try&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xA;  Catch ex As Exception&#xA;  End Try&#xA; End Try&#xA;Finally&#xA; Try&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xA;  System.GC.Collect()&#xA;  System.GC.WaitForPendingFinalizers()&#xA; Catch ex As Exception&#xA; End Try&#xA;End Try" DisplayName="Invoke code for GuiLabel" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_ControlID">[in_ControlID]</InArgument>
         <OutArgument x:TypeArguments="x:Int32" x:Key="out_ColorIndex">[out_ColorIndex]</OutArgument>
@@ -91,36 +121,5 @@
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
     <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
-    <sads:DebugSymbol.Symbol>d09DOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRG9jdW1lbnRzXERldmVsb3BtZW50XFNSQ19Db21tb25cU1JDX0dldF9HdWlMYWJlbC54YW1sDU4DXw4CAQFQNFBGAgECUgVSowECARNTBVwVAgEGXQVdnwECAQNSe1KgAQIBFFZHVlcCARFXT1dlAgEPWUZZVAIBDVVFVVMCAQtaRVpSAgEJWEtYXgIBB115XZwBAgEE</sads:DebugSymbol.Symbol>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314,164" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,922">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Test_1" sap:VirtualizedContainerService.HintSize="376,1002" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

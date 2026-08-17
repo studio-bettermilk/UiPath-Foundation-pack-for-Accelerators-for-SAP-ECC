@@ -1,0 +1,211 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetUnitsOfMeasurement" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="SAP 連線服務物件" Name="in_SAPService" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出結果：整理好的單位對照表（含MSEHI、MSEH3）" Name="out_dt_UnitOfMeas" Type="OutArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="語系代碼（對應 SAP 表T006A的SPRAS欄位）" Name="in_LanguageKey" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="InvokeWorkflowFile_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="InvokeWorkflowFile_4" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,59" Id="BuildDataTable_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,59" Id="JoinDataTables_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,59" Id="FilterDataTable_3" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,1074" Id="Sequence_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="376,1154" Id="Main_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (從 SAP 抓取「單位對照表」資料，把 SAP 內部單位代碼（MSEHI）跟外部單位縮寫（MSEH3）做好對應整理，輸出成一張乾淨的對照表 out_dt_UnitOfMeas。這正是前面分析過的 ConvertUnits.xaml 所需要的 in_dt_UnitOfMeas 輸入來源！)&#xA;Get data of table : T006 and T006A using [RFC_READ_TABLE].&#xA;&#xA;- Arguments&#xA;    in_SAPService as Connected session information &lt;IConnectionService&gt;&#xA;    in_FilePath as File path of Excel file to convert&lt;String&gt;&#xA;    in_LanguageKey as T006A -SPRAS (Language Key) &lt;String&gt;" DisplayName="GetUnitsOfMeasurement" sap:VirtualizedContainerService.HintSize="973,2323" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable]" Name="dt_T006" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable]" Name="dt_T006A" />
+      <Variable x:TypeArguments="x:String" Default="GetUnitsOfMeasurement" Name="WorkflowName" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,362" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這個流程可以理解為「單位對照表產生器」：&#xD;&#xA;&#xD;&#xA;GetT006.xaml  ──→ dt_T006  (SAP 內部單位代碼主表)&#xD;&#xA;                     ↘&#xD;&#xA;                      Left Join (依 MSEHI 關聯) ──→ out_dt_UnitOfMeas&#xD;&#xA;                     ↗                                (MSEHI + MSEH3)&#xD;&#xA;GetT006A.xaml ──→ dt_T006A (依語系顯示的單位縮寫文字表)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;最終產出的 out_dt_UnitOfMeas，就是提供給 ConvertUnits.xaml 用來「查表轉換」的核心對照資料 —— 讓外部輸入的單位縮寫（MSEH3，例如 KG）可以正確轉換成 SAP 系統認得的內部單位代碼（MSEHI，例如 KGM）。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,323" sap2010:WorkflowViewState.IdRef="Comment_2" Text="整體串接關係（完整補上這一塊後）&#xD;&#xA;&#xD;&#xA;GetUnitsOfMeasurement.xaml  ← 從 SAP 抓單位對照表 (T006 + T006A Join)&#xD;&#xA;      ↓ (out_dt_UnitOfMeas)&#xD;&#xA;ReadConversionTarget.xaml   ← 讀取 Excel 各工作表資料&#xD;&#xA;      ↓ (out_ConversionTarget)&#xD;&#xA;DataConversion.xaml         ← 逐表逐列處理&#xD;&#xA;      ├─ FindTargetDataType.xaml  ← 找 UNIT 欄位&#xD;&#xA;      └─ ConvertUnits.xaml        ← 用對照表做轉換&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;至此，SRC_BAPIv2.2_VALTBL_CNV_E 這個單位轉換模組的所有核心流程都串接清楚了！" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫子流程 GetT006.xaml&#xD;&#xA;&gt; 用 RFC_READ_TABLE 去查 SAP 標準表 T006（度量單位主表），結果存到 dt_T006&#xD;&#xA;&gt; T006 是 SAP 存放所有「單位代碼」的主表（例如 MSEHI 內部代碼）" DisplayName="Invoke GetT006 workflow" sap:VirtualizedContainerService.HintSize="450,271" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VALTBL_CNV_E\GetT006.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_T006">[dt_T006]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText=" 呼叫子流程 GetT006A.xaml&#xD;&#xA;&gt; 用 RFC_READ_TABLE 去查 SAP 標準表 T006A（度量單位語系文字表），並帶入 in_LanguageKey（語系），結果存到 dt_T006A&#xD;&#xA;&gt; T006A 存放的是「依語系顯示的單位縮寫文字」（MSEH3 就是這張表裡的欄位，是使用者比較熟悉的簡短單位代碼，例如 KG、PC）" DisplayName="Invoke GetT006A workflow" sap:VirtualizedContainerService.HintSize="450,303" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VALTBL_CNV_E\GetT006A.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_T006A">[dt_T006A]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LanguageKey">[in_LanguageKey]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText=" 用 BuildDataTable 建立輸出表的骨架 out_dt_UnitOfMeas&#xD;&#xA;&gt; 只保留兩個欄位：MSEHI（SAP 內部代碼）、MSEH3（外部/語系單位縮寫）" DataTable="[out_dt_UnitOfMeas]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="450,169" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;MSEHI&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;MSEH3&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:BuildDataTable>
+    <ui:JoinDataTables sap2010:Annotation.AnnotationText="用 JoinDataTables 把 dt_T006 跟 dt_T006A 做 Left Join（左外連接）&#xD;&#xA;&gt; Join 條件：dt_T006.MSEHI = dt_T006A.MSEHI（用共同的內部單位代碼做關聯）&#xD;&#xA;&gt; 這樣就能把「單位代碼」跟「對應語系的單位縮寫文字」串在同一列&#xD;&#xA;&gt; Join 完的結果存到 out_dt_UnitOfMeas" DataTable1="[dt_T006]" DataTable2="[dt_T006A]" DisplayName="Join Data Tables" sap:VirtualizedContainerService.HintSize="450,218" sap2010:WorkflowViewState.IdRef="JoinDataTables_1" JoinType="Left" OutputDataTable="[out_dt_UnitOfMeas]">
+      <ui:JoinDataTables.Arguments>
+        <scg:List x:TypeArguments="ui:JoinOperationArgument" Capacity="4">
+          <ui:JoinOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EQ">
+            <ui:JoinOperationArgument.Column1>
+              <InArgument x:TypeArguments="x:String">["MSEHI"]</InArgument>
+            </ui:JoinOperationArgument.Column1>
+            <ui:JoinOperationArgument.Column2>
+              <InArgument x:TypeArguments="x:String">["MSEHI"]</InArgument>
+            </ui:JoinOperationArgument.Column2>
+          </ui:JoinOperationArgument>
+        </scg:List>
+      </ui:JoinDataTables.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:JoinDataTables>
+    <ui:FilterDataTable sap2010:Annotation.AnnotationText="用 FilterDataTable 整理 Join 完之後的資料&#xD;&#xA;&gt; ⚠️ 因為兩張表都有 MSEHI 欄位，Join 之後會產生重複欄位（例如 MSEHI、MSEHI_1）&#xD;&#xA;&gt; 這裡用 SelectColumnsMode=&quot;Remove&quot; 把多出來的 MSEHI_1（重複欄位）移除，只留下乾淨的欄位結構&#xD;&#xA;&gt; （FilterDataTable.Filters 裡雖然有設定，但條件是空的 {x:Null}，實際上這裡主要是拿來做欄位篩選，而不是列篩選）" DataTable="[out_dt_UnitOfMeas]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="450,354" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[out_dt_UnitOfMeas]" SelectColumnsMode="Remove">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <InArgument x:TypeArguments="x:String">["MSEHI_1"]</InArgument>
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:FilterDataTable>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

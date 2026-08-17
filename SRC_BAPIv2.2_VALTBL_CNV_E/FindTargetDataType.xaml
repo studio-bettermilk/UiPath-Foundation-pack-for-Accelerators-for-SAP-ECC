@@ -1,0 +1,202 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="FindTargetDataType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="輸出結果：找到的所有「型態為 UNIT」的欄位索引清單（List(Of Int32)）" Name="out_UnitColList" Type="OutArgument(scg:List(x:Int32))" />
+    <x:Property sap2010:Annotation.AnnotationText="一筆資料型態定義列（DataRow），這一列裡的每一欄，存放的是「對應欄位的資料型態」（例如某欄存的值是&quot;UNIT&quot;、&quot;CHAR&quot;、&quot;NUMC&quot;等）" Name="in_DataType" Type="InArgument(sd:DataRow)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>FindValueToConvert_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="512,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="512,60" Id="Assign_441" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="200,22" Id="AddToCollection`1_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,208" Id="If_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,60" Id="Assign_440" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="486,432" Id="Sequence_462">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="512,590" Id="While_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="512,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="534,1178" Id="Sequence_463">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="574,1258" Id="FindValueToConvert_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這個工作流程的功能很簡單：掃描一整列資料的所有欄位，找出哪些欄位的「資料型態」是 UNIT（單位型態），並把這些欄位的位置（索引）整理成一份清單回傳。這正是前面看過的 ConvertUnits.xaml 所需要的輸入 —— 它們是上下游關係：FindTargetDataType.xaml 先找出「哪幾欄是單位欄」，ConvertUnits.xaml 再拿這份清單去做真正的單位轉換。)&#xA;   Search data type [UNIT] and return column index&#xA;&#xA;- Arguments&#xA;   in_DataType as row data&lt;DataRow&gt;&#xA;   out_UnitColList as column index&lt;List(Of Int32)&gt;" DisplayName="FindTargetDataType" sap:VirtualizedContainerService.HintSize="973,1835" sap2010:WorkflowViewState.IdRef="Sequence_463">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="FindTargetDataType" Name="WorkflowName" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="532,284" sap2010:WorkflowViewState.IdRef="Comment_1" Text="假設 in_DataType 這一列的內容依序是：&#xD;&#xA;第0欄: &quot;CHAR&quot;   第1欄: &quot;NUMC&quot;   第2欄: &quot;UNIT&quot;   第3欄: &quot;CHAR&quot;   第4欄: &quot;UNIT&quot;&#xD;&#xA;&#xD;&#xA;跑完這個流程後，out_UnitColList 會得到：{2, 4}&#xD;&#xA;&#xD;&#xA;這份 {2, 4} 之後就會被拿去餵給 ConvertUnits.xaml 的 in_UnitColList 參數，讓那個流程知道「只需要處理第 2 欄跟第 4 欄的單位轉換」。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="532,303" sap2010:WorkflowViewState.IdRef="Comment_2" Text="整體串接關係&#xD;&#xA;&#xD;&#xA;資料型態定義列 (in_DataType)&#xD;&#xA;      ↓&#xD;&#xA;FindTargetDataType.xaml  ← 掃描找出所有 &quot;UNIT&quot; 型態的欄位位置&#xD;&#xA;      ↓ (out_UnitColList)&#xD;&#xA;ConvertUnits.xaml  ← 針對這些欄位位置，做外部單位→SAP內部單位的轉換&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;您目前選中的 Assign_441（初始化 out_UnitColList） 正是整個流程一開始，先把輸出清單清空、準備開始收集結果的第一步。" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="532,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Assign DisplayName="Assign(Initialize out_UnitColList)" sap:VirtualizedContainerService.HintSize="532,57" sap2010:WorkflowViewState.IdRef="Assign_441">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(x:Int32)">[out_UnitColList]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(x:Int32)">[New List(Of Int32)]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <While sap2010:Annotation.AnnotationText=" While 迴圈，逐欄檢查 in_DataType 這一列的每一個欄位&#xD;&#xA;&gt; 用 LoopCount 當作目前檢查到第幾欄的計數器&#xD;&#xA;&gt; 迴圈條件：LoopCount &lt; in_DataType.Table.Columns.Count（還沒檢查完所有欄位就繼續）&#xD;&#xA;&gt; 每一輪迴圈：&#xD;&#xA;1. 檢查目前這一欄的值是否等於 &quot;UNIT&quot;（in_DataType.Item(LoopCount).ToString() = &quot;UNIT&quot;）&#xD;&#xA;  &gt;&gt;如果是 → 用 AddToCollection 把目前的欄位索引 LoopCount 加進 out_UnitColList&#xD;&#xA;  &gt;&gt;如果不是 → 不做任何事，直接跳過&#xD;&#xA;2. LoopCount + 1，繼續檢查下一欄" DisplayName="While Column Loop" sap:VirtualizedContainerService.HintSize="532,868" sap2010:WorkflowViewState.IdRef="While_1">
+      <While.Variables>
+        <Variable x:TypeArguments="x:Int32" Name="LoopCount" />
+      </While.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <While.Condition>[LoopCount &lt; in_DataType.Table.Columns.Count]</While.Condition>
+      <Sequence DisplayName="Search ColumnType(UNIT)" sap:VirtualizedContainerService.HintSize="486,499" sap2010:WorkflowViewState.IdRef="Sequence_462">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If Condition="[in_DataType.Item(LoopCount).ToString() = &quot;UNIT&quot;]" DisplayName="If Is the target UNIT?" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_3">
+          <If.Then>
+            <AddToCollection x:TypeArguments="x:Int32" Collection="[out_UnitColList]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[LoopCount]" />
+          </If.Then>
+        </If>
+        <Assign DisplayName="Count up(LoopCount)" sap:VirtualizedContainerService.HintSize="452,166" sap2010:WorkflowViewState.IdRef="Assign_440">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[LoopCount]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[LoopCount + 1]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+    </While>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="532,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+  </Sequence>
+</Activity>

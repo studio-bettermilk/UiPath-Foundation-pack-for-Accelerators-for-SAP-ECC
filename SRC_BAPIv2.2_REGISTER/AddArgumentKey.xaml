@@ -1,51 +1,43 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="AddArgumentKey"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="AddArgumentKey" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="io_LoginPassword" Type="InOutArgument(ss:SecureString)" />
-    <x:Property Name="io_LoginUser" Type="InOutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="SAP連線設定字典(可讀可寫)，例如Client、Language、AppServer等連線資訊" Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="選填的功能設定字典(可讀可寫)，例如BAPIUser、Commit、ResultType等" Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="SAP登入密碼(SecureString，可讀可寫)" Name="io_LoginPassword" Type="InOutArgument(ss:SecureString)" />
+    <x:Property sap2010:Annotation.AnnotationText="SAP登入帳號(可讀可寫)" Name="io_LoginUser" Type="InOutArgument(x:String)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap2010:WorkflowViewState.IdRef>CheckSAPConnectionArgument_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
+      <x:String>System.Net</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Net</x:String>
-      <x:String>System.Security</x:String>
-      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -73,18 +65,149 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Check the existence of Key of Dictionary type argument.&#xA;If the arguments required are not defined, Key is assigned with the corresponding item name and Value is assigned with &quot;&quot;.&#xA;&#xA;- Input/Output&#xA;io_Config as Config Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;io_Option as Option Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;io_LoginUser as Login User Data &lt;String&gt;&#xA;io_LoginPassword as Login Password &lt;SecureString&gt;&#xA;" DisplayName="AddArgumentKey" sap2010:WorkflowViewState.IdRef="Sequence_701">
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_685" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_303" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_686" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_304" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_701" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_318" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_677" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_295" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_678" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_296" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_679" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_297" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_680" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_298" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_681" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_299" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_700" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_319" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_682" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_300" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_687" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_305" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_683" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_301" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_688" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_306" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_684" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_302" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_702" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,208" Id="If_320" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_689" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,356" Id="If_307" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_690" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_308" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_691" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_309" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,4490" Id="Sequence_702">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_698" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_316" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_692" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,208" Id="If_310" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_696" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,356" Id="If_314" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_693" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_311" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_694" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_312" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_695" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="731,208" Id="If_313" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,1559" Id="Sequence_703">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="753,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="775,6637" Id="Sequence_701">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="815,6717" Id="CheckSAPConnectionArgument_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程是一個參數補齊工具，功能是：檢查io_Config(SAP連線設定字典)和io_Option(選填功能字典)裡有沒有缺少某些必要的Key，如果缺少就自動補上「空字串」或「預設值」，避免後續流程因為存取字典裡不存在的Key而直接拋出KeyNotFoundException錯誤。)&#xA;Check the existence of Key of Dictionary type argument.&#xA;If the arguments required are not defined, Key is assigned with the corresponding item name and Value is assigned with &quot;&quot;.&#xA;&#xA;- Input/Output&#xA;io_Config as Config Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;io_Option as Option Data&lt;Dictionary&lt;String, Object&gt;&gt;&#xA;io_LoginUser as Login User Data &lt;String&gt;&#xA;io_LoginPassword as Login Password &lt;SecureString&gt;&#xA;" DisplayName="AddArgumentKey" sap:VirtualizedContainerService.HintSize="880,3766" sap2010:WorkflowViewState.IdRef="Sequence_701">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="AddArgumentKey" Name="WorkflowName" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <Sequence sap2010:Annotation.AnnotationText="Check the existence of the Dictionary type io_Config argument with the SAP connection information. If it does not exist, add the Key/Value." DisplayName="Check existence of SAP connection information" sap2010:WorkflowViewState.IdRef="Sequence_702">
-      <If Condition="[Not io_Config.ContainsKey(&quot;Client&quot;)]" DisplayName="If : Check Client" sap2010:WorkflowViewState.IdRef="If_303">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程的設計巧思&#xD;&#xA;這是一個典型的**「防禦性補值（Defensive Default）」模式**：確保後面所有會用到 io_Config(&quot;XXX&quot;) 或 io_Option(&quot;XXX&quot;) 的地方（例如 SapApplicationScope 建立連線時需要用到 AppServer、Client、SncMode等），不會因為使用者的設定檔沒填某個欄位而直接崩潰，而是安全地用空字串或合理預設值頂替，讓流程可以繼續往下執行(或是讓SAP連線元件自己去判斷空值該怎麼處理)。&#xD;&#xA;" sap:VirtualizedContainerService.HintSize="488,264" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="🔗 這支流程在整套流程中的角色&#xD;&#xA;您之前問過的 SRC_BAPIv2.2_REGISTER.xaml（主流程）在讀取完Settings工作表組出Config字典後，馬上就會呼叫這支AddArgumentKey.xaml，確保接下來要用SapApplicationScope建立SAP連線、以及呼叫ExecuteBAPI.xaml時，所有必要的參數Key都已經齊全，不會因為使用者Excel設定檔漏填某幾個欄位而讓整個流程中途出錯。" sap:VirtualizedContainerService.HintSize="488,232" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="488,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Sequence sap2010:Annotation.AnnotationText="Check the existence of the Dictionary type io_Config argument with the SAP connection information. If it does not exist, add the Key/Value.&#xD;&#xA;&#xD;&#xA;第一段：檢查 io_Config 裡的SAP連線相關Key（Sequence_702）&#xD;&#xA;&gt; 逐一檢查以下Key是否存在，缺少就補空字串： Client、Language、SncLibraryPath、SncMode、SncPartnerName、SncQOP、SncSSO、AdvancedParameters、AppServer、LogonGroup、MessageServer、SAPRouter、SystemID、SystemNumber&#xD;&#xA;&gt; 特殊處理 io_LoginPassword：若為 Nothing（沒有值），就初始化成空的SecureString&#xD;&#xA;&gt; 特殊處理 StatefulConnection：&#xD;&#xA;&gt;&gt; 若Key存在但值是空字串 → 補成 &quot;True&quot;&#xD;&#xA;&gt;&gt; 若Key根本不存在 → 也補成 &quot;True&quot;&#xD;&#xA;&gt;&gt; （代表預設要用「有狀態連線」模式，這對SAP連線很重要，因為許多BAPI呼叫需要維持同一個Session狀態）" DisplayName="Check existence of SAP connection information" sap:VirtualizedContainerService.HintSize="488,314" sap2010:WorkflowViewState.IdRef="Sequence_702">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[Not io_Config.ContainsKey(&quot;Client&quot;)]" DisplayName="If : Check Client" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_303">
         <If.Then>
-          <Assign DisplayName="Assign Client" sap2010:WorkflowViewState.IdRef="Assign_685">
+          <Assign DisplayName="Assign Client" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_685">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("Client")]</OutArgument>
             </Assign.To>
@@ -94,9 +217,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;Language&quot;)]" DisplayName="If : Check Language" sap2010:WorkflowViewState.IdRef="If_304">
+      <If Condition="[Not io_Config.ContainsKey(&quot;Language&quot;)]" DisplayName="If : Check Language" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_304">
         <If.Then>
-          <Assign DisplayName="Assign Language" sap2010:WorkflowViewState.IdRef="Assign_686">
+          <Assign DisplayName="Assign Language" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_686">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("Language")]</OutArgument>
             </Assign.To>
@@ -106,9 +229,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[io_LoginPassword is Nothing]" DisplayName="If : Check io_LoginPassword" sap2010:WorkflowViewState.IdRef="If_318">
+      <If Condition="[io_LoginPassword is Nothing]" DisplayName="If : Check io_LoginPassword" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_318">
         <If.Then>
-          <Assign DisplayName="Assign io_LoginPassword (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_701">
+          <Assign DisplayName="Assign io_LoginPassword (Initialize)" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_701">
             <Assign.To>
               <OutArgument x:TypeArguments="ss:SecureString">[io_LoginPassword]</OutArgument>
             </Assign.To>
@@ -118,9 +241,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SncLibraryPath&quot;)]" DisplayName="If : Check SncLibraryPath" sap2010:WorkflowViewState.IdRef="If_295">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncLibraryPath&quot;)]" DisplayName="If : Check SncLibraryPath" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_295">
         <If.Then>
-          <Assign DisplayName="Assign SncLibraryPath" sap2010:WorkflowViewState.IdRef="Assign_677">
+          <Assign DisplayName="Assign SncLibraryPath" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_677">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SncLibraryPath")]</OutArgument>
             </Assign.To>
@@ -130,9 +253,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SncMode&quot;)]" DisplayName="If : Check SncMode" sap2010:WorkflowViewState.IdRef="If_296">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncMode&quot;)]" DisplayName="If : Check SncMode" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_296">
         <If.Then>
-          <Assign DisplayName="Assign SncMode" sap2010:WorkflowViewState.IdRef="Assign_678">
+          <Assign DisplayName="Assign SncMode" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_678">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SncMode")]</OutArgument>
             </Assign.To>
@@ -142,9 +265,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SncPartnerName&quot;)]" DisplayName="If : Check SncPartnerName" sap2010:WorkflowViewState.IdRef="If_297">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncPartnerName&quot;)]" DisplayName="If : Check SncPartnerName" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_297">
         <If.Then>
-          <Assign DisplayName="Assign SncPartnerName" sap2010:WorkflowViewState.IdRef="Assign_679">
+          <Assign DisplayName="Assign SncPartnerName" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_679">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SncPartnerName")]</OutArgument>
             </Assign.To>
@@ -154,9 +277,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SncQOP&quot;)]" DisplayName="If : Check SncQOP" sap2010:WorkflowViewState.IdRef="If_298">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncQOP&quot;)]" DisplayName="If : Check SncQOP" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_298">
         <If.Then>
-          <Assign DisplayName="Assign SncQOP" sap2010:WorkflowViewState.IdRef="Assign_680">
+          <Assign DisplayName="Assign SncQOP" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_680">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SncQOP")]</OutArgument>
             </Assign.To>
@@ -166,9 +289,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SncSSO&quot;)]" DisplayName="If : Check SncSSO" sap2010:WorkflowViewState.IdRef="If_299">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SncSSO&quot;)]" DisplayName="If : Check SncSSO" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_299">
         <If.Then>
-          <Assign DisplayName="Assign SncSSO" sap2010:WorkflowViewState.IdRef="Assign_681">
+          <Assign DisplayName="Assign SncSSO" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_681">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SncSSO")]</OutArgument>
             </Assign.To>
@@ -178,9 +301,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[string.IsNullOrWhiteSpace(io_LoginUser)]" DisplayName="If : Check io_LoginUser" sap2010:WorkflowViewState.IdRef="If_319">
+      <If Condition="[string.IsNullOrWhiteSpace(io_LoginUser)]" DisplayName="If : Check io_LoginUser" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_319">
         <If.Then>
-          <Assign DisplayName="Assign io_LoginUser" sap2010:WorkflowViewState.IdRef="Assign_700">
+          <Assign DisplayName="Assign io_LoginUser" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_700">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[io_LoginUser]</OutArgument>
             </Assign.To>
@@ -192,9 +315,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;AdvancedParameters&quot;)]" DisplayName="If : Check AdvancedParameters" sap2010:WorkflowViewState.IdRef="If_300">
+      <If Condition="[Not io_Config.ContainsKey(&quot;AdvancedParameters&quot;)]" DisplayName="If : Check AdvancedParameters" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_300">
         <If.Then>
-          <Assign DisplayName="Assign AdvancedParameters" sap2010:WorkflowViewState.IdRef="Assign_682">
+          <Assign DisplayName="Assign AdvancedParameters" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_682">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("AdvancedParameters")]</OutArgument>
             </Assign.To>
@@ -204,9 +327,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;AppServer&quot;)]" DisplayName="If : Check AppServer" sap2010:WorkflowViewState.IdRef="If_305">
+      <If Condition="[Not io_Config.ContainsKey(&quot;AppServer&quot;)]" DisplayName="If : Check AppServer" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_305">
         <If.Then>
-          <Assign DisplayName="Assign AppServer" sap2010:WorkflowViewState.IdRef="Assign_687">
+          <Assign DisplayName="Assign AppServer" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_687">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("AppServer")]</OutArgument>
             </Assign.To>
@@ -216,9 +339,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;LogonGroup&quot;)]" DisplayName="If : Check LogonGroup" sap2010:WorkflowViewState.IdRef="If_301">
+      <If Condition="[Not io_Config.ContainsKey(&quot;LogonGroup&quot;)]" DisplayName="If : Check LogonGroup" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_301">
         <If.Then>
-          <Assign DisplayName="Assign LogonGroup" sap2010:WorkflowViewState.IdRef="Assign_683">
+          <Assign DisplayName="Assign LogonGroup" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_683">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("LogonGroup")]</OutArgument>
             </Assign.To>
@@ -228,9 +351,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;MessageServer&quot;)]" DisplayName="If : Check MessageServer" sap2010:WorkflowViewState.IdRef="If_306">
+      <If Condition="[Not io_Config.ContainsKey(&quot;MessageServer&quot;)]" DisplayName="If : Check MessageServer" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_306">
         <If.Then>
-          <Assign DisplayName="Assign MessageServer" sap2010:WorkflowViewState.IdRef="Assign_688">
+          <Assign DisplayName="Assign MessageServer" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_688">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("MessageServer")]</OutArgument>
             </Assign.To>
@@ -240,9 +363,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SAPRouter&quot;)]" DisplayName="If : Check SAPRouter" sap2010:WorkflowViewState.IdRef="If_302">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SAPRouter&quot;)]" DisplayName="If : Check SAPRouter" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_302">
         <If.Then>
-          <Assign DisplayName="Assign SAPRouter" sap2010:WorkflowViewState.IdRef="Assign_684">
+          <Assign DisplayName="Assign SAPRouter" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_684">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SAPRouter")]</OutArgument>
             </Assign.To>
@@ -252,11 +375,11 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[io_Config.ContainsKey(&quot;StatefulConnection&quot;)]" DisplayName="If : Check StatefulConnection" sap2010:WorkflowViewState.IdRef="If_307">
+      <If Condition="[io_Config.ContainsKey(&quot;StatefulConnection&quot;)]" DisplayName="If : Check StatefulConnection" sap:VirtualizedContainerService.HintSize="454,688" sap2010:WorkflowViewState.IdRef="If_307">
         <If.Then>
-          <If Condition="[io_Config(&quot;StatefulConnection&quot;).ToString = &quot;&quot;]" DisplayName="If : Check StatefulConnection is equal &quot;&quot;" sap2010:WorkflowViewState.IdRef="If_320">
+          <If Condition="[io_Config(&quot;StatefulConnection&quot;).ToString = &quot;&quot;]" DisplayName="If : Check StatefulConnection is equal &quot;&quot;" sap:VirtualizedContainerService.HintSize="452,362" sap2010:WorkflowViewState.IdRef="If_320">
             <If.Then>
-              <Assign DisplayName="Assign StatefulConnection" sap2010:WorkflowViewState.IdRef="Assign_702">
+              <Assign DisplayName="Assign StatefulConnection" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_702">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:Object">[io_Config("StatefulConnection")]</OutArgument>
                 </Assign.To>
@@ -268,7 +391,7 @@
           </If>
         </If.Then>
         <If.Else>
-          <Assign DisplayName="Assign StatefulConnection (Key check)" sap2010:WorkflowViewState.IdRef="Assign_689">
+          <Assign DisplayName="Assign StatefulConnection (Key check)" sap:VirtualizedContainerService.HintSize="452,143" sap2010:WorkflowViewState.IdRef="Assign_689">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("StatefulConnection")]</OutArgument>
             </Assign.To>
@@ -278,9 +401,9 @@
           </Assign>
         </If.Else>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SystemID&quot;)]" DisplayName="If : Check SystemID" sap2010:WorkflowViewState.IdRef="If_308">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SystemID&quot;)]" DisplayName="If : Check SystemID" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_308">
         <If.Then>
-          <Assign DisplayName="Assign SystemID" sap2010:WorkflowViewState.IdRef="Assign_690">
+          <Assign DisplayName="Assign SystemID" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_690">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SystemID")]</OutArgument>
             </Assign.To>
@@ -290,9 +413,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;SystemNumber&quot;)]" DisplayName="If : Check SystemNumber" sap2010:WorkflowViewState.IdRef="If_309">
+      <If Condition="[Not io_Config.ContainsKey(&quot;SystemNumber&quot;)]" DisplayName="If : Check SystemNumber" sap:VirtualizedContainerService.HintSize="454,385" sap2010:WorkflowViewState.IdRef="If_309">
         <If.Then>
-          <Assign DisplayName="Assign SystemNumber" sap2010:WorkflowViewState.IdRef="Assign_691">
+          <Assign DisplayName="Assign SystemNumber" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_691">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Config("SystemNumber")]</OutArgument>
             </Assign.To>
@@ -303,10 +426,17 @@
         </If.Then>
       </If>
     </Sequence>
-    <Sequence sap2010:Annotation.AnnotationText="Check the existence of io_Option argument of Dictionary type and add Key/Value if it does not exist.&#xA;&#xA;* [BAPIUser] [PasswordSuffix] is used only for specific BAPI components,&#xA;   so it has been changed from required items to optional functions.&#xA;   Accordingly, processing has been added so that the current version can run the previous version." DisplayName="Check existence of io_Option argument" sap2010:WorkflowViewState.IdRef="Sequence_703">
-      <If Condition="[io_Option is Nothing]" DisplayName="If : Check io_Option is nothing" sap2010:WorkflowViewState.IdRef="If_316">
+    <Sequence sap2010:Annotation.AnnotationText="Check the existence of io_Option argument of Dictionary type and add Key/Value if it does not exist.&#xA;&#xA;* [BAPIUser] [PasswordSuffix] is used only for specific BAPI components,&#xA;   so it has been changed from required items to optional functions.&#xA;   Accordingly, processing has been added so that the current version can run the previous version.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;第二段：檢查 io_Option 裡的選填功能Key（Sequence_703）&#xD;&#xA;&gt; 若 io_Option 整個是 Nothing → 先初始化成一個空的新字典&#xD;&#xA;&gt; BAPIUser的特殊邏輯（If_314巢狀If_310）：&#xD;&#xA;&gt;&gt; 若 io_Config 沒有 BAPIUser → 檢查 io_Option 有沒有，沒有就補空字串&#xD;&#xA;&gt;&gt; 若 io_Config 有 BAPIUser → 直接把 io_Config(&quot;BAPIUser&quot;) 的值複製到 io_Option(&quot;BAPIUser&quot;)&#xD;&#xA;&gt;&gt; 📌 這裡有個註解說明：BAPIUser和PasswordSuffix原本是舊版設計放在io_Config裡的必填欄位，後來改成放在io_Option裡的選填功能，這段邏輯是向下相容處理——讓舊版流程(把值放在io_Config)仍然能正常運作，同時新版流程(把值放在io_Option)也能用&#xD;&#xA;&gt; PasswordSuffix：若 io_Config 有這個Key，就把值(去除頭尾空白)複製到 io_Option&#xD;&#xA;&gt; Commit：若io_Option沒有，就從io_Config(&quot;Commit&quot;)轉大寫、去空白後複製過來&#xD;&#xA;&gt; ResultType：若io_Option沒有，補空字串" DisplayName="Check existence of io_Option argument" sap:VirtualizedContainerService.HintSize="488,2751" sap2010:WorkflowViewState.IdRef="Sequence_703">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[io_Option is Nothing]" DisplayName="If : Check io_Option is nothing" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_316">
         <If.Then>
-          <Assign DisplayName="Assign io_Option (Initialize)" sap2010:WorkflowViewState.IdRef="Assign_698">
+          <Assign DisplayName="Assign io_Option (Initialize)" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_698">
             <Assign.To>
               <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">[io_Option]</OutArgument>
             </Assign.To>
@@ -316,11 +446,11 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Config.ContainsKey(&quot;BAPIUser&quot;)]" DisplayName="If : Check BAPIUser in io_Config" sap2010:WorkflowViewState.IdRef="If_314">
+      <If Condition="[Not io_Config.ContainsKey(&quot;BAPIUser&quot;)]" DisplayName="If : Check BAPIUser in io_Config" sap:VirtualizedContainerService.HintSize="454,688" sap2010:WorkflowViewState.IdRef="If_314">
         <If.Then>
-          <If Condition="[Not io_Option.ContainsKey(&quot;BAPIUser&quot;)]" DisplayName="If : Check BAPIUser in io_Option" sap2010:WorkflowViewState.IdRef="If_310">
+          <If Condition="[Not io_Option.ContainsKey(&quot;BAPIUser&quot;)]" DisplayName="If : Check BAPIUser in io_Option" sap:VirtualizedContainerService.HintSize="452,362" sap2010:WorkflowViewState.IdRef="If_310">
             <If.Then>
-              <Assign DisplayName="Assign BAPIUser to io_Option" sap2010:WorkflowViewState.IdRef="Assign_692">
+              <Assign DisplayName="Assign BAPIUser to io_Option" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_692">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:Object">[io_Option("BAPIUser")]</OutArgument>
                 </Assign.To>
@@ -332,7 +462,7 @@
           </If>
         </If.Then>
         <If.Else>
-          <Assign DisplayName="Assign BAPIUser of io_Config to io_Option" sap2010:WorkflowViewState.IdRef="Assign_696">
+          <Assign DisplayName="Assign BAPIUser of io_Config to io_Option" sap:VirtualizedContainerService.HintSize="452,143" sap2010:WorkflowViewState.IdRef="Assign_696">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Option("BAPIUser")]</OutArgument>
             </Assign.To>
@@ -342,9 +472,9 @@
           </Assign>
         </If.Else>
       </If>
-      <If Condition="[io_Config.ContainsKey(&quot;PasswordSuffix&quot;)]" DisplayName="If : Check PasswordSuffix" sap2010:WorkflowViewState.IdRef="If_311">
+      <If Condition="[io_Config.ContainsKey(&quot;PasswordSuffix&quot;)]" DisplayName="If : Check PasswordSuffix" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_311">
         <If.Then>
-          <Assign DisplayName="Assign PasswordSuffix" sap2010:WorkflowViewState.IdRef="Assign_693">
+          <Assign DisplayName="Assign PasswordSuffix" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_693">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Option("PasswordSuffix")]</OutArgument>
             </Assign.To>
@@ -354,9 +484,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Option.ContainsKey(&quot;Commit&quot;)]" DisplayName="If : Check Commit" sap2010:WorkflowViewState.IdRef="If_312">
+      <If Condition="[Not io_Option.ContainsKey(&quot;Commit&quot;)]" DisplayName="If : Check Commit" sap:VirtualizedContainerService.HintSize="454,394" sap2010:WorkflowViewState.IdRef="If_312">
         <If.Then>
-          <Assign DisplayName="Assign Commit" sap2010:WorkflowViewState.IdRef="Assign_694">
+          <Assign DisplayName="Assign Commit" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_694">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Option("Commit")]</OutArgument>
             </Assign.To>
@@ -366,9 +496,9 @@
           </Assign>
         </If.Then>
       </If>
-      <If Condition="[Not io_Option.ContainsKey(&quot;ResultType&quot;)]" DisplayName="If : Check ResultType" sap2010:WorkflowViewState.IdRef="If_313">
+      <If Condition="[Not io_Option.ContainsKey(&quot;ResultType&quot;)]" DisplayName="If : Check ResultType" sap:VirtualizedContainerService.HintSize="454,385" sap2010:WorkflowViewState.IdRef="If_313">
         <If.Then>
-          <Assign DisplayName="Assign ResultType" sap2010:WorkflowViewState.IdRef="Assign_695">
+          <Assign DisplayName="Assign ResultType" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_695">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[io_Option("ResultType")]</OutArgument>
             </Assign.To>
@@ -379,101 +509,13 @@
         </If.Then>
       </If>
     </Sequence>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
-    <sads:DebugSymbol.Symbol>d09DOlx3b3JrXzFcZGVsaXZhcmFibGVfcmVc5pys5L2T5pS55L+uXFNSQ19CQVBJdjIuMl9SRUdJU1RFUlxBZGRBcmd1bWVudEtleS54YW1sgAFPA4ADDgIBAVE0UUQCAQJTBVOkAQMBswFUBbECEAIBNLICBf0CEAIBBv4CBf4CoAECAQNTe1OhAQMBtAFVB2AMAwGsAWEHbAwDAaUBbQd4DAMBngF5B4QBDAMBlwGFAQeQAQwDAZABkQEHnAEMAwGJAZ0BB6gBDAMBggGpAQe0AQwCAXu1AQfCAQwCAXTDAQfOAQwCAW3PAQfaAQwCAWbbAQfmAQwCAV/nAQfyAQwCAVjzAQf+AQwCAVH/AQeYAgwCAUOZAgekAgwCATylAgewAgwCATWzAge+AgwCAS2/AgfYAgwCAR7ZAgfkAgwCARblAgfwAgwCAQ7xAgf8AgwCAQf+Ann+Ap0BAgEEVRVVRgMBrQFXC14UAwGvAWEVYUgDAaYBYwtqFAMBqAFtFW00AwGfAW8LdhQDAaEBeRV5TgMBmAF7C4IBFAMBmgGFARWFAUcDAZEBhwELjgEUAwGTAZEBFZEBTgMBigGTAQuaARQDAYwBnQEVnQFGAwGDAZ8BC6YBFAMBhQGpARWpAUYCAXyrAQuyARQCAX61ARW1AUACAXW3AQvAARQCAXfDARXDAVICAW7FAQvMARQCAXDPARXPAUkCAWfRAQvYARQCAWnbARXbAUoCAWDdAQvkARQCAWLnARXnAU0CAVnpAQvwARQCAVvzARXzAUkCAVL1AQv8ARQCAVT/ARX/AU4CAUSBAguMAhACAUqPAguWAhQCAUaZAhWZAkgCAT2bAguiAhQCAT+lAhWlAkwCATanAguuAhQCATizAhWzAi0CAS61Agu8AhQCATC/AhW/AkgCAR/BAgvMAhACASbPAgvWAhQCASHZAhXZAkoCARfbAgviAhQCARnlAhXlAkYCAQ/nAgvuAhQCARHxAhXxAkoCAQjzAgv6AhQCAQpcNlw6AwGyAVk3WUwDAbABaDZoOgMBqwFlN2VOAwGpAXQ9dE8DAaQBcT5xUAMBogGAATaAAToDAZ0BfTd9VAMBmwGMATaMAToDAZYBiQE3iQFNAwGUAZgBNpgBOgMBjwGVATeVAVQDAY0BpAE2pAE6AwGIAaEBN6EBTAMBhgGwATawAToDAYEBrQE3rQFMAgF/vQERvQFAAgF6uQE3uQFFAgF4ygE2ygE6AgFzxwE3xwFYAgFx1gE21gE6AgFs0wE30wFPAgFq4gE24gE6AgFl3wE33wFQAgFj7gE27gE6AgFe6wE36wFTAgFc+gE2+gE6AgFX9wE39wFPAgFVgQIZgQJeAgFLgwIPigIYAgFNlAI2lAI+AgFJkQI3kQJYAgFHoAI2oAI6AgFCnQI3nQJOAgFArAI2rAI6AgE7qQI3qQJSAgE5ugJQugJzAgEztwJRtwJcAgExwQIZwQJMAgEnwwIPygIYAgEp1AI21AJNAgEk0QI30QJOAgEi4AI24AJhAgEc3QI33QJUAgEa7AI27AJhAgEU6QI36QJMAgES+AI2+AI6AgEN9QI39QJQAgELiAI6iAJCAgFQhQI7hQJcAgFOyAI6yAI+AgEsxQI7xQJSAgEq</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="488,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="753,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_685" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_303" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_686" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_304" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_701" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_318" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_677" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_295" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_678" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_296" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_679" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_297" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_680" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_298" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_681" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_299" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_700" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_319" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_682" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_300" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_687" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_305" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_683" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_301" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_688" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_306" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_684" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_302" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_702" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_320" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="Assign_689" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_307" sap:VirtualizedContainerService.HintSize="731,356" />
-      <sap2010:ViewStateData Id="Assign_690" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_308" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_691" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_309" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Sequence_702" sap:VirtualizedContainerService.HintSize="753,4490">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_698" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_316" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_692" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_310" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="Assign_696" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_314" sap:VirtualizedContainerService.HintSize="731,356" />
-      <sap2010:ViewStateData Id="Assign_693" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_311" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_694" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_312" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Assign_695" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_313" sap:VirtualizedContainerService.HintSize="731,208" />
-      <sap2010:ViewStateData Id="Sequence_703" sap:VirtualizedContainerService.HintSize="753,1559">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="753,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_701" sap:VirtualizedContainerService.HintSize="775,6637">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CheckSAPConnectionArgument_1" sap:VirtualizedContainerService.HintSize="815,6717" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

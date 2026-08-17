@@ -1,53 +1,44 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GetSAPDataTable"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetSAPDataTable" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_ExcelDataFilePath" Type="InArgument(x:String)" />
-    <x:Property Name="in_SAPService" Type="InArgument(usbc:IConnectionService)" />
-    <x:Property Name="out_dt_SAPDataTable" Type="OutArgument(sd:DataTable)" />
-    <x:Property Name="in_AddInformationFlg" Type="InArgument(x:String)" />
-    <x:Property Name="in_FunctionXamlFilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="前一支流程（SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E）產出的 Excel 條件檔路徑" Name="in_ExcelDataFilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="SAP 連線資訊" Name="in_SAPService" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property sap2010:Annotation.AnnotationText="要呼叫哪一支「執行SAP查表」的子流程檔案路徑(動態傳入,可替換)" Name="out_dt_SAPDataTable" Type="OutArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="&quot;X&quot;= 在輸出最上面加一列DDTEXT(欄位說明)/DATATYPE(型態)/LENG(長度)；非 X = 不加" Name="in_AddInformationFlg" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="要呼叫哪一支「執行SAP查表」的子流程檔案路徑(動態傳入,可替換)" Name="in_FunctionXamlFilePath" Type="InArgument(x:String)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap2010:WorkflowViewState.IdRef>GetSAPTableData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
-      <x:String>System.Xml.Serialization</x:String>
-      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -74,9 +65,162 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Read Excel file created by SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E(Data extraction conditions are entered) .&#xA;Output SAP Table Data Info as DataTable based on search conditions.&#xA;&#xA;- Input/Output&#xA;in_SAPService as SAP Connect Info &#xA;in_ExcelDataFilePath as file path of Excel file created by SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E &lt;String&gt;&#xA;in_AddInformationFlg as flag to output DDTEXT, DATATYPE, LENG to first row of the output file &lt;String&gt;&#xA;   X ・・・Output&#xA;   Non-X・・・No output&#xA;out_dt_SAPDataTable as SAP Table Data &lt;DataTable&gt;" DisplayName="GetSAPDataTable" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,86" Id="ExcelReadCell_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,86" Id="ExcelReadRange_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,336" Id="Sequence_8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,472" Id="ExcelApplicationScope_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,114" Id="InvokeWorkflowFile_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,114" Id="InvokeWorkflowFile_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,114" Id="InvokeWorkflowFile_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="Assign_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="Assign_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,129" Id="InvokeWorkflowFile_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,594" Id="Sequence_12">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,114" Id="InvokeWorkflowFile_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,114" Id="InvokeWorkflowFile_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,114" Id="InvokeWorkflowFile_8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,546" Id="Sequence_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,736" Id="If_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,60" Id="Assign_3" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="486,3052" Id="Sequence_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="526,3132" Id="GetSAPTableData_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這個工作流程是整個 SRC_BAPIv2.2_TABLEDATA_OUTPUT_E 模組的主控流程（Main Flow）：讀取由前一支流程（SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E）產出的 Excel 條件檔，串起前面拆解過的多個子流程，最終從 SAP 撈出符合條件的整張資料表內容，並依需求在最上面加註中文欄位說明。)&#xA;Read Excel file created by SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E(Data extraction conditions are entered) .&#xA;Output SAP Table Data Info as DataTable based on search conditions.&#xA;&#xA;- Input/Output&#xA;in_SAPService as SAP Connect Info &#xA;in_ExcelDataFilePath as file path of Excel file created by SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E &lt;String&gt;&#xA;in_AddInformationFlg as flag to output DDTEXT, DATATYPE, LENG to first row of the output file &lt;String&gt;&#xA;   X ・・・Output&#xA;   Non-X・・・No output&#xA;out_dt_SAPDataTable as SAP Table Data &lt;DataTable&gt;" DisplayName="GetSAPDataTable" sap:VirtualizedContainerService.HintSize="880,4461" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="QueryTableStr" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Data" />
@@ -86,37 +230,88 @@
       <Variable x:TypeArguments="sd:DataTable" Name="dt_OutDataTable" />
       <Variable x:TypeArguments="x:String" Default="GetSAPDataTable" Name="WorkflowName" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Read Excel file in which data extraction conditions are entered." AutoSave="False" CreateNewFile="False" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" ReadOnly="True" Visible="False" WorkbookPath="[in_ExcelDataFilePath]">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="完整呼叫關係圖&#xD;&#xA;&#xD;&#xA;GetSAPDataTable.xaml (主控)&#xD;&#xA; ├─ ExcelApplicationScope → 讀 QueryTableStr(表名) + dt_InputExcel(條件明細)&#xD;&#xA; ├─ SetFieldsDataTable.xaml       → 組 dt_Fields(欄位清單)&#xD;&#xA; ├─ SetOptionDataTable.xaml       → 組 dt_Options(查詢條件)&#xD;&#xA; │    └─ GetConvertDataType.xaml&#xD;&#xA; │    └─ MakeOptionDataTable.xaml&#xD;&#xA; ├─ [in_FunctionXamlFilePath]（如SRC_CallRecReadTable） → 真正呼叫SAP RFC_READ_TABLE&#xD;&#xA; ├─ SRC_Common\SRC_MakeTextListToDataTable.xaml → 拆解WA長字串還原成表格&#xD;&#xA; └─ (若加註旗標=X) AddInformation.xaml × 3次 → 插入 LENG/DATATYPE/DDTEXT 說明列&#xD;&#xA;&#xD;&#xA;簡單說，這支流程就是把**「使用者用Excel設定的查詢條件」→「轉成SAP查詢語法」→「呼叫SAP撈資料」→「還原成正常表格」→「加上中文欄位說明」這整套流程串起來的總指揮官**。" sap:VirtualizedContainerService.HintSize="484,493" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// ">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="484,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:ExcelApplicationScope sap2010:Annotation.AnnotationText="Read Excel file in which data extraction conditions are entered.&#xD;&#xA;&#xD;&#xA;用 ExcelApplicationScope 開啟條件 Excel 檔（只讀模式）&#xD;&#xA;&gt; ExcelReadCell 讀 SRC_DataElement 工作表的 A1 儲存格 → 存成 QueryTableStr（這格通常放的是要查的SAP表名，例如MARA）&#xD;&#xA;&gt; ExcelReadRange 讀 SRC_DataElement 工作表從 A2 開始的整個範圍 → 存成 dt_InputExcel（就是使用者在Excel裡設定的篩選條件明細，這份Excel正是SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E模組先前產出的欄位定義表）" AutoSave="False" CreateNewFile="False" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="484,582" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" ReadOnly="True" Visible="False" WorkbookPath="[in_ExcelDataFilePath]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_8">
-            <ui:ExcelReadCell sap2010:Annotation.AnnotationText="Get DataTable name" Cell="A1" DisplayName="Read Cell Set" sap2010:WorkflowViewState.IdRef="ExcelReadCell_1" SheetName="SRC_DataElement">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,297" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelReadCell sap2010:Annotation.AnnotationText="Get DataTable name" Cell="A1" DisplayName="Read Cell Set (A1) to QueryTableStr" sap:VirtualizedContainerService.HintSize="416,123" sap2010:WorkflowViewState.IdRef="ExcelReadCell_1" SheetName="SRC_DataElement">
               <ui:ExcelReadCell.Result>
                 <OutArgument x:TypeArguments="x:String">[QueryTableStr]</OutArgument>
               </ui:ExcelReadCell.Result>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ExcelReadCell>
-            <ui:ExcelReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Get DataTable of Data Element Info" DataTable="[dt_InputExcel]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="A2" SheetName="SRC_DataElement" />
+            <ui:ExcelReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Get DataTable of Data Element Info" DataTable="[dt_InputExcel]" DisplayName="Read Range (A2) to dt_InputExcel" sap:VirtualizedContainerService.HintSize="416,114" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="A2" SheetName="SRC_DataElement">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ExcelReadRange>
           </Sequence>
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ExcelApplicationScope>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Set FIELDNAME data." DisplayName="Invoke Workflow File SetFieldsDataTable" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SetFieldsDataTable.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Set FIELDNAME data.&#xD;&#xA;&#xD;&#xA;呼叫 SetFieldsDataTable.xaml&#xD;&#xA;&gt; 傳入 dt_InputExcel → 過濾出有效欄位，組出 dt_Fields(要查詢的欄位清單)" DisplayName="Invoke Workflow File SetFieldsDataTable" sap:VirtualizedContainerService.HintSize="484,271" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SetFieldsDataTable.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_Fields">[dt_Fields]</OutArgument>
         <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_InputExcel">[dt_InputExcel]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Set &quot;Option&quot; info." DisplayName="Invoke Workflow File SetOptionDataTable" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SetOptionDataTable.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Set &quot;Option&quot; info.&#xD;&#xA;&#xD;&#xA;呼叫 SetOptionDataTable.xaml&#xD;&#xA;&gt; 同樣傳入 dt_InputExcel → 依篩選條件組出 dt_Options(SAP查詢條件字串,如AND WERKS = '1000')" DisplayName="Invoke Workflow File SetOptionDataTable" sap:VirtualizedContainerService.HintSize="484,287" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SetOptionDataTable.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_Options">[dt_Options]</OutArgument>
         <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_InputExcel">[dt_InputExcel]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Get Table info" DisplayName="Invoke Workflow File SRC_CallRecReadTable" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="[in_FunctionXamlFilePath]">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Get Table info&#xD;&#xA;&#xD;&#xA;呼叫 [in_FunctionXamlFilePath]（動態子流程，通常是 SRC_CallRecReadTable）&#xD;&#xA;&gt; 把 QueryTableStr(表名)、dt_Fields(欄位)、dt_Options(條件) 一起傳入&#xD;&#xA;&gt; 這支子流程實際去呼叫 SAP 的 RFC_READ_TABLE，把資料塞回 dt_Data&#xD;&#xA;&gt; ⚠️ 由於 SAP RFC_READ_TABLE 回傳的每一列資料，是把所有欄位值串成一整條長字串放在 WA 欄位裡（這是SAP這個FM的標準行為限制）" DisplayName="Invoke Workflow File SRC_CallRecReadTable" sap:VirtualizedContainerService.HintSize="484,367" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="[in_FunctionXamlFilePath]">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_QueryTableStr">[QueryTableStr]</InArgument>
@@ -124,13 +319,24 @@
         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Fields">[dt_Fields]</InOutArgument>
         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Options">[dt_Options]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <Sequence sap2010:Annotation.AnnotationText="The io_dt_Data column ”WA” is returned as a string with the contents of dt_Fields concatenated.&#xA;&#xA;Decompose column &quot;WA&quot; by each character length and set to DataTable." DisplayName="Sequence Set dt_OutDataTable" sap2010:WorkflowViewState.IdRef="Sequence_12">
+    <Sequence sap2010:Annotation.AnnotationText="The io_dt_Data column ”WA” is returned as a string with the contents of dt_Fields concatenated.&#xA;&#xA;Decompose column &quot;WA&quot; by each character length and set to DataTable.&#xD;&#xA;&#xD;&#xA;拆解 WA 長字串還原成正常表格（Sequence_12）&#xD;&#xA;&gt; 把 dt_Data 的 WA 欄位值全部抓出來存成 WAList&#xD;&#xA;&gt; 把 dt_Fields 的 LENGTH（各欄位長度）存成 LengthList&#xD;&#xA;&gt; 呼叫 SRC_Common\SRC_MakeTextListToDataTable.xaml：依照每個欄位的長度，把每一條長字串切割還原成一格一格的正常資料表 → 產出 dt_OutDataTable" DisplayName="Sequence Set dt_OutDataTable" sap:VirtualizedContainerService.HintSize="484,818" sap2010:WorkflowViewState.IdRef="Sequence_12">
       <Sequence.Variables>
         <Variable x:TypeArguments="scg:List(x:String)" Name="WAList" />
         <Variable x:TypeArguments="scg:List(x:String)" Name="LengthList" />
       </Sequence.Variables>
-      <Assign sap2010:Annotation.AnnotationText="Set  Column &quot;WA&quot; value to List type." DisplayName="Assign WAList" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign sap2010:Annotation.AnnotationText="Set  Column &quot;WA&quot; value to List type." DisplayName="Assign WAList" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[WAList]</OutArgument>
         </Assign.To>
@@ -138,7 +344,7 @@
           <InArgument x:TypeArguments="scg:List(x:String)">[dt_Data.AsEnumerable().Select(Function(r) r("WA").ToString()).ToList()]</InArgument>
         </Assign.Value>
       </Assign>
-      <Assign sap2010:Annotation.AnnotationText="Set  the caracter length to List type." DisplayName="Assign LengthList" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign sap2010:Annotation.AnnotationText="Set  the caracter length to List type." DisplayName="Assign LengthList" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[LengthList]</OutArgument>
         </Assign.To>
@@ -146,7 +352,7 @@
           <InArgument x:TypeArguments="scg:List(x:String)">[dt_Fields.AsEnumerable().Select(Function(r) r("LENGTH").ToString()).ToList()]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Create the DataTable based on acquired table element information." DisplayName="Invoke Workflow File SRC_MakeTextListToDataTable" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_Common\SRC_MakeTextListToDataTable.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Create the DataTable based on acquired table element information." DisplayName="Invoke Workflow File SRC_MakeTextListToDataTable" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_Common\SRC_MakeTextListToDataTable.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Text">[WAList]</InArgument>
           <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Len_Str">[LengthList]</InArgument>
@@ -155,191 +361,78 @@
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>
-    <If sap2010:Annotation.AnnotationText="in_AddInformationFlg Check&#xA;Judge if DDTEXT, DATATYPE and LENG info is output on the first row or not" Condition="[in_AddInformationFlg.ToUpper = &quot;X&quot;]" DisplayName="If in_AddInformationFlg.ToUpper = &quot;X&quot;" sap2010:WorkflowViewState.IdRef="If_1">
+    <If sap2010:Annotation.AnnotationText="in_AddInformationFlg Check&#xA;Judge if DDTEXT, DATATYPE and LENG info is output on the first row or not&#xD;&#xA;&#xD;&#xA;判斷 in_AddInformationFlg 是否為 &quot;X&quot;&#xD;&#xA;&gt; 若是，依序呼叫 3次AddInformation.xaml（就是您上一題問的那支流程！）：&#xD;&#xA;&gt;&gt; 第1次：加入 LENG(長度) 這一列&#xD;&#xA;&gt;&gt; 第2次：加入 DATATYPE(資料型態) 這一列&#xD;&#xA;&gt;&gt; 第3次：加入 DDTEXT(欄位中文說明) 這一列&#xD;&#xA;&gt; 每次都用 InsertAt(0) 插到最上面，所以最終順序（從上往下）會變成：DDTEXT → DATATYPE → LENG → 實際資料（因為最後呼叫的會被插到最前面）" Condition="[in_AddInformationFlg.ToUpper = &quot;X&quot;]" DisplayName="If in_AddInformationFlg.ToUpper = &quot;X&quot;" sap:VirtualizedContainerService.HintSize="484,1218" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11">
-          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Output LENG" DisplayName="Invoke AddInformation workflow LENG" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\AddInformation.xaml">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,765" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Output LENG&#xD;&#xA;&#xD;&#xA;第1次：加入 LENG(長度) 這一列" DisplayName="Invoke AddInformation workflow LENG" sap:VirtualizedContainerService.HintSize="416,238" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\AddInformation.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_OutDataTable">[dt_OutDataTable]</InOutArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_ColumnName">LENG</InArgument>
               <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_InputData">[dt_InputExcel]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Output DATATYPE" DisplayName="Invoke AddInformation workflow DATATYPE" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\AddInformation.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Output DATATYPE&#xD;&#xA;&#xD;&#xA;第2次：加入 DATATYPE(資料型態) 這一列" DisplayName="Invoke AddInformation workflow DATATYPE" sap:VirtualizedContainerService.HintSize="416,238" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\AddInformation.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_OutDataTable">[dt_OutDataTable]</InOutArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_ColumnName">DATATYPE</InArgument>
               <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_InputData">[dt_InputExcel]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Output DDTEXT" DisplayName="Invoke AddInformation workflow DDTEXT" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\AddInformation.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Output DDTEXT&#xD;&#xA;&#xD;&#xA;第3次：加入 DDTEXT(欄位中文說明) 這一列" DisplayName="Invoke AddInformation workflow DDTEXT" sap:VirtualizedContainerService.HintSize="416,229" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\AddInformation.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_OutDataTable">[dt_OutDataTable]</InOutArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_ColumnName">DDTEXT</InArgument>
               <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_InputData">[dt_InputExcel]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeWorkflowFile>
         </Sequence>
       </If.Then>
     </If>
-    <Assign DisplayName="Assign out_dt_SAPDataTable" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap2010:Annotation.AnnotationText="把 dt_OutDataTable 指定給輸出參數 out_dt_SAPDataTable" DisplayName="Assign out_dt_SAPDataTable" sap:VirtualizedContainerService.HintSize="484,220" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[out_dt_SAPDataTable]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="sd:DataTable">[dt_OutDataTable]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
-    <sads:DebugSymbol.Symbol>d74BQzpcZmpcVWlwYXRoXDA1X1NBUOmDqOWTgemWi+eZuuODluODquODvOODleOCo+ODs+OCsFwwM1/kvZzmpa1cMDFf5L2c5oiQXDMwX1NSQ19UQUJMRURBVEFfT1VUUFVUX1ZvbDJcRUNDXFNSQ19CQVBJdjIuMl9UQUJMRURBVEFfT1VUUFVUX0VcU1JDX0JBUEl2Mi4yX1RBQkxFREFUQV9PVVRQVVRfRVxHZXRTQVBEYXRhVGFibGUueGFtbEJPA8MBDgIBAVc0V0UCAQJZBVmkAQIBXloFaiACAVBrBXAdAgFKcQV2HQIBRHcFfx0CATeAAQWdARACASSeAQW4AQoCAQu5AQXAAQ4CAQbBAQXBAaABAgEDWXtZoQECAV9azAJa5AICAVxgC2cWAgFRbk1uXAIBTm1LbVYCAUxr/AFrtQICAUt0TXRcAgFIc0xzWAIBRnGFAnG+AgIBRXlVeWQCAUJ9TX1ZAgFAekl6WAIBPnxMfFcCATx7SntTAgE6d/kBd5QCAgE4hQEHjAEQAgEzjQEHlAEQAgEvlQEHnAEfAgElngGgAZ4B0AECAQygAQm2ARQCAQ6+ATS+AUUCAQm7ATW7AUoCAQfBAXnBAZ0BAgEEYQ1lIAIBV2YNZooCAgFSigE8igGEAQIBNocBPYcBRQIBNJIBPJIBigECATKPAT2PAUkCATCYAU+YAVsCAS2XAUyXAVQCASuaAVGaAWICASmVAbUClQHiAgIBKJkBS5kBVgIBJqEBC6cBIwIBHagBC64BIwIBFq8BC7UBIwIBD2FbYV8CAVtjOWNIAgFZYbgBYckBAgFYZoMBZpQBAgFVZucBZusBAgFUZvYBZocCAgFTpAFMpAFQAgEjowFYowFpAgEhpQFSpQFhAgEfoQH2AaEBqwICAR6rAUyrAVQCARyqAViqAWkCARqsAVKsAWECARioAf4BqAGzAgIBF7IBTLIBUgIBFbEBWLEBaQIBE7MBUrMBYQIBEa8B+gGvAa8CAgEQ</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="484,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="464,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelReadCell_1" sap:VirtualizedContainerService.HintSize="314,86">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="314,86">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,336">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="464,472">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="464,114">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="464,114">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="464,114">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="314,87">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,87">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="314,129">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="464,594">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_6" sap:VirtualizedContainerService.HintSize="314,114">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_7" sap:VirtualizedContainerService.HintSize="314,114">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_8" sap:VirtualizedContainerService.HintSize="314,114">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,546">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,736">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="464,60" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="464,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,3052">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GetSAPTableData_1" sap:VirtualizedContainerService.HintSize="526,3132" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

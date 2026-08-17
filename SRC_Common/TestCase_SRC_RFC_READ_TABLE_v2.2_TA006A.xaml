@@ -1,0 +1,498 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="TestCase_SRC_RFC_READ_TABLE_v2_2" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="TestCase_SRC_RFC_READ_TABLE_v2_2_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:uas="clr-namespace:UiPath.Activities.System;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usba="clr-namespace:UiPath.SAP.BAPI.Activities;assembly=UiPath.SAP.BAPI.Activities" xmlns:usbam="clr-namespace:UiPath.SAP.BAPI.Activities.Model;assembly=UiPath.SAP.BAPI.Activities" xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI" xmlns:usbm="clr-namespace:UiPath.SAP.BAPI.Model;assembly=UiPath.SAP.BAPI" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.SAP.BAPI.Telemetry</x:String>
+      <x:String>UiPath.SAP.BAPI.Activities</x:String>
+      <x:String>UiPath.Activities.System</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.SAP.BAPI.Activities.Model</x:String>
+      <x:String>UiPath.SAP.BAPI.Model</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="TestCase_SRC_RFC_READ_TABLE_v2_2" sap:VirtualizedContainerService.HintSize="1082,3782" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="usbc:IConnectionService" Name="SAPService" />
+      <Variable x:TypeArguments="x:String" Name="in_QueryTableStr" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New Datatable]" Name="io_dt_Data" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New Datatable]" Name="io_dt_Fields" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New Datatable]" Name="io_dt_Options" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="... Given" sap:VirtualizedContainerService.HintSize="520,3224" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="in_LanguageKey" />
+        <Variable x:TypeArguments="ui:PasswordCredentials" Name="pcCredential" />
+        <Variable x:TypeArguments="x:String" Name="in_AppServer" />
+        <Variable x:TypeArguments="x:String" Name="in_SystemNumber" />
+        <Variable x:TypeArguments="x:String" Name="in_Client" />
+        <Variable x:TypeArguments="x:String" Name="in_Language" />
+        <Variable x:TypeArguments="x:String" Name="in_User" />
+        <Variable x:TypeArguments="ss:SecureString" Name="in_Password" />
+        <Variable x:TypeArguments="x:String" Name="in_SystemID" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <uas:GetUsernamePasswordX CredentialName="{x:Null}" TimeoutInSeconds="{x:Null}" AutosubmitTimeoutSeconds="10" Credential="[pcCredential]" CredentialsSource="Orchestrator" DisplayName="Get Username/Password" sap:VirtualizedContainerService.HintSize="478,210" sap2010:WorkflowViewState.IdRef="GetUsernamePasswordX_1" OrchestratorCredentialName="SAPUSER" OrchestratorFolderPath="資訊部" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478,366" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_AppServer]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">10.10.10.6</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_SystemNumber]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">01</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_Client]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">310</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_Language]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">EN</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_User]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[pcCredential.Username]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="ss:SecureString">[in_Password]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="ss:SecureString">[New System.Net.NetworkCredential("",pcCredential.Password).SecurePassword]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_SystemID]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">Dev</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[in_QueryTableStr]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">KNA1</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <Assign sap:VirtualizedContainerService.HintSize="478,175" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[in_Language]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["ZF"]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="478,175" sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[in_QueryTableStr]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["T006A"]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="SPRAS &#xD;&#xA;English =&gt; E&#xD;&#xA;繁體中文 =&gt; M or F" sap:VirtualizedContainerService.HintSize="478,236" sap2010:WorkflowViewState.IdRef="Assign_10">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[in_LanguageKey]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["M"]</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="478,57" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="468,209" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <usba:SapApplicationScope AdvancedParameters="{x:Null}" ExistingConnectionService="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" SystemId="{x:Null}" AppServer="[in_AppServer]" Client="[in_Client]" DesignAppServer="10.10.10.6" DesignClient="310" DesignLanguage="EN" DesignSystemId="DEV" DesignSystemNumber="01" DesignUser="UI001" DisplayName="SAP Application Scope" sap:VirtualizedContainerService.HintSize="434,149" sap2010:WorkflowViewState.IdRef="SapApplicationScope_3" Language="[in_Language]" Password="[in_Password]" SapConnectionService="[SAPService]" StatefulConnection="True" SystemNumber="[in_SystemNumber]" User="[in_User]">
+              <usba:SapApplicationScope.Body>
+                <ActivityAction x:TypeArguments="usbc:IConnectionService">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+                  </ActivityAction.Argument>
+                </ActivityAction>
+              </usba:SapApplicationScope.Body>
+              <usba:SapApplicationScope.DesignAdvancedParameters>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignAdvancedParameters>
+              <usba:SapApplicationScope.DesignLogonGroup>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignLogonGroup>
+              <usba:SapApplicationScope.DesignMessageServer>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignMessageServer>
+              <usba:SapApplicationScope.DesignPassword>
+                <ss:SecureString />
+              </usba:SapApplicationScope.DesignPassword>
+              <usba:SapApplicationScope.DesignSapRouterString>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignSapRouterString>
+              <usba:SapApplicationScope.DesignSncLibraryPath>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignSncLibraryPath>
+              <usba:SapApplicationScope.DesignSncMode>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignSncMode>
+              <usba:SapApplicationScope.DesignSncPartnerName>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignSncPartnerName>
+              <usba:SapApplicationScope.DesignSncQOP>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignSncQOP>
+              <usba:SapApplicationScope.DesignSncSso>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </usba:SapApplicationScope.DesignSncSso>
+            </usba:SapApplicationScope>
+          </Sequence>
+        </ui:CommentOut.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:CommentOut>
+      <ui:BuildDataTable DataTable="[io_dt_Data]" DisplayName="Set DATA" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;WA&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <ui:BuildDataTable DataTable="[io_dt_Fields]" DisplayName="Set FIELD" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_3" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FIELDNAME&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <ui:BuildDataTable DataTable="[io_dt_Options]" DisplayName="Set OPTIONS" sap:VirtualizedContainerService.HintSize="478,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_4" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;TEXT&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;SPRAS EQ '&quot; + in_LanguageKey +&quot;'&quot;}]" DataTable="[io_dt_Options]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="478,221" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+      <usba:SapApplicationScope AdvancedParameters="{x:Null}" ExistingConnectionService="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" StatefulConnection="{x:Null}" AppServer="[in_AppServer]" Client="[in_Client]" DesignAppServer="10.10.10.6" DesignClient="310" DesignLanguage="EN" DesignSystemId="DEV" DesignSystemNumber="01" DesignUser="UI001" DisplayName="SAP Application Scope" sap:VirtualizedContainerService.HintSize="478,202" sap2010:WorkflowViewState.IdRef="SapApplicationScope_4" Language="[in_Language]" Password="[in_Password]" SapConnectionService="[SAPService]" SystemId="[in_SystemID]" SystemNumber="[in_SystemNumber]" User="[in_User]">
+        <usba:SapApplicationScope.Body>
+          <ActivityAction x:TypeArguments="usbc:IConnectionService">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+            </ActivityAction.Argument>
+            <usba:InvokeSapBapi BapiDescription="Create Bank" BapiName="RFC_READ_TABLE" BapiSelected="True" DisplayName="RFC_READ_TABLE" sap:VirtualizedContainerService.HintSize="400,60" sap2010:WorkflowViewState.IdRef="InvokeSapBapi_1">
+              <usba:InvokeSapBapi.AllArguments>
+                <scg:Dictionary x:TypeArguments="x:String, usbam:BapiArgumentUiModel">
+                  <x:Reference>__ReferenceID0<x:Key>DELIMITER</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID1<x:Key>NO_DATA</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID2<x:Key>QUERY_TABLE</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID3<x:Key>ROWCOUNT</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID4<x:Key>ROWSKIPS</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID5<x:Key>DATA</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID6<x:Key>FIELDS</x:Key></x:Reference>
+                  <x:Reference>__ReferenceID7<x:Key>OPTIONS</x:Key></x:Reference>
+                </scg:Dictionary>
+              </usba:InvokeSapBapi.AllArguments>
+              <usba:InvokeSapBapi.OptionalArguments>
+                <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="4">
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Name="__ReferenceID0" DataType="String" DataTypeAsString="String" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="DELIMITER" Optional="True" ServiceDataType="">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InArgument x:TypeArguments="x:String" />
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                  </usbam:BapiArgumentUiModel>
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Name="__ReferenceID1" DataType="String" DataTypeAsString="String" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="1" Name="NO_DATA" Optional="True" ServiceDataType="">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InArgument x:TypeArguments="x:String" />
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                  </usbam:BapiArgumentUiModel>
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Name="__ReferenceID3" DataType="Integer" DataTypeAsString="Int32" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="4" Name="ROWCOUNT" Optional="True" ServiceDataType="">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                  </usbam:BapiArgumentUiModel>
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Name="__ReferenceID4" DataType="Integer" DataTypeAsString="Int32" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="4" Name="ROWSKIPS" Optional="True" ServiceDataType="">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                  </usbam:BapiArgumentUiModel>
+                </scg:List>
+              </usba:InvokeSapBapi.OptionalArguments>
+              <usba:InvokeSapBapi.SelectedArgumentList>
+                <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="4">
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" FieldArguments="{x:Null}" x:Name="__ReferenceID2" DataType="String" DataTypeAsString="String" DecimalLength="0" Direction="In" DirectionAsString="In" IsSelected="False" Length="30" Name="QUERY_TABLE" Optional="False" ServiceDataType="">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InArgument x:TypeArguments="x:String">[in_QueryTableStr]</InArgument>
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                  </usbam:BapiArgumentUiModel>
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" Length="{x:Null}" x:Name="__ReferenceID5" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="DATA" Optional="False" ServiceDataType="TAB512">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InOutArgument x:TypeArguments="sd:DataTable">[io_dt_Data]</InOutArgument>
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                    <usbam:BapiArgumentUiModel.FieldArguments>
+                      <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="文字項目の長さ 512" Length="512" Name="WA" />
+                      </scg:List>
+                    </usbam:BapiArgumentUiModel.FieldArguments>
+                  </usbam:BapiArgumentUiModel>
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" Length="{x:Null}" x:Name="__ReferenceID6" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="FIELDS" Optional="False" ServiceDataType="RFC_DB_FLD">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InOutArgument x:TypeArguments="sd:DataTable">[io_dt_Fields]</InOutArgument>
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                    <usbam:BapiArgumentUiModel.FieldArguments>
+                      <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="8">
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="項目名" Length="30" Name="FIELDNAME" />
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="項目のオフセット" Length="6" Name="OFFSET" />
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="長さ (文字数)" Length="6" Name="LENGTH" />
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="ABAP データ型 (C,D,N,...)" Length="1" Name="TYPE" />
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="リポジトリオブジェクトの内容説明" Length="60" Name="FIELDTEXT" />
+                      </scg:List>
+                    </usbam:BapiArgumentUiModel.FieldArguments>
+                  </usbam:BapiArgumentUiModel>
+                  <usbam:BapiArgumentUiModel Description="{x:Null}" Length="{x:Null}" x:Name="__ReferenceID7" DataType="DataTable" DataTypeAsString="DataTable" DecimalLength="0" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="OPTIONS" Optional="False" ServiceDataType="RFC_DB_OPT">
+                    <usbam:BapiArgumentUiModel.ArgumentValue>
+                      <InOutArgument x:TypeArguments="sd:DataTable">[io_dt_Options]</InOutArgument>
+                    </usbam:BapiArgumentUiModel.ArgumentValue>
+                    <usbam:BapiArgumentUiModel.FieldArguments>
+                      <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="4">
+                        <usbm:FieldArgument DataType="String" DecimalLength="0" Description="SAPoffice: メッセージのテキスト行" Length="72" Name="TEXT" />
+                      </scg:List>
+                    </usbam:BapiArgumentUiModel.FieldArguments>
+                  </usbam:BapiArgumentUiModel>
+                </scg:List>
+              </usba:InvokeSapBapi.SelectedArgumentList>
+            </usba:InvokeSapBapi>
+          </ActivityAction>
+        </usba:SapApplicationScope.Body>
+        <usba:SapApplicationScope.DesignAdvancedParameters>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignAdvancedParameters>
+        <usba:SapApplicationScope.DesignLogonGroup>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignLogonGroup>
+        <usba:SapApplicationScope.DesignMessageServer>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignMessageServer>
+        <usba:SapApplicationScope.DesignPassword>
+          <ss:SecureString />
+        </usba:SapApplicationScope.DesignPassword>
+        <usba:SapApplicationScope.DesignSapRouterString>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignSapRouterString>
+        <usba:SapApplicationScope.DesignSncLibraryPath>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignSncLibraryPath>
+        <usba:SapApplicationScope.DesignSncMode>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignSncMode>
+        <usba:SapApplicationScope.DesignSncPartnerName>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignSncPartnerName>
+        <usba:SapApplicationScope.DesignSncQOP>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignSncQOP>
+        <usba:SapApplicationScope.DesignSncSso>
+          <InArgument x:TypeArguments="x:String">
+            <Literal x:TypeArguments="x:String" Value="" />
+          </InArgument>
+        </usba:SapApplicationScope.DesignSncSso>
+      </usba:SapApplicationScope>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="478,569" sap2010:WorkflowViewState.IdRef="Comment_2" Text="[&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M%  %  %     %         百分比&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M%O %O %O    %0        千分率&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M1  一  一     一         一&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M10 D  d     天         天&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M22S22Smm2/s mm2/s     平方公釐/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M2M CMScm/s  cm/s      公分/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M2X 000m/min m/min     公尺/分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M4G 無  無     無         微升&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M4O 湩  湩     湩         微法拉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310M4T PF pF    pF        微微法拉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MA  A  A     A         安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MA87GOHGOhm  GOhm      千兆歐姆&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MA93GM3g/m3  g/m3      公克/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MACRACRacre  英畝        英畝&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB34KD3kg/dm3kg/dm3    公斤/立方公寸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB45KMLkmol  kmol      仟莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB47NI ND    ND        仟牛頓&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB73MN mn    MN        百萬牛頓&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB75MGOMOhm  MOhm      百萬歐姆&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB78MHVMV    MV        百萬伏特&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MB84渙  渙     渙         微安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBAGBAGBAG   袋         袋&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBAR巴  巴     巴         巴&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBJ BarBarrel桶         桶&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBM2BM2Bq/m2 貝克/m2     貝克/每平方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBOEBOEBOE   BOE       約當油桶數&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBOTBT Bt.   瓶         瓶&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBQ BQ 貝克    貝克        貝克〈1/秒〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBQ2BQ2Bq/cm2Bq/cm2    貝克/平方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBQGBQGBq/g  貝克/公克     貝克/克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBQKBQKBq/kg Bq/kg     貝克/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBTUBTUBTU   英制熱單位     英制熱單位&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBYTBYTBytes Bytes     Bytes&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MBqmBqmBq/m3 Bq/m3     貝克/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC10RF mF    mF        毫法拉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC36M/Mmol/m3Mo/m3     每立方公尺莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC38M/LMol/l 莫耳/公升     每公升莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC39NA nA    nA        塵安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC3SC3Scm3/s cm3/s     立方公分/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC41R-UnF    nF        毫微法拉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MC56NMMN/mm2 N/mm2     牛頓/平方公釐&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCCKCCKCCM/KGCCM/KG    每公斤立方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCCMCCMcm3   cm3       立方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCD CD cd    cd        燭光&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCDMCD3dm3   立方公寸      立方公寸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCM CM cm    公分        公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCM2CM2cm2   cm2       平方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCMHCMHcm/h  cm/h      公分/小時&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCOPCOP副本    副本        副本&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCS CV 個案    個案        個案&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCTLCL Cl    厘升        厘升&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MCUPCUPcup   杯         杯&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MD10S/MS/m   Siemens/m Siemens/公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MD41TOMt/m3  t/m3      噸/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MD46VAMVAM   伏安        伏特 - 安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDBAdBAdB (A)dB (A)    分貝〈A 加權〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDBCdBCdB (C)dB (C)    分貝〈C 加權〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDEGDEGdeg   程度        程度&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDGPDGPDGP   ADR 點     ADR 危險物品豁免點&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDM DM dm    dm        公寸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDPRDRRDRR   cProjects cProjects: Unit f. Req. Capcty&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDR DR DR    滾筒        滾筒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MDZ DZ dz    打         打&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MEA EA ea    每個        每個&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MEE EU EU    酵素單位      酵素單位&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MEMLEMLEU/ml 酵素/ml     酵素單位/毫升&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MF  F  F     F         法拉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MFA 蚌  蚌     蚌         華氏溫度&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MFT 呎  呎     呎         呎&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MFT2FT2ft2   平方呎       平方呎&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MFT3FT3ft3   立方呎       立方呎&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MG  G  g     g         公克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MG/LG/Lgai/l gai/公升    公克有效成分/公升&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGAUGAUgau   公克黃金      公克黃金&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGBQGBqGBq   十億貝克      十億貝克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGC ℃  ℃     ℃         攝氏度數&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGHGGHGg/hg  g/hg      公克/公兩&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGJ GJ GJ    十億焦耳      十億焦耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGJKGJCGJ/kl GJ/kl     千兆焦耳/公秉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGJTGJTGJ/噸  GJ/噸      千兆焦耳/噸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGKGGKGg/kg  g/kg      公克/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGLIGLIg/l   g/l       公克/公升&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGLLGALgal USUS 加侖     加侖〈美國〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGLMGPMGPM USGal/Mi(US)加侖每哩〈美制〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGM GM g/莫耳  g/莫耳      公克/莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGM2GM2g/m2  g/m2      公克/平方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGPHGPHGPH US加侖/hr US  加侖每小時〈美制〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGQ 湟Q 湟Q    湟Q        微克/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGRO籮  籮     籮         籮&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGT g/tg/t   公克/噸      公克/噸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MGW GAIgai   g 有效原料    公克有效成份&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MH  H  h     小時        小時&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MHARHA 公頃    公頃        公頃&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MHHR003000003&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MHL HL hl    hl        公石&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MHPAHPAhPa   hPa       百帕斯卡&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MHZ HZ Hz    Hz        赫玆〈1/秒〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MIN 吋  英吋    吋         吋&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MIN2\&quot;2 平方吋   平方吋       平方吋&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MIN3\&quot;3 立方吋   立方吋       立方吋&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MJ  J  J     J         焦耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MJHRYR 年     年         年&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MJKGJKGJ/kg  J/kg      焦耳/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MJKKJKKJ/kgK J/(kg*K)  特定熱容量&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MJMOJMOJ/mol J/mol     焦耳/莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MK  K  k     K         絕對溫度&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKA KA kA    千安培       千安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKANKANKAN   罐         罐&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKARKARKAR   箱         箱&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKB2KB2kBq/c2千貝克/cm2   仟貝克/平方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKBGKBGkBq/g 千貝克/g     仟貝克/克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKBKKBKkBq/kgkBq/kg    千貝克/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKBQKBQ千貝克   千貝克       千貝克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKG KG kg    kg        公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGFKGFkg/m2 kg/m2     公斤/平方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGHKGHkg/h  公斤/小時     公斤/小時&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGJKGJkg/GJ kg/GJ     公斤/千兆焦耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGKKGKkg/kg kg/kg     公斤/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGMKGMkg/molkg/mol    公斤/莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGSKGSkg/s  kg/s      公斤/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGTKGTkg/t  公斤/噸      公斤/噸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGVKGVkg/m3 kg/m3     公斤/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKGWKAIkgai  kg有效原料    公斤有效成份&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKHZKHZKHZ   KHZ       仟赫&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKI CRT板條箱   板條箱       板條箱&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKJ KJ KJ    KJ        仟焦耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKJGKJGkJ/g  kJ/g      千焦耳/公克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKJKKJKKJ/kg KJ/kg     仟焦耳/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKJMKJMkJ/molkJ/mol    仟焦耳/莫耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKM KM km    km        公里&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKM2KM2km2   km2       平方公里&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKMHKMHkm/h  km/h      公里/小時&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKMKKMKm3/m3 m3/m3     立方公尺/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKMNKMNK/min K/min     絕對溫度/分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKMSKMSK/s   K/s       絕對溫度/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKOHKOHkOhm  kOhm      仟歐姆&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKPAKPAkpa   kpa       仟帕斯卡&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKT KT kt    kt        千噸&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKV KV kV    kV        仟伏特&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKVAKVAkVA   kVA       千伏特 - 安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKW KW KW    KW        仟瓦&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKWHKWHkW.h  仟瓦小時      仟瓦小時&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKWKKIKkai/kgkai/kg    公斤有效成份/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MKWMKWMkWh/m3kWh/m3    千瓦時/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310ML  L  l     l         公升&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310ML2 LMIl/min l/min     公升/分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLB LB lb    磅         磅&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLBJLBY磅/年   磅/年       磅/年&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLBmlbM磅/月   磅/月       磅/月&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLE AU AU    作業單位      作業單位&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLHKLHKl/hkm l/100 公里  公升每 100 公里&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLM 002000002公尺/個件     每單位長度〈公尺〉&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLMSLMSl/m_.sl/mol.s   公升/莫耳秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MLPHLPHL/hr  公升/小時     公升每小時&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM  M  m     公尺        公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM% M% %(m)  %(m)      百分比質量&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM%OM%O%O(m) %0 (質量)   千分率質量&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM/SM/Sm/s   m/s       公尺/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2 M2 m2    平方公尺      平方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2CM2Cm2/cm3m2/cm3    平方公尺/立方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2GM2Gm2/g  m2/g      平方公尺/公克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2IM-21/M2  1/M2      1/平方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2KM2Km2/kg m2/kg     平方公尺/公斤&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2MM2Mm2/m3 m2/m3     平方公尺/立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM2SM2Sm2/s  m2/s      平方公尺/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM3 M3 m3    m3        立方公尺&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM3DM3Dm3/日  m3/日      立方公尺/日&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MM3SM3Sm3/s  m3/s      立方公尺/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMA MA mA    mA        毫安培&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMB2MB2MBq/c2百萬貝克c2    百萬貝克/平方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMBAMBAmbar  mbar      毫巴&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMBGMBGMBq/g 百萬貝克/g    百萬貝克/克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMBQMBqMBq   百萬貝克      百萬貝克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMBZMBZm.b_/sm.bar/s   公尺巴/秒&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMEJMEJMJ    MJ        百萬焦耳&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMG MG mg    mg        毫克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMGFMGEmg/cm2mg/cm2    毫克/平方公分&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMGGMGGmg/g  mg/g      毫克/公克&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMGJMGJg/m3/kg/m3/kpa  公克/立方公尺/千帕&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;WA&quot;: &quot;310MMGKMGKmg/kg mg/kg     毫克" />
+      <ui:Comment sap:VirtualizedContainerService.HintSize="478,479" sap2010:WorkflowViewState.IdRef="Comment_1" Text="[&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;MANDT&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000000&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000003&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;用戶端&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;SPRAS&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000003&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000001&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;語言代碼&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;MSEHI&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000004&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000003&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;計量單位&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;MSEH3&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000007&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000003&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;外部計量單位商業格式（3 字元）&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;MSEH6&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000010&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000006&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;外部計量單位技術格式（6 字元）&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;MSEHT&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000016&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000010&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;計量單位內文（最多 10 字元）&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;FIELDNAME&quot;: &quot;MSEHL&quot;,&#xD;&#xA;    &quot;OFFSET&quot;: &quot;000026&quot;,&#xD;&#xA;    &quot;LENGTH&quot;: &quot;000030&quot;,&#xD;&#xA;    &quot;TYPE&quot;: &quot;C&quot;,&#xD;&#xA;    &quot;FIELDTEXT&quot;: &quot;計量單位內文（最大 30 字元）&quot;&#xD;&#xA;  }&#xD;&#xA;]" />
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,166" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;&quot;]" />
+    </Sequence>
+    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="520,422" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,330" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_RFC_READ_TABLE_v2.2 - Invoke Workflow File (SRC_Common\SRC_RFC_READ_TABLE_v2.2.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_Common\SRC_RFC_READ_TABLE_v2.2.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[SAPService]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_QueryTableStr">[in_QueryTableStr]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Data">[io_dt_Data]</InOutArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Fields">[io_dt_Fields]</InOutArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_Options">[io_dt_Options]</InOutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ui:CommentOut.Body>
+      </ui:CommentOut>
+    </Sequence>
+    <Sequence DisplayName="... Then" sap:VirtualizedContainerService.HintSize="520,113" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Sequence>
+  </Sequence>
+</Activity>

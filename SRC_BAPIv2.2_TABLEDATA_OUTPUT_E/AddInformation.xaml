@@ -1,48 +1,40 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="AddInformation"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="AddInformation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="io_dt_OutDataTable" Type="InOutArgument(sd:DataTable)" />
-    <x:Property Name="in_ColumnName" Type="InArgument(x:String)" />
-    <x:Property Name="in_dt_InputData" Type="InArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="參考資料表（DataTable），會逐列去抓資料" Name="io_dt_OutDataTable" Type="InOutArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="要從參考表裡抓哪一個欄位的值（例如&quot;FIELDTEXT&quot;欄位說明文字）" Name="in_ColumnName" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="要被插入新列的目標資料表（可讀可寫）" Name="in_dt_InputData" Type="InArgument(sd:DataTable)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap2010:WorkflowViewState.IdRef>AddInformation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -67,30 +59,108 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Add Info to the header of DataTable.&#xA;Add Info of target Column of reference DataTable defined as Argument to the header of DataTable.&#xA;&#xA;- Input/Output&#xA;in_dt_InputData as reference DataTable  &lt;DataTable&gt;&#xA;in_ColumnName as reference ColumnName &lt;String&gt;&#xA;io_dt_OutDataTable as DataTable to insert a row &lt;DataTable&gt;" DisplayName="AddInformation" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,60" Id="Assign_4" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_5" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,250" Id="ForEachRow_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,159" Id="InvokeMethod_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,1097" Id="Sequence_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="376,1177" Id="AddInformation_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這個工作流程的功能是：從一張參考資料表（in_dt_InputData）裡，取出指定欄位（in_ColumnName）每一列的值，橫向排成一整列，並把這一整列資料插入到目標資料表（io_dt_OutDataTable）的最上方（第一列）。這通常是用來在輸出資料表最上面加一列「說明/標頭資訊」，例如加上每個欄位對應的中文說明、或原始欄位名稱等。)&#xA;Add Info to the header of DataTable.&#xA;Add Info of target Column of reference DataTable defined as Argument to the header of DataTable.&#xA;&#xA;- Input/Output&#xA;in_dt_InputData as reference DataTable  &lt;DataTable&gt;&#xA;in_ColumnName as reference ColumnName &lt;String&gt;&#xA;io_dt_OutDataTable as DataTable to insert a row &lt;DataTable&gt;" DisplayName="AddInformation" sap:VirtualizedContainerService.HintSize="880,2160" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataRow" Name="TempRow" />
       <Variable x:TypeArguments="x:String" Default="AddInformation" Name="WorkflowName" />
       <Variable x:TypeArguments="x:Int32" Name="Index" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <Assign DisplayName="Assign NewRow" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="舉例說明&#xD;&#xA;假設 in_dt_InputData（參考表）的 FIELDTEXT 欄位，依列順序內容是：&#xD;&#xA;&#xD;&#xA;第0列: &quot;料號&quot;   第1列: &quot;工廠&quot;   第2列: &quot;料號類型&quot;&#xD;&#xA;&#xD;&#xA;且 in_ColumnName = &quot;FIELDTEXT&quot;：&#xD;&#xA;跑完這個流程後，TempRow 會變成：&#xD;&#xA;&#xD;&#xA;第0欄: &quot;料號&quot;   第1欄: &quot;工廠&quot;   第2欄: &quot;料號類型&quot;&#xD;&#xA;&#xD;&#xA;然後這整列會被插入到 io_dt_OutDataTable 的最上面，變成一列「欄位說明標頭」。" sap:VirtualizedContainerService.HintSize="450,449" sap2010:WorkflowViewState.IdRef="Comment_1" Text="舉例說明&#xD;&#xA;假設 in_dt_InputData（參考表）的 FIELDTEXT 欄位，依列順序內容是：&#xD;&#xA;Text&#xD;&#xA;第0列: &quot;料號&quot;   第1列: &quot;工廠&quot;   第2列: &quot;料號類型&quot;&#xD;&#xA;且 in_ColumnName = &quot;FIELDTEXT&quot;：&#xD;&#xA;跑完這個流程後，TempRow 會變成：&#xD;&#xA;Text&#xD;&#xA;第0欄: &quot;料號&quot;   第1欄: &quot;工廠&quot;   第2欄: &quot;料號類型&quot;&#xD;&#xA;然後這整列會被插入到 io_dt_OutDataTable 的最上面，變成一列「欄位說明標頭」。">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Comment_2" Text="這個流程的用途&#xD;&#xA;這是 SRC_BAPIv2.2_TABLEDATA_OUTPUT_E 模組裡用來美化輸出結果的小工具：把 SAP 抓回來的原始資料表（欄位名通常是英文代碼，例如 MATNR、WERKS）輸出前，先在最上面插入一列「中文說明」或「欄位描述」，讓最終產出的 Excel/報表更容易閱讀，不用只看到 SAP 的代碼欄位名。" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Assign sap2010:Annotation.AnnotationText="用 io_dt_OutDataTable.NewRow 建立一筆空白的新資料列 TempRow&#xD;&#xA;&gt; 這筆新列的欄位結構會跟目標表 io_dt_OutDataTable 完全一致" DisplayName="Assign NewRow" sap:VirtualizedContainerService.HintSize="450,252" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[TempRow]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="sd:DataRow">[io_dt_OutDataTable.NewRow]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:ForEachRow sap2010:Annotation.AnnotationText="Convert Info of target Column of reference DataTable into a Row of DataTable." CurrentIndex="[Index]" DataTable="[in_dt_InputData]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" sap2010:Annotation.AnnotationText="Convert Info of target Column of reference DataTable into a Row of DataTable.&#xD;&#xA;&#xD;&#xA;用 ForEachRow 逐列走過 in_dt_InputData（參考表）&#xD;&#xA;&gt; 用 Index 記錄目前跑到第幾列（CurrentIndex=&quot;[Index]&quot;）&#xD;&#xA;&gt; 每一列（row）都執行：&#xD;&#xA;&gt;&gt; 把 row(in_ColumnName) 的值（也就是參考表這一列、指定欄位的內容）指定給 TempRow.Item(Index)&#xD;&#xA;&gt; ⚠️ 關鍵技巧：這裡是用 Index（目前是第幾列）當作 TempRow 的「欄位索引」，也就是說：&#xD;&#xA;&gt;&gt; 參考表第 0 列的 in_ColumnName 值 → 放到 TempRow 的第 0 欄&#xD;&#xA;&gt;&gt; 參考表第 1 列的 in_ColumnName 值 → 放到 TempRow 的第 1 欄&#xD;&#xA;&gt;&gt; 以此類推……&#xD;&#xA;&gt; 這樣一來，參考表原本是「直向排列」的資料，就被轉換成「橫向排列」成一整列了！" CurrentIndex="[Index]" DataTable="[in_dt_InputData]" DisplayName="For Each Row 原「直向排列」資料表，轉成「橫向排列」成一整列" sap:VirtualizedContainerService.HintSize="450,701" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Assign DisplayName="Assign TempRow.Item(Index)" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign DisplayName="Assign TempRow.Item(Index)" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="Assign_5">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Object">[TempRow.Item(Index)]</OutArgument>
             </Assign.To>
@@ -100,63 +170,31 @@
           </Assign>
         </ActivityAction>
       </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <InvokeMethod sap2010:Annotation.AnnotationText="Add TempRow to the first line" DisplayName="Invoke Method" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="InsertAt">
+    <InvokeMethod sap2010:Annotation.AnnotationText="Add TempRow to the first line&#xD;&#xA;&#xD;&#xA;用 InvokeMethod 呼叫 io_dt_OutDataTable.Rows.InsertAt(TempRow, 0)&#xD;&#xA;&gt; 把組好的 TempRow插入到目標表的第 0 列（也就是最上面）.&#xD;&#xA;&gt; 用 InsertAt 而不是 Add，就是為了確保這筆資訊列一定會出現在表格最上方，不管目標表原本有沒有其他資料." DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="450,328" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="InsertAt">
       <InvokeMethod.TargetObject>
         <InArgument x:TypeArguments="sd:DataRowCollection">[io_dt_OutDataTable.Rows]</InArgument>
       </InvokeMethod.TargetObject>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <InArgument x:TypeArguments="sd:DataRow">[TempRow]</InArgument>
       <InArgument x:TypeArguments="x:Int32">0</InArgument>
     </InvokeMethod>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
-    <sads:DebugSymbol.Symbol>d7EBQzpcZmpcVWlwYXRoXDA1X1NBUOmDqOWTgemWi+eZuuODluODquODvOODleOCo+ODs+OCsFwwM1/kvZzmpa1cMDFf5L2c5oiQXDMwX1NSQ19UQUJMRURBVEFfT1VUUFVUX1ZvbDJcSEFOQVxTUkNfVEFCTEVEQVRBX09VVFBVVFxTUkNfQkFQSXYyLjJfVEFCTEVEQVRBX09VVFBVVFxBZGRJbmZvcm1hdGlvbi54YW1sE0gDcQ4CAQFLNEtEAgECTgVOpAECARdPBVYOAgETVwVnFQIBC2gFbhQCAQZvBW+gAQIBA057TqEBAgEYVDJUTQIBFlEzUTwCARRXkwFXnAECARFXpwFXugECAQ9dC2QUAgEMbS1tLgIBCmwwbDkCAQhqPGpVAgEHb3lvnQECAQRiNmJTAgEOXzdfTAIBDQ==</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="314,250">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeMethod_1" sap:VirtualizedContainerService.HintSize="314,159">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="336,1097">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddInformation_1" sap:VirtualizedContainerService.HintSize="376,1177" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

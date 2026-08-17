@@ -1,47 +1,39 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="GetConvertDataType"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetConvertDataType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_ConvertType" Type="OutArgument(x:String)" />
-    <x:Property Name="in_ConvertDataType" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出結果：轉換後的簡化型態（&quot;String&quot;/&quot;Int&quot;/&quot;Byte&quot;），如果查不到就回傳空白" Name="out_ConvertType" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="要查詢的 SAP 資料型態代碼（例如&quot;CHAR&quot;、&quot;DEC&quot;）" Name="in_ConvertDataType" Type="InArgument(x:String)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap2010:WorkflowViewState.IdRef>GetConvertDataType_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -67,27 +59,126 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Return  value (&quot;String&quot;or&quot;Int&quot;or&quot;Byte&quot;).&#xA;If nothing value it ,return blank.&#xA;&#xA;- Input/Output&#xA;in_ConvertDataType as string to be checked&#xA;out_ConvertType as converted string" DisplayName="GetConvertDataType" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,146" Id="BuildDataTable_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,87" Id="Assign_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_10" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,208" Id="If_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="464,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="486,1024" Id="Sequence_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="526,1104" Id="GetConvertDataType_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (把 SAP 的 ABAP 資料型態代碼（例如 CHAR、DEC、INT4…），轉換成比較「通用、簡化」的三種型態分類：String、Int、Byte，這樣後續在組查詢條件時，就能依照這個簡化後的型態，決定要用什麼格式來寫判斷式（例如字串要加引號、數字不用加）。)&#xA;Return  value (&quot;String&quot;or&quot;Int&quot;or&quot;Byte&quot;).&#xA;If nothing value it ,return blank.&#xA;&#xA;- Input/Output&#xA;in_ConvertDataType as string to be checked&#xA;out_ConvertType as converted string" DisplayName="GetConvertDataType" sap:VirtualizedContainerService.HintSize="973,2003" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="GetConvertDataType" Name="WorkflowName" />
       <Variable x:TypeArguments="sd:DataRow[]" Name="Rows" />
       <Variable x:TypeArguments="sd:DataTable" Name="TypeDataTable" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Create a comparison table of data types used by SAP.&#xA;&#xA;-SAPDataType : Data type used by SAP&#xA;-ConvertType: Corresponding data type" DataTable="[TypeDataTable]" DisplayName="Build Data Table" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;SAPDataType&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ConvertType&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CUKY&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;UNIT&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;NUMC&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CHAR&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;LCHR&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;DATS&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;ACCP&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;TIMS&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CLNT&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;LANG&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;DEC&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;INT4&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CURR&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;QUAN&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;FLTP&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;INT1&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;INT2&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;PREC&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;RAWSTRING&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;RAW&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;LRAW&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;" />
-    <Assign sap2010:Annotation.AnnotationText="Get Data Type from TypeDataTable." DisplayName="Assign Rows" sap2010:WorkflowViewState.IdRef="Assign_9">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="舉例說明&#xD;&#xA;&gt; 輸入 in_ConvertDataType = &quot;CHAR&quot; → 對照表查到 → out_ConvertType = &quot;String&quot;&#xD;&#xA;&gt; 輸入 in_ConvertDataType = &quot;DEC&quot; → 對照表查到 → out_ConvertType = &quot;Int&quot;&#xD;&#xA;&gt; 輸入 in_ConvertDataType = &quot;XYZ&quot;（不存在的型態）→ 查不到 → out_ConvertType = &quot;&quot;（空白）" sap:VirtualizedContainerService.HintSize="452,215" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="這個流程正是前面 SetOptionDataTable.xaml 裡第一步呼叫的子流程：&#xD;&#xA;&#xD;&#xA;SetOptionDataTable.xaml&#xD;&#xA;   ↓ (傳入 row.Item(&quot;DATATYPE&quot;))&#xD;&#xA;GetConvertDataType.xaml  ← 把 SAP 型態代碼簡化成 String/Int/Byte&#xD;&#xA;   ↓ (out_ConvertType)&#xD;&#xA;MakeOptionDataTable.xaml  ← 依照這個簡化型態，決定查詢條件的寫法&#xD;&#xA;                              (例如 String 型態的值要加單引號 &#xD;&#xA;                               '值'，Int 型態則不需要加引號)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;這樣設計的好處是：不用針對每一種 SAP 底層的細分型態都寫一套判斷邏輯，只要簡化成 3 大類，後續組 SQL-like 查詢字串時的邏輯就會簡單很多。&#xD;&#xA;至此，SRC_BAPIv2.2_TABLEDATA_OUTPUT_E 這個模組裡「查詢條件組裝」相關的三個流程（SetOptionDataTable、GetConvertDataType、以及尚未看過的 MakeOptionDataTable）的關聯已經很清楚了。" sap:VirtualizedContainerService.HintSize="452,461" sap2010:WorkflowViewState.IdRef="Comment_2" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="452,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Create a comparison table of data types used by SAP.&#xA;&#xA;-SAPDataType : Data type used by SAP&#xA;-ConvertType: Corresponding data type&#xD;&#xA;&#xD;&#xA;用 BuildDataTable 建立一張「型態對照表」TypeDataTable&#xD;&#xA;&gt; 欄位：SAPDataType（SAP 型態代碼）、ConvertType（對應的簡化型態）&#xD;&#xA;&gt; 表裡預先寫好了完整的對照清單：&#xD;&#xA;SAP 資料型態（ABAP Type）| 轉換後型態&#xD;&#xA;CUKY、UNIT、NUMC、CHAR、LCHR、DATS、ACCP、TIMS、CLNT、LANG | String&#xD;&#xA;DEC、INT4、CURR、QUAN、FLTP | Int&#xD;&#xA;INT1、INT2、PREC、RAWSTRING、RAW、LRAW |Byte" DataTable="[TypeDataTable]" DisplayName="Build Data Table TypeDataTable" sap:VirtualizedContainerService.HintSize="452,365" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;SAPDataType&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ConvertType&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CUKY&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;UNIT&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;NUMC&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CHAR&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;LCHR&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;DATS&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;ACCP&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;TIMS&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CLNT&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;LANG&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;String&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;DEC&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;INT4&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;CURR&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;QUAN&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;FLTP&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Int&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;INT1&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;INT2&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;PREC&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;RAWSTRING&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;RAW&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;SAPDataType&gt;LRAW&lt;/SAPDataType&gt;&#xA;    &lt;ConvertType&gt;Byte&lt;/ConvertType&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:BuildDataTable>
+    <Assign sap2010:Annotation.AnnotationText="Get Data Type from TypeDataTable.&#xD;&#xA;&#xD;&#xA;用 TypeDataTable.Select(...) 查詢&#xD;&#xA;&gt; 條件：SAPDataType = '[in_ConvertDataType]'&#xD;&#xA;&gt; 把查詢結果（符合的資料列陣列）存到 Rows" DisplayName="Assign Rows" sap:VirtualizedContainerService.HintSize="452,269" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow[]">[Rows]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="sd:DataRow[]">[TypeDataTable.Select("SAPDataType = '" &amp; in_ConvertDataType &amp; "'")]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <If Condition="[Rows.Length &lt;&gt; 0]" DisplayName="If Convert Type information was found" sap2010:WorkflowViewState.IdRef="If_4">
+    <If sap2010:Annotation.AnnotationText="判斷有沒有查到對應的型態&#xD;&#xA;&gt; 條件：Rows.Length &lt;&gt; 0&#xD;&#xA;&gt;&gt; 有查到 → 把查到的那一列的 ConvertType 欄位值，指定給 out_ConvertType&#xD;&#xA;&gt;&gt; 沒查到 → out_ConvertType 維持預設值（空白），不做任何指定" Condition="[Rows.Length &lt;&gt; 0]" DisplayName="If Convert Type information was found" sap:VirtualizedContainerService.HintSize="452,488" sap2010:WorkflowViewState.IdRef="If_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Assign DisplayName="Assign Set out_ConvertType" sap2010:WorkflowViewState.IdRef="Assign_10">
+        <Assign DisplayName="Assign Set out_ConvertType" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_10">
           <Assign.To>
             <OutArgument x:TypeArguments="x:String">[out_ConvertType]</OutArgument>
           </Assign.To>
@@ -97,59 +188,13 @@
         </Assign>
       </If.Then>
     </If>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
-    <sads:DebugSymbol.Symbol>d7UBQzpcZmpcVWlwYXRoXDA1X1NBUOmDqOWTgemWi+eZuuODluODquODvOODleOCo+ODs+OCsFwwM1/kvZzmpa1cMDFf5L2c5oiQXDMwX1NSQ19UQUJMRURBVEFfT1VUUFVUX1ZvbDJcSEFOQVxTUkNfVEFCTEVEQVRBX09VVFBVVFxTUkNfQkFQSXYyLjJfVEFCTEVEQVRBX09VVFBVVFxHZXRDb252ZXJ0RGF0YVR5cGUueGFtbBBIA2YOAgEBSjRKSAIBAk4FTqQBAgETTwVPmCkCARBQBVcOAgEMWAVjCgIBBmQFZKABAgEDTntOoQECARRP0wFP5AECARFVNFWAAQIBD1I1UjsCAQ1YE1gtAgEHWglhEgIBCGR5ZJ0BAgEEXzRfWgIBC1w1XEYCAQk=</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="452,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="464,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BuildDataTable_1" sap:VirtualizedContainerService.HintSize="464,146">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="464,87">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,208">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="464,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1024">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GetConvertDataType_1" sap:VirtualizedContainerService.HintSize="526,1104" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

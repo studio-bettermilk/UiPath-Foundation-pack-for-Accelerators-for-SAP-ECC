@@ -1,0 +1,241 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_BAPIv2_2_VALTBL_CNV_E" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="SAP連線資訊(已建立好的連線Session，由外部傳入，這支流程本身沒有連線/登出動作)" Name="in_SAPService" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property sap2010:Annotation.AnnotationText="要轉換的Excel檔案路徑(轉換完直接覆寫回這份檔案)" Name="in_FilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="對應SAPT006A表的SPRAS（語言代碼），決定抓哪個語系的單位文字" Name="in_LanguageKey" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SAP_Logout_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Cryptography</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Java.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.PDF</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="InvokeWorkflowFile_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="InvokeWorkflowFile_6" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="InvokeWorkflowFile_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="InvokeWorkflowFile_7" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,91" Id="LogMessage_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="336,1061" Id="Sequence_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="376,1141" Id="SAP_Logout_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程是 SRC_BAPIv2.2_VALTBL_CNV_E 模組的最上層主流程（也就是您目前選中的 Sequence_4），功能是：把Excel檔案裡填寫的「外部單位」，全部轉換成SAP認得的「內部單位」，並直接寫回同一份Excel檔案。)&#xA;    Convert the unit of measure described in the Excel file to the internal unit of measure obtained from SAP.&#xA;&#xA;- Argument&#xA;    in_SAPService as Connected session information &lt;IConnectionService&gt;&#xA;    in_FilePath as File path of Excel file to convert&lt;String&gt;&#xA;    in_LanguageKey as T006A-SPRAS (Language Key)&lt;String&gt;&#xA;&#xA;" DisplayName="SRC_BAPIv2.2_VALTBL_CNV_E" sap:VirtualizedContainerService.HintSize="880,2933" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_VALTBL_CNV_E" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" Name="ConversionTarget" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_UnitOfMeas" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="四大模組之間的關係圖&#xD;&#xA;&#xD;&#xA;【模組4：VAL_TBL_EXPORT_E】 產生單位對照Excel ──► 【模組4：VALTBL_CNV_E】 使用對照表轉換資料&#xD;&#xA;                                                        (供模組1註冊前先轉換好單位)&#xD;&#xA;&#xD;&#xA;【模組2：DATAELEMENT_OUTPUT_E】 產生欄位條件Excel ──► 【模組3：TABLEDATA_OUTPUT_E】 依條件撈實際資料&#xD;&#xA;&#xD;&#xA;【模組1：REGISTER】 讀取(可能經過模組4轉換過的)Excel資料 ──► 送進SAP做BAPI登錄&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;簡單說：模組2+3是一組「查詢/讀取」的搭檔（先產生查詢範本，再依範本撈資料），模組4是「單位轉換」的輔助工具（產生對照表+執行轉換），模組1則是「寫入/登錄」的主力，是整個Foundation Pack最終要達成的核心目的——把資料寫回SAP。" sap:VirtualizedContainerService.HintSize="450,428" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="（單位轉換模組，兩支互補流程）&#xD;&#xA;功能：處理SAP單位代碼與外部單位代碼之間的轉換對照。&#xD;&#xA;&gt; VAL_TBL_EXPORT_E（產生對照表）：&#xD;&#xA;&#xD;&#xA;CheckArgument.xaml → GetUnitsOfMeasurement.xaml（撈T006+T006A，Left Join產出MSEHI↔MSEH3對照表，寫入Excel）&#xD;&#xA;&#xD;&#xA;&gt; VALTBL_CNV_E（使用對照表做轉換）：&#xD;&#xA;&#xD;&#xA;CheckArgument.xaml → ReadConversionTarget.xaml（讀Excel所有工作表）&#xD;&#xA;→ GetUnitsOfMeasurement.xaml（撈單位對照表）&#xD;&#xA;→ DataConversion.xaml（逐表逐列處理：FindTargetDataType.xaml找UNIT欄位 → ConvertUnits.xaml依對照表轉換，寫回Excel）" sap:VirtualizedContainerService.HintSize="450,379" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="完整呼叫關係圖&#xA;&#xA;SRC_BAPIv2.2_VALTBL_CNV_E.xaml（主流程）&#xA; ├─ CheckArgument.xaml              → 驗證輸入參數&#xA; ├─ ReadConversionTarget.xaml       → 讀Excel所有工作表 → ConversionTarget(Dictionary)&#xA; ├─ GetUnitsOfMeasurement.xaml      → 撈SAP單位對照表 → dt_UnitOfMeas&#xA; │    ├─ GetT006.xaml&#xA; │    └─ GetT006A.xaml&#xA; └─ DataConversion.xaml             → 主控轉換&#xA;      ├─ FindTargetDataType.xaml    → 找出UNIT欄位&#xA;      └─ ConvertUnits.xaml          → 依對照表做單位轉換，寫回Excel&#xA;" sap:VirtualizedContainerService.HintSize="450,346" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程在整套系統裡的角色&#xA;它跟前面問過的 SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml 剛好是一組互補的流程：&#xA;&gt; VAL_TBL_EXPORT_E → **「產生」**單位對照Excel（給人看、給人參考用）&#xA;&gt; VALTBL_CNV_E（這支）→ 「使用」這份Excel（或其他填有外部單位的資料檔），把外部單位直接轉換成SAP內部單位，讓後續能順利拿去做BAPI註冊(登錄資料)&#xA;&#xA;簡單來說，這是整個「單位轉換」流程的執行者，串起了「讀資料→查SAP單位對照→逐列轉換→寫回檔案」這四個步驟。" sap:VirtualizedContainerService.HintSize="450,330" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫 CheckArgument.xaml&#xA;&gt; 驗證 in_SAPService、in_FilePath、in_LanguageKey 三個參數是否正確、完整，確保後面動作不會因參數缺漏而失敗" DisplayName="Invoke CheckArgument workflow" sap:VirtualizedContainerService.HintSize="450,254" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VALTBL_CNV_E\CheckArgument.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[in_FilePath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LanguageKey">[in_LanguageKey]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫 ReadConversionTarget.xaml（您之前已經問過這支！）&#xA;&gt; 讀取 in_FilePath 這份Excel檔案裡除了 &quot;SRC_Contents&quot; 以外的所有工作表&#xA;&gt; 整理成 ConversionTarget（型態是 Dictionary&lt;工作表名稱, DataTable&gt;），也就是「要被轉換的目標資料」" DisplayName="Invoke ReadConversionTarget workflow" sap:VirtualizedContainerService.HintSize="450,303" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VALTBL_CNV_E\ReadConversionTarget.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[in_FilePath]</InArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="out_ConversionTarget">[ConversionTarget]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫 GetUnitsOfMeasurement.xaml（您之前也問過這支！）&#xA;&gt; 用 in_SAPService 連線、依 in_LanguageKey 語言代碼，從SAP的 T006(單位主表) + T006A(單位語系文字表) 撈資料，做Left Join&#xA;&gt; 產出 dt_UnitOfMeas（內部單位MSEHI ↔ 外部單位MSEH3的對照表）" DisplayName="Invoke GetUnitsOfMeasurement workflow" sap:VirtualizedContainerService.HintSize="450,303" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VALTBL_CNV_E\GetUnitsOfMeasurement.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_UnitOfMeas">[dt_UnitOfMeas]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LanguageKey">[in_LanguageKey]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫 DataConversion.xaml（您之前也問過這支主控轉換流程！）&#xA;&gt; 把 in_FilePath(檔案路徑)、ConversionTarget(要轉換的資料)、dt_UnitOfMeas(單位對照表) 全部傳入&#xA;&gt; 內部會：&#xA;&gt;&gt; 逐工作表、逐列處理&#xA;&gt;&gt; 先呼叫 FindTargetDataType.xaml 找出哪些欄位是&quot;UNIT&quot;型態&#xA;&gt;&gt; 再呼叫 ConvertUnits.xaml，用 LookupDataTable 依對照表把外部單位換成SAP內部單位&#xA;&gt;&gt; 最後把轉換好的內容 WriteRange 寫回 in_FilePath 這份Excel檔案" DisplayName="Invoke DataConversion workflow" sap:VirtualizedContainerService.HintSize="450,385" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VALTBL_CNV_E\DataConversion.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[in_FilePath]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)" x:Key="in_ConversionTarget">[ConversionTarget]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_UnitOfMeas">[dt_UnitOfMeas]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>
