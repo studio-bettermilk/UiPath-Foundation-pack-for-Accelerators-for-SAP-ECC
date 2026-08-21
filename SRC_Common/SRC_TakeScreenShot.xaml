@@ -1,129 +1,157 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_TakeScreenShot"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_TakeScreenShot" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_FileName" Type="InArgument(x:String)" />
-    <x:Property Name="in_OutputPath" Type="InArgument(x:String)" />
-    <x:Property Name="out_ScreenShotPath" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="截圖存檔的檔案名稱(例如&quot;Screenshot1.png&quot;)" Name="in_FileName" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="截圖要存放的資料夾路徑" Name="in_OutputPath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：實際存檔後的完整檔案路徑(資料夾路徑+檔案名稱組合起來的結果)，方便呼叫端後續使用(例如附加到Email或Log裡)" Name="out_ScreenShotPath" Type="OutArgument(x:String)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>376,1055</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GC_TAKE_SS2_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Reflection</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Creates a screenshot file with the specified filename and path.&#xA;&#xA;- Input/Output&#xA;in_FileName as Screenshot Filename &lt;String&gt;&#xA;in_OutputPath as Screenshot save path &lt;String&gt;&#xA;out_ScreenShotPath as Output created screenshot filename with relative path &lt;String&gt;" DisplayName="SRC_TakeScreenShot" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程的功能非常直觀：擷取目前整個畫面(全螢幕)的截圖，並存成圖片檔案到指定路徑，是自動化流程裡常用來記錄畫面證據(例如出錯時存證、或每個關鍵步驟留紀錄)的工具。)&#xA;Creates a screenshot file with the specified filename and path.&#xA;&#xA;- Input/Output&#xA;in_FileName as Screenshot Filename &lt;String&gt;&#xA;in_OutputPath as Screenshot save path &lt;String&gt;&#xA;out_ScreenShotPath as Output created screenshot filename with relative path &lt;String&gt;" DisplayName="SRC_TakeScreenShot" sap:VirtualizedContainerService.HintSize="939,1771" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="ScreenShotFile" />
       <Variable x:TypeArguments="ui:Image" Name="ScreenShot" />
       <Variable x:TypeArguments="x:String" Default="SRC_TakeScreenShot" Name="WorkFlowName" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot; start&quot;]" />
-    <Assign sap2010:Annotation.AnnotationText="Concatenate Screenshot FilePath and FileName." DisplayName="Assign ScreenShotFile" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,206" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這支流程的邏輯很精簡，只有四個核心動作：組路徑 → 截全螢幕圖 → 存檔 → 回傳路徑。因為截圖的目標鎖定在桌面(Program Manager)而不是特定視窗，所以效果等同於「按下鍵盤PrtScn鍵擷取整個畫面」，適合用來在流程執行過程中的任意時間點留下畫面證據。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="Comment_5" Text="這支流程的功能非常直觀：擷取目前整個畫面(全螢幕)的截圖，並存成圖片檔案到指定路徑，是自動化流程裡常用來記錄畫面證據(例如出錯時存證、或每個關鍵步驟留紀錄)的工具。" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Assign sap2010:Annotation.AnnotationText="Concatenate Screenshot FilePath and FileName.&#xD;&#xA;&#xD;&#xA;組合完整檔案路徑(Assign ScreenShotFile)&#xD;&#xA;&gt; 把in_OutputPath(資料夾路徑)與in_FileName(檔案名稱)用&quot;\&quot;符號串接起來，組成一個完整路徑字串，存到變數ScreenShotFile裡" DisplayName="Assign ScreenShotFile" sap:VirtualizedContainerService.HintSize="450,285" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[ScreenShotFile]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[in_OutputPath + "\" + in_FileName]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take full window screenshot " sap2010:WorkflowViewState.IdRef="TakeScreenshot_1" Screenshot="[ScreenShot]">
+    <ui:TakeScreenshot WaitBefore="{x:Null}" sap2010:Annotation.AnnotationText="擷取螢幕截圖(TakeScreenshot)&#xD;&#xA;&gt; 使用TakeScreenshot活動，對Target設定為&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;(也就是Windows桌面本身)進行截圖&#xD;&#xA;&gt; 因為Target指向的是桌面(Program Manager)而不是特定應用程式視窗，所以這裡拍到的是整個螢幕畫面，不論當時SAP或其他視窗開在哪個位置都會一併被截取進去&#xD;&#xA;&gt; 截圖結果會存到ui:Image型別的變數ScreenShot裡(記憶體中的圖片物件，尚未寫入硬碟)" DisplayName="Take full window screenshot " sap:VirtualizedContainerService.HintSize="450,294" sap2010:WorkflowViewState.IdRef="TakeScreenshot_1" Screenshot="[ScreenShot]">
       <ui:TakeScreenshot.Target>
-        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;" TimeoutMS="30" WaitForReady="INTERACTIVE" />
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3f9457a1-1307-4b61-a1d9-849d9e24d7f7" Selector="&lt;wnd app='explorer.exe' cls='Progman' title='Program Manager' /&gt;" TimeoutMS="30" WaitForReady="INTERACTIVE" />
       </ui:TakeScreenshot.Target>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:TakeScreenshot>
-    <ui:SaveImage DisplayName="Save screenshot image" FileName="[ScreenShotFile]" sap2010:WorkflowViewState.IdRef="SaveImage_1" Image="[ScreenShot]" />
-    <Assign DisplayName="Assign out_ScreenShotPath" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <ui:SaveImage sap2010:Annotation.AnnotationText="存檔(SaveImage)&#xD;&#xA;使用SaveImage活動，把記憶體中的ScreenShot圖片物件，寫入到ScreenShotFile路徑，正式產生圖片檔案" DisplayName="Save screenshot image" FileName="[ScreenShotFile]" sap:VirtualizedContainerService.HintSize="450,244" sap2010:WorkflowViewState.IdRef="SaveImage_1" Image="[ScreenShot]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:SaveImage>
+    <Assign sap2010:Annotation.AnnotationText="回傳結果路徑&#xD;&#xA;Assign out_ScreenShotPath：把ScreenShotFile(完整路徑)指派給輸出參數out_ScreenShotPath，讓呼叫端可以取得這張截圖確切存在哪裡" DisplayName="Assign out_ScreenShotPath" sap:VirtualizedContainerService.HintSize="450,252" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_ScreenShotPath]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[ScreenShotFile]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
-    <sads:DebugSymbol.Symbol>d1hDOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRGVza3RvcFxTUkNfUEFZTUVOVF9QUk1UX0NSVFxTUkNfQ29tbW9uXFNSQ19UYWtlU2NyZWVuU2hvdC54YW1sE0gDZw4CAQFMNExIAgECTgVOogECARtPBVYOAgEVVwVbGQIBEFwFXJgBAgELXQVkDgIBBmUFZZ4BAgEDTnpOnwECARxUMFRTAgEYUTFRQQIBFllKWZIBAgEUWZ0BWaEBAgETV5cBV6UBAgERXEBcUgIBDlyHAVyVAQIBDGIwYkACAQlfMV9FAgEHZXhlmwECAQQ=</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314,91" />
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="314,102">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TakeScreenshot_1" sap:VirtualizedContainerService.HintSize="314,68" />
-      <sap2010:ViewStateData Id="SaveImage_1" sap:VirtualizedContainerService.HintSize="314,92" />
-      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="314,91" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,975">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GC_TAKE_SS2_1" sap:VirtualizedContainerService.HintSize="376,1055" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

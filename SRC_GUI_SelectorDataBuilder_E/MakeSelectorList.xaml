@@ -1,66 +1,91 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="MakeSelectorList" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="MakeSelectorList" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_InputItemList" Type="OutArgument(scg:List(x:String))" />
     <x:Property Name="out_SelectorList" Type="OutArgument(scg:List(x:String))" />
     <x:Property Name="in_dt_MessageResource" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_TargetInformation" Type="InArgument(sd:DataTable)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap:VirtualizedContainerService.HintSize>1120,3309</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Xml.Serialization</x:String>
-      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -68,7 +93,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;This workflow uses the Indicate On Screen Activity to get all choosed Selector's information by the user, and invokes the appropriate workflow accordingly the selector type to output the Input Field Names list and Selector Information list.&#xA;&#xA;- Input/Output&#xA;out_InputItemList as List of Input Fields &lt;List&lt;String&gt;&gt;&#xA;out_SelectorList as List of Selector Information &lt;List&lt;String&gt;&gt;&#xA;in_dt_MessageResource as DataTable with messages (labels) resources &lt;DataTable&gt;&#xA;in_dt_TargetInformation as Target Selector Acquisition Information &lt;DataTable&gt;" DisplayName="MakeSelectorList" sap:VirtualizedContainerService.HintSize="1080,3229" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;This workflow uses the Indicate On Screen Activity to get all choosed Selector's information by the user, and invokes the appropriate workflow accordingly the selector type to output the Input Field Names list and Selector Information list.&#xA;&#xA;- Input/Output&#xA;out_InputItemList as List of Input Fields &lt;List&lt;String&gt;&gt;&#xA;out_SelectorList as List of Selector Information &lt;List&lt;String&gt;&gt;&#xA;in_dt_MessageResource as DataTable with messages (labels) resources &lt;DataTable&gt;&#xA;in_dt_TargetInformation as Target Selector Acquisition Information &lt;DataTable&gt;" DisplayName="MakeSelectorList" sap:VirtualizedContainerService.HintSize="1099,4500" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Name="SelectorList" />
       <Variable x:TypeArguments="scg:List(x:String)" Name="InputItemList" />
@@ -82,15 +107,15 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="1058,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="570,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <Sequence sap2010:Annotation.AnnotationText="Initialize variable instances." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="1058,511" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <Sequence sap2010:Annotation.AnnotationText="Initialize variable instances." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="570,845" sap2010:WorkflowViewState.IdRef="Sequence_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -98,7 +123,7 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign DisplayName="Assign InputItemList" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign DisplayName="Assign InputItemList" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[InputItemList]</OutArgument>
         </Assign.To>
@@ -106,7 +131,7 @@
           <InArgument x:TypeArguments="scg:List(x:String)">[new List(of string)]</InArgument>
         </Assign.Value>
       </Assign>
-      <Assign DisplayName="Assign SelectorList" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign DisplayName="Assign SelectorList" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[SelectorList]</OutArgument>
         </Assign.To>
@@ -114,15 +139,20 @@
           <InArgument x:TypeArguments="scg:List(x:String)">[new List(of string)]</InArgument>
         </Assign.Value>
       </Assign>
-      <Assign DisplayName="Assign MessageSelectGrid" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign sap2010:Annotation.AnnotationText="12: 請選擇整個網格區域。" DisplayName="Assign MessageSelectGrid" sap:VirtualizedContainerService.HintSize="416,206" sap2010:WorkflowViewState.IdRef="Assign_7">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[MessageSelectGrid]</OutArgument>
         </Assign.To>
         <Assign.Value>
           <InArgument x:TypeArguments="x:String">[in_dt_MessageResource.Rows(12).Item("Message").ToString]</InArgument>
         </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <Assign DisplayName="Assign MessageNotSupported" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+      <Assign DisplayName="Assign MessageNotSupported" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_8">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[MessageNotSupported]</OutArgument>
         </Assign.To>
@@ -131,7 +161,7 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <DoWhile DisplayName="Do While Main loop" sap:VirtualizedContainerService.HintSize="1058,1821" sap2010:WorkflowViewState.IdRef="DoWhile_1">
+    <DoWhile DisplayName="Do While Main loop" sap:VirtualizedContainerService.HintSize="570,2899" sap2010:WorkflowViewState.IdRef="DoWhile_1">
       <DoWhile.Variables>
         <Variable x:TypeArguments="x:Boolean" Default="False" Name="EndFlg" />
       </DoWhile.Variables>
@@ -142,7 +172,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <DoWhile.Condition>[Not EndFlg]</DoWhile.Condition>
-      <TryCatch DisplayName="Try Catch GetSelectorList" sap:VirtualizedContainerService.HintSize="1032,1659" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <TryCatch DisplayName="Try Catch GetSelectorList" sap:VirtualizedContainerService.HintSize="524,2701" sap2010:WorkflowViewState.IdRef="TryCatch_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -150,7 +180,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <TryCatch.Try>
-          <Sequence DisplayName="Sequence GetSelectorList" sap:VirtualizedContainerService.HintSize="1014,1015" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Sequence DisplayName="Sequence GetSelectorList" sap:VirtualizedContainerService.HintSize="522,2057" sap2010:WorkflowViewState.IdRef="Sequence_7">
             <Sequence.Variables>
               <Variable x:TypeArguments="ui:UiElement" Name="UiElement" />
               <Variable x:TypeArguments="x:String" Name="UiElementType" />
@@ -162,19 +192,23 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:IndicateOnScreen sap2010:Annotation.AnnotationText="Get the user selected input field UiElement." DisplayName="Indicate On Screen" HidePreview="False" sap:VirtualizedContainerService.HintSize="992,64" sap2010:WorkflowViewState.IdRef="IndicateOnScreen_2" SelectScreenRegion="False" SelectedUiElement="[UiElement]">
+            <ui:IndicateOnScreen sap2010:Annotation.AnnotationText="Get the user selected input field UiElement." DisplayName="Indicate On Screen" HidePreview="False" sap:VirtualizedContainerService.HintSize="488,88" sap2010:WorkflowViewState.IdRef="IndicateOnScreen_2" SelectScreenRegion="False" SelectedUiElement="[UiElement]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:IndicateOnScreen>
-            <ui:GetAttribute sap2010:Annotation.AnnotationText="Get the type attribute from acquired UiElement." Attribute="type" ContinueOnError="True" DisplayName="Get Attribute &quot;type&quot;" sap:VirtualizedContainerService.HintSize="992,123" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
+            <ui:GetAttribute sap2010:Annotation.AnnotationText="Get the type attribute from acquired UiElement." Attribute="type" ContinueOnError="True" DisplayName="Get Attribute &quot;type&quot;" sap:VirtualizedContainerService.HintSize="488,248" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
               <ui:GetAttribute.Result>
                 <OutArgument x:TypeArguments="x:String">[UiElementType]</OutArgument>
               </ui:GetAttribute.Result>
               <ui:GetAttribute.Target>
-                <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Element="[UiElement]" WaitForReady="INTERACTIVE" />
+                <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[UiElement]" Id="d29753bb-4a89-4105-900f-29a284abe3fb" WaitForReady="INTERACTIVE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
               </ui:GetAttribute.Target>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -182,7 +216,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:GetAttribute>
-            <Assign sap2010:Annotation.AnnotationText="Get row from TargetInformation DataTable where target selector acquisition type match." DisplayName="Assign Rows" sap:VirtualizedContainerService.HintSize="992,117" sap2010:WorkflowViewState.IdRef="Assign_6">
+            <Assign sap2010:Annotation.AnnotationText="Get row from TargetInformation DataTable where target selector acquisition type match." DisplayName="Assign Rows" sap:VirtualizedContainerService.HintSize="488,220" sap2010:WorkflowViewState.IdRef="Assign_6">
               <Assign.To>
                 <OutArgument x:TypeArguments="sd:DataRow[]">[Rows]</OutArgument>
               </Assign.To>
@@ -195,7 +229,8 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </Assign>
-            <If Condition="[Rows.Length &lt;&gt; 0]" DisplayName="If target selector information was found" sap:VirtualizedContainerService.HintSize="992,467" sap2010:WorkflowViewState.IdRef="If_9">
+            <ui:LogMessage DisplayName="[Debug] Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;UiElementType=&quot;+UiElementType]" />
+            <If Condition="[Rows.Length &lt;&gt; 0]" DisplayName="If target selector information was found" sap:VirtualizedContainerService.HintSize="488,1266" sap2010:WorkflowViewState.IdRef="If_9">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -203,7 +238,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <If sap2010:Annotation.AnnotationText="Check if the selected seletor is not a single cell on a grid Element by verifying it contains the text &quot;tableCol=&quot; and inform user to make the selection again choosing the entire grid Element, otherwise process the selector acquisition using the GetSelector workflow accordingly. " Condition="[UiElement.Selector.Text.contains(&quot;tableCol=&quot;)]" DisplayName="If selector is single cell on grid element" sap:VirtualizedContainerService.HintSize="653,319" sap2010:WorkflowViewState.IdRef="If_8">
+                <If sap2010:Annotation.AnnotationText="Check if the selected seletor is not a single cell on a grid Element by verifying it contains the text &quot;tableCol=&quot; and inform user to make the selection again choosing the entire grid Element, otherwise process the selector acquisition using the GetSelector workflow accordingly. " Condition="[UiElement.Selector.Text.contains(&quot;tableCol=&quot;)]" DisplayName="If selector is single cell on grid element" sap:VirtualizedContainerService.HintSize="486,826" sap2010:WorkflowViewState.IdRef="If_8">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -212,42 +247,86 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <If.Then>
-                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Inform user to make the selection again using the entire grid element." Buttons="Ok" DisplayName="Message Box Grid Selection" sap:VirtualizedContainerService.HintSize="314,101" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[MessageSelectGrid]" TopMost="True">
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="484,302" sap2010:WorkflowViewState.IdRef="Sequence_12">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                    </ui:MessageBox>
+                      <Sequence sap:VirtualizedContainerService.HintSize="450,242" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Inform user to make the selection again using the entire grid element." AutoCloseAfter="00:00:00" Buttons="Ok" DisplayName="Message Box Grid Selection" sap:VirtualizedContainerService.HintSize="416,159" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[MessageSelectGrid]" TopMost="True">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:MessageBox>
+                      </Sequence>
+                    </Sequence>
                   </If.Then>
                   <If.Else>
-                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Invoke GetSelector workflow accordingly the type." DisplayName="Invoke Workflow File GetSelectorXXX by Type" sap:VirtualizedContainerService.HintSize="314,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="[Rows(0).Item(&quot;XamlFile&quot;).ToString]">
-                      <ui:InvokeWorkflowFile.Arguments>
-                        <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_InputItemList">[InputItemList]</InOutArgument>
-                        <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_SelectorList">[SelectorList]</InOutArgument>
-                        <InArgument x:TypeArguments="ui:UiElement" x:Key="in_UiElement">[UiElement]</InArgument>
-                        <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetInformationRow">[Rows(0)]</InArgument>
-                        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MessageResource">[in_dt_MessageResource]</InArgument>
-                      </ui:InvokeWorkflowFile.Arguments>
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,340" sap2010:WorkflowViewState.IdRef="Sequence_14">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                    </ui:InvokeWorkflowFile>
+                      <Sequence sap:VirtualizedContainerService.HintSize="450,280" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Invoke GetSelector workflow accordingly the type." DisplayName="Invoke Workflow File GetSelectorXXX by Type" sap:VirtualizedContainerService.HintSize="416,197" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="[Rows(0).Item(&quot;XamlFile&quot;).ToString]">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_InputItemList">[InputItemList]</InOutArgument>
+                            <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="io_SelectorList">[SelectorList]</InOutArgument>
+                            <InArgument x:TypeArguments="ui:UiElement" x:Key="in_UiElement">[UiElement]</InArgument>
+                            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TargetInformationRow">[Rows(0)]</InArgument>
+                            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_MessageResource">[in_dt_MessageResource]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:InvokeWorkflowFile>
+                      </Sequence>
+                    </Sequence>
                   </If.Else>
                 </If>
               </If.Then>
               <If.Else>
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Inform user the selector type is not supported" Buttons="Ok" DisplayName="Message Box Excluded messages" sap:VirtualizedContainerService.HintSize="314,86" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[UiElementType +  Environment.NewLine + MessageNotSupported +  Environment.NewLine + UiElement.Selector.ToString]" TopMost="True">
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="486,288" sap2010:WorkflowViewState.IdRef="Sequence_16">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                </ui:MessageBox>
+                  <Sequence sap:VirtualizedContainerService.HintSize="452,228" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="Inform user the selector type is not supported" AutoCloseAfter="00:00:00" Buttons="Ok" DisplayName="Message Box Excluded messages" sap:VirtualizedContainerService.HintSize="416,145" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[UiElementType +  Environment.NewLine + MessageNotSupported +  Environment.NewLine + UiElement.Selector.ToString]" TopMost="True">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:MessageBox>
+                  </Sequence>
+                </Sequence>
               </If.Else>
             </If>
           </Sequence>
@@ -264,14 +343,14 @@
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
               </ActivityAction.Argument>
-              <If sap2010:Annotation.AnnotationText="As the Indicate On Screen Activity returns &quot;UiPath.UiAutomation.Activities&quot; exception when the user press &quot;ESC&quot; key, set EndFlg with true to stop the Do While Main Loop, otherwise throw an exception." Condition="[exception.Source = &quot;UiPath.UiAutomation.Activities&quot;]" DisplayName="If ESC key is pressed" sap:VirtualizedContainerService.HintSize="467,265" sap2010:WorkflowViewState.IdRef="If_4">
+              <If sap2010:Annotation.AnnotationText="As the Indicate On Screen Activity returns &quot;UiPath.UiAutomation.Activities&quot; exception when the user press &quot;ESC&quot; key, set EndFlg with true to stop the Do While Main Loop, otherwise throw an exception." Condition="[exception.Source = &quot;UiPath.UiAutomation.Activities&quot;]" DisplayName="If ESC key is pressed" sap:VirtualizedContainerService.HintSize="522,479" sap2010:WorkflowViewState.IdRef="If_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <If.Then>
-                  <Assign DisplayName="Assign EndFlag" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                  <Assign DisplayName="Assign EndFlag" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="Assign_3">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:Boolean">[EndFlg]</OutArgument>
                     </Assign.To>
@@ -281,7 +360,7 @@
                   </Assign>
                 </If.Then>
                 <If.Else>
-                  <Throw Exception="[exception]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                  <Throw Exception="[exception]" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="Throw_1" />
                 </If.Else>
               </If>
             </ActivityAction>
@@ -289,14 +368,14 @@
         </TryCatch.Catches>
       </TryCatch>
     </DoWhile>
-    <Sequence DisplayName="Set Output Argument" sap:VirtualizedContainerService.HintSize="1058,284" sap2010:WorkflowViewState.IdRef="Sequence_11">
+    <Sequence DisplayName="Set Output Argument" sap:VirtualizedContainerService.HintSize="570,433" sap2010:WorkflowViewState.IdRef="Sequence_11">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign DisplayName="Assign out_InputItemList" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign DisplayName="Assign out_InputItemList" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_4">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[out_InputItemList]</OutArgument>
         </Assign.To>
@@ -304,7 +383,7 @@
           <InArgument x:TypeArguments="scg:List(x:String)">[InputItemList]</InArgument>
         </Assign.Value>
       </Assign>
-      <Assign DisplayName="Assign out_SelectorList" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign DisplayName="Assign out_SelectorList" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_5">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[out_SelectorList]</OutArgument>
         </Assign.To>
@@ -313,7 +392,7 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="1058,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="570,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GetSelectorTableSheetType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetSelectorTableSheetType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="io_InputItemList" Type="InOutArgument(scg:List(x:String))" />
     <x:Property Name="io_SelectorList" Type="InOutArgument(scg:List(x:String))" />
@@ -6,60 +6,66 @@
     <x:Property Name="in_dt_MessageResource" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_TargetInformationRow" Type="InArgument(sd:DataRow)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap:VirtualizedContainerService.HintSize>711,2160</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Xml.Serialization</x:String>
-      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;This workflow create a list of input field name and selector information from the UiElement argument, passing it as output argument.&#xA;&#xA;- Input/Output&#xA;io_InputItemList as Input Field Name List &lt;List&lt;String&gt;&gt;&#xA;io_SelectorList as Selector Information List &lt;List&lt;String&gt;&gt;&#xA;in_UiElement as UiElement get from Indicate On Screen Activity &lt;UiElement&gt;&#xA;in_TargetInformationRow as Target Selector Acquisition Information &lt;DataRow&gt;&#xA;in_dt_MessageResource as Message (labels) Resources &lt;DataTable&gt;" DisplayName="GetSelectorTableSheetType" sap:VirtualizedContainerService.HintSize="671,2080" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -84,7 +90,7 @@
     </ui:LogMessage>
     <ui:FindChildren sap2010:Annotation.AnnotationText="Get all children cells of parent grid selector." Children="[ChildElement]" DisplayName="Find children in Grid" Filter="&lt;sap/&gt;" sap:VirtualizedContainerService.HintSize="649,95" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_CHILDREN">
       <ui:FindChildren.Target>
-        <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[in_UiElement]" TimeoutMS="0" WaitForReady="INTERACTIVE" />
+        <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[in_UiElement]" Id="b1f8e52c-42bd-443f-aed9-e419f1c6f98e" TimeoutMS="0" WaitForReady="INTERACTIVE" />
       </ui:FindChildren.Target>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -146,7 +152,11 @@
                       <OutArgument x:TypeArguments="x:String">[ColName]</OutArgument>
                     </ui:GetAttribute.Result>
                     <ui:GetAttribute.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Element="[item]" WaitForReady="INTERACTIVE" />
+                      <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[item]" Id="9331f0bf-0d1c-4959-9a72-24c02da71dfd" WaitForReady="INTERACTIVE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
                     </ui:GetAttribute.Target>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -163,7 +173,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Dialog to specify the Input Field Name." DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="314,119" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="[in_dt_MessageResource.Rows(11).Item(&quot;Message&quot;).ToString]" Title="[in_dt_MessageResource.Rows(10).Item(&quot;Message&quot;).ToString]">
+                      <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Dialog to specify the Input Field Name." DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="314,119" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="[in_dt_MessageResource.Rows(11).Item(&quot;Message&quot;).ToString]" Title="[in_dt_MessageResource.Rows(10).Item(&quot;Message&quot;).ToString]" TopMost="False">
                         <ui:InputDialog.Result>
                           <OutArgument x:TypeArguments="x:String">[ColName]</OutArgument>
                         </ui:InputDialog.Result>

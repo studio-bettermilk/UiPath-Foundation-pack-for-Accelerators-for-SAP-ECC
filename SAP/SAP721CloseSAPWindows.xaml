@@ -1,0 +1,225 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SAP登出" this:SAP登出.in_SAPLogonPath="C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SAPLogonPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SAP登出_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.Activities.System</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="SAP701登出" sap:VirtualizedContainerService.HintSize="927,1376" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:CurrentJobInfo" Name="CurrentJobInfo" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:GetCurrentJobInfo DisplayName="取得目前工作資訊" sap:VirtualizedContainerService.HintSize="522,57" sap2010:WorkflowViewState.IdRef="GetCurrentJobInfo_2" Result="[CurrentJobInfo]" />
+    <ui:LogMessage DisplayName="記錄檔訊息" sap:VirtualizedContainerService.HintSize="522,57" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[CurrentJobInfo.WorkflowName+&quot;.xaml Begin&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Sequence DisplayName="登出" sap:VirtualizedContainerService.HintSize="522,1191" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Int32" Default="0" Name="nIndex" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <uix:NCheckState CheckWindowActive="False" DisplayName="Check App State '登入(L)'" HealingAgentBehavior="Disabled" sap:VirtualizedContainerService.HintSize="488,1099" sap2010:WorkflowViewState.IdRef="NCheckState_3" Version="V5">
+        <uix:NCheckState.IfExists>
+          <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="486,588" sap2010:WorkflowViewState.IdRef="Sequence_17">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="452,57" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Trace" Message="[&quot;SAP Logon 770 登入 按鈕 存在. Close it.&quot;]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:LogMessage>
+            <uix:NApplicationCard AttachMode="ByInstance" DisplayName="SAP Logon 770" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="452,471" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" ScopeGuid="719d35f5-2e89-4aaf-b980-1e6634c0acd1" Version="V2">
+              <uix:NApplicationCard.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NWindowOperation DisplayName="Window Operation - Close window" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,165" sap2010:WorkflowViewState.IdRef="NWindowOperation_2" Operation="Close" ScopeIdentifier="719d35f5-2e89-4aaf-b980-1e6634c0acd1" Version="V5" />
+                  </Sequence>
+                </ActivityAction>
+              </uix:NApplicationCard.Body>
+              <uix:NApplicationCard.OCREngine>
+                <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                  <ActivityFunc.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                  </ActivityFunc.Argument>
+                </ActivityFunc>
+              </uix:NApplicationCard.OCREngine>
+              <uix:NApplicationCard.TargetApp>
+                <uix:TargetApp Area="329, 122, 590, 590" ContentHash="au1eGq0LwUW1AzbACVm55g" FilePath="[in_SAPLogonPath]" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFASURBVFhHYxgFo2AUjIJBAxxrVls61ay5T2dcC7Ue7AAnoMB/emHHmjWz7KtXMkGtp68DgJbPsCtfzQi1GgLo5QCg5dMcy1cgLP+/QzgChA8scW1unlD+v7mfMlzVU//fsWoVdsur10yxq1iF6vP/O0X+Uwt/2SL1P6224r99+XJslk+yqkDyOQxgM4gc/GWL9P+kiuL/NkULgJatRrd8gm3xEkzLQQCbYaTiz0DLE8txWF6zps+sBC3YkQE2A0nBnzdL/08oL/1vU4zV8h6oNbgB0JDFIPxojcq+7bMd/2+f7UASTqgox2559eouqBXEAZui+S52pUv+25UsJgnbly/DYvmaDqixxAOgIVQpB4DB3gY1kjRApYKoGWoc6YBSBwB93gg1ijwAdIAm0KD5ZOJcqDGjYBSMglFAImBgAAAGHG0I3oyiGgAAAABJRU5ErkJggg==" InformativeScreenshot="1f759039886e1c024fe2abed9cd4c3ec.jpg" Reference="aMaG1xdWzE6Cl7rBrZzY0g/VmVm0akPtUqUaQ5iuY8R5A" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 770' /&gt;" Version="V2">
+                  <uix:TargetApp.Arguments>
+                    <InArgument x:TypeArguments="x:String" />
+                  </uix:TargetApp.Arguments>
+                  <uix:TargetApp.WorkingDirectory>
+                    <InArgument x:TypeArguments="x:String" />
+                  </uix:TargetApp.WorkingDirectory>
+                </uix:TargetApp>
+              </uix:NApplicationCard.TargetApp>
+            </uix:NApplicationCard>
+          </Sequence>
+        </uix:NCheckState.IfExists>
+        <uix:NCheckState.IfNotExists>
+          <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="486,226" sap2010:WorkflowViewState.IdRef="Sequence_18">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Trace" Message="[&quot;SAP Logon 770 登入 按鈕 不不不 存在&quot;]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:LogMessage>
+          </Sequence>
+        </uix:NCheckState.IfNotExists>
+        <uix:NCheckState.Target>
+          <uix:TargetAnchorable CVScreenId="c97888da-4478-4e74-9bf5-ebe28c0f1ce2" ContentHash="JT7-gzweWk-_fnDCTtLFuw" CvElementArea="516, 548, 59, 29" CvTextArea="521, 553, 49, 19" CvTextArgument="eA(L)" CvType="Button" DesignTimeRectangle="518, 549, 56, 26" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd ctrlid='1068' title='登入(&amp;amp;L)' /&gt;&lt;ctrl name='登入(L)' role='push button' /&gt;" Guid="11f4bd16-8f4d-4ed4-99cd-0ffdf67d51d3" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIxSURBVFhH7ZjPKkVRFMaNTcgrmHgRr2DoDSgyVWbGRgYGnsDMwEyZGaJIlBQlkYT8CVu/0/2OZdl7n3PLlXuOX33de/Za+9jfXutstzMQWka7DZ9eP4eJlZMwOr8fBqd3+lp4wAueLKVhAiOzu9HJ/Sw8WdOlYXajSJr6Pqlv1fGCN1EabkIbp4Q3URqOJTZJ4t9wUyVqGT66fOpkfbK+dxuu71+LON+Rn2dl7zG+dBzN6aVE1xXGmPIxjGBu7bz4rDID5MZi0vLWVZG3eXhXXAufh7ZPHorY4sZFNC6JWoa5KRXCDLAgxq1J4sjPtVK+5sc0tnAQHp7fCvGdMeFzkfLVbSmJWoZlCDBvY6o42PGYlOvvYeWri4TNs1KVcxspahnWQtW+Hv3BqlZlPhuXq8be+WNxr8nV03JM2DwrdU5uI0WlYZmJxbwgdXhpUXyH1ObQnmDHhB3zgrObl2gMidqHllo6RW53EfOVw2fqeQffAcKOeYlYDImuDKdMMZ4zrOdSJ7g//KzAb4awY14iFkOi5xWWOd/qOhfsGII/UWFERfxiuM4dVpBqX8b9/XLPMPlWtkPgR59hpINHBv21lSrrDXkRtzm5U9qjrtE6co+VqDSs1quLdl1V8PeLCcNavJ53+3+4ShiF2Jkgia4q/Bvyv7Te3zsLjECsJ7+0flu2ykMzu2E4IWKq7o/+lm6CRGm4da94WvcSr3WvaYEAu9GE9sYDXqxZ+GK4DbTMcAgf527OnJGPAh0AAAAASUVORK5CYII=" InformativeScreenshot="3e11cf9ab3022297131b6914981e2f8d.jpg" Reference="aMaG1xdWzE6Cl7rBrZzY0g/iHQel2ozAU-ukwcruG54kQ" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 770' /&gt;" SearchSteps="Selector, Image, CV" Version="V6" WaitForReadyArgument="Interactive" />
+        </uix:NCheckState.Target>
+      </uix:NCheckState>
+    </Sequence>
+    <ui:LogMessage DisplayName="記錄檔訊息" sap:VirtualizedContainerService.HintSize="522,48" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[CurrentJobInfo.WorkflowName+&quot;.xaml End&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

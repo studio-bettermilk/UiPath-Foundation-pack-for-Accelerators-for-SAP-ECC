@@ -1,62 +1,84 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Initialization" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Initialization" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_dt_MessageResource" Type="OutArgument(sd:DataTable)" />
     <x:Property Name="out_dt_TargetInformation" Type="OutArgument(sd:DataTable)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap:VirtualizedContainerService.HintSize>561,1649</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
+      <x:String>System.Globalization</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Xml.Serialization</x:String>
-      <x:String>System.Globalization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -64,7 +86,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;1. Read the message (labels) information from an Excel file according the system language and return in a DataTable.&#xA;2. Read the Selector acquisition information from an Excel file and return in a DataTable. &#xA;&#xA;- Input/Output&#xA;out_dt_MessageResource as Localized Message Resources &lt;DataTable&gt;&#xA;out_dt_TargetInformation as Target Selector Acquisition Informartion &lt;DataTable&gt;" DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="521,1569" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;1. Read the message (labels) information from an Excel file according the system language and return in a DataTable.&#xA;2. Read the Selector acquisition information from an Excel file and return in a DataTable. &#xA;&#xA;- Input/Output&#xA;out_dt_MessageResource as Localized Message Resources &lt;DataTable&gt;&#xA;out_dt_TargetInformation as Target Selector Acquisition Informartion &lt;DataTable&gt;" DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="1065,2561" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="Initialization" Name="WorkflowName" />
     </Sequence.Variables>
@@ -74,7 +96,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="499,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -82,7 +104,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <Sequence DisplayName="1. Read Message Information" sap:VirtualizedContainerService.HintSize="336,513" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="1. Read Message Information" sap:VirtualizedContainerService.HintSize="486,1381" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="SystemCulture" />
         <Variable x:TypeArguments="x:String" Name="MessageFilename" />
@@ -93,7 +115,7 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign sap2010:Annotation.AnnotationText="Get the system culture." DisplayName="Assign SystemCulture" sap:VirtualizedContainerService.HintSize="314,87" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign sap2010:Annotation.AnnotationText="Get the system culture." DisplayName="Assign SystemCulture" sap:VirtualizedContainerService.HintSize="452,206" sap2010:WorkflowViewState.IdRef="Assign_7">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[SystemCulture]</OutArgument>
         </Assign.To>
@@ -106,25 +128,25 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Set the message filename and worksheet name based on the system culture." DisplayName="Switch (based on the system's culture)" Expression="[SystemCulture]" sap:VirtualizedContainerService.HintSize="314,108" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Set the message filename and worksheet name based on the system culture." DisplayName="Switch (based on the system's culture)" Expression="[SystemCulture]" sap:VirtualizedContainerService.HintSize="452,834" sap2010:WorkflowViewState.IdRef="Switch`1_1">
         <Switch.Default>
-          <Assign DisplayName="Assign MessageFilename (English)" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign DisplayName="Assign MessageFilename (English)" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_5">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[MessageFilename]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">Config\Message\Message_EN.xlsx</InArgument>
+              <InArgument x:TypeArguments="x:String">[".\SRC_GUI_SelectorDataBuilder_E\Config\Message\Message_EN.xlsx"]</InArgument>
             </Assign.Value>
           </Assign>
         </Switch.Default>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Assign x:Key="ja-JP" DisplayName="Assign MessageFilename (Japanese)" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign x:Key="ja-JP" DisplayName="Assign MessageFilename (Japanese)" sap:VirtualizedContainerService.HintSize="450,143" sap2010:WorkflowViewState.IdRef="Assign_1">
           <Assign.To>
             <OutArgument x:TypeArguments="x:String">[MessageFilename]</OutArgument>
           </Assign.To>
@@ -132,8 +154,23 @@
             <InArgument x:TypeArguments="x:String">Config\Message\Message_JA.xlsx</InArgument>
           </Assign.Value>
         </Assign>
+        <Sequence x:Key="zh-TW" DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign MessageFilename (繁體中文)" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_8">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[MessageFilename]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[".\SRC_GUI_SelectorDataBuilder_E\Config\Message\Message_TW.xlsx"]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
       </Switch>
-      <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read Message Excel file" DataTable="[out_dt_MessageResource]" DisplayName="Read Range (MessageFile)" sap:VirtualizedContainerService.HintSize="314,114" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Message" WorkbookPath="[MessageFilename]">
+      <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read Message Excel file" DataTable="[out_dt_MessageResource]" DisplayName="Read Range (MessageFile)" sap:VirtualizedContainerService.HintSize="452,249" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Message" WorkbookPath="[MessageFilename]">
         <ui:ReadRange.Range>
           <InArgument x:TypeArguments="x:String">
             <Literal x:TypeArguments="x:String" Value="" />
@@ -146,14 +183,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:ReadRange>
     </Sequence>
-    <Sequence DisplayName="2. Read Target Selector Acquisition Information" sap:VirtualizedContainerService.HintSize="499,498" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <Sequence DisplayName="2. Read Target Selector Acquisition Information" sap:VirtualizedContainerService.HintSize="486,739" sap2010:WorkflowViewState.IdRef="Sequence_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read Target Selector Acquisition Excel file" DataTable="[out_dt_TargetInformation]" DisplayName="Read Range (Target Selector Acquisition)" sap:VirtualizedContainerService.HintSize="314,114" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="TargetInformation" WorkbookPath="Config\Config.xlsx">
+      <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read Target Selector Acquisition Excel file" DataTable="[out_dt_TargetInformation]" DisplayName="Read Range (Target Selector Acquisition)" sap:VirtualizedContainerService.HintSize="416,258" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="TargetInformation" WorkbookPath="SRC_GUI_SelectorDataBuilder_E\Config\Config.xlsx">
         <ui:ReadRange.Range>
           <InArgument x:TypeArguments="x:String">
             <Literal x:TypeArguments="x:String" Value="" />
@@ -167,14 +204,14 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ReadRange>
-      <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" sap2010:Annotation.AnnotationText="Sort by column &quot;Order&quot; that also is the selector acquisition execution order." ColumnName="Order" DataTable="[out_dt_TargetInformation]" DisplayName="Sort Data Table (Target Selector Acquisition)" sap:VirtualizedContainerService.HintSize="314,79" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[out_dt_TargetInformation]">
+      <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" sap2010:Annotation.AnnotationText="Sort by column &quot;Order&quot; that also is the selector acquisition execution order." ColumnName="Order" DataTable="[out_dt_TargetInformation]" DisplayName="Sort Data Table (Target Selector Acquisition)" sap:VirtualizedContainerService.HintSize="416,158" sap2010:WorkflowViewState.IdRef="SortDataTable_1" OutputDataTable="[out_dt_TargetInformation]" SortOrder="Ascending">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:SortDataTable>
-      <ui:FilterDataTable sap2010:Annotation.AnnotationText="Remove the target selector acquisition information that is set to be not executed." DataTable="[out_dt_TargetInformation]" DisplayName="Filter data table (workflow checks)" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="314,101" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_dt_TargetInformation]" SelectColumnsMode="Remove">
+      <ui:FilterDataTable sap2010:Annotation.AnnotationText="Remove the target selector acquisition information that is set to be not executed." DataTable="[out_dt_TargetInformation]" DisplayName="Filter data table (workflow checks)" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="416,231" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_dt_TargetInformation]" SelectColumnsMode="Remove">
         <ui:FilterDataTable.Filters>
           <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
             <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -201,7 +238,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:FilterDataTable>
     </Sequence>
-    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="499,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="486,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

@@ -1,0 +1,13 @@
+﻿{
+  "Name": "關閉",
+  "Type": "Element",
+  "TaxonomyType": "Button",
+  "Id": "XlyqJL7Nr0q2Tkpf7wULTg",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/XlyqJL7Nr0q2Tkpf7wULTg",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/HlacORr0F0GdZbrJm8EMFA",
+  "Created": "2026-08-18T09:58:25.004649Z",
+  "Updated": "2026-08-18T09:58:25.004649Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

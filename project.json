@@ -1,14 +1,14 @@
 {
-  "name": "UiPath Foundation pack for Accelerators for SAP ECC",
+  "name": "U0011UiPath Foundation pack for Accelerators for SAP ECC",
   "projectId": "7af8ef0a-211a-48a6-96bc-dc1541cd77c1",
-  "description": "Blank Process",
+  "description": "U0011UiPath Foundation pack for Accelerators for SAP ECC",
   "main": "Sample_SRC_BAPIv2.2_REGISTER.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[3.6.1]",
     "UiPath.SAP.BAPI.Activities": "[3.0.4]",
-    "UiPath.System.Activities": "[25.12.2]",
+    "UiPath.System.Activities": "[26.6.3]",
     "UiPath.Testing.Activities": "[25.10.2]",
-    "UiPath.UIAutomation.Activities": "[25.10.39]"
+    "UiPath.UIAutomation.Activities": "[26.10.3]"
   },
   "webServices": [],
   "entitiesStores": [],
@@ -97,7 +97,67 @@
         "testCaseId": "2f7aed94-7614-4282-b415-b9bbb0704222",
         "testCaseType": "TestCase",
         "executionTemplateInvokeIsolated": false,
+        "fileName": "SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E\\TestCase_1.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "f39ade3e-4531-410e-afa9-c07260fbfc68",
+        "testCaseType": "TestCase",
+        "executionTemplateInvokeIsolated": false,
         "fileName": "SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E\\TestCase_SRC_BAPIv2.2_DATAELEMENT_OUTPUT_E.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "93dc36b5-6800-42bb-8383-7cf5feab1ffd",
+        "testCaseType": "TestCase",
+        "executionTemplateInvokeIsolated": false,
+        "fileName": "SRC_BAPIv2.2_VALTBL_CNV_E\\TestCase_SRC_BAPIv2.2_VALTBL_CNV_E.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "3f5bb8d1-eb06-4ee7-96a8-9e8973d8dc16",
+        "testCaseType": "TestCase",
+        "fileName": "SAP\\TestCase_SAP011登入.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "82dd745a-2a52-4fff-984c-bdf4f166c75b",
+        "testCaseType": "TestCase",
+        "fileName": "SAP\\TestCase_SAP701登出.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "0217bc0c-3fa0-4608-9428-cdee21fb9a5b",
+        "testCaseType": "TestCase",
+        "fileName": "SAP\\TestCase_SAP上傳傳票流程.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "27ed2bdb-f7da-40a2-9de0-8268dfb95676",
+        "testCaseType": "TestCase",
+        "executionTemplateInvokeIsolated": false,
+        "fileName": "SRC_CM_SAP_LOGON_E\\TestCase_SRC_CM_SAP_LOGON_E.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "3fd77d6e-e140-4d35-90fc-f5a46fb3f0cf",
+        "testCaseType": "TestCase",
+        "executionTemplateInvokeIsolated": false,
+        "fileName": "SRC_CM_SAP_LOGOFF_E\\TestCase_SRC_CM_SAP_LOGOFF_E.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "329d7c72-9a09-4f27-8ce7-34f3e381ddd5",
+        "testCaseType": "TestCase",
+        "executionTemplateInvokeIsolated": false,
+        "fileName": "SRC_GUI_SelectorDataBuilder_E\\TestCase_SRC_GUI_SelectorDataBuilder_E.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "0ca9a524-2ecf-4ba1-8016-a4947c9285ef",
+        "testCaseType": "TestCase",
+        "executionTemplateInvokeIsolated": false,
+        "fileName": "SRC_INPUT_FILE_VAL_CNV_E\\TestCase_SRC_INPUT_FILE_VAL_CNV_E.xaml"
       }
     ],
     "saveToCloud": false

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="KdgytlKDLE-j93t48KjF8w" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="11, 43, 85, 26" DesignTimeScaleFactor="1" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd ctrlid='1087' title='變數登入(&amp;amp;V)' /&gt;" Guid="78a76b6d-1d3b-40f7-8b21-3a21f744ed69" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 770' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.PointOffset>
+        <PointOffset />
+      </TargetAnchorable.PointOffset>
+      <imageRef attrName="InformativeScreenshot" originalValue="69f4dca2a8c8fff9058c5f92d38a0da9.jpg" xmlns="">0AMm7xC_IDkW0YOuyN-Wj7g</imageRef>
+    </TargetAnchorable>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

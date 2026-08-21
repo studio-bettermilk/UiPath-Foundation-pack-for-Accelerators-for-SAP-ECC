@@ -1,0 +1,440 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ImportImageCheck"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_ImportChkSelector" Type="InArgument(x:String)" />
+    <x:Property Name="in_ImportType" Type="InArgument(x:String)" />
+    <x:Property Name="in_Request" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SetInitialScreen_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Overview&#xA;Confirm that it will switch to the expected image after import processing&#xA;&#xA;Arguments&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xA;in_ImportChkSelector as Request List St Item Target Row Selector &lt;String&gt;&#xA;in_ImportType as Import Type &lt;String&gt;&#xA;in_Request as Target Request &lt;String&gt;" DisplayName="ImportImageCheck" sap2010:WorkflowViewState.IdRef="Sequence_73">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="ImportImageCheck" Name="WorkflowName" />
+      <Variable x:TypeArguments="s:DateTime" Name="StartTime" />
+      <Variable x:TypeArguments="x:Int32" Name="RefreshCount" />
+      <Variable x:TypeArguments="x:Boolean" Default="True" Name="CheckImage" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Assign DisplayName="Assign(StartTime - After saving)" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[StartTime]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign RefreshCount Initialize" sap2010:WorkflowViewState.IdRef="Assign_13">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[RefreshCount]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">0</InArgument>
+      </Assign.Value>
+    </Assign>
+    <DoWhile DisplayName="Check Element(After saving)" sap2010:WorkflowViewState.IdRef="DoWhile_2">
+      <DoWhile.Variables>
+        <Variable x:TypeArguments="x:TimeSpan" Name="ProcessingTime" />
+        <Variable x:TypeArguments="s:DateTime" Name="CurrentTime" />
+      </DoWhile.Variables>
+      <DoWhile.Condition>[CheckImage]</DoWhile.Condition>
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_79">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="IconName" />
+          <Variable x:TypeArguments="x:Int32" Default="10" Name="CheckImageTimeout" />
+          <Variable x:TypeArguments="x:Int32" Default="1" Name="RefreshBtnInterval" />
+        </Sequence.Variables>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SRC_Get_GuiLabel Workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiLabel.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="in_ControlID">[in_ImportChkSelector]</InArgument>
+            <OutArgument x:TypeArguments="x:Int32" x:Key="out_ColorIndex" />
+            <OutArgument x:TypeArguments="x:Boolean" x:Key="out_ColorIntensified" />
+            <OutArgument x:TypeArguments="x:String" x:Key="out_DisplayedText" />
+            <OutArgument x:TypeArguments="x:String" x:Key="out_IconName">[IconName]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="out_Tooltip" />
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <Assign DisplayName="Assign(CurrentTime - After saving) 1" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign.To>
+            <OutArgument x:TypeArguments="s:DateTime">[CurrentTime]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign DisplayName="Assign(ProcessingTime - After saving) 1" sap2010:WorkflowViewState.IdRef="Assign_6">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:TimeSpan">[ProcessingTime]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:TimeSpan">[CurrentTime - StartTime]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Switch x:TypeArguments="x:String" DisplayName="Switch in_ImportType" Expression="[in_ImportType]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+          <If x:Key="Immediate" Condition="[in_Config(&quot;ImportComplete&quot;).ToString = IconName]" DisplayName="If-End the loop when the target image is displayed 1" sap2010:WorkflowViewState.IdRef="If_6">
+            <If.Then>
+              <Assign DisplayName="Assign(CheckWindow)1" sap2010:WorkflowViewState.IdRef="Assign_11">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[CheckImage]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+          </If>
+          <If x:Key="StartTime" Condition="[in_Config(&quot;ImportScheduled&quot;).ToString = IconName]" DisplayName="If-End the loop when the target image is displayed 2" sap2010:WorkflowViewState.IdRef="If_7">
+            <If.Then>
+              <Assign DisplayName="Assign(CheckWindow)2" sap2010:WorkflowViewState.IdRef="Assign_12">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[CheckImage]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+          </If>
+        </Switch>
+        <If Condition="[ProcessingTime.Minutes &gt; RefreshBtnInterval * RefreshCount]" DisplayName="If Check If Refresh button interval" sap2010:WorkflowViewState.IdRef="If_8">
+          <If.Then>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_81">
+              <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey Refresh" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="f5" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+                <ui:SendHotkey.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;WND_Request_List&quot;).ToString]" WaitForReady="INTERACTIVE" />
+                </ui:SendHotkey.Target>
+              </ui:SendHotkey>
+              <DoWhile DisplayName="Do While Refresh" sap2010:WorkflowViewState.IdRef="DoWhile_1">
+                <DoWhile.Variables>
+                  <Variable x:TypeArguments="x:Boolean" Default="True" Name="CheckWindow" />
+                </DoWhile.Variables>
+                <DoWhile.Condition>[CheckWindow]</DoWhile.Condition>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_76">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary(Of String,String)]" Name="StatusbarObject" />
+                  </Sequence.Variables>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SRC_Get_GuiStatusbar workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="SRC_Common\SRC_Get_GuiStatusbar.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_MessageType">[StatusbarObject("MessageType")]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_MessageId">[StatusbarObject("MessageId")]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_MessageNumber">[StatusbarObject("MessageNumber")]</OutArgument>
+                      <OutArgument x:TypeArguments="x:String" x:Key="out_MessageText">[StatusbarObject("MessageText")]</OutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <If Condition="[String.IsNullOrWhiteSpace(StatusbarObject(&quot;MessageText&quot;))]" DisplayName="If - Exit the loop when the screen Refresh" sap2010:WorkflowViewState.IdRef="If_3">
+                    <If.Then>
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[CheckWindow]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                  </If>
+                  <Assign DisplayName="Assign(CurrentTime - After saving) 2" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:DateTime">[CurrentTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:DateTime">[System.DateTime.Now]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign(ProcessingTime - After saving) 2" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:TimeSpan">[ProcessingTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:TimeSpan">[CurrentTime - StartTime]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <If Condition="[ProcessingTime.Minutes &gt;= CheckImageTimeout]" DisplayName="If - Whether the processing time exceeds the specified value(After saving) 1" sap2010:WorkflowViewState.IdRef="If_4">
+                    <If.Then>
+                      <Sequence sap2010:Annotation.AnnotationText="Set Custom Exception and throw" DisplayName="Set Custom Exception Not Import Image Check 1" sap2010:WorkflowViewState.IdRef="Sequence_84">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="ui:BusinessRuleException" Name="CustomException" />
+                        </Sequence.Variables>
+                        <Assign DisplayName="Assign Not Import Image Check 1" sap2010:WorkflowViewState.IdRef="Assign_15">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="ui:BusinessRuleException">[CustomException]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="ui:BusinessRuleException">[new UiPath.Core.BusinessRuleException()]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Assign Not Import Image Check StatusMessage 1" sap2010:WorkflowViewState.IdRef="Assign_16">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Object">[CustomException.Data("StatusMessage")]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["[" &amp; in_Request &amp; "] " &amp; in_Config("MSG_0002").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Not Import Image Check 1" Exception="[CustomException]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                      </Sequence>
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </DoWhile>
+              <Assign DisplayName="Assign RefreshCount Increment" sap2010:WorkflowViewState.IdRef="Assign_14">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[RefreshCount]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[RefreshCount +1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+        </If>
+        <If Condition="[ProcessingTime.Minutes &gt;= CheckImageTimeout]" DisplayName="If - Whether the processing time exceeds the specified value(After saving) 2" sap2010:WorkflowViewState.IdRef="If_5">
+          <If.Then>
+            <Sequence sap2010:Annotation.AnnotationText="Set Custom Exception and throw" DisplayName="Set Custom Exception Not Import Image Check 2" sap2010:WorkflowViewState.IdRef="Sequence_85">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="ui:BusinessRuleException" Name="CustomException" />
+              </Sequence.Variables>
+              <Assign DisplayName="Assign Not Import Image Check 2" sap2010:WorkflowViewState.IdRef="Assign_17">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="ui:BusinessRuleException">[CustomException]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="ui:BusinessRuleException">[new UiPath.Core.BusinessRuleException()]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign Not Import Image Check StatusMessage 2 " sap2010:WorkflowViewState.IdRef="Assign_18">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[CustomException.Data("StatusMessage")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["[" &amp; in_Request &amp; "] " &amp; in_Config("MSG_0002").ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Not Import Image Check 2" Exception="[CustomException]" sap2010:WorkflowViewState.IdRef="Throw_5" />
+            </Sequence>
+          </If.Then>
+        </If>
+      </Sequence>
+    </DoWhile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+    <sads:DebugSymbol.Symbol>d2NDOlxVc2Vyc1x5dWtpLnlhbWF6YWtpXERlc2t0b3BcU1JDX0lNUE9SVF9RVUVVRV9FXzIwMTkxMjAzXFNSQ19JTVBPUlRfUVVFVUVfRVxJbXBvcnRJbWFnZUNoZWNrLnhhbWxdXAOuAg4CAQFeNF5GAgEDYTVhOwIBAmMFY6QBAwGIAWQFaw4DAYQBbAVzDgMBgAF0BasCDwIBB6wCBawCnwECAQRje2OhAQMBiQFpMmlHAwGHAWYzZj4DAYUBcS9xMAMBgwFuMG4+AwGBAXkaeSYCAX56B6oCEgIBCKwCeawCnAECAQV9N307AgEKfjd+OgIBCYABCYkBIQIBeIoBCZEBEgIBdJIBCZkBEgIBbpoBCbMBEgIBW7QBCY8CDgIBG5ACCakCDgIBC4YBSoYBVAIBfIIBSYIBXwIBeoABwgGAAeQBAgF5jwE2jwFLAgF3jAE3jAFEAgF1lwE2lwFPAgFxlAE3lAFHAgFvmgFamgFrAgFcmwELpgEQAgFmpwELsgEQAgFetAEXtAFYAgEctgENjQIYAgEgkAIXkAJJAgEMkgINpwIYAgEPmwErmwFoAgFnnQEPpAEYAgFqpwErpwFpAgFfqQEPsAEYAgFitwEPuwEfAgFXvAEPhAIZAgEmhQIPjAIYAgEhlgIPnQIYAgEXngIPpQIYAgESpgIPpgLHAQIBEKIBO6IBQAIBbZ8BPJ8BSAIBa64BO64BQAIBZasBPKsBSAIBY7kBabkBnQECAVm3AfYBtwH6AQIBWL4BQb4BRwIBJ8ABJMABMQIBVcEBEYMCHAIBKIoCOYoCSgIBJIcCOocCSAIBIpsCSpsCcwIBGpgCS5gCXAIBGKMCOqMCgAECARSgAjugAmICAROmAocBpgKaAQIBEcMBXMMBgAECASnFARPMASsCAUvNARPYARgCAUTZARPgARwCAUDhARPoARwCATrpAROCAhgCASrHAVfHAXcCAVPJAVnJAXsCAVHIAVXIAXMCAU/KAVfKAXcCAU3FAdABxQH2AQIBTM0BIc0BaAIBRc8BF9YBIAIBR94BQN4BVQIBQ9sBQdsBTgIBQeYBQOYBWQIBPeMBQeMBUQIBO+kBIekBUwIBK+sBF4ACIgIBLtQBQ9QBSAIBStEBRNEBUQIBSO8BGfYBIgIBNvcBGf4BIgIBMf8BGf8B0QECAS/0AVT0AX0CATnxAVXxAWYCATf8AUT8AYoBAgEz+QFF+QFsAgEy/wGRAf8BpAECATA=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="707,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="707,60" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="707,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_21" sap:VirtualizedContainerService.HintSize="659,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="659,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="659,60" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="659,160">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="512,116" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_22" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_15" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_16" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="242,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_84" sap:VirtualizedContainerService.HintSize="264,400">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,548" />
+      <sap2010:ViewStateData Id="Sequence_76" sap:VirtualizedContainerService.HintSize="486,1247">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="512,1409">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="512,60" />
+      <sap2010:ViewStateData Id="Sequence_81" sap:VirtualizedContainerService.HintSize="534,1789">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="659,1937" />
+      <sap2010:ViewStateData Id="Assign_17" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_18" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Throw_5" sap:VirtualizedContainerService.HintSize="242,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_85" sap:VirtualizedContainerService.HintSize="264,400">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="659,548" />
+      <sap2010:ViewStateData Id="Sequence_79" sap:VirtualizedContainerService.HintSize="681,3176">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_2" sap:VirtualizedContainerService.HintSize="707,3338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="707,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_73" sap:VirtualizedContainerService.HintSize="729,4056">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetInitialScreen_1" sap:VirtualizedContainerService.HintSize="769,4136" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

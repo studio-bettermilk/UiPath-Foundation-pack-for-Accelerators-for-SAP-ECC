@@ -1,0 +1,14 @@
+﻿{
+  "Name": "變數登入",
+  "Description": "變數登入",
+  "Type": "Element",
+  "TaxonomyType": "Button",
+  "Id": "EjuwH7NlFkC6vrAXQ_UQBw",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/EjuwH7NlFkC6vrAXQ_UQBw",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/HlacORr0F0GdZbrJm8EMFA",
+  "Created": "2026-08-18T09:58:24.7735422Z",
+  "Updated": "2026-08-18T09:58:24.7735422Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

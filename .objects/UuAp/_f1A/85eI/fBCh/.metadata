@@ -1,0 +1,14 @@
+﻿{
+  "Name": "FBL5N FBLN ZFIR0001 fBL…",
+  "Type": "Element",
+  "TaxonomyType": "Dropdown",
+  "Id": "fBChjKXwxUm-WdreI85ong",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/fBChjKXwxUm-WdreI85ong",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/85eI9OatrU-h51nf5Gg87Q",
+  "Created": "2026-08-17T10:44:47.524692Z",
+  "Updated": "2026-08-17T10:44:47.524692Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.0.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

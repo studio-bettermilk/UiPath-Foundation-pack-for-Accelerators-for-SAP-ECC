@@ -1,0 +1,205 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ExecuteSave"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_LogFileName" Type="InArgument(x:String)" />
+    <x:Property Name="in_HeaderIndex" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ExecutePost_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Execute Save&#xA;&#xA;- Input/Output&#xA;in_Config as Config Parameters &lt;Dictorionary&lt;String, Object&gt;&gt;&#xA;in_LogFileName as LogFile Name &lt;String&gt;&#xA;in_HeaderIndex as Header Index &lt;String&gt;" DisplayName="ExecuteSave" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="ExecuteSave" Name="WorkflowName" />
+      <Variable x:TypeArguments="x:String" Name="StatusMessage" />
+      <Variable x:TypeArguments="x:String" Name="MessageNumber" />
+      <Variable x:TypeArguments="x:String" Name="MessageId" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Delay sap2010:Annotation.AnnotationText="Drawing completion wait time" DisplayName="Delay Select Workflow" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <If Condition="[in_Config(&quot;TransactionCode&quot;).ToString = &quot;FV60&quot; or  in_Config(&quot;TransactionCode&quot;).ToString = &quot;FV70&quot;]" DisplayName="If Select Workflow" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click BasicData tab" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;TAB_BasicData&quot;).ToString]" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </If.Then>
+    </If>
+    <Delay sap2010:Annotation.AnnotationText="Drawing completion wait time" DisplayName="Delay SaveBefore" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_3" />
+    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey Save" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="s" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+      <ui:SendHotkey.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[in_Config(&quot;WND_Main&quot;).ToString]" WaitForReady="COMPLETE" />
+      </ui:SendHotkey.Target>
+    </ui:SendHotkey>
+    <Delay sap2010:Annotation.AnnotationText="Drawing completion wait time" DisplayName="Delay SaveAfter" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_2" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CheckStatusbarMessage Workflow File" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_148" UnSafe="False" WorkflowFileName="SRC_PARK_ACC_E\CheckStatusbarMessage.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_StatusMessage">[StatusMessage]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_MessageNumber">[MessageNumber]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_StatusCode" />
+        <OutArgument x:TypeArguments="x:String" x:Key="out_MessageId">[MessageId]</OutArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file [SRC_WriteLogToText] Process each row" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_149" UnSafe="False" WorkflowFileName="SRC_Common\SRC_WriteLogToText.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_Config("LogFolderPath").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFileName">[in_LogFileName]</InArgument>
+        <InArgument x:TypeArguments="s:String[]" x:Key="in_LogData">[{Datetime.Now.ToString("yyyy-MM-dd HH:mm:ss"), WorkflowName, "S", in_HeaderIndex, MessageId.Trim &amp; MessageNumber.Trim, StatusMessage, "", ""}]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d0dDOlwwMV/moYjku7ZcMTNfRlY1MFxFQ0NcU1JDX1BBUktfQUNDX0VcU1JDX1BBUktfQUNDX0VcRXhlY3V0ZVNhdmUueGFtbB5aA48BDgIBAVw0XEECAQJhBWGkAQIBKGIFYrEBAgEmYwV1CgIBH3YFdqwBAgEddwV7FQIBGXwFfKsBAgEXfQWFAR0CAQ2GAQWMAR0CAQaNAQWNAaABAgEDYXthoQECASliemKEAQIBJ2MTY6ABAgEgZQlzFAIBI3Z1dn8CAR55X3mLAQIBG3fpAXfsAQIBGnx0fH4CARh/S39aAgEVgAFLgAFaAgETggFHggFSAgERgwFcgwFnAgEPfckBffQBAgEOiAFHiAFsAgELiQFHiQFXAgEJigFFigHYAQIBCIYB2QGGAf0BAgEHjQF5jQGdAQIBBHFjcZQBAgEk</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="464,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="464,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,216" />
+      <sap2010:ViewStateData Id="Delay_3" sap:VirtualizedContainerService.HintSize="464,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="464,116" />
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="464,49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_148" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_149" sap:VirtualizedContainerService.HintSize="464,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="464,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1396">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecutePost_1" sap:VirtualizedContainerService.HintSize="526,1476" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

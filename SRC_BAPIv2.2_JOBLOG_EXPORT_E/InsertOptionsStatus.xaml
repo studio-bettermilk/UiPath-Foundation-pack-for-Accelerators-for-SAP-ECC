@@ -1,0 +1,236 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="InsertOptionsStatus"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_SelectedStatus" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="io_dt_Options" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>InsertOptionsStatus_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xD;&#xA;Rewrite the job status stored on List to query which is sent to RFC_READ_TABLE and store it in DataTable.&#xD;&#xA;- Input/Output&#xD;&#xA;out_dt_Options as search criteria table [OPTIONS] that searches SAP table [TBTCO]&lt;DataTable&gt;&#xD;&#xA;out_SelectedStatus as Job status &lt;List(Of String)&gt;" DisplayName="InsertOptionsStatus" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="InsertOptionsStatus" Name="WorkflowName" />
+    </Sequence.Variables>
+    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Sequence DisplayName="Insert Options - STATUS" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="OptionStringStatus" />
+      </Sequence.Variables>
+      <Assign DisplayName="Assign - OptionStringStatus" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[OptionStringStatus]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[nothing]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <If Condition="[in_SelectedStatus.Count &gt; 0]" DisplayName="If job status is selected" sap2010:WorkflowViewState.IdRef="If_3">
+        <If.Then>
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="IndexNo" />
+            </Sequence.Variables>
+            <ui:ForEach x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Combine selected job status separated by commas." CurrentIndex="[IndexNo]" DisplayName="For Each (SelectedStatus)" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_SelectedStatus]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:String">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:String" Name="status" />
+                  </ActivityAction.Argument>
+                  <If Condition="[in_SelectedStatus.Count -1  = IndexNo]" DisplayName="If : SelectedStatus.Count -1  = Position" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If.Then>
+                      <Assign sap2010:Annotation.AnnotationText="The last array" DisplayName="Assign : OptionStringStatus (End of array)" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[OptionStringStatus]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[OptionStringStatus +"'" +status + "'"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                    <If.Else>
+                      <Assign sap2010:Annotation.AnnotationText="Other than the last array" DisplayName="Assign : OptionStringStatus (First Array and After)" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[OptionStringStatus]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String" xml:space="preserve">[OptionStringStatus +"'" +status + "'"  + ","]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Else>
+                  </If>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
+            <If Condition="[io_dt_Options.Rows.Count = 0]" DisplayName="If : Branch by number of records in DataTable (Status)" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;STATUS IN (&quot; &amp; OptionStringStatus &amp; &quot;)&quot;}]" DataTable="[io_dt_Options]" DisplayName="Add Data Row(First row) - Status" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+              </If.Then>
+              <If.Else>
+                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;AND STATUS IN (&quot; + OptionStringStatus + &quot;)&quot;}]" DataTable="[io_dt_Options]" DisplayName="Add Data Row(2nd row and after) - Status" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+              </If.Else>
+            </If>
+          </Sequence>
+        </If.Then>
+      </If>
+    </Sequence>
+    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <sads:DebugSymbol.Symbol>d11DOlxVc2Vyc1x5dWtpLnlhbWF6YWtpXERvY3VtZW50c1xVaVBhdGhcU1JDX0JBUEl2Mi4yX0pPQkxPR19FWFBPUlRfRVxJbnNlcnRPcHRpb25zU3RhdHVzLnhhbWwfSQONAQ4CAQFLNEtJAgECTQVNowECATBOBYoBEAIBBosBBYsBnwECAQNNek2gAQIBMVIHWRACASxaB4kBDAIBB4sBeIsBnAECAQRXMlc7AgEvVDNURwIBLVoVWjcCAQhcC4cBFgIBCmANfhoCARd/DYYBEgIBC2D/AWCUAgIBKmCWAWChAQIBKGYTexgCARh/G387AgEMgQERgQGDAgIBEoQBEYQBhwICAQ1mIWZKAgEZaBdvIAIBInIXeSACARyBAZEBgQGiAQIBFYEBPIEBhgECAROEAY0BhAGeAQIBEIQBPIQBggECAQ5tQm1pAgElakNqVwIBI3RDdFcCAR0=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="694,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="672,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="509,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="525,396">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="AddDataRow_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddDataRow_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="525,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="547,768">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="672,916">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="694,1140">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="694,91">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="716,1613">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InsertOptionsStatus_1" sap:VirtualizedContainerService.HintSize="756,1693" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

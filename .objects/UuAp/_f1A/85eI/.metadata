@@ -1,0 +1,13 @@
+﻿{
+  "Name": "SAP 輕鬆存取  -  使用者功能表： UiPath",
+  "Type": "Screen",
+  "Id": "85eI9OatrU-h51nf5Gg87Q",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/85eI9OatrU-h51nf5Gg87Q",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/_f1At90IIkSp3l47J_mtRA",
+  "Created": "2026-08-17T10:43:34.6473267Z",
+  "Updated": "2026-08-17T10:43:34.6473267Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.0.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

@@ -27,6 +27,9 @@
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -56,6 +59,27 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -270,7 +294,7 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="700,1934" Id="Sample_Input_Create_2" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Flowchart sap2010:Annotation.AnnotationText="- Overview （選擇器產生工具）&#xA;Function to create the necessary input files, that contains selector information, used to register multiple SAP data through GUI components.&#xA;After executing this workflow, click the required input field item on the SAP screen, and selector information will be saved in an Excel file automatically.&#xA;" DisplayName="SRC_GUI_SelectorDataBuilder_E" sap:VirtualizedContainerService.HintSize="1033,719" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart sap2010:Annotation.AnnotationText="- Overview （選擇器產生工具）&#xA;Function to create the necessary input files, that contains selector information, used to register multiple SAP data through GUI components.&#xA;After executing this workflow, click the required input field item on the SAP screen, and selector information will be saved in an Excel file automatically.&#xA;" DisplayName="SRC_GUI_SelectorDataBuilder_E" sap:VirtualizedContainerService.HintSize="1071,619" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="x:String" Name="InputFileName" />
       <Variable x:TypeArguments="x:String" Name="OutputPath" />
@@ -287,8 +311,8 @@
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <av:Size x:Key="ShapeSize">50,50</av:Size>
-        <av:PointCollection x:Key="ConnectorLocation">60,65 60,125</av:PointCollection>
-        <av:Point x:Key="ShapeLocation">35,15</av:Point>
+        <av:PointCollection x:Key="ConnectorLocation">100,115 100,175</av:PointCollection>
+        <av:Point x:Key="ShapeLocation">75,65</av:Point>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
@@ -298,9 +322,9 @@
     <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">265,415</av:Point>
+          <av:Point x:Key="ShapeLocation">305,465</av:Point>
           <av:Size x:Key="ShapeSize">110,70</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">320,485 320,525</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">360,535 360,575</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Invoke Workflow File MakeSelectorList" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_GUI_SelectorDataBuilder_E\MakeSelectorList.xaml">
@@ -315,9 +339,9 @@
         <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_9">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <av:Point x:Key="ShapeLocation">265,525</av:Point>
+              <av:Point x:Key="ShapeLocation">305,575</av:Point>
               <av:Size x:Key="ShapeSize">110,70</av:Size>
-              <av:PointCollection x:Key="ConnectorLocation">375,560 405,560 405,270 445,270</av:PointCollection>
+              <av:PointCollection x:Key="ConnectorLocation">415,610 445,610 445,320 485,320</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Invoke Workflow File OutputExcel" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SRC_GUI_SelectorDataBuilder_E\OutputExcel.xaml">
@@ -334,38 +358,47 @@
             <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <av:Point x:Key="ShapeLocation">445,235</av:Point>
+                  <av:Point x:Key="ShapeLocation">485,285</av:Point>
                   <av:Size x:Key="ShapeSize">110,70</av:Size>
-                  <av:PointCollection x:Key="ConnectorLocation">500,305 500,335 560,335 560,370</av:PointCollection>
+                  <av:PointCollection x:Key="ConnectorLocation">540,355 540,385 600,385 600,420</av:PointCollection>
+                  <av:Point x:Key="AnnotationLocation">560,220</av:Point>
+                  <av:Size x:Key="AnnotationSize">170,90</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MessageBox sap2010:Annotation.AnnotationText="Ask user to proceed to next screen, or terminate the execution." AutoCloseAfter="00:00:00" Buttons="YesNo" Caption="[dt_MessageResource.Rows(8).Item(&quot;Message&quot;).ToString]" ChosenButton="[RetMsg]" DisplayName="Message Box Ask to proceed to next screen" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[dt_MessageResource.Rows(9).Item(&quot;Message&quot;).ToString]" TopMost="True" />
+              <ui:MessageBox sap2010:Annotation.AnnotationText="Ask user to proceed to next screen, or terminate the execution." AutoCloseAfter="00:00:00" Buttons="YesNo" Caption="[dt_MessageResource.Rows(8).Item(&quot;Message&quot;).ToString]" ChosenButton="[RetMsg]" DisplayName="Message Box Ask to proceed to next screen" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[dt_MessageResource.Rows(9).Item(&quot;Message&quot;).ToString]" TopMost="True">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:MessageBox>
               <FlowStep.Next>
                 <FlowDecision x:Name="__ReferenceID4" Condition="[RetMsg = &quot;Yes&quot;]" DisplayName="to be continue ?" sap:VirtualizedContainerService.HintSize="60,60" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <av:Point x:Key="ShapeLocation">530,370</av:Point>
+                      <av:Point x:Key="ShapeLocation">570,420</av:Point>
                       <av:Size x:Key="ShapeSize">60,60</av:Size>
-                      <av:PointCollection x:Key="TrueConnector">590,400 620,400 620,200 375,200</av:PointCollection>
-                      <av:PointCollection x:Key="FalseConnector">530,400 500,400 500,460 685,460</av:PointCollection>
+                      <av:PointCollection x:Key="TrueConnector">630,450 660,450 660,250 415,250</av:PointCollection>
+                      <av:PointCollection x:Key="FalseConnector">570,450 540,450 540,510 725,510</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <FlowDecision.True>
                     <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_7">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <av:Point x:Key="ShapeLocation">265,165</av:Point>
+                          <av:Point x:Key="ShapeLocation">305,215</av:Point>
                           <av:Size x:Key="ShapeSize">110,70</av:Size>
-                          <av:PointCollection x:Key="ConnectorLocation">320,235 320,320</av:PointCollection>
+                          <av:PointCollection x:Key="ConnectorLocation">360,285 360,370</av:PointCollection>
+                          <av:Point x:Key="AnnotationLocation">150,214</av:Point>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Show a dialog box to specify the Excel Worksheet name in that Input and Selector information will be saved." DisplayName="Input Dialog specify Worksheet Name" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InputDialog_4" IsPassword="False" Label="[dt_MessageResource.Rows(6).Item(&quot;Message&quot;).ToString]" Title="[dt_MessageResource.Rows(7).Item(&quot;Message&quot;).ToString]" TopMost="False">
+                      <ui:InputDialog Options="{x:Null}" sap2010:Annotation.AnnotationText="Show a dialog box to specify the Excel Worksheet name in that Input and Selector information will be saved." DisplayName="Input Dialog specify Worksheet Name" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InputDialog_4" IsPassword="False" Label="[dt_MessageResource.Rows(6).Item(&quot;Message&quot;).ToString]" OptionsString="[&quot;SheetName&quot;+DateTime.Now.toString(&quot;yyyyMMdd-HHmmss&quot;)]" Title="[dt_MessageResource.Rows(7).Item(&quot;Message&quot;).ToString]" TopMost="False">
                         <ui:InputDialog.Result>
                           <OutArgument x:TypeArguments="x:String">[TargetSheetName]</OutArgument>
                         </ui:InputDialog.Result>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:InputDialog>
@@ -373,11 +406,12 @@
                         <FlowDecision x:Name="__ReferenceID9" sap2010:Annotation.AnnotationText="Check if worksheet name is specified." Condition="[TargetSheetName &lt;&gt; &quot;&quot;]" DisplayName="Is worksheet name specified?" sap:VirtualizedContainerService.HintSize="60,60" sap2010:WorkflowViewState.IdRef="FlowDecision_2" True="{x:Reference __ReferenceID0}" False="{x:Reference __ReferenceID1}">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">290,320</av:Point>
+                              <av:Point x:Key="ShapeLocation">330,370</av:Point>
                               <av:Size x:Key="ShapeSize">60,60</av:Size>
-                              <av:PointCollection x:Key="TrueConnector">350,350 380,350 380,385 320,385 320,415</av:PointCollection>
-                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
-                              <av:PointCollection x:Key="FalseConnector">290,350 260,350 260,200 265,200</av:PointCollection>
+                              <av:PointCollection x:Key="TrueConnector">390,400 420,400 420,435 360,435 360,465</av:PointCollection>
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <av:PointCollection x:Key="FalseConnector">330,400 300,400 300,250 305,250</av:PointCollection>
+                              <av:Point x:Key="AnnotationLocation">150,396</av:Point>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </FlowDecision>
@@ -388,9 +422,9 @@
                     <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_4">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <av:Point x:Key="ShapeLocation">685,425</av:Point>
+                          <av:Point x:Key="ShapeLocation">725,475</av:Point>
                           <av:Size x:Key="ShapeSize">110,70</av:Size>
-                          <av:PointCollection x:Key="ConnectorLocation">740,495 740,535</av:PointCollection>
+                          <av:PointCollection x:Key="ConnectorLocation">780,545 780,585</av:PointCollection>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" Buttons="Ok" DisplayName="Message Box EndMessage" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[dt_MessageResource.Rows(0).Item(&quot;Message&quot;).ToString]" TopMost="True" />
@@ -398,7 +432,7 @@
                         <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_8">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">685,535</av:Point>
+                              <av:Point x:Key="ShapeLocation">725,585</av:Point>
                               <av:Size x:Key="ShapeSize">110,70</av:Size>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
@@ -417,9 +451,10 @@
     <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">265,45</av:Point>
+          <av:Point x:Key="ShapeLocation">305,95</av:Point>
           <av:Size x:Key="ShapeSize">110,70</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">320,115 320,165</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">360,165 360,215</av:PointCollection>
+          <av:Point x:Key="AnnotationLocation">460,56</av:Point>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <Sequence sap2010:Annotation.AnnotationText="Show dialog boxes to specify the following information:&#xA;1. Input Filename&#xA;2. Selector FileName&#xA;3. Save destination" DisplayName="Sequence Specify file output destination" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -429,36 +464,129 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Assign DisplayName="Assign ListFileName(InputData)" sap2010:WorkflowViewState.IdRef="Assign_22">
+        <Assign DisplayName="Assign ListFileName(InputData)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_22">
           <Assign.To>
             <OutArgument x:TypeArguments="x:String">[ListFileName(0)]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="x:String">[dt_MessageResource.Rows(1).Item("Message").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String">[dt_MessageResource.Rows(1).Item("Message").ToString+Datetime.Now.toString("yyyyMMdd-HHmmss")]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:InputDialog OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Dialog to specify the Input Filename" DisplayName="Input Dialog Initial display FileNmase(InputData)" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="[dt_MessageResource.Rows(3).Item(&quot;Message&quot;).ToString]" Options="[ListFileName]" Title="[dt_MessageResource.Rows(5).Item(&quot;Message&quot;).ToString]" TopMost="False">
+        <ui:InputDialog OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Dialog to specify the Input Filename" DisplayName="Input Dialog Initial display FileNmase(InputData)" sap:VirtualizedContainerService.HintSize="416,360" sap2010:WorkflowViewState.IdRef="InputDialog_6" IsPassword="False" Label="[dt_MessageResource.Rows(3).Item(&quot;Message&quot;).ToString]" Options="[ListFileName]" Title="[dt_MessageResource.Rows(5).Item(&quot;Message&quot;).ToString]" TopMost="False">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="x:String">[InputFileName]</OutArgument>
           </ui:InputDialog.Result>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:InputDialog>
-        <Assign DisplayName="Assign ListFileName(SelectorData)" sap2010:WorkflowViewState.IdRef="Assign_23">
+        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign InputFileName" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_26">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[InputFileName]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[InputFileName+Datetime.Now.toString("yyyyMMdd-HHmmss")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ui:CommentOut.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CommentOut>
+        <Assign DisplayName="Assign ListFileName(SelectorData)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_23">
           <Assign.To>
             <OutArgument x:TypeArguments="x:String">[ListFileName(0)]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="x:String">[dt_MessageResource.Rows(2).Item("Message").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String">[dt_MessageResource.Rows(2).Item("Message").ToString+Datetime.Now.toString("yyyyMMdd-HHmmss")]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:InputDialog OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Dialog to specify the Selector Filename" DisplayName="Input Dialog Initial display FileNmase(SelectorData)" sap2010:WorkflowViewState.IdRef="InputDialog_5" IsPassword="False" Label="[dt_MessageResource.Rows(4).Item(&quot;Message&quot;).ToString]" Options="[ListFileName]" Title="[dt_MessageResource.Rows(5).Item(&quot;Message&quot;).ToString]" TopMost="False">
+        <ui:InputDialog OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Dialog to specify the Selector Filename" DisplayName="Input Dialog Initial display FileNmase(SelectorData)" sap:VirtualizedContainerService.HintSize="416,360" sap2010:WorkflowViewState.IdRef="InputDialog_5" IsPassword="False" Label="[dt_MessageResource.Rows(4).Item(&quot;Message&quot;).ToString]" Options="[ListFileName]" Title="[dt_MessageResource.Rows(5).Item(&quot;Message&quot;).ToString]" TopMost="False">
           <ui:InputDialog.Result>
             <OutArgument x:TypeArguments="x:String">[SelectorFileName]</OutArgument>
           </ui:InputDialog.Result>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:InputDialog>
-        <ui:SelectFolder sap2010:Annotation.AnnotationText="Specify the save destination." DisplayName="Select Folder" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[OutputPath]" />
+        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign SelectorFileName" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_25">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[SelectorFileName]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[SelectorFileName+Datetime.Now.toString("yyyyMMdd-HHmmss")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ui:CommentOut.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CommentOut>
+        <Assign DisplayName="Assign OutputPath" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_24">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[OutputPath]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">["D:\RPA工作區\UiPath Foundation pack for Accelerators for SAP ECC\Output"]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+          <ui:CommentOut.Body>
+            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,194" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:SelectFolder sap2010:Annotation.AnnotationText="Specify the save destination." DisplayName="Select Folder" sap:VirtualizedContainerService.HintSize="416,134" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[OutputPath]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:SelectFolder>
+            </Sequence>
+          </ui:CommentOut.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CommentOut>
       </Sequence>
       <FlowStep.Next>
         <x:Reference>__ReferenceID1</x:Reference>
@@ -471,19 +599,21 @@
     <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_10">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">105,45</av:Point>
+          <av:Point x:Key="ShapeLocation">145,95</av:Point>
           <av:Size x:Key="ShapeSize">110,70</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">215,80 265,80</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">255,130 305,130</av:PointCollection>
+          <av:Point x:Key="AnnotationLocation">135,5</av:Point>
+          <av:Size x:Key="AnnotationSize">310,90</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="1. Read the message (labels) information from an Excel file according the system language and return in a DataTable.&#xA;2. Read the Selector acquisition information from an Excel file and return in a DataTable. " DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_GUI_SelectorDataBuilder_E\Initialization.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="1. Read the message (labels) information from an Excel file according the system language and return in a DataTable.&#xA;2. Read the Selector acquisition information from an Excel file and return in a DataTable. " DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="334,239" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SRC_GUI_SelectorDataBuilder_E\Initialization.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_MessageResource">[dt_MessageResource]</OutArgument>
           <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_TargetInformation">[dt_TargetInformation]</OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:InvokeWorkflowFile>
@@ -495,9 +625,9 @@
     <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_11">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">5,125</av:Point>
+          <av:Point x:Key="ShapeLocation">45,175</av:Point>
           <av:Size x:Key="ShapeSize">110,70</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">115,160 160,160 160,115</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">155,210 200,210 200,165</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
@@ -510,13 +640,13 @@
     <FlowStep sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">455,15</av:Point>
+          <av:Point x:Key="ShapeLocation">635,55</av:Point>
           <av:Size x:Key="ShapeSize">110,70</av:Size>
-          <av:Point x:Key="AnnotationLocation">580,5</av:Point>
+          <av:Point x:Key="AnnotationLocation">790,55</av:Point>
           <av:Size x:Key="AnnotationSize">480,210</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:Comment sap2010:Annotation.AnnotationText="（選擇器產生工具）&#xD;&#xA;Overview：「建立含有選擇器(Selector)資訊的輸入檔案，用來透過GUI元件批次註冊多筆SAP資料。執行此流程後，在SAP畫面上點擊需要的輸入欄位，選擇器資訊就會自動存進Excel檔案。」&#xD;&#xA;&gt; 用 Flowchart 型態設計&#xD;&#xA;&gt; 呼叫 Initialization.xaml 讀取多語系訊息資源 + 目標資訊&#xD;&#xA;&gt; 用 InputDialog 讓使用者指定：輸入檔名、選擇器檔名、輸出路徑&#xD;&#xA;&gt; 透過使用者實際在SAP畫面上點擊欄位，自動記錄每個欄位的UI選擇器(Selector)，存進Excel檔案&#xD;&#xA;&#xD;&#xA;📌 這是一支**「錄製輔助工具」**，讓開發/導入人員不用手動寫UI選擇器，只要照著畫面點擊要用到的欄位，工具就會自動幫忙記錄下來，大幅降低GUI自動化流程的建置門檻。" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property">
+      <ui:Comment sap2010:Annotation.AnnotationText="（選擇器產生工具）&#xA;Overview：「建立含有選擇器(Selector)資訊的輸入檔案，用來透過GUI元件批次註冊多筆SAP資料。執行此流程後，在SAP畫面上點擊需要的輸入欄位，選擇器資訊就會自動存進Excel檔案。」&#xA;&gt; 用 Flowchart 型態設計&#xA;&gt; 呼叫 Initialization.xaml 讀取多語系訊息資源 + 目標資訊&#xA;&gt; 用 InputDialog 讓使用者指定：輸入檔名、選擇器檔名、輸出路徑&#xA;&gt; 透過使用者實際在SAP畫面上點擊欄位，自動記錄每個欄位的UI選擇器(Selector)，存進Excel檔案&#xA;&#xA;📌 這是一支**「錄製輔助工具」**，讓開發/導入人員不用手動寫UI選擇器，只要照著畫面點擊要用到的欄位，工具就會自動幫忙記錄下來，大幅降低GUI自動化流程的建置門檻。" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>

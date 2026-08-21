@@ -1,9 +1,9 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="SRC_MakeTextListToDataTable" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_Text" Type="InArgument(scg:List(x:String))" />
-    <x:Property Name="in_Len_Str" Type="InArgument(scg:List(x:String))" />
-    <x:Property Name="in_dt_Fields" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="out_dt_OutputData" Type="OutArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="一筆一筆的原始文字資料(每一項代表一整行的定長字串)" Name="in_Text" Type="InArgument(scg:List(x:String))" />
+    <x:Property sap2010:Annotation.AnnotationText="每個欄位的字元長度清單(依順序對應每個欄位該取幾個字元)，這是「切割規則」" Name="in_Len_Str" Type="InArgument(scg:List(x:String))" />
+    <x:Property sap2010:Annotation.AnnotationText="欄位定義表，內含&quot;FIELDNAME&quot;這一欄，代表要建立的欄位名稱清單" Name="in_dt_Fields" Type="InArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="轉換完成的結果表" Name="out_dt_OutputData" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -64,6 +64,7 @@
       <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -168,7 +169,7 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="647,2424" Id="SetDataTable_1" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Create the DataTable based on the argument information.&#xA;&#xA;- Input&#xA;in_Text as Data String &lt;List&lt;String&gt;&gt;&#xA;in_Len_Str as Number of strings &lt;List&lt;String&gt;&gt;&#xA;in_dt_Fields as Information of FIELDS &lt;DataTable&gt;&#xA;&#xA;- Output&#xA;out_dt_OutputData as Extracted Data from Data String &lt;DataTable&gt;" DisplayName="SRC_MakeTextListToDataTable" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程的功能是把「固定長度格式(Fixed-Length Format)」的純文字清單，依欄位定義切割並組裝成一張標準的DataTable。這是SAP常見的「定長文字檔」轉表格資料的標準轉換工具。)&#xA;Create the DataTable based on the argument information.&#xA;&#xA;- Input&#xA;in_Text as Data String &lt;List&lt;String&gt;&gt;&#xA;in_Len_Str as Number of strings &lt;List&lt;String&gt;&gt;&#xA;in_dt_Fields as Information of FIELDS &lt;DataTable&gt;&#xA;&#xA;- Output&#xA;out_dt_OutputData as Extracted Data from Data String &lt;DataTable&gt;" DisplayName="SRC_MakeTextListToDataTable" sap:VirtualizedContainerService.HintSize="939,4065" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="TempDataTable" />
       <Variable x:TypeArguments="x:String" Default="SRC_MakeTextListToDataTable" Name="WorkflowName" />
@@ -176,10 +177,27 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]" />
-    <Assign DisplayName="Assign TempDataTable" sap2010:WorkflowViewState.IdRef="Assign_12">
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程的功能是把「固定長度格式(Fixed-Length Format)」的純文字清單，依欄位定義切割並組裝成一張標準的DataTable。這是SAP常見的「定長文字檔」轉表格資料的標準轉換工具。" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,89" sap2010:WorkflowViewState.IdRef="Comment_4" Text="//" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,89" sap2010:WorkflowViewState.IdRef="Comment_5" Text="//" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="488,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Assign DisplayName="Assign TempDataTable" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_12">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[TempDataTable]</OutArgument>
       </Assign.To>
@@ -187,29 +205,53 @@
         <InArgument x:TypeArguments="sd:DataTable">[new DataTable]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Create Column from in_dt_Fields" DataTable="[in_dt_Fields]" DisplayName="For Each Row Create Column" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:Comment sap2010:Annotation.AnnotationText="依欄位定義建立欄位(Column)&#xD;&#xA;用ForEachRow逐列掃描in_dt_Fields&#xD;&#xA;對每一列，取出&quot;FIELDNAME&quot;欄位的值，透過AddDataColumn活動在TempDataTable裡新增一個同名的欄位&#xD;&#xA;這一步等於是先把**表格的骨架(欄位結構)**建好，但欄位資料型別預設是String" sap:VirtualizedContainerService.HintSize="488,215" sap2010:WorkflowViewState.IdRef="Comment_2" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Create Column from in_dt_Fields" DataTable="[in_dt_Fields]" DisplayName="For Each Row Create Column" sap:VirtualizedContainerService.HintSize="488,472" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[row.Item(&quot;FIELDNAME&quot;).ToString]" DataTable="[TempDataTable]" DisplayName="Add Data Column" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="-1" Unique="False" />
+          <ui:AddDataColumn x:TypeArguments="x:String" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[row.Item(&quot;FIELDNAME&quot;).ToString]" DataTable="[TempDataTable]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="334,189" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="-1" Unique="False" />
         </ActivityAction>
       </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Divide Data string for each delimiter ( length ) to set the Datatable." DisplayName="For Each Add Data Row" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[in_Text]">
+    <ui:Comment sap2010:Annotation.AnnotationText="逐行文字資料，依長度切割並填值 用ForEach迴圈跑過in_Text清單裡的每一筆原始文字(item)：&#xD;&#xA;&gt; 初始化：StartPoint = 0(切割起始位置)，並建立一個新的空白列Row = TempDataTable.NewRow&#xD;&#xA;&gt; 內層再用ForEach迴圈跑過in_Len_Str清單(每個欄位對應的長度值len)，並用Index追蹤目前是第幾個欄位：&#xD;&#xA;&gt;&gt; Assign EndPoint：把長度字串len轉成整數(Integer.Parse(len))，代表本欄位要擷取的字元數&#xD;&#xA;&gt;&gt; 判斷是否超出字串總長度(If StartPoint &gt; item.Length)：&#xD;&#xA;&gt;&gt;&gt; 若是(起始位置已超過原字串長度)：直接把該欄位值設為空字串&quot;&quot;(代表這筆資料在這個欄位沒有內容，屬正常結尾情況)&#xD;&#xA;&gt;&gt;&gt; 若否：用item.Substring(StartPoint, 實際擷取長度).Trim擷取子字串並去除頭尾空白，填入Row.Item(Index)。其中實際擷取長度會判斷「若字串剩餘長度足夠取滿EndPoint，就取EndPoint；否則只取剩下的字元數(item.Length - StartPoint)」，這是為了避免Substring因超出字串範圍而丟出例外&#xD;&#xA;&gt;&gt; Assign StartPoint：把起始位置往後移動EndPoint個字元，準備切割下一個欄位(注意這裡是StartPoint + EndPoint，並非透過Index更新，所以是依序累加位移量往後推進)&#xD;&#xA;&gt; 每一筆原始文字跑完所有欄位切割後，用AddDataRow把組好的Row加入TempDataTable" sap:VirtualizedContainerService.HintSize="488,526" sap2010:WorkflowViewState.IdRef="Comment_3" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Divide Data string for each delimiter ( length ) to set the Datatable." DisplayName="For Each Add Data Row" sap:VirtualizedContainerService.HintSize="488,1892" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[in_Text]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body Add Data Row" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body Add Data Row" sap:VirtualizedContainerService.HintSize="486,1730" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Int32" Name="StartPoint" />
               <Variable x:TypeArguments="sd:DataRow" Name="Row" />
               <Variable x:TypeArguments="x:Int32" Name="Index" />
             </Sequence.Variables>
-            <Assign DisplayName="Assign Initialize StartPoint" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign Initialize StartPoint" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_1">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:Int32">[StartPoint]</OutArgument>
               </Assign.To>
@@ -217,7 +259,7 @@
                 <InArgument x:TypeArguments="x:Int32">0</InArgument>
               </Assign.Value>
             </Assign>
-            <Assign DisplayName="Assign Initialize NewRow" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign DisplayName="Assign Initialize NewRow" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_2">
               <Assign.To>
                 <OutArgument x:TypeArguments="sd:DataRow">[Row]</OutArgument>
               </Assign.To>
@@ -225,27 +267,42 @@
                 <InArgument x:TypeArguments="sd:DataRow">[TempDataTable.NewRow]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:ForEach x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Separate by character position" CurrentIndex="[Index]" DisplayName="For Each Set Row.Item" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_Len_Str]">
+            <ui:ForEach x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Separate by character position" CurrentIndex="[Index]" DisplayName="For Each Set Row.Item" sap:VirtualizedContainerService.HintSize="452,1108" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_Len_Str]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="len" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body Set Row.Item" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Sequence DisplayName="Body Set Row.Item" sap:VirtualizedContainerService.HintSize="450,946" sap2010:WorkflowViewState.IdRef="Sequence_5">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:Int32" Name="EndPoint" />
                     </Sequence.Variables>
-                    <Assign sap2010:Annotation.AnnotationText="Get last character position" DisplayName="Assign EndPoint" sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap2010:Annotation.AnnotationText="Get last character position" DisplayName="Assign EndPoint" sap:VirtualizedContainerService.HintSize="416,206" sap2010:WorkflowViewState.IdRef="Assign_5">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:Int32">[EndPoint]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
                         <InArgument x:TypeArguments="x:Int32">[Integer.Parse(len)]</InArgument>
                       </Assign.Value>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
                     </Assign>
-                    <If sap2010:Annotation.AnnotationText="Check if the string acquisition start position exceeds the total number of characters" Condition="[StartPoint &gt; item.Length]" DisplayName="If  StartPoint &gt; item.Length" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If sap2010:Annotation.AnnotationText="Check if the string acquisition start position exceeds the total number of characters" Condition="[StartPoint &gt; item.Length]" DisplayName="If  StartPoint &gt; item.Length" sap:VirtualizedContainerService.HintSize="416,514" sap2010:WorkflowViewState.IdRef="If_1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
                       <If.Then>
-                        <Assign DisplayName="Assign blank" sap2010:WorkflowViewState.IdRef="Assign_13">
+                        <Assign DisplayName="Assign blank" sap:VirtualizedContainerService.HintSize="335,143" sap2010:WorkflowViewState.IdRef="Assign_13">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Object">[Row.Item(Index)]</OutArgument>
                           </Assign.To>
@@ -255,7 +312,7 @@
                         </Assign>
                       </If.Then>
                       <If.Else>
-                        <Assign DisplayName="Assign Item separated by character position" sap2010:WorkflowViewState.IdRef="Assign_6">
+                        <Assign DisplayName="Assign Item separated by character position" sap:VirtualizedContainerService.HintSize="335,143" sap2010:WorkflowViewState.IdRef="Assign_6">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Object">[Row.Item(Index)]</OutArgument>
                           </Assign.To>
@@ -265,7 +322,7 @@
                         </Assign>
                       </If.Else>
                     </If>
-                    <Assign DisplayName="Assign Update start position" sap2010:WorkflowViewState.IdRef="Assign_7">
+                    <Assign DisplayName="Assign Update start position" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_7">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:Int32">[StartPoint]</OutArgument>
                       </Assign.To>
@@ -276,20 +333,42 @@
                   </Sequence>
                 </ActivityAction>
               </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
-            <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[Row]" DataTable="[TempDataTable]" DisplayName="Add Data Row" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+            <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[Row]" DataTable="[TempDataTable]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="452,212" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <Assign sap2010:Annotation.AnnotationText="Set result as argument" DisplayName="Assign out_dt_OutputData" sap2010:WorkflowViewState.IdRef="Assign_9">
+    <Assign sap2010:Annotation.AnnotationText="Set result as argument&#xD;&#xA;&#xD;&#xA;把組裝完成的TempDataTable指派給輸出參數" DisplayName="Assign out_dt_OutputData" sap:VirtualizedContainerService.HintSize="488,236" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[out_dt_OutputData]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="sd:DataTable">[TempDataTable]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="488,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
 </Activity>

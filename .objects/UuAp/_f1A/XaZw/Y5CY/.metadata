@@ -1,0 +1,13 @@
+﻿{
+  "Name": "Afx79B600001008(1)",
+  "Type": "Element",
+  "Id": "Y5CYfQdAhkela9VJ5vikZw",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/Y5CYfQdAhkela9VJ5vikZw",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/XaZw8Afu806ZGpLqo-ytyg",
+  "Created": "2026-08-17T10:24:14.3395078Z",
+  "Updated": "2026-08-17T10:24:14.3395078Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.0.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

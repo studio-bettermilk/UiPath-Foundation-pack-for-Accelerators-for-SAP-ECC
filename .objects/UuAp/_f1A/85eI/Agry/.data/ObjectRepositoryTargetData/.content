@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="wNgs55ZFQEi9PkHoLrU9HQ" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="1241, 750, 38, 26" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='Footer' /&gt;&lt;wnd cls='Button' title='?瑁?' /&gt;" Guid="465f7ceb-48c9-407d-b2d3-906c627ea6c5" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='顯示客戶明細項目' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.PointOffset>
+        <PointOffset Position="BottomLeft" X="20" Y="-14" />
+      </TargetAnchorable.PointOffset>
+      <imageRef attrName="InformativeScreenshot" originalValue="f88496094b1ba0774100c03a68c50e75.jpg" xmlns="">0kgjKitwomE6ycWcYGUc6Mw</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">Click</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

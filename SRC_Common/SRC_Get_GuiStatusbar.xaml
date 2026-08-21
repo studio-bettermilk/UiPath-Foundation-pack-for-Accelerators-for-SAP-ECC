@@ -1,23 +1,14 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_Get_GuiStatusbar"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_Get_GuiStatusbar" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_MessageType" Type="OutArgument(x:String)" />
-    <x:Property Name="out_MessageId" Type="OutArgument(x:String)" />
-    <x:Property Name="out_MessageNumber" Type="OutArgument(x:String)" />
-    <x:Property Name="out_MessageText" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：訊息類型(單一字元代碼)" Name="out_MessageType" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：訊息類別ID(例如M3、ZMM等，代表這是哪個模組發出的訊息)" Name="out_MessageId" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：訊息編號(例如311，配合MessageId可精確定位到SAP說明文件裡的具體訊息定義)" Name="out_MessageNumber" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：狀態列實際顯示的完整文字內容" Name="out_MessageText" Type="OutArgument(x:String)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>376,897</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Test_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -44,41 +35,89 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Management.Automation</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
-      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Return the specified properties of Gui Status Bar Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;out_MessageType as Message Type &lt;String&gt;&#xA;out_MessageId as Message ID &lt;String&gt;&#xA;out_MessageNumber as Message Number &lt;String&gt;&#xA;out_MessageText as Message Text &lt;String&gt;&#xA;&#xA;* MessageType summary&#xA;---------------------------&#xA;S = Success&#xA;W = Warning&#xA;E = Error&#xA;A = Abort&#xA;I = Information" DisplayName="SRC_Get_GuiStatusbar" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (讀取SAP GUI畫面最下方的「狀態列(Status Bar)」訊息——也就是每次執行操作或BAPI後，SAP用來顯示「成功/警告/錯誤」訊息的那一整條橫幅。)&#xA;Return the specified properties of Gui Status Bar Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;out_MessageType as Message Type &lt;String&gt;&#xA;out_MessageId as Message ID &lt;String&gt;&#xA;out_MessageNumber as Message Number &lt;String&gt;&#xA;out_MessageText as Message Text &lt;String&gt;&#xA;&#xA;* MessageType summary&#xA;---------------------------&#xA;S = Success&#xA;W = Warning&#xA;E = Error&#xA;A = Abort&#xA;I = Information" DisplayName="SRC_Get_GuiStatusbar" sap:VirtualizedContainerService.HintSize="939,2089" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_Get_GuiStatusbar" Name="WorkflowName" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xD;&#xA;Dim SapGuiAuto As Object = Nothing&#xD;&#xA;Try&#xD;&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xD;&#xA; Dim application As Object = Nothing&#xD;&#xA; Try&#xD;&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xD;&#xA;  Dim connection As Object = Nothing&#xD;&#xA;  Try&#xD;&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xD;&#xA;   Dim session As Object = Nothing&#xD;&#xA;   Try&#xD;&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xD;&#xA;    Dim ControlID As Object = Nothing&#xD;&#xA;    Try&#xD;&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[0]/sbar&quot;})&#xD;&#xA;     out_MessageType = CType(ControlID.GetType.InvokeMember(&quot;MessageType&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;     out_MessageId = CType(ControlID.GetType.InvokeMember(&quot;MessageId&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;     out_MessageNumber = CType(ControlID.GetType.InvokeMember(&quot;MessageNumber&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;     out_MessageText = CType(ControlID.GetType.InvokeMember(&quot;Text&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xD;&#xA;    Finally&#xD;&#xA;     Try&#xD;&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xD;&#xA;     Catch ex As Exception&#xD;&#xA;     End Try&#xD;&#xA;    End Try&#xD;&#xA;   Finally&#xD;&#xA;    Try&#xD;&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xD;&#xA;    Catch ex As Exception&#xD;&#xA;    End Try&#xD;&#xA;   End Try   &#xD;&#xA;  Finally&#xD;&#xA;   Try&#xD;&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xD;&#xA;   Catch ex As Exception&#xD;&#xA;   End Try&#xD;&#xA;  End Try  &#xD;&#xA; Finally&#xD;&#xA;  Try&#xD;&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xD;&#xA;  Catch ex As Exception&#xD;&#xA;  End Try&#xD;&#xA; End Try&#xD;&#xA;Finally&#xD;&#xA; Try&#xD;&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xD;&#xA;  System.GC.Collect()&#xD;&#xA;  System.GC.WaitForPendingFinalizers()&#xD;&#xA; Catch ex As Exception&#xD;&#xA; End Try&#xD;&#xA;End Try" DisplayName="Invoke code for GuiStatusbar" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="MessageType&#xD;&#xA;對照表（來自流程的Overview備註）&#xD;&#xA;代碼 | 意義&#xD;&#xA;S Success(成功)&#xD;&#xA;W Warning(警告)&#xD;&#xA;E Error(錯誤)&#xD;&#xA;A Abort(中止)&#xD;&#xA;I Information(資訊)" sap:VirtualizedContainerService.HintSize="450,232" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程 vs.&#xD;&#xA;SRC_Get_GuiLabel.xaml&#xD;&#xA;的差異總結 &#xD;&#xA;項目 | SRC_Get_GuiLabel.xaml | SRC_Get_GuiStatusbar.xaml（本流程）&#xD;&#xA;目標控件 | 任意指定(in_ControlID參數) | 固定為狀態列(sbar)&#xD;&#xA;輸入參數 | 需要in_ControlID | 無輸入參數&#xD;&#xA;讀取的屬性 | 顏色、顯示文字、圖示、提示 | 訊息類型、訊息ID、訊息編號、訊息文字&#xD;&#xA;主要用途 | 判斷任意欄位/標籤的視覺狀態 | 專門判斷SAP執行後的成功/失敗訊息" sap:VirtualizedContainerService.HintSize="450,297" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程的用途與角色&#xD;&#xA;這是整個「GUI操作路線」裡最關�keys的錯誤/成功判斷工具：每次透過SAP GUI畫面操作完成一個動作後（例如存檔、送出、執行交易），SAP幾乎都會在狀態列顯示結果訊息。上層流程（例如您之前問過的 SRC_CM_FNCMDL_EXE_E.xaml、SRC_CM_GET_TBL_E.xaml）通常會呼叫這支流程，取得 out_MessageType，然後：&#xD;&#xA;&gt; 若是 &quot;E&quot;(錯誤)或&quot;A&quot;(中止) → 判定這次操作失敗，把out_MessageText記錄進Log，可能還要重試或中斷流程&#xD;&#xA;&gt; 若是 &quot;S&quot;(成功) → 判定操作成功，繼續下一步&#xD;&#xA;這跟您之前問過BAPI路線裡的 AddSuccessMessageToBAPILog.xaml（記錄BAPI成功訊息）、CheckAuthority.xaml（用例外判斷授權失敗）是功能對等的概念——只是這支是專門給GUI操作路線使用的「執行結果判斷工具」。" sap:VirtualizedContainerService.HintSize="450,379" sap2010:WorkflowViewState.IdRef="Comment_5" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:Comment sap2010:Annotation.AnnotationText="用 InvokeCode（內嵌VB.NET程式碼）操作SAP GUI Scripting API&#xD;&#xA;跟 SRC_Get_GuiLabel.xaml 幾乎一模一樣的COM物件反射逐層挖取手法：&#xD;&#xA;&#xD;&#xA;SapGuiAuto (GetObject(&quot;SAPGUI&quot;))&#xD;&#xA;  └─ application (GetScriptingEngine)&#xD;&#xA;       └─ connection (Children(0))&#xD;&#xA;            └─ session (Children(0))&#xD;&#xA;                 └─ ControlID = findById(&quot;wnd[0]/sbar&quot;)  ← 關鍵差異在這裡！&#xD;&#xA;&#xD;&#xA;⚠️ 與SRC_Get_GuiLabel.xaml最大的不同：&#xD;&#xA;&gt; SRC_Get_GuiLabel.xaml 是用 findById(&quot;wnd[0]/&quot; &amp; in_ControlID) → 可以指定任意控件(彈性、通用)&#xD;&#xA;&gt; 這支 SRC_Get_GuiStatusbar.xaml 是寫死用 findById(&quot;wnd[0]/sbar&quot;) → sbar 就是SAP GUI裡狀態列的固定選擇器代碼，不需要輸入參數，因為狀態列在SAP畫面上永遠只有這一個固定位置&#xD;&#xA;&#xD;&#xA;找到狀態列控件後，讀取四個專屬屬性：&#xD;&#xA;&gt; MessageType（訊息類型：S/W/E/A/I）→ out_MessageType&#xD;&#xA;&gt; MessageId（訊息類別ID）→ out_MessageId&#xD;&#xA;&gt; MessageNumber（訊息編號）→ out_MessageNumber&#xD;&#xA;&gt; Text（完整顯示文字）→ out_MessageText" sap:VirtualizedContainerService.HintSize="450,542" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,147" sap2010:WorkflowViewState.IdRef="Comment_3" Text="同樣用巢狀 Try...Finally 逐層釋放COM物件（ControlID→session→connection→application→SapGuiAuto），並手動觸發垃圾回收，避免記憶體洩漏" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xA;Dim SapGuiAuto As Object = Nothing&#xA;Try&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xA; Dim application As Object = Nothing&#xA; Try&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xA;  Dim connection As Object = Nothing&#xA;  Try&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xA;   Dim session As Object = Nothing&#xA;   Try&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xA;    Dim ControlID As Object = Nothing&#xA;    Try&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[0]/sbar&quot;})&#xA;     out_MessageType = CType(ControlID.GetType.InvokeMember(&quot;MessageType&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_MessageId = CType(ControlID.GetType.InvokeMember(&quot;MessageId&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_MessageNumber = CType(ControlID.GetType.InvokeMember(&quot;MessageNumber&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_MessageText = CType(ControlID.GetType.InvokeMember(&quot;Text&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;    Finally&#xA;     Try&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xA;     Catch ex As Exception&#xA;     End Try&#xA;    End Try&#xA;   Finally&#xA;    Try&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xA;    Catch ex As Exception&#xA;    End Try&#xA;   End Try   &#xA;  Finally&#xA;   Try&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xA;   Catch ex As Exception&#xA;   End Try&#xA;  End Try  &#xA; Finally&#xA;  Try&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xA;  Catch ex As Exception&#xA;  End Try&#xA; End Try&#xA;Finally&#xA; Try&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xA;  System.GC.Collect()&#xA;  System.GC.WaitForPendingFinalizers()&#xA; Catch ex As Exception&#xA; End Try&#xA;End Try" DisplayName="Invoke code for GuiStatusbar" sap:VirtualizedContainerService.HintSize="450,287" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <OutArgument x:TypeArguments="x:String" x:Key="out_MessageType">[out_MessageType]</OutArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_MessageId">[out_MessageId]</OutArgument>
@@ -86,37 +125,13 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_MessageText">[out_MessageText]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
-    <sads:DebugSymbol.Symbol>d1NDOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRG9jdW1lbnRzXERldmVsb3BtZW50XFNSQ19Db21tb25cU1JDX0dldF9HdWlTdGF0dXNiYXIueGFtbAtMA1sOAgEBTjROSgIBAlAFUKMBAgEPUQVYFQIBBlkFWZ8BAgEDUHtQoAECARBTSVNaAgENVUtVXgIBC1RHVFYCAQlWSVZaAgEHWXlZnAECAQQ=</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314,164" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,817">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Test_1" sap:VirtualizedContainerService.HintSize="376,897" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

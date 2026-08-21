@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="bmfZDtPKgkqELk4dclvj-w" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="23, 94, 133, 20" ElementType="InputBox" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;&lt;wnd cls='Edit' /&gt;" Guid="f0a916ca-e5ab-47ed-9b4f-65f6bb41557a" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 輕鬆存取  -  使用者功能表： UiPath' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="d184b80cc4893f799cf7deea1eb781df.jpg" xmlns="">0cqEEG65KGE2DJ-drM0j7aA</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">Click</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

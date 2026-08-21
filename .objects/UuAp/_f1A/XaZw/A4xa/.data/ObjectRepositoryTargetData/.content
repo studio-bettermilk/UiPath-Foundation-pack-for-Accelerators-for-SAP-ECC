@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="bU6IfMMMvk6pKQmYBwlHww" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="162, 247, 55, 33" ElementVisibilityArgument="Interactive" Guid="e0f7d155-b482-4eca-9c33-2fc8bf483590" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADcAAAAhCAYAAAB9VDPAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIySURBVFhH7ZYxjoMwEEX3XnuY9CtFyhEiRYpyCCIOgUjHBYB2G1KZbrt0lLN/bAy2Y0QcpJW8cvEVMjZknv/MkI9hGOi/KsHFqgQXqxJcrEpwsSrBxaqNcILqRnji6xLCF3//eT6FwQlBwo01OWWehKbkRYuEZ2XnC53KloprTkV5g3I6nefrDPHaC76kjh5d54mHwiG5wki0RkJm4nOcE8aakWTNSU/PEgBpx2sAX8dr3+GtqqL7sfLEg+A4iZvz4ygjgBQjRH29AJ5j7j4DQApwPucQy8pXyxJQnzvq4dpPBR139J3bkOE9N56uKC9jOTJMi+9jefK6W1YNEm/M2LJz854X1eXUA+rhWQuGkyD4ZBjTMQ0qOEFxsxyQ67ivBqRy/xXnAL0/oD+XgNmtI/VVBedyuu92dM/t3guCUxDqWsKhv2SSk1MMoNfHvQCVScu4dmnBOUd8UMs9qMqRy7OXUPje2XvCy1IKpQjQr712RLlScAyDxExIYE1NVP6uQfBpTMh5WrKzPE2X3PKoQ+85vaYVBoeTlBAowQmA3eNSdfvM1BOcsw7p+81y36pg5/jHrZOdEtdCycEJ6131BKeGDrsqECv4eeMe+5WxTW/BWSfrg3NfGdhzQkyWoFxTvSlQhvXUfxyz75XrG1z8GzhnMGh35GQ14jx85qrgCjjg2QH95+gtOB7negDwEFGuaPGAcODWhL9o8jmh960oGC4mJbhYleBiVYKLVQkuTg30C531A+COvmAdAAAAAElFTkSuQmCC" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;" SearchSteps="Image" TargetType="ImageBased" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="d91d583eda5126f94cb00ca210a596ea.jpg" xmlns="">0xtF8JtDHNE2A_rNYB5i2xg</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">Click</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

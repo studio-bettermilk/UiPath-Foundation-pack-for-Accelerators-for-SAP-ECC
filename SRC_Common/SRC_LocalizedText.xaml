@@ -1,6 +1,6 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="SRC_LocalizedText" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_Messages" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property sap2010:Annotation.AnnotationText="供外部流程取用轉換好的多語系訊息集合" Name="out_Messages" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -66,6 +66,7 @@
       <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -123,7 +124,7 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="764,1869" Id="GetTranslatedText_1" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="-Overview&#xA;Return a dictionary object with localized message based on OS Language, specified in Message_File.xlsx.&#xA;&#xA;-Input/Output&#xA;out_Messages as Dictionary with all localized messages. Dictionary &lt;String, String&gt;" DisplayName="SRC_LocalizedText" sap2010:WorkflowViewState.IdRef="Sequence_10">
+  <Sequence sap2010:Annotation.AnnotationText="-Overview (這支流程的功能是把多語系訊息檔(Excel)讀進來，轉換成一個字典(Dictionary)物件，讓其他流程可以用「訊息編號」查詢出對應語言的文字內容。整體是標準的「多語系訊息載入器」設計。)&#xA;Return a dictionary object with localized message based on OS Language, specified in Message_File.xlsx.&#xA;&#xA;-Input/Output&#xA;out_Messages as Dictionary with all localized messages. Dictionary &lt;String, String&gt;" DisplayName="SRC_LocalizedText" sap:VirtualizedContainerService.HintSize="939,3930" sap2010:WorkflowViewState.IdRef="Sequence_10">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Language" />
       <Variable x:TypeArguments="x:String" Default="SRC_LocalizedText" Name="WorkflowName" />
@@ -133,18 +134,53 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[WorkflowName + &quot; start&quot;]" />
-    <Assign DisplayName="Assign MessageFilePath" sap2010:WorkflowViewState.IdRef="Assign_22">
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程的功能是把多語系訊息檔(Excel)讀進來，轉換成一個字典(Dictionary)物件，讓其他流程可以用「訊息編號」查詢出對應語言的文字內容。整體是標準的「多語系訊息載入器」設計。" sap:VirtualizedContainerService.HintSize="514,166" sap2010:WorkflowViewState.IdRef="Comment_2" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程本質上是一個**「Excel多語系訊息表 → 記憶體字典」的轉換工具**：先自動偵測系統語言，再逐工作表、逐列掃描Excel檔案，依「工作表名稱+編號」為Key，把對應語言的文字(找不到時退回英文)整理成一個字典物件輸出，方便其他流程用固定的Key快速查出當前語系該顯示的訊息文字。" sap:VirtualizedContainerService.HintSize="514,199" sap2010:WorkflowViewState.IdRef="Comment_3" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText=" 初始化設定&#xD;&#xA;&gt; Assign MessageFilePath：固定寫死路徑 SRC_Common\Message_File.xlsx，這是存放所有多語系訊息的Excel範本檔&#xD;&#xA;&gt; Assign Messages：建立一個空的Dictionary(Of String, String)物件，準備存放整理後的訊息&#xD;&#xA;&gt; Assign Language：取得目前作業系統的UI文化語系，也就是System.Globalization.CultureInfo.InstalledUICulture.Name，並附上一則註解說明：範例值會是&quot;zh-TW&quot;(繁體中文-台灣)。這代表語系是自動偵測系統語言，並非人工指定。" sap:VirtualizedContainerService.HintSize="514,297" sap2010:WorkflowViewState.IdRef="Comment_5" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="514,57" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Assign DisplayName="Assign MessageFilePath" sap:VirtualizedContainerService.HintSize="514,175" sap2010:WorkflowViewState.IdRef="Assign_22">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[MessageFilePath]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">SRC_Common\Message_File.xlsx</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <Assign DisplayName="Assign Messages (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_26">
+    <Assign DisplayName="Assign Messages (Initialization)" sap:VirtualizedContainerService.HintSize="514,175" sap2010:WorkflowViewState.IdRef="Assign_26">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[Messages]</OutArgument>
       </Assign.To>
@@ -152,7 +188,7 @@
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(of String, String)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign Language (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_28">
+    <Assign DisplayName="Assign Language (Initialization)" sap:VirtualizedContainerService.HintSize="514,175" sap2010:WorkflowViewState.IdRef="Assign_28">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[Language]</OutArgument>
       </Assign.To>
@@ -160,34 +196,59 @@
         <InArgument x:TypeArguments="x:String">[System.Globalization.CultureInfo.InstalledUICulture.Name]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="ce:IXLWorksheet" CurrentIndex="{x:Null}" DisplayName="For Each Sheet in Message File" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[New XLWorkbook(MessageFilePath).Worksheets]">
+    <ui:Comment sap:VirtualizedContainerService.HintSize="514,108" sap2010:WorkflowViewState.IdRef="Comment_1" Text="System.Globalization.CultureInfo.InstalledUICulture.Name=&quot;zh-TW&quot;" />
+    <ui:Comment sap2010:Annotation.AnnotationText="逐工作表(Sheet)讀取Excel 用ForEach迴圈跑過Message_File.xlsx裡的每一個工作表(New XLWorkbook(MessageFilePath).Worksheets)：&#xD;&#xA;對每個工作表用ReadRange把整張表(含標頭列)讀進dt_MessageData這個DataTable&#xD;&#xA;再用ForEachRow逐行掃描這個DataTable" sap:VirtualizedContainerService.HintSize="514,199" sap2010:WorkflowViewState.IdRef="Comment_6" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:ForEach x:TypeArguments="ce:IXLWorksheet" CurrentIndex="{x:Null}" DisplayName="For Each Sheet in Message File" sap:VirtualizedContainerService.HintSize="514,1757" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[New XLWorkbook(MessageFilePath).Worksheets]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="ce:IXLWorksheet">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ce:IXLWorksheet" Name="ws" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Add Sheet Name into Collection" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <Sequence DisplayName="Add Sheet Name into Collection" sap:VirtualizedContainerService.HintSize="512,1626" sap2010:WorkflowViewState.IdRef="Sequence_9">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="dt_MessageData" />
             </Sequence.Variables>
-            <ui:ReadRange AddHeaders="True" DataTable="[dt_MessageData]" DisplayName="Read Range for each worksheet in Message File" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[ws.Name.ToString]" WorkbookPath="[MessageFilePath]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ReadRange AddHeaders="True" DataTable="[dt_MessageData]" DisplayName="Read Range for each worksheet in Message File" sap:VirtualizedContainerService.HintSize="478,227" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[ws.Name.ToString]" WorkbookPath="[MessageFilePath]">
               <ui:ReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
                 </InArgument>
               </ui:ReadRange.Range>
             </ui:ReadRange>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_MessageData]" DisplayName="For each row in MessageData" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:Comment sap2010:Annotation.AnnotationText="逐列判斷並組字典Key 對DataTable裡的每一列(row)：&#xD;&#xA;&gt; 第一層判斷：如果該列的&quot;No.&quot;欄位不是空白或Null(代表這是一筆有效的訊息編號)，才繼續往下處理&#xD;&#xA;&gt; 第二層判斷：檢查該列是否存在與目前系統語系同名的欄位(即row(Language) IsNot Nothing，例如若Language=&quot;zh-TW&quot;，就檢查Excel裡有沒有一欄叫zh-TW)&#xD;&#xA;&gt;&gt; 若有：取該語系欄位的值，寫入Messages(工作表名稱 &amp; &quot;No.&quot;欄位值) = 該語系文字&#xD;&#xA;&gt;&gt; 若沒有(Else，找不到對應語系欄)：改用&quot;en-US&quot;欄位的值作為預設語言(Fallback)，同樣寫入Messages(工作表名稱 &amp; &quot;No.&quot;欄位值)&#xD;&#xA;&#xD;&#xA;也就是說，字典的Key是「工作表名稱 + 訊息編號」組合而成(例如&quot;Sheet1&quot; &amp; &quot;001&quot; = &quot;Sheet1001&quot;)，這樣可以避免不同工作表之間訊息編號重複衝突；Value則是該語系(或英文預設)對應的實際文字內容。" sap:VirtualizedContainerService.HintSize="478,395" sap2010:WorkflowViewState.IdRef="Comment_8" Text="// Write your comments in the Text property">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:Comment>
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_MessageData]" DisplayName="For each row in MessageData" sap:VirtualizedContainerService.HintSize="478,944" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
-                  <If Condition="[NOT String.IsNullOrEmpty(row(&quot;No.&quot;).ToString.Trim)]" DisplayName="If No in MessageFile is empty or null" sap2010:WorkflowViewState.IdRef="If_7">
+                  <If Condition="[NOT String.IsNullOrEmpty(row(&quot;No.&quot;).ToString.Trim)]" DisplayName="If No in MessageFile is empty or null" sap:VirtualizedContainerService.HintSize="452,701" sap2010:WorkflowViewState.IdRef="If_7">
                     <If.Then>
-                      <If sap2010:Annotation.AnnotationText="If target language dosen't exist in MessageFile use &quot;en-US&quot; as default." Condition="[row(Language) IsNot Nothing]" DisplayName="If target language dosen't exist in MessageFile" sap2010:WorkflowViewState.IdRef="If_8">
+                      <If sap2010:Annotation.AnnotationText="If target language dosen't exist in MessageFile use &quot;en-US&quot; as default." Condition="[row(Language) IsNot Nothing]" DisplayName="If target language dosen't exist in MessageFile" sap:VirtualizedContainerService.HintSize="450,482" sap2010:WorkflowViewState.IdRef="If_8">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
                         <If.Then>
-                          <Assign DisplayName="Add key/value pair Messages" sap2010:WorkflowViewState.IdRef="Assign_25">
+                          <Assign DisplayName="Add key/value pair Messages" sap:VirtualizedContainerService.HintSize="343,143" sap2010:WorkflowViewState.IdRef="Assign_25">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[Messages(ws.Name &amp; row("No.").ToString)]</OutArgument>
                             </Assign.To>
@@ -197,7 +258,7 @@
                           </Assign>
                         </If.Then>
                         <If.Else>
-                          <Assign DisplayName="Add key/value pair Messages (Case Default)" sap2010:WorkflowViewState.IdRef="Assign_29">
+                          <Assign DisplayName="Add key/value pair Messages (Case Default)" sap:VirtualizedContainerService.HintSize="343,143" sap2010:WorkflowViewState.IdRef="Assign_29">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[Messages(ws.Name &amp; row("No.").ToString)]</OutArgument>
                             </Assign.To>
@@ -216,14 +277,26 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <Assign DisplayName="Assign out_Messages (Output Argument)" sap2010:WorkflowViewState.IdRef="Assign_27">
+    <ui:Comment sap2010:Annotation.AnnotationText="Assign out_Messages：把組好的Messages字典指派給輸出參數out_Messages，讓呼叫端可以拿到完整的多語系訊息對照表" sap:VirtualizedContainerService.HintSize="514,150" sap2010:WorkflowViewState.IdRef="Comment_9" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <Assign sap2010:Annotation.AnnotationText="" DisplayName="Assign out_Messages (Output Argument)" sap:VirtualizedContainerService.HintSize="514,206" sap2010:WorkflowViewState.IdRef="Assign_27">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[out_Messages]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[Messages]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="514,166" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
   </Sequence>
 </Activity>

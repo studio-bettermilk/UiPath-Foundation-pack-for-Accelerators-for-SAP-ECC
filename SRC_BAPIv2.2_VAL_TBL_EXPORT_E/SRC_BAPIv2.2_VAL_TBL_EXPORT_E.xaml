@@ -132,7 +132,7 @@
       </sap2010:ViewStateData>
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程是 SRC_BAPIv2.2_VAL_TBL_EXPORT_E 模組的最上層主流程，功能非常單純：從SAP的單位主表（T006/T006A）撈出「內部單位」對照資料，並輸出到Excel檔案，供後續BAPI註冊(登錄資料)時使用的單位轉換參考表。)&#xA;Acquires the internal unit of measure required for BAPI registration from the SAP table [T006 / T006A] and outputs it to an Excel file.&#xA;&#xA;- Arguments&#xA;    in_SAPService as Connected session information &lt;IConnectionService&gt;&#xA;    in_FilePath as File path of Excel file to convert&lt;String&gt;&#xA;    in_LanguageKey as T006A(SPRAS : Language Key) &lt;String&gt;&#xA;" DisplayName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E" sap:VirtualizedContainerService.HintSize="880,1829" sap2010:WorkflowViewState.IdRef="Sequence_4">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程是 SRC_BAPIv2.2_VAL_TBL_EXPORT_E 模組的最上層主流程，功能非常單純：從SAP的單位主表（T006/T006A）撈出「內部單位」對照資料，並輸出到Excel檔案，供後續BAPI註冊(登錄資料)時使用的單位轉換參考表。)&#xA;Acquires the internal unit of measure required for BAPI registration from the SAP table [T006 / T006A] and outputs it to an Excel file.&#xA;&#xA;- Arguments&#xA;    in_SAPService as Connected session information &lt;IConnectionService&gt;&#xA;    in_FilePath as File path of Excel file to convert&lt;String&gt;&#xA;    in_LanguageKey as T006A(SPRAS : Language Key) &lt;String&gt;&#xA;" DisplayName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E" sap:VirtualizedContainerService.HintSize="1071,1504" sap2010:WorkflowViewState.IdRef="Sequence_4">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_BAPIv2.2_VAL_TBL_EXPORT_E" Name="WorkflowName" />
     </Sequence.Variables>
@@ -142,23 +142,29 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:Comment sap2010:Annotation.AnnotationText="完整呼叫關係圖&#xD;&#xA;&#xD;&#xA;SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml（主流程）&#xD;&#xA; ├─ CheckArgument.xaml              → 驗證輸入參數是否正確&#xD;&#xA; └─ GetUnitsOfMeasurement.xaml      → 撈單位對照表並輸出Excel&#xD;&#xA;      ├─ GetT006.xaml               → 撈SAP單位主表&#xD;&#xA;      └─ GetT006A.xaml              → 撈對應語系的單位文字表" sap:VirtualizedContainerService.HintSize="450,264" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//">
+    <ui:Comment sap2010:Annotation.AnnotationText="完整呼叫關係圖&#xA;&#xA;SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml（主流程）&#xA; ├─ CheckArgument.xaml              → 驗證輸入參數是否正確&#xA; └─ GetUnitsOfMeasurement.xaml      → 撈單位對照表並輸出Excel&#xA;      ├─ GetT006.xaml               → 撈SAP單位主表&#xA;      └─ GetT006A.xaml              → 撈對應語系的單位文字表" sap:VirtualizedContainerService.HintSize="450,264" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:Comment>
-    <ui:Comment sap2010:Annotation.AnnotationText="這支流程在整套系統裡的角色&#xD;&#xA;它產出的這份「單位對照Excel」，正是您之前問過的 SRC_BAPIv2.2_VALTBL_CNV_E 模組（ConvertUnits.xaml、DataConversion.xaml等）在做「外部單位→SAP內部單位」轉換時，所依賴的參考資料來源！也就是說：&#xD;&#xA;&#xD;&#xA;SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml  ──產出──►  單位對照Excel  ──被讀取──►  SRC_BAPIv2.2_VALTBL_CNV_E\ReadConversionTarget.xaml / ConvertUnits.xaml&#xD;&#xA;&#xD;&#xA;簡單來說，這是一支「建立單位換算字典」的準備工具，先把SAP裡的單位對照關係整理成Excel，後續其他模組在做資料轉換時才有東西可以查表對照。&#xD;&#xA;CheckArgument.xaml（VAL_TBL_EXPORT_E版本）跟TABLEDA" sap:VirtualizedContainerService.HintSize="450,379" sap2010:WorkflowViewState.IdRef="Comment_3" Text="//">
+    <ui:Comment sap2010:Annotation.AnnotationText="這支流程在整套系統裡的角色&#xA;它產出的這份「單位對照Excel」，正是您之前問過的 SRC_BAPIv2.2_VALTBL_CNV_E 模組（ConvertUnits.xaml、DataConversion.xaml等）在做「外部單位→SAP內部單位」轉換時，所依賴的參考資料來源！也就是說：&#xA;&#xA;SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml  ──產出──►  單位對照Excel  ──被讀取──►  SRC_BAPIv2.2_VALTBL_CNV_E\ReadConversionTarget.xaml / ConvertUnits.xaml&#xA;&#xA;簡單來說，這是一支「建立單位換算字典」的準備工具，先把SAP裡的單位對照關係整理成Excel，後續其他模組在做資料轉換時才有東西可以查表對照。&#xA;CheckArgument.xaml（VAL_TBL_EXPORT_E版本）跟TABLEDA" sap:VirtualizedContainerService.HintSize="450,379" sap2010:WorkflowViewState.IdRef="Comment_3" Text="//">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:Comment>
-    <ui:Comment sap:VirtualizedContainerService.HintSize="450,89" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Write your comments in the Text property" />
-    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText=" 呼叫 CheckArgument.xaml&#xD;&#xA;&gt;把 in_SAPService、in_FilePath、in_LanguageKey 全部傳入&#xD;&#xA;&gt;目的是先驗證這三個參數是否正確、完整（例如連線是否有效、檔案路徑是否存在、語言代碼是否合法），確保後面正式撈資料前不會因參數缺漏而失敗" DisplayName="Invoke CheckArgument workflow" sap:VirtualizedContainerService.HintSize="450,287" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E\CheckArgument.xaml">
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText=" 呼叫 CheckArgument.xaml&#xA;&gt;把 in_SAPService、in_FilePath、in_LanguageKey 全部傳入&#xA;&gt;目的是先驗證這三個參數是否正確、完整（例如連線是否有效、檔案路徑是否存在、語言代碼是否合法），確保後面正式撈資料前不會因參數缺漏而失敗" DisplayName="Invoke CheckArgument workflow" sap:VirtualizedContainerService.HintSize="450,287" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E\CheckArgument.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[in_FilePath]</InArgument>
@@ -170,7 +176,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText=" 呼叫 GetUnitsOfMeasurement.xaml（這支流程您之前已經問過！）&#xD;&#xA;&gt; 同樣傳入 in_SAPService、in_FilePath、in_LanguageKey&#xD;&#xA;&gt; 這支子流程內部會：&#xD;&#xA;&gt;&gt; 呼叫 GetT006.xaml 撈SAP單位主表(T006)&#xD;&#xA;&gt;&gt; 呼叫 GetT006A.xaml 撈對應語系的單位文字表(T006A，依in_LanguageKey篩選語言)&#xD;&#xA;&gt;&gt; 用 Left Join 把兩者合併，產出「內部單位(MSEHI) ↔ 外部單位(MSEH3)」的對照表&#xD;&#xA;&gt;&gt; 最後把結果寫入 in_FilePath 指定的Excel檔案" DisplayName="Invoke GetUnitsOfMeasurement workflow" sap:VirtualizedContainerService.HintSize="450,369" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E\GetUnitsOfMeasurement.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText=" 呼叫 GetUnitsOfMeasurement.xaml（這支流程您之前已經問過！）&#xA;&gt; 同樣傳入 in_SAPService、in_FilePath、in_LanguageKey&#xA;&gt; 這支子流程內部會：&#xA;&gt;&gt; 呼叫 GetT006.xaml 撈SAP單位主表(T006)&#xA;&gt;&gt; 呼叫 GetT006A.xaml 撈對應語系的單位文字表(T006A，依in_LanguageKey篩選語言)&#xA;&gt;&gt; 用 Left Join 把兩者合併，產出「內部單位(MSEHI) ↔ 外部單位(MSEH3)」的對照表&#xA;&gt;&gt; 最後把結果寫入 in_FilePath 指定的Excel檔案" DisplayName="Invoke GetUnitsOfMeasurement workflow" sap:VirtualizedContainerService.HintSize="450,369" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E\GetUnitsOfMeasurement.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[in_FilePath]</InArgument>
@@ -182,6 +188,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,166" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
 </Activity>

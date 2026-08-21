@@ -1,0 +1,339 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Sample_SRC_AUTHORITY_EXPORT_PFCG_E" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Sample_SRC_PYM_PARM_CRET_E_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,87" Id="Assign_10">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,102" Id="Assign_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,92" Id="InputDialog_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="553,542" Id="Sequence_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_17" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_18" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,284" Id="Sequence_14">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_15" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_16" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,284" Id="Sequence_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="553,459" Id="If_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="553,87" Id="InvokeWorkflowFile_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="553,59" Id="MessageBox_3" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="575,1391" Id="Sequence_10">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,59" Id="MessageBox_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="579,21" Id="Catch`1_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="593,1645" Id="TryCatch_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="615,1796" Id="Sequence_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="655,1876" Id="Sample_SRC_PYM_PARM_CRET_E_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="Sample workflow that specify the Excel file containing initial argument settings." DisplayName="Sample_SRC_AUTHORITY_EXPORT_PFCG_E" sap:VirtualizedContainerService.HintSize="1025,3818" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,186" sap2010:WorkflowViewState.IdRef="Comment_2" Text="這支流程是一個範例啟動流程(Sample/Entry Point)，功能是讓使用者用對話框選擇一份存放參數設定的Excel檔，然後呼叫真正的主流程SRC_AUTHORITY_EXPORT_PFCG_E來執行實際的PFCG權限匯出作業，並在執行完畢後用訊息框告知成功或失敗結果。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,264" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這支流程扮演的角色是一個**「使用者互動入口」**：本身不含任何業務邏輯，純粹負責「讓使用者挑選要用的參數Excel檔 → 呼叫真正的主流程執行 → 用彈出視窗告知結果(成功或失敗)」。透過依系統語言(日文/英文)動態切換提示文字，以及完整的例外攔截機制，讓非技術人員也能直接雙擊執行這支流程、選好參數檔後就能一鍵跑完整個PFCG權限匯出作業，即使出錯也能立刻看到清楚的錯誤診斷資訊。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,89" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Write your comments in the Text property" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,89" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Write your comments in the Text property" />
+    <TryCatch sap2010:Annotation.AnnotationText="Invoke Main Workflow" DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="488,3136" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Variables>
+        <Variable x:TypeArguments="x:String" Name="MessageError" />
+        <Variable x:TypeArguments="x:String" Name="MessageSuccess" />
+        <Variable x:TypeArguments="x:String" Name="SelectedFile" />
+      </TryCatch.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="486,2608" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence sap2010:Annotation.AnnotationText="Show a dialog box with a list of Excel files inside of specified folder to be choosed as Config Parameter Arguments. &#xD;&#xA;&#xD;&#xA;選擇參數設定檔(Choose Argument File)&#xD;&#xA;1. Assign ParameterFolder：把參數檔資料夾路徑固定設為&quot;\SRC_AUTHORITY_EXPORT_PFCG_E\Data&quot;&#xD;&#xA;2. Assign DirectoryFiles：用System.IO.Directory.GetFiles搜尋「目前工作目錄+該資料夾路徑」下所有*.xlsx檔案(包含所有子目錄，SearchOption.AllDirectories)，取得檔案清單&#xD;&#xA;3. InputDialog：跳出一個輸入對話框，標題為「File List」，提示文字為「Select the parameter settings Excel file」，把上一步找到的Excel檔案清單當作選項(Options)讓使用者用下拉選單挑選一個，選擇結果存到SelectedFile變數" DisplayName="Choose Argument File" sap:VirtualizedContainerService.HintSize="452,986" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="ParameterFolder" />
+              <Variable x:TypeArguments="s:String[]" Name="DirectoryFiles" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap2010:Annotation.AnnotationText="Assign the folder Path of config files" DisplayName="Assign ParameterFolder" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_10">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[ParameterFolder]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">["\SRC_AUTHORITY_EXPORT_PFCG_E\Data"]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <Assign sap2010:Annotation.AnnotationText="Get the config file list inside config folder." DisplayName="Assign DirectoryFiles" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_11">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:String[]">[DirectoryFiles]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:String[]">[System.IO.Directory.GetFiles(Directory.GetCurrentDirectory + ParameterFolder ,"*.xlsx" , System.IO.SearchOption.AllDirectories)]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <ui:InputDialog OptionsString="{x:Null}" DisplayName="Input dialog" sap:VirtualizedContainerService.HintSize="416,320" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Select the parameter settings Excel file" Options="[DirectoryFiles]" Title="File List" TopMost="False">
+              <ui:InputDialog.Result>
+                <OutArgument x:TypeArguments="x:String">[SelectedFile]</OutArgument>
+              </ui:InputDialog.Result>
+            </ui:InputDialog>
+          </Sequence>
+          <If sap2010:Annotation.AnnotationText="Check if system language is japanese, otherwise set english as default.&#xD;&#xA;&#xD;&#xA;依系統語言判斷訊息文字(If system language is japanese)&#xD;&#xA;&gt; 判斷條件：System.Globalization.CultureInfo.InstalledUICulture.Name 是否包含&quot;ja-JP&quot;(即系統UI語言是不是日文)&#xD;&#xA;&gt;&gt; 若是日文系統：MessageSuccess = 「処理は終了しました。」，MessageError = 「エラーが発生しました。」&#xD;&#xA;&gt;&gt; 若不是日文系統(預設英文)：MessageSuccess = 「The process completed successfully.」，MessageError = 「Error Occurred.」" Condition="[System.Globalization.CultureInfo.InstalledUICulture.Name.ToString.Contains(&quot;ja-JP&quot;)]" DisplayName="If system language is japanese" sap:VirtualizedContainerService.HintSize="452,1100" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence DisplayName="Set labels for Japanese" sap:VirtualizedContainerService.HintSize="450,401" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign MessageSuccess (Japanese)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_17">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[MessageSuccess]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">処理は終了しました。</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign DisplayName="Assign MessageError (Japanese)" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_18">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[MessageError]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">エラーが発生しました。</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence DisplayName="Set labels for English" sap:VirtualizedContainerService.HintSize="450,401" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign MessageSuccess (English)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_15">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[MessageSuccess]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">The process completed successfully.</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <Assign DisplayName="Assign MessageError (English)" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_16">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[MessageError]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">Error Occurred.</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Else>
+          </If>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫SRC_AUTHORITY_EXPORT_PFCG_E\SRC_AUTHORITY_EXPORT_PFCG_E.xaml這支真正執行PFCG權限匯出邏輯的主流程&#xD;&#xA;只傳入一個參數in_ArgumentFilePath = SelectedFile(也就是使用者剛剛選好的參數檔路徑)，代表主流程所有的執行設定都是靠這份Excel參數檔來驅動" DisplayName="Invoke Workflow File [SRC_AUTHORITY_EXPORT_PFCG_E]" sap:VirtualizedContainerService.HintSize="452,287" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_AUTHORITY_EXPORT_PFCG_E\SRC_AUTHORITY_EXPORT_PFCG_E.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ArgumentFilePath">[SelectedFile]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="顯示成功訊息&#xD;&#xA;如果主流程順利執行完畢(沒有丟出例外)，用MessageBox彈出視窗顯示MessageSuccess的內容" AutoCloseAfter="00:00:00" Buttons="Ok" DisplayName="Message Box (Success)" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[MessageSuccess]" TopMost="True">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MessageBox>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" sap2010:Annotation.AnnotationText="如果Try區塊內任何地方發生例外(Exception)，會被Catch捕捉，並用MessageBox彈出一個詳細的錯誤診斷視窗，內容包含：&#xD;&#xA;&gt; MessageError(依語言顯示的錯誤提示)&#xD;&#xA;&gt; Message(例外訊息內容)&#xD;&#xA;&gt; Source(發生例外的來源)&#xD;&#xA;&gt; StackTrace(完整呼叫堆疊，方便除錯定位)&#xD;&#xA;&gt; Data、TargetSite、HResult(更深入的例外技術資訊)" AutoCloseAfter="00:00:00" Buttons="Ok" DisplayName="Message Box (Exception)" sap:VirtualizedContainerService.HintSize="486,234" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[MessageError &amp; Environment.NewLine &amp; &#xA;&quot;Message[&quot; &amp; Exception.Message.ToString &amp; &quot;]&quot; &amp; Environment.NewLine &amp; Environment.NewLine &amp;&#xA;&quot;Source[&quot; &amp; Exception.Source.ToString &amp; &quot;]&quot; &amp; Environment.NewLine &amp; Environment.NewLine &amp;&#xA;&quot;StackTrace[&quot; &amp;Exception.StackTrace.ToString &amp; &quot;]&quot; &amp; Environment.NewLine &amp; Environment.NewLine &amp;&#xA;&quot;Data[&quot; &amp;Exception.Data.ToString &amp; &quot;]&quot; &amp; Environment.NewLine &amp; Environment.NewLine &amp;&#xA;&quot;TargetSite[&quot; &amp;Exception.TargetSite.ToString &amp; &quot;]&quot; &amp; Environment.NewLine &amp; Environment.NewLine &amp;&#xA;&quot;HResult[&quot; &amp;Exception.HResult.ToString &amp; &quot;]&quot;]" TopMost="True">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:MessageBox>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>

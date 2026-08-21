@@ -34,6 +34,10 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Net</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>UiPath.SAP.BAPI.Telemetry</x:String>
+      <x:String>UiPath.SAP.BAPI.Activities</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -98,49 +102,34 @@
       <AssemblyReference>System.Net.WebClient</AssemblyReference>
       <AssemblyReference>System.Net.Requests</AssemblyReference>
       <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TestCase_SRC_BAPIv2_2_TABLEDATA_OUTPUT_E" sap:VirtualizedContainerService.HintSize="1066,993" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TestCase_SRC_BAPIv2_2_TABLEDATA_OUTPUT_E" sap:VirtualizedContainerService.HintSize="940,1683" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="in_ExcelDataFilePath" />
       <Variable x:TypeArguments="x:String" Name="in_OutPath" />
       <Variable x:TypeArguments="x:String" Name="in_OutFileName" />
-      <Variable x:TypeArguments="x:String" Name="in_AppServer">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">10.10.10.6</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="in_Client">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">310</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="in_Language">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">EN</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="10.10.10.6" Name="in_AppServer" />
+      <Variable x:TypeArguments="x:String" Default="310" Name="in_Client" />
+      <Variable x:TypeArguments="x:String" Default="EN" Name="in_Language" />
       <Variable x:TypeArguments="ss:SecureString" Name="in_Password" />
-      <Variable x:TypeArguments="x:String" Name="in_SystemNumber">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">01</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="in_User">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">UI001</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="01" Name="in_SystemNumber" />
+      <Variable x:TypeArguments="x:String" Default="UI001" Name="in_User" />
       <Variable x:TypeArguments="x:String" Name="in_AddInformationFlg" />
       <Variable x:TypeArguments="x:String" Name="in_FunctionXamlFilePath" />
-      <Variable x:TypeArguments="sd:DataTable" Name="out_dt_TableData" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable]" Name="out_dt_TableData" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="... Given" sap:VirtualizedContainerService.HintSize="512,597" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <ui:Comment sap:VirtualizedContainerService.HintSize="520,108" sap2010:WorkflowViewState.IdRef="Comment_1" Text="????  ???? in_ExcelDataFilePath 的 A1 需要是 SAPDataTable" />
+    <Sequence DisplayName="... Given" sap:VirtualizedContainerService.HintSize="520,597" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="ui:PasswordCredentials" Name="pcCredential" />
       </Sequence.Variables>
@@ -190,7 +179,7 @@
                 <OutArgument x:TypeArguments="x:String">[in_OutFileName]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">in_OutFileName.csv</InArgument>
+                <InArgument x:TypeArguments="x:String">["in_OutFileName_"+Datetime.Now.toString("yyyyMMdd-HHmmss-fff")+".csv"]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -198,20 +187,20 @@
                 <OutArgument x:TypeArguments="x:String">[in_FunctionXamlFilePath]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">SRC_GUI_SelectorDataBuilder_E\GetSelector\GetSelectorTextType.xaml</InArgument>
+                <InArgument x:TypeArguments="x:String">SRC_Common\SRC_RFC_READ_TABLE_v2.2.xaml</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
           </scg:List>
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
     </Sequence>
-    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="512,260" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="520,842" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E - Invoke Workflow File (SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SRC_BAPIv2.2_TABLEDATA_OUTPUT_E.xaml)" sap:VirtualizedContainerService.HintSize="439,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SRC_BAPIv2.2_TABLEDATA_OUTPUT_E.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E - Invoke Workflow File (SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SRC_BAPIv2.2_TABLEDATA_OUTPUT_E.xaml)" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SRC_BAPIv2.2_TABLEDATA_OUTPUT_E.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="in_ExcelDataFilePath">[in_ExcelDataFilePath]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_OutPath">[in_OutPath]</InArgument>
@@ -227,8 +216,44 @@
           <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_TableData">[out_dt_TableData]</OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E - Invoke Workflow File (SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SRC_BAPIv2.2_TABLEDATA_OUTPUT_E.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_TABLEDATA_OUTPUT_E\SRC_BAPIv2.2_TABLEDATA_OUTPUT_E.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ExcelDataFilePath">[in_ExcelDataFilePath]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_OutPath">[in_OutPath]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_OutFileName">[in_OutFileName]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_AppServer" />
+                <InArgument x:TypeArguments="x:String" x:Key="in_Client">[in_Client]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Language">[in_Language]</InArgument>
+                <InArgument x:TypeArguments="ss:SecureString" x:Key="in_Password">[in_Password]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_SystemNumber">[in_SystemNumber]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_User">[in_User]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_AddInformationFlg">[in_AddInformationFlg]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_FunctionXamlFilePath">[in_FunctionXamlFilePath]</InArgument>
+                <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_TableData">[out_dt_TableData]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ui:CommentOut.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:CommentOut>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;in_AppServer=&quot;+in_AppServer]" />
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;out_dt_TableData.RowCount=&quot;+out_dt_TableData.RowCount.toString]" />
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;&quot;]" />
     </Sequence>
-    <Sequence DisplayName="... Then" sap:VirtualizedContainerService.HintSize="512,113" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="... Then" sap:VirtualizedContainerService.HintSize="520,113" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

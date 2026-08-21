@@ -1,82 +1,114 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_Get_GuiVerticalScrollbar" this:SRC_Get_GuiVerticalScrollbar.in_ScreenId="0"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:this="clr-namespace:"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_Get_GuiVerticalScrollbar" this:SRC_Get_GuiVerticalScrollbar.in_ScreenId="0" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_Maximum" Type="OutArgument(x:Int32)" />
-    <x:Property Name="out_Minimum" Type="OutArgument(x:Int32)" />
-    <x:Property Name="out_PageSize" Type="OutArgument(x:Int32)" />
-    <x:Property Name="out_Position" Type="OutArgument(x:Int32)" />
-    <x:Property Name="in_ScreenId" Type="InArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：捲軸的最大值(代表捲動範圍的上限)" Name="out_Maximum" Type="OutArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：捲軸的最小值(通常是0，代表捲動範圍的起點)" Name="out_Minimum" Type="OutArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：每一頁的顯示量(捲軸每次「翻頁」代表的幅度)" Name="out_PageSize" Type="OutArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：捲軸目前所在的位置" Name="out_Position" Type="OutArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="要查詢的視窗ID(整數，預設值為0，對應SAP GUI裡的wnd[0]，也就是主視窗)" Name="in_ScreenId" Type="InArgument(x:Int32)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>376,792</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetGuiVerticalScrollbar_Property_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
-      <AssemblyReference>System.Xml</AssemblyReference>
-      <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Return the specified properties of Gui Vertical Scrollbar Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;in_ScreenId as Screen Session ID &lt;Int32&gt;&#xA;out_Maximum as Maximum Position &lt;Int32&gt;&#xA;out_Minimum as Minimum Position &lt;Int32&gt;&#xA;out_PageSize as Page Size &lt;Int32&gt;&#xA;out_Position as Current Position &lt;Int32&gt;" DisplayName="SRC_Get_GuiVerticalScrollbar" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程的功能是：透過SAP GUI Scripting API，讀取畫面上垂直捲軸(Vertical Scrollbar)目前的位置與範圍資訊，讓自動化流程可以知道「目前畫面捲動到哪裡了、還能不能往下捲、整份資料還有多少沒顯示出來」。)&#xA;Return the specified properties of Gui Vertical Scrollbar Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;in_ScreenId as Screen Session ID &lt;Int32&gt;&#xA;out_Maximum as Maximum Position &lt;Int32&gt;&#xA;out_Minimum as Minimum Position &lt;Int32&gt;&#xA;out_PageSize as Page Size &lt;Int32&gt;&#xA;out_Position as Current Position &lt;Int32&gt;" DisplayName="SRC_Get_GuiVerticalScrollbar" sap:VirtualizedContainerService.HintSize="939,1749" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_Get_GuiVerticalScrollbar" Name="WorkflowName" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xD;&#xA;Dim SapGuiAuto As Object = Nothing&#xD;&#xA;Try&#xD;&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xD;&#xA; Dim application As Object = Nothing&#xD;&#xA; Try&#xD;&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xD;&#xA;  Dim connection As Object = Nothing&#xD;&#xA;  Try&#xD;&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xD;&#xA;   Dim session As Object = Nothing&#xD;&#xA;   Try&#xD;&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xD;&#xA;    Dim ControlID As Object = Nothing&#xD;&#xA;    Try&#xD;&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[&quot; &amp; in_ScreenId.ToString &amp; &quot;]/usr&quot;})&#xD;&#xA;     Dim VScroll As Object = Nothing&#xD;&#xA;     Try&#xD;&#xA;      VScroll = ControlID.GetType.InvokeMember(&quot;VerticalScrollbar&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing)&#xD;&#xA;      out_Maximum = CType(VScroll.GetType.InvokeMember(&quot;Maximum&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xD;&#xA;      out_Minimum = CType(VScroll.GetType.InvokeMember(&quot;Minimum&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xD;&#xA;      out_PageSize = CType(VScroll.GetType.InvokeMember(&quot;PageSize&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xD;&#xA;      out_Position = CType(VScroll.GetType.InvokeMember(&quot;Position&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xD;&#xA;     Finally&#xD;&#xA;      Try&#xD;&#xA;       System.Runtime.InteropServices.Marshal.ReleaseComObject(VScroll)&#xD;&#xA;      Catch ex As Exception&#xD;&#xA;      End Try&#xD;&#xA;     End Try&#xD;&#xA;    Finally&#xD;&#xA;     Try&#xD;&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xD;&#xA;     Catch ex As Exception&#xD;&#xA;     End Try&#xD;&#xA;    End Try&#xD;&#xA;   Finally&#xD;&#xA;    Try&#xD;&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xD;&#xA;    Catch ex As Exception&#xD;&#xA;    End Try&#xD;&#xA;   End Try   &#xD;&#xA;  Finally&#xD;&#xA;   Try&#xD;&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xD;&#xA;   Catch ex As Exception&#xD;&#xA;   End Try&#xD;&#xA;  End Try  &#xD;&#xA; Finally&#xD;&#xA;  Try&#xD;&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xD;&#xA;  Catch ex As Exception&#xD;&#xA;  End Try&#xD;&#xA; End Try&#xD;&#xA;Finally&#xD;&#xA; Try&#xD;&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xD;&#xA;  System.GC.Collect()&#xD;&#xA;  System.GC.WaitForPendingFinalizers()&#xD;&#xA; Catch ex As Exception&#xD;&#xA; End Try&#xD;&#xA;End Try" DisplayName="Invoke code for GuiScrollbar.VerticalScrollbar" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,186" sap2010:WorkflowViewState.IdRef="Comment_4" Text="這支流程的功能是：透過SAP GUI Scripting API，讀取畫面上垂直捲軸(Vertical Scrollbar)目前的位置與範圍資訊，讓自動化流程可以知道「目前畫面捲動到哪裡了、還能不能往下捲、整份資料還有多少沒顯示出來」。" />
+    <ui:Comment sap2010:Annotation.AnnotationText="這四個數值的實際意義與應用方式&#xD;&#xA;假設某張SAP表格畫面顯示：Maximum=120、Minimum=0、PageSize=15、Position=0，這代表：&#xD;&#xA;&gt; 這張表總共有121列資料(0~120)&#xD;&#xA;&gt; 每頁畫面上只能看到15列&#xD;&#xA;&gt; 目前捲軸停在最上面(第0列)&#xD;&#xA;透過這些數值，自動化流程就能計算出：&#xD;&#xA;&gt; 還需要捲動幾次才能看完全部資料：(Maximum - Position) ÷ PageSize，本例約需捲動8次&#xD;&#xA;&gt; 目前是否已經捲到底了：Position + PageSize &gt;= Maximum，若成立代表已經到最後一頁，不用再繼續往下捲" sap:VirtualizedContainerService.HintSize="450,297" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:Comment sap2010:Annotation.AnnotationText="用 InvokeCode（內嵌VB.NET程式碼）操作SAP GUI Scripting API&#xD;&#xA;透過COM物件反射逐層挖取，一路取得目前SAP Session，再找到目標容器：&#xD;&#xA;&#xD;&#xA;SapGuiAuto (GetObject(&quot;SAPGUI&quot;))&#xD;&#xA;  └─ application (GetScriptingEngine)&#xD;&#xA;       └─ connection (Children(0))&#xD;&#xA;            └─ session (Children(0))&#xD;&#xA;                 └─ ControlID = findById(&quot;wnd[&quot; &amp; in_ScreenId &amp; &quot;]/usr&quot;)   ← 找到指定視窗的「使用者區域(usr)」&#xD;&#xA;                      └─ VScroll = ControlID.VerticalScrollbar            ← 再取得該區域的「垂直捲軸」物件&#xD;&#xA;&#xD;&#xA;📌 這裡有一個關鍵設計：in_ScreenId 是可變動的，代表這支流程能夠彈性地查詢任意視窗的垂直捲軸(不侷限於主視窗wnd[0])，例如若SAP畫面上跳出第二個彈出視窗(wnd[1])，也能透過改變 in_ScreenId 去讀取那個視窗裡的捲軸資訊。&#xD;&#xA;&#xD;&#xA;找到 VerticalScrollbar 物件後，逐一讀取四個屬性：&#xD;&#xA;&gt; Maximum（最大值）→ out_Maximum&#xD;&#xA;&gt; Minimum（最小值）→ out_Minimum&#xD;&#xA;&gt; PageSize（每頁幅度）→ out_PageSize&#xD;&#xA;&gt; Position（目前位置）→ out_Position&#xD;&#xA;&#xD;&#xA;" sap:VirtualizedContainerService.HintSize="450,559" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="用巢狀的 Try...Finally 逐層釋放COM物件資源&#xD;&#xA;&gt; 釋放順序：VScroll → ControlID → session → connection → application → SapGuiAuto&#xD;&#xA;&gt; 最外層額外呼叫 Marshal.FinalReleaseComObject + 手動觸發 GC.Collect() / GC.WaitForPendingFinalizers()，確保COM物件完全釋放，避免長時間執行造成記憶體洩漏" sap:VirtualizedContainerService.HintSize="450,215" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xA;Dim SapGuiAuto As Object = Nothing&#xA;Try&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xA; Dim application As Object = Nothing&#xA; Try&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xA;  Dim connection As Object = Nothing&#xA;  Try&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xA;   Dim session As Object = Nothing&#xA;   Try&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xA;    Dim ControlID As Object = Nothing&#xA;    Try&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[&quot; &amp; in_ScreenId.ToString &amp; &quot;]/usr&quot;})&#xA;     Dim VScroll As Object = Nothing&#xA;     Try&#xA;      VScroll = ControlID.GetType.InvokeMember(&quot;VerticalScrollbar&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing)&#xA;      out_Maximum = CType(VScroll.GetType.InvokeMember(&quot;Maximum&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xA;      out_Minimum = CType(VScroll.GetType.InvokeMember(&quot;Minimum&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xA;      out_PageSize = CType(VScroll.GetType.InvokeMember(&quot;PageSize&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xA;      out_Position = CType(VScroll.GetType.InvokeMember(&quot;Position&quot;, Reflection.BindingFlags.GetProperty, Nothing, VScroll, Nothing), Integer)&#xA;     Finally&#xA;      Try&#xA;       System.Runtime.InteropServices.Marshal.ReleaseComObject(VScroll)&#xA;      Catch ex As Exception&#xA;      End Try&#xA;     End Try&#xA;    Finally&#xA;     Try&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xA;     Catch ex As Exception&#xA;     End Try&#xA;    End Try&#xA;   Finally&#xA;    Try&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xA;    Catch ex As Exception&#xA;    End Try&#xA;   End Try   &#xA;  Finally&#xA;   Try&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xA;   Catch ex As Exception&#xA;   End Try&#xA;  End Try  &#xA; Finally&#xA;  Try&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xA;  Catch ex As Exception&#xA;  End Try&#xA; End Try&#xA;Finally&#xA; Try&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xA;  System.GC.Collect()&#xA;  System.GC.WaitForPendingFinalizers()&#xA; Catch ex As Exception&#xA; End Try&#xA;End Try" DisplayName="Invoke code for GuiScrollbar.VerticalScrollbar" sap:VirtualizedContainerService.HintSize="450,287" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <OutArgument x:TypeArguments="x:Int32" x:Key="out_Maximum">[out_Maximum]</OutArgument>
         <OutArgument x:TypeArguments="x:Int32" x:Key="out_Minimum">[out_Minimum]</OutArgument>
@@ -85,37 +117,13 @@
         <InArgument x:TypeArguments="x:Int32" x:Key="in_ScreenId">[in_ScreenId]</InArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
-    <sads:DebugSymbol.Symbol>d1tDOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRG9jdW1lbnRzXERldmVsb3BtZW50XFNSQ19Db21tb25cU1JDX0dldF9HdWlWZXJ0aWNhbFNjcm9sbGJhci54YW1sDQGAAQGCAQECSgNaDgIBAUw0TFICAQJOBU6jAQIBEU8FVxUCAQZYBVifAQIBA057TqABAgESU0VTUwIBD1VDVVACAQ1RRFFRAgELUkRSUQIBCVRFVFMCAQdYeVicAQIBBA==</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314,164" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="314,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,712">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GetGuiVerticalScrollbar_Property_1" sap:VirtualizedContainerService.HintSize="376,792" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

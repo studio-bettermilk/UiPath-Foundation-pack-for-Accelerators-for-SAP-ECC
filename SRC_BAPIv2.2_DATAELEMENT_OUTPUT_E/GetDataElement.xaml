@@ -40,6 +40,12 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
       <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -71,6 +77,29 @@
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -185,7 +214,7 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="539,2663" Id="Main_1" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview (依據指定的 SAP 資料表名稱（Table Name），去 SAP 抓出這張表所有欄位的結構定義資訊（欄位名稱、資料型態、長度、Key 欄位、欄位說明等），並整理成一個乾淨的 DataTable 輸出，供後續（例如輸出到 Excel）使用。)&#xA;Output SAP Table Element Info into DataTable based on the Table name defined in Argument (Reference Table: DD03VT) (Using &quot;RFC_READ_TABLE&quot; of function module in SAP.)&#xA;&#xA;- Input/Output&#xA;in_SAPService as SAP Connect Info &lt;IConnectionService&gt; &#xA;in_Language as Language &lt;String&gt;&#xA;in_TableName as name of target Table &lt;String&gt;&#xA;out_ColumnData as name of output File (SAP Table Element Info)" DisplayName="GetDataElement" sap:VirtualizedContainerService.HintSize="973,4911" sap2010:WorkflowViewState.IdRef="Sequence_5">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (依據指定的 SAP 資料表名稱（Table Name），去 SAP 抓出這張表所有欄位的結構定義資訊（欄位名稱、資料型態、長度、Key 欄位、欄位說明等），並整理成一個乾淨的 DataTable 輸出，供後續（例如輸出到 Excel）使用。)&#xA;Output SAP Table Element Info into DataTable based on the Table name defined in Argument (Reference Table: DD03VT) (Using &quot;RFC_READ_TABLE&quot; of function module in SAP.)&#xA;&#xA;- Input/Output&#xA;in_SAPService as SAP Connect Info &lt;IConnectionService&gt; &#xA;in_Language as Language &lt;String&gt;&#xA;in_TableName as name of target Table &lt;String&gt;&#xA;out_ColumnData as name of output File (SAP Table Element Info)" DisplayName="GetDataElement" sap:VirtualizedContainerService.HintSize="1095,4490" sap2010:WorkflowViewState.IdRef="Sequence_5">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="QueryTable" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Data" />
@@ -200,7 +229,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:Comment sap:VirtualizedContainerService.HintSize="450,342" sap2010:WorkflowViewState.IdRef="Comment_3" Text="這個流程可以理解為「SAP 資料表結構查詢器」：&#xD;&#xA;1. 準備好要問 SAP 的問題（要查哪張表、哪個語系）.&#xD;&#xA;2. 呼叫 SAP RFC_READ_TABLE 去查 DD03VT 這張系統表.&#xD;&#xA;3. 因為 SAP RFC 回傳的是「一整條字串」，所以要自己動手依欄位長度切割還原.&#xD;&#xA;4. 排序後輸出成乾淨的 DataTable，讓後續流程（例如 OutputElementToExcel.xaml）能直接拿去寫進 Excel 的 SRC_DataElement 工作表裡.&#xD;&#xA;&#xD;&#xA;這也解釋了為什麼一開始搜尋 SRC_DataElement 工作表時，會發現 GetDataElement.xaml 產出的結果，最終正是被寫進去那張工作表的資料來源之一。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,342" sap2010:WorkflowViewState.IdRef="Comment_3" Text="這個流程可以理解為「SAP 資料表結構查詢器」：&#xA;1. 準備好要問 SAP 的問題（要查哪張表、哪個語系）.&#xA;2. 呼叫 SAP RFC_READ_TABLE 去查 DD03VT 這張系統表.&#xA;3. 因為 SAP RFC 回傳的是「一整條字串」，所以要自己動手依欄位長度切割還原.&#xA;4. 排序後輸出成乾淨的 DataTable，讓後續流程（例如 OutputElementToExcel.xaml）能直接拿去寫進 Excel 的 SRC_DataElement 工作表裡.&#xA;&#xA;這也解釋了為什麼一開始搜尋 SRC_DataElement 工作表時，會發現 GetDataElement.xaml 產出的結果，最終正是被寫進去那張工作表的資料來源之一。" />
     <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -209,14 +238,16 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Build a Data Table with parameters used for save the table element information.&#xA;(Function modle : RFC_READ_TABLE  have &quot;FIELDS&quot; in &quot;Tables&quot;.&#xA;&quot;FIELDS&quot;  have table element information.)&#xA;&#xA;-FIELDNAME as name of Element&#xA;-OFFSET as offset of Element&#xA;-LENGTH as length of Element&#xA;-TYPE as ABAP data type (C,D,N,...)&#xA;-FIELDTEXT as explanation of repository object&#xA;&#xA;Preset following items as FIELDNAME of DataTable to get Info from DD03VT.&#xA;&#xA;FIELDNAME as name of Element&#xA;POSITION as position in the target Table&#xA;DATATYPE as type of ABAP dictionary&#xA;KEYFLAG as key flag of the target Table&#xA;LENG as length (String) of Element&#xA;DDTEXT as explanation of repository object" DataTable="[dt_Fields]" DisplayName="Build Data Table dt_Fields" sap:VirtualizedContainerService.HintSize="450,447" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FIELDNAME&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;OFFSET&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;LENGTH&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;TYPE&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;FIELDTEXT&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;FIELDNAME&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;POSITION&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;KEYFLAG&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;DATATYPE&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;LENG&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;DDTEXT&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;">
+    <ui:BuildDataTable sap2010:Annotation.AnnotationText="Build a Data Table with parameters used for save the table element information.&#xA;(Function modle : RFC_READ_TABLE  have &quot;FIELDS&quot; in &quot;Tables&quot;.&#xA;&quot;FIELDS&quot;  have table element information.)&#xA;&#xA;-FIELDNAME as name of Element&#xA;-OFFSET as offset of Element&#xA;-LENGTH as length of Element&#xA;-TYPE as ABAP data type (C,D,N,...)&#xA;-FIELDTEXT as explanation of repository object&#xA;&#xA;Preset following items as FIELDNAME of DataTable to get Info from DD03VT.&#xA;&#xA;FIELDNAME as name of Element&#xA;POSITION as position in the target Table&#xA;DATATYPE as type of ABAP dictionary&#xA;KEYFLAG as key flag of the target Table&#xA;LENG as length (String) of Element&#xA;DDTEXT as explanation of repository object" DataTable="[dt_Fields]" DisplayName="Build Data Table dt_Fields" sap:VirtualizedContainerService.HintSize="450,412" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FIELDNAME&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;OFFSET&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;LENGTH&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;TYPE&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;FIELDTEXT&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;FIELDNAME&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;POSITION&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;KEYFLAG&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;DATATYPE&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;LENG&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;FIELDNAME&gt;DDTEXT&lt;/FIELDNAME&gt;&#xA;    &lt;OFFSET&gt;000000&lt;/OFFSET&gt;&#xA;    &lt;LENGTH&gt;000000&lt;/LENGTH&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:BuildDataTable>
-    <ui:Comment sap:VirtualizedContainerService.HintSize="450,245" sap2010:WorkflowViewState.IdRef="Comment_1" Text="dt_Fields：定義要從 SAP 抓回來的欄位清單（也就是要跟 SAP 標準表 DD03VT〈資料元素/欄位說明表〉要哪些欄位資訊），預先塞好 6 個固定欄位名稱：&#xD;&#xA;&gt; FIELDNAME（欄位名稱）&#xD;&#xA;&gt; POSITION（欄位在表中的順序位置）&#xD;&#xA;&gt; KEYFLAG（是否為 Key 欄位）&#xD;&#xA;&gt; DATATYPE（ABAP 資料型態，例如 C、D、N…）&#xD;&#xA;&gt; LENG（欄位長度）&#xD;&#xA;&gt; DDTEXT（欄位說明文字）" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,245" sap2010:WorkflowViewState.IdRef="Comment_1" Text="dt_Fields：定義要從 SAP 抓回來的欄位清單（也就是要跟 SAP 標準表 DD03VT〈資料元素/欄位說明表〉要哪些欄位資訊），預先塞好 6 個固定欄位名稱：&#xA;&gt; FIELDNAME（欄位名稱）&#xA;&gt; POSITION（欄位在表中的順序位置）&#xA;&gt; KEYFLAG（是否為 Key 欄位）&#xA;&gt; DATATYPE（ABAP 資料型態，例如 C、D、N…）&#xA;&gt; LENG（欄位長度）&#xA;&gt; DDTEXT（欄位說明文字）" />
     <ui:BuildDataTable sap2010:Annotation.AnnotationText="Build a Data Table with parameters used for save the &#xA;text line of the message.&#xA;(Function modle : RFC_READ_TABLE  have &quot;OPTIONS&quot; in &quot;Tables&quot;.&#xA; The &quot;OPTIONS&quot; field is an item for entering data extraction conditions.)&#xA;&#xA;-TEXT : SAPoffice as text line of the message" DataTable="[dt_Options]" DisplayName="Build Data Table dt_Options" sap:VirtualizedContainerService.HintSize="450,251" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;TEXT&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;72&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;TEXT /&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -225,7 +256,7 @@
       </sap:WorkflowViewStateService.ViewState>
     </ui:BuildDataTable>
     <ui:Comment DisplayName="Private: Comment" sap:VirtualizedContainerService.HintSize="450,147" sap2010:WorkflowViewState.IdRef="Comment_2" Text="dt_Options：用來裝「查詢條件」的容器，欄位是 TEXT（純文字條件式，最長 72 字元，因為 SAP RFC_READ_TABLE 的 OPTIONS 參數本身就是這樣設計的）" />
-    <Assign sap2010:Annotation.AnnotationText="Get SAP Table Element Info from DD03VT.&#xD;&#xA;&#xD;&#xA;設定要查詢的來源表：QueryTable = &quot;DD03VT&quot;&#xD;&#xA;&#xD;&#xA;這是 SAP 標準的「資料字典欄位文字說明表」，専門用來查某個資料表底下每個欄位的定義資訊" DisplayName="Assign QueryTable" sap:VirtualizedContainerService.HintSize="450,285" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap2010:Annotation.AnnotationText="Get SAP Table Element Info from DD03VT.&#xA;&#xA;設定要查詢的來源表：QueryTable = &quot;DD03VT&quot;&#xA;&#xA;這是 SAP 標準的「資料字典欄位文字說明表」，専門用來查某個資料表底下每個欄位的定義資訊" DisplayName="Assign QueryTable" sap:VirtualizedContainerService.HintSize="450,285" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[QueryTable]</OutArgument>
       </Assign.To>
@@ -238,7 +269,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Set DDLANGUAGE (Language Key) from login Language (in_Language).&#xA;The default value is &quot;E&quot;.&#xA;Supports only EN and JA." DisplayName="Switch Set DDLANGUAGE" Expression="[in_Language.ToUpper]" sap:VirtualizedContainerService.HintSize="450,799" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Set DDLANGUAGE (Language Key) from login Language (in_Language).&#xA;The default value is &quot;E&quot;.&#xA;Supports only EN and JA." DisplayName="Switch Set DDLANGUAGE" Expression="[in_Language.ToUpper]" sap:VirtualizedContainerService.HintSize="450,134" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <Assign DisplayName="Assign DdLanguage Default" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="Assign_7">
           <Assign.To>
@@ -252,6 +283,8 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <Assign x:Key="EN" DisplayName="Assign DdLanguage EN" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="Assign_5">
@@ -271,7 +304,7 @@
         </Assign.Value>
       </Assign>
     </Switch>
-    <Assign sap2010:Annotation.AnnotationText="Set target Table name and Language.&#xD;&#xA;&#xD;&#xA;組出查詢條件字串，放進 dt_Options&#xD;&#xA;TABNAME = '目標表名稱' AND DDLANGUAGE = '語系代碼'&#xD;&#xA;&#xD;&#xA;意思就是：「只抓這張指定表、指定語系的欄位說明資料」" DisplayName="Assign Item(&quot;TEXT&quot;)" sap:VirtualizedContainerService.HintSize="450,318" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap2010:Annotation.AnnotationText="Set target Table name and Language.&#xA;&#xA;組出查詢條件字串，放進 dt_Options&#xA;TABNAME = '目標表名稱' AND DDLANGUAGE = '語系代碼'&#xA;&#xA;意思就是：「只抓這張指定表、指定語系的欄位說明資料」" DisplayName="Assign Item(&quot;TEXT&quot;)" sap:VirtualizedContainerService.HintSize="450,318" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">[dt_Options.Rows(0).Item("TEXT")]</OutArgument>
       </Assign.To>
@@ -284,7 +317,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Get SAP Table Element Info.&#xD;&#xA;&#xD;&#xA;呼叫子流程 [in_FunctionXamlFilePath]（動態路徑，通常是 SRC_CallRecReadTable.xaml 之類）&#xD;&#xA;&gt; 把 QueryTable（要查的 SAP 表 DD03VT）、dt_Fields（要抓哪些欄位）、dt_Options（查詢條件）都傳進去&#xD;&#xA;&gt; 這個子流程實際上會呼叫 SAP 的 RFC_READ_TABLE Function Module，把結果塞回 dt_Data" DisplayName="Invoke Workflow File SRC_CallRecReadTable" sap:VirtualizedContainerService.HintSize="450,334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="[in_FunctionXamlFilePath]">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Get SAP Table Element Info.&#xA;&#xA;呼叫子流程 [in_FunctionXamlFilePath]（動態路徑，通常是 SRC_CallRecReadTable.xaml 之類）&#xA;&gt; 把 QueryTable（要查的 SAP 表 DD03VT）、dt_Fields（要抓哪些欄位）、dt_Options（查詢條件）都傳進去&#xA;&gt; 這個子流程實際上會呼叫 SAP 的 RFC_READ_TABLE Function Module，把結果塞回 dt_Data" DisplayName="Invoke Workflow File SRC_CallRecReadTable" sap:VirtualizedContainerService.HintSize="450,334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="[in_FunctionXamlFilePath]">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_QueryTableStr">[QueryTable]</InArgument>
@@ -298,7 +331,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <Sequence sap2010:Annotation.AnnotationText="The io_dt_Data column ”WA” is returned as a string with the contents of dt_Fields (FIELDNAME, POSITION, DATATYPE, KEYFLAG, LENG, DDTEXT) concatenated.&#xA;&#xA;Decompose column &quot;WA&quot; by each character length and set to DataTable.&#xD;&#xA;&#xD;&#xA;關鍵技術點：RFC_READ_TABLE 回傳的資料，並不是分好欄位的乾淨表格，而是把每一列所有欄位的內容串成一整條長字串塞在一個叫 WA 的欄位裡（這是 SAP RFC 介面的標準行為，需要依照各欄位的「長度」去自己切開）&#xD;&#xA;所以這裡要做：&#xD;&#xA;1. WAList：把 dt_Data 的 WA 欄位整理成一個字串清單.&#xD;&#xA;2. LengthList：把剛剛 dt_Fields 裡的每個欄位「長度（LENGTH）」也整理成清單.&#xD;&#xA;3. 呼叫 SRC_MakeTextListToDataTable.xaml：依照 LengthList 裡的長度資訊，把每一條長字串按長度切割，還原成一個個獨立欄位，最終組成乾淨的 out_dt_ColumnData.&#xD;&#xA;4. 最後用 SortDataTable 依照 POSITION（欄位在表中的順序）做由小到大排序，確保輸出結果的欄位順序跟原始 SAP 表的順序一致." DisplayName=" 整理輸出結果 Sequence Set out_dt_ColumnData " sap:VirtualizedContainerService.HintSize="450,1420" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence sap2010:Annotation.AnnotationText="The io_dt_Data column ”WA” is returned as a string with the contents of dt_Fields (FIELDNAME, POSITION, DATATYPE, KEYFLAG, LENG, DDTEXT) concatenated.&#xA;&#xA;Decompose column &quot;WA&quot; by each character length and set to DataTable.&#xA;&#xA;關鍵技術點：RFC_READ_TABLE 回傳的資料，並不是分好欄位的乾淨表格，而是把每一列所有欄位的內容串成一整條長字串塞在一個叫 WA 的欄位裡（這是 SAP RFC 介面的標準行為，需要依照各欄位的「長度」去自己切開）&#xA;所以這裡要做：&#xA;1. WAList：把 dt_Data 的 WA 欄位整理成一個字串清單.&#xA;2. LengthList：把剛剛 dt_Fields 裡的每個欄位「長度（LENGTH）」也整理成清單.&#xA;3. 呼叫 SRC_MakeTextListToDataTable.xaml：依照 LengthList 裡的長度資訊，把每一條長字串按長度切割，還原成一個個獨立欄位，最終組成乾淨的 out_dt_ColumnData.&#xA;4. 最後用 SortDataTable 依照 POSITION（欄位在表中的順序）做由小到大排序，確保輸出結果的欄位順序跟原始 SAP 表的順序一致." DisplayName=" 整理輸出結果 Sequence Set out_dt_ColumnData " sap:VirtualizedContainerService.HintSize="450,1699" sap2010:WorkflowViewState.IdRef="Sequence_6">
       <Sequence.Variables>
         <Variable x:TypeArguments="scg:List(x:String)" Name="WAList" />
         <Variable x:TypeArguments="scg:List(x:String)" Name="LengthList" />
@@ -309,7 +342,7 @@
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign sap2010:Annotation.AnnotationText="Set  Column &quot;WA&quot; value to List type.&#xD;&#xA;&#xD;&#xA;1. WAList：把 dt_Data 的 WA 欄位整理成一個字串清單." DisplayName="Assign WAList" sap:VirtualizedContainerService.HintSize="416,252" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign sap2010:Annotation.AnnotationText="Set  Column &quot;WA&quot; value to List type.&#xA;&#xA;1. WAList：把 dt_Data 的 WA 欄位整理成一個字串清單." DisplayName="Assign WAList" sap:VirtualizedContainerService.HintSize="416,252" sap2010:WorkflowViewState.IdRef="Assign_3">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[WAList]</OutArgument>
         </Assign.To>
@@ -322,7 +355,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <Assign sap2010:Annotation.AnnotationText="Set  the caracter length to List type.&#xD;&#xA;&#xD;&#xA;2. LengthList：把剛剛 dt_Fields 裡的每個欄位「長度（LENGTH）」也整理成清單." DisplayName="Assign LengthList" sap:VirtualizedContainerService.HintSize="416,252" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign sap2010:Annotation.AnnotationText="Set  the caracter length to List type.&#xA;&#xA;2. LengthList：把剛剛 dt_Fields 裡的每個欄位「長度（LENGTH）」也整理成清單." DisplayName="Assign LengthList" sap:VirtualizedContainerService.HintSize="416,252" sap2010:WorkflowViewState.IdRef="Assign_4">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:List(x:String)">[LengthList]</OutArgument>
         </Assign.To>
@@ -335,7 +368,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Create the DataTable based on acquired table element information.&#xD;&#xA;&#xD;&#xA;3. 呼叫 SRC_MakeTextListToDataTable.xaml：依照 LengthList 裡的長度資訊，把每一條長字串按長度切割，還原成一個個獨立欄位，最終組成乾淨的 out_dt_ColumnData" DisplayName="Invoke Workflow File SRC_MakeTextListToDataTable" sap:VirtualizedContainerService.HintSize="416,303" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SRC_Common\SRC_MakeTextListToDataTable.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Create the DataTable based on acquired table element information.&#xA;&#xA;3. 呼叫 SRC_MakeTextListToDataTable.xaml：依照 LengthList 裡的長度資訊，把每一條長字串按長度切割，還原成一個個獨立欄位，最終組成乾淨的 out_dt_ColumnData" DisplayName="Invoke Workflow File SRC_MakeTextListToDataTable" sap:VirtualizedContainerService.HintSize="416,303" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SRC_Common\SRC_MakeTextListToDataTable.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Text">[WAList]</InArgument>
           <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Len_Str">[LengthList]</InArgument>
@@ -348,13 +381,14 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:InvokeWorkflowFile>
-      <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" sap2010:Annotation.AnnotationText="Sort by &quot;POSITION&quot; field.&#xD;&#xA;&#xD;&#xA;4. 最後用 SortDataTable 依照 POSITION（欄位在表中的順序）做由小到大排序，確保輸出結果的欄位順序跟原始 SAP 表的順序一致." ColumnName="POSITION" DataTable="[out_dt_ColumnData]" DisplayName="Sort Data Table" sap:VirtualizedContainerService.HintSize="416,198" sap2010:WorkflowViewState.IdRef="SortDataTable_1" OutputDataTable="[out_dt_ColumnData]" SortOrder="Ascending">
+      <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" sap2010:Annotation.AnnotationText="Sort by &quot;POSITION&quot; field.&#xA;&#xA;4. 最後用 SortDataTable 依照 POSITION（欄位在表中的順序）做由小到大排序，確保輸出結果的欄位順序跟原始 SAP 表的順序一致." ColumnName="POSITION" DataTable="[out_dt_ColumnData]" DisplayName="Sort Data Table" sap:VirtualizedContainerService.HintSize="416,207" sap2010:WorkflowViewState.IdRef="SortDataTable_1" OutputDataTable="[out_dt_ColumnData]" SortOrder="Ascending">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:SortDataTable>
+      <ui:WriteRange StartingCell="{x:Null}" DataTable="[out_dt_ColumnData]" DisplayName="[Debug] Write Range Workbook" sap:VirtualizedContainerService.HintSize="416,270" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="工作表1" WorkbookPath="[&quot;D:\RPA工作區\UiPath Foundation pack for Accelerators for SAP ECC\Output\QueryTable_&quot;+QueryTable+&quot;_dt_ColumnData_&quot;+Datetime.Now.ToString(&quot;yyyyMMdd-HHmmss-fff&quot;)+&quot;.xlsx&quot;]" />
     </Sequence>
     <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
   </Sequence>

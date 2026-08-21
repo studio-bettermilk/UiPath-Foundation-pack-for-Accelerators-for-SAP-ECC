@@ -1,95 +1,109 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="CheckResultType"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="CheckResultType" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_BAPIName" Type="InArgument(x:String)" />
     <x:Property Name="io_RegisterReturn" Type="InOutArgument(scg:List(scg:Dictionary(x:String, x:String)))" />
     <x:Property Name="out_ResultType" Type="OutArgument(x:Object)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>571,1419</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SetStatusType_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
-      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;If the value of in_BAPIName exists, add Workflow Name to &quot;Message&quot; for BAPI processing result.&#xA;And extract &quot;Type&quot; for BAPI processing result to check &quot;Type&quot; contains &quot;S&quot;.&#xA;&#xA;- Input/Output&#xA;in_BAPIName  as  BAPI Name  &lt;String&gt;&#xA;in_RegisterReturn  as  Processing result of BAPI Workflow  &lt;List&lt;Dictionary&lt;String&gt;&lt;String&gt;&gt;&gt;&#xA;out_ResultType  as  Type of BAPI Result  &lt;Object&gt;&#xA;" DisplayName="CheckResultType" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;If the value of in_BAPIName exists, add Workflow Name to &quot;Message&quot; for BAPI processing result.&#xA;And extract &quot;Type&quot; for BAPI processing result to check &quot;Type&quot; contains &quot;S&quot;.&#xA;&#xA;- Input/Output&#xA;in_BAPIName  as  BAPI Name  &lt;String&gt;&#xA;in_RegisterReturn  as  Processing result of BAPI Workflow  &lt;List&lt;Dictionary&lt;String&gt;&lt;String&gt;&gt;&gt;&#xA;out_ResultType  as  Type of BAPI Result  &lt;Object&gt;&#xA;" DisplayName="CheckResultType" sap:VirtualizedContainerService.HintSize="531,1339" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="CheckResultType" Name="WorkflowName" />
       <Variable x:TypeArguments="scg:List(x:String)" Default="[new List (Of String)]" Name="ResultTypeList" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - send to Logfile start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[io_RegisterReturn]">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log message - send to Logfile start" sap:VirtualizedContainerService.HintSize="509,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="509,528" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[io_RegisterReturn]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="scg:Dictionary(x:String, x:String)">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="item" />
           </ActivityAction.Argument>
-          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
-            <If Condition="[in_BAPIName &lt;&gt; &quot;&quot;]" DisplayName="Check if in_BAPIName is not &quot;&quot;" sap2010:WorkflowViewState.IdRef="If_4">
+          <Sequence sap:VirtualizedContainerService.HintSize="486,394" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[in_BAPIName &lt;&gt; &quot;&quot;]" DisplayName="Check if in_BAPIName is not &quot;&quot;" sap:VirtualizedContainerService.HintSize="464,208" sap2010:WorkflowViewState.IdRef="If_4">
               <If.Then>
-                <Assign DisplayName="Assign BAPIName to Message" sap2010:WorkflowViewState.IdRef="Assign_9">
+                <Assign DisplayName="Assign BAPIName to Message" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_9">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[item("Message=")]</OutArgument>
                   </Assign.To>
@@ -99,14 +113,14 @@
                 </Assign>
               </If.Then>
             </If>
-            <AddToCollection x:TypeArguments="x:String" Collection="[ResultTypeList]" DisplayName="Add To Collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[item(&quot;Type=&quot;).Trim]" />
+            <AddToCollection x:TypeArguments="x:String" Collection="[ResultTypeList]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="464,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[item(&quot;Type=&quot;).Trim]" />
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <If Condition="[ResultTypeList.Contains(&quot;S&quot;) or ResultTypeList.Contains(&quot;&quot;)]" DisplayName="Check if ResultTypeList contains status S or &quot;&quot;" sap2010:WorkflowViewState.IdRef="If_3">
+    <If Condition="[ResultTypeList.Contains(&quot;S&quot;) or ResultTypeList.Contains(&quot;&quot;)]" DisplayName="Check if ResultTypeList contains status S or &quot;&quot;" sap:VirtualizedContainerService.HintSize="509,208" sap2010:WorkflowViewState.IdRef="If_3">
       <If.Then>
-        <Assign DisplayName="Assign Status S to out_ResultType" sap2010:WorkflowViewState.IdRef="Assign_7">
+        <Assign DisplayName="Assign Status S to out_ResultType" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_7">
           <Assign.To>
             <OutArgument x:TypeArguments="x:Object">[out_ResultType]</OutArgument>
           </Assign.To>
@@ -116,7 +130,7 @@
         </Assign>
       </If.Then>
       <If.Else>
-        <Assign DisplayName="Assign Status E to out_ResultType" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign DisplayName="Assign Status E to out_ResultType" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_8">
           <Assign.To>
             <OutArgument x:TypeArguments="x:Object">[out_ResultType]</OutArgument>
           </Assign.To>
@@ -126,50 +140,13 @@
         </Assign>
       </If.Else>
     </If>
-    <ui:LogMessage DisplayName="Log message - send to Logfile end" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
-    <sads:DebugSymbol.Symbol>d0pDOlx3b3JrXzFcZGVsaXZhcmFibGVfcmVc5pys5L2TXFNSQ19CQVBJdjIuMl9SRUdJU1RFUlxDaGVja1Jlc3VsdFR5cGUueGFtbBpNA4MBDgIBAU80T0UCAQNQPlBWAgECUgVStAECASVTBWoSAgETawWAAQoCAQeBAQWBAbABAgEEUosBUrEBAgEmU6oBU78BAgEjWQtnFgIBFGsTa2YCAQhtCXQSAgEPdwl+EgIBC4EBiQGBAa0BAgEFWg1lEgIBGmYNZtUBAgEVcjRyOQIBEm81b0UCARB8NHw5AgEOeTV5RQIBDFobWkACARtcEWMaAgEdZkRmVgIBGGayAWbSAQIBFmE8YX0CASBePV5PAgEe</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - send to Logfile end" sap:VirtualizedContainerService.HintSize="509,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="509,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="AddToCollection`1_2" sap:VirtualizedContainerService.HintSize="464,22" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486,394">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="509,528" />
-      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="509,208" />
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="509,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="531,1339">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="SetStatusType_1" sap:VirtualizedContainerService.HintSize="571,1419" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

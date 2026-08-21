@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="AvoOnhR_b0GwGHxmTpsfaw" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" CVScreenId="048cded7-8341-4d18-a3c6-0d33bd29bc43" CvElementArea="784, 547, 59, 29" CvTextArea="789, 553, 49, 19" CvTextArgument="BA(L)" CvType="Button" DesignTimeRectangle="786, 549, 56, 26" DesignTimeScaleFactor="1" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd ctrlid='1068' title='登入(&amp;amp;L)' /&gt;&lt;ctrl name='登入(L)' role='push button' /&gt;" Guid="6bf0697b-6980-4884-804e-419e233d5214" ImageBase64="" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 770' /&gt;" SearchSteps="Selector, Image, CV" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.PointOffset>
+        <PointOffset />
+      </TargetAnchorable.PointOffset>
+      <imageRef attrName="InformativeScreenshot" originalValue="4f41f24b94059e13ebc60d9c30ffb7d9.jpg" xmlns="">0K4A68amlxU2Fntun1qOC4A</imageRef>
+    </TargetAnchorable>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="SJ51v9I_8UaNxcnkZezm5g" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="662, 98, 185, 26" DesignTimeScaleFactor="1" ElementType="InputBox" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd ctrlid='1091' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1091' matching:ctrlid='fuzzy' fuzzylevel:ctrlid='0.0' /&gt;" Guid="e7d6fb26-b57a-406d-800e-9b0d644521cb" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 770' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.Anchors>
+        <scg:List x:TypeArguments="ITarget" Capacity="4">
+          <Target DesignTimeRectangle="309, 105, 353, 22" ElementType="Text" FullSelectorArgument="&lt;wnd ctrlid='1110' title='連線' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlid='1110' title='連線' matching:ctrlid='fuzzy' fuzzylevel:ctrlid='0.0' matching:title='fuzzy' fuzzylevel:title='0.0' check:text='連線' /&gt;" Guid="03b56535-ebf5-42a2-a8ac-7f378cdeb837" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAWEAAAAWCAYAAAARry0aAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKqSURBVHhe7doxittAFIfxLXPAXCOQMywsvoSNAynTCbtNlcoSqVKktIqcQaXy/m9mrBmv4l0iL6OFr/hhaSS5/HiM9DAMwzgM/Xju9fvcuT2OTdvPXgv+8WzfvfAcANTz4eOX8cevP7PXbtEzenbu2v+IETbtfty25UU5H/ZjkyLbPw+yrm8PFuJsLawfx1M674kxgHVZEtK3ifBgk6vFVJPtqe0umt3GIjudyxTc3p7p4nFw8vst1pnt02YKOQCswHVIdX7L9b35+RJZhG16TaFsLZwxvEWEdZxPwlrz485Cux9P9vxpZ7/pejS3BgA1LQnpnSMcJ9/Dfnx8OoYpN9uayLcjiq0JTc4W5HOvOE/rCnWj/8s0CrQ/AwDrsKIIh4MisBbhx920lZAfFxHedfHFXVpjEgbwPlyHVOe3XN+bny8RI9yNWwuqf+mg81dNwqIpuvcvIbQVobXLJGz3Kt4+CRNhACuzJKR3j7Di6vu+Cqdezr1qErbgWmDPCrf2kIstB21THKftDT+260XAAaCeVUU4KT4ru6zl02/YP57CGl7ahXNNw9on1uSrdQu7hde/lOB7YQAro5Cu6zthC6x/bqaYajshmvtErZhoe21hWJxTjPU/2tqwSOu5xqbosA4A6/H1+2+P6Us23376/XNr9zC9mFNcswuX9WISzllg/btihdYC7NG1IKdpOp77r+83Xz8PAOuWpt4U7Ll7lgp7wv4iTlHV1oGCqj3dsIWg/d4w+YY1l/4gvsBLofYAp2CnCMf/95d0szEHgPXKJ+a560s9aPuhnFQtsh5kC+xuTtp2CPf61xE6zuLsU/Gnz5cvLMJavA8A3hltP7zpJAwAqIMIA0BFRBgAKiLCAFAREQaAiogwAFREhAGgIiIMABURYQCoZhj/AixJICkNAtLFAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
+        </scg:List>
+      </TargetAnchorable.Anchors>
+      <TargetAnchorable.PointOffset>
+        <PointOffset />
+      </TargetAnchorable.PointOffset>
+      <imageRef attrName="InformativeScreenshot" originalValue="351f5c578d2f600d11d0461f30254829.jpg" xmlns="">0GhBY5jRYakG7ahhDT_PEcA</imageRef>
+    </TargetAnchorable>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

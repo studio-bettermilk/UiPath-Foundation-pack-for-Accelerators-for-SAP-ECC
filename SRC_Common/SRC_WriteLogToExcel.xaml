@@ -1,88 +1,113 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="SRC_WriteLogToExcel"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_WriteLogToExcel" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_ExcelFilePath" Type="InArgument(x:String)" />
-    <x:Property Name="in_dt_LogData" Type="InArgument(sd:DataTable)" />
+    <x:Property sap2010:Annotation.AnnotationText="要寫入Log的目標Excel檔案路徑(通常就是流程原本讀取的輸入檔)" Name="in_ExcelFilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="從Log檔讀取出來、已整理成表格格式的Log內容資料" Name="in_dt_LogData" Type="InArgument(sd:DataTable)" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>548,2124</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SRC_AddLogToExcel_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>ClosedXML.Excel</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>ClosedXML.Excel</x:String>
-      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>ClosedXML</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>ClosedXML</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- OverView&#xA;Add the Log File content into a new worksheet named [SRC_Log] in Excel Input File.&#xA;&#xA;- Input/Output&#xA;in_ExcelFilePath as Input File Path &lt;String&gt;&#xA;in_dt_LogData as Log Content read from Log File &lt;DataTable&gt;" DisplayName="SRC_WriteLogToExcel" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- OverView (這支流程的功能是：把流程執行過程中產生的Log內容，寫入到Excel輸入檔裡新增一個叫SRC_Log的工作表，並把這個工作表移到第一個位置，方便使用者一打開Excel檔就能立刻看到執行紀錄。)&#xA;Add the Log File content into a new worksheet named [SRC_Log] in Excel Input File.&#xA;&#xA;- Input/Output&#xA;in_ExcelFilePath as Input File Path &lt;String&gt;&#xA;in_dt_LogData as Log Content read from Log File &lt;DataTable&gt;" DisplayName="SRC_WriteLogToExcel" sap:VirtualizedContainerService.HintSize="1025,3958" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_WriteLogToExcel" Name="WorkflowName" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot; start&quot;]" />
-    <Sequence DisplayName="Delete [SRC_Log] worksheet" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap2010:Annotation.AnnotationText="順序 | 欄位名稱(LogPattern) | 存放內容說明&#xA;1 | DateTime |記錄當下的時間戳記，格式yyyy-MM-dd HH:mm:ss(來自Datetime.Now.ToString(...))&#xA;2 | SheetName | 實際存放的是流程名稱(WorkflowName)，用來標示這筆Log是哪支流程寫入的&#xA;3 | Status | 執行狀態代碼：&quot;S&quot;= 成功(Success)，&quot;E&quot;= 錯誤(Error)&#xA;4 | No | 存放HeaderIndex，也就是目前處理到的資料識別編號(對應輸入資料表裡的No欄位)&#xA;5 | SAP MessageNo | 若是SAP系統回報的錯誤，存放exception.Data(&quot;MessageNo&quot;)(SAP訊息編號)；其他情況為空字串&quot;&quot;&#xA;6 | SAP Message | 成功時存放StatusMessage(成功訊息)；SAP錯誤時存放exception.Data(&quot;StatusMessage&quot;)(SAP狀態列訊息)；一般應用程式錯誤時為空字串&quot;&quot;&#xA;7 | Exception | 若是一般應用程式例外，存放exception.Message(.NET例外訊息內容)；其他情況為空字串&quot;&quot;&#xA;8 | Screenshot | 發生錯誤時存放ScreenShotPath(錯誤截圖檔案路徑)；成功時為空字串&quot;&quot;&#xA;&#xA;依不同情境，實際填入的內容組合&#xA;情境 | DateTime | SheetName | Status | No | SAP MessageNo | SAP Message | Exception | Screenshot&#xA;✅ 成功 | 時間 | 流程名稱 | S | HeaderIndex | (空) StatusMessage | (空) | (空)&#xA;❌ 一般應用程式錯誤 | 時間 | 流程名稱 | E HeaderIndex | (空) | (空) | exception.Message | 截圖路徑&#xA;❌ SAP系統錯誤 | 時間 | 流程名稱 | E | HeaderIndex | SAP訊息編號 | SAP狀態列訊息 | (空) | 截圖路徑" sap:VirtualizedContainerService.HintSize="486,712" sap2010:WorkflowViewState.IdRef="Comment_6" Text="輸出 8欄位的標準格式(時間、流程名稱、狀態、識別編號、SAP訊息編號、SAP訊息內容、例外訊息、截圖路徑)">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="486,167" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這支流程的功能是：把流程執行過程中產生的Log內容，寫入到Excel輸入檔裡新增一個叫SRC_Log的工作表，並把這個工作表移到第一個位置，方便使用者一打開Excel檔就能立刻看到執行紀錄。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="486,225" sap2010:WorkflowViewState.IdRef="Comment_5" Text="這支流程的邏輯可以濃縮成四個階段：清除舊Log表 → 寫入新Log資料 → 調整分頁位置與文字格式 → 存檔。透過「先刪除再重建」的做法確保Log內容每次都是最新且完整的，並額外把工作表移到第一頁、統一設為文字格式，讓最終產出的Excel檔案在檢視Log紀錄時更方便、更不容易因格式問題而顯示錯亂。" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="486,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Sequence sap2010:Annotation.AnnotationText="先刪除舊的SRC_Log工作表(避免重複疊加)&#xA;&gt; Assign Workbook：用New XLWorkbook(in_ExcelFilePath)開啟目標Excel檔&#xA;&gt; Assign Worksheet：先把Worksheet變數初始化為Nothing&#xA;&gt; 判斷：Workbook.TryGetWorksheet(&quot;SRC_Log&quot;, Worksheet)：檢查該Excel檔裡是不是已經存在一個名為SRC_Log的工作表&#xA;&gt;&gt; 若存在：用InvokeMethod呼叫該工作表的Delete方法，把舊的SRC_Log工作表整個刪除&#xA;&gt;&gt; 若不存在：不做任何動作，直接跳過&#xA;&gt; 最後呼叫Workbook的Save方法，把「刪除舊工作表」這個變更存檔&#xA;&#xA;&#xA;💡 這一步的用意是確保每次寫入都是乾淨的新資料，不會因為流程重複執行而讓Log內容一直往下疊加、越寫越多。" DisplayName="Delete [SRC_Log] worksheet" sap:VirtualizedContainerService.HintSize="486,1213" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="ce:XLWorkbook" Name="Workbook" />
         <Variable x:TypeArguments="ce:IXLWorksheet" Name="Worksheet" />
       </Sequence.Variables>
-      <Assign DisplayName="Assign Workbook (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign Workbook (Initialization)" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="ce:XLWorkbook">[Workbook]</OutArgument>
         </Assign.To>
@@ -90,7 +115,7 @@
           <InArgument x:TypeArguments="ce:XLWorkbook">[New XLWorkbook(in_ExcelFilePath)]</InArgument>
         </Assign.Value>
       </Assign>
-      <Assign DisplayName="Assign Worksheet (Initialization)" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign DisplayName="Assign Worksheet (Initialization)" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_4">
         <Assign.To>
           <OutArgument x:TypeArguments="ce:IXLWorksheet">[Worksheet]</OutArgument>
         </Assign.To>
@@ -98,27 +123,47 @@
           <InArgument x:TypeArguments="ce:IXLWorksheet">[Nothing]</InArgument>
         </Assign.Value>
       </Assign>
-      <If Condition="[Workbook.TryGetWorksheet(&quot;SRC_Log&quot;, Worksheet)]" DisplayName="If [SRC_Log] sheet exists" sap2010:WorkflowViewState.IdRef="If_1">
+      <If Condition="[Workbook.TryGetWorksheet(&quot;SRC_Log&quot;, Worksheet)]" DisplayName="If [SRC_Log] sheet exists" sap:VirtualizedContainerService.HintSize="452,387" sap2010:WorkflowViewState.IdRef="If_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <InvokeMethod DisplayName="Invoke Method Delete [SRC_Log]" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Delete">
+          <InvokeMethod DisplayName="Invoke Method Delete [SRC_Log]" sap:VirtualizedContainerService.HintSize="450,136" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Delete">
             <InvokeMethod.TargetObject>
               <InArgument x:TypeArguments="ce:IXLWorksheet">[Workbook.Worksheet("SRC_Log")]</InArgument>
             </InvokeMethod.TargetObject>
           </InvokeMethod>
         </If.Then>
       </If>
-      <InvokeMethod DisplayName="Invoke Method Save after Delete" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Save">
+      <InvokeMethod DisplayName="Invoke Method Save after Delete" sap:VirtualizedContainerService.HintSize="452,160" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Save">
         <InvokeMethod.TargetObject>
           <InArgument x:TypeArguments="ce:XLWorkbook">[Workbook]</InArgument>
         </InvokeMethod.TargetObject>
       </InvokeMethod>
     </Sequence>
-    <ui:WriteRange AddHeaders="True" DataTable="[in_dt_LogData]" DisplayName="Write Range" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="SRC_Log" StartingCell="A1" WorkbookPath="[in_ExcelFilePath]" />
-    <Sequence DisplayName="Change the position of the sheet" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <ui:WriteRange sap2010:Annotation.AnnotationText="寫入新的Log資料(WriteRange)&#xA;&gt; 用WriteRange活動，把in_dt_LogData這張DataTable的內容，寫入到in_ExcelFilePath檔案裡，工作表名稱指定為&quot;SRC_Log&quot;(因為剛才已經刪除舊表，這裡會自動新建一個全新的同名工作表)，起始寫入位置為&quot;A1&quot;" DataTable="[in_dt_LogData]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="486,389" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="SRC_Log" StartingCell="A1" WorkbookPath="[in_ExcelFilePath]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:WriteRange>
+    <Sequence sap2010:Annotation.AnnotationText="調整工作表位置與格式&#xA;&gt; 再次用New XLWorkbook(in_ExcelFilePath)重新開啟Excel檔(因為前一步WriteRange已經改動並存檔過，需要重新載入才能拿到最新狀態)&#xA;&gt; Assign Workbook.Worksheet(&quot;SRC_Log&quot;).Position = 1：把SRC_Log工作表的位置設為1，也就是移動到整個Excel檔的第一個分頁，方便打開檔案時第一眼就看到Log&#xA;&gt; Assign Workbook.Worksheet(&quot;SRC_Log&quot;).Style.NumberFormat.NumberFormatId = 49：把整張工作表的儲存格格式設定為文字格式(NumberFormatId 49對應Excel的「文字(Text)」格式)，這是為了避免Log內容裡如果有像時間戳記或數字字串的資料，被Excel自動轉換成日期或數字格式而跑版&#xA;&gt; 呼叫Workbook的Save方法，把「調整位置+格式」這兩個變更存檔" DisplayName="Change the position of the sheet" sap:VirtualizedContainerService.HintSize="486,1047" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <Sequence.Variables>
         <Variable x:TypeArguments="ce:XLWorkbook" Name="Workbook" />
       </Sequence.Variables>
-      <Assign DisplayName="Assign Workbook" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign Workbook" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_5">
         <Assign.To>
           <OutArgument x:TypeArguments="ce:XLWorkbook">[Workbook]</OutArgument>
         </Assign.To>
@@ -126,109 +171,45 @@
           <InArgument x:TypeArguments="ce:XLWorkbook">[New XLWorkbook(in_ExcelFilePath)]</InArgument>
         </Assign.Value>
       </Assign>
-      <Assign sap2010:Annotation.AnnotationText="Move [SRC_Log] to the first sheet" DisplayName="Assign Workbook.Worksheet(&quot;SRC_Log&quot;).Position" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign sap2010:Annotation.AnnotationText="Move [SRC_Log] to the first sheet" DisplayName="Assign Workbook.Worksheet(&quot;SRC_Log&quot;).Position" sap:VirtualizedContainerService.HintSize="416,206" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
           <OutArgument x:TypeArguments="x:Int32">[Workbook.Worksheet("SRC_Log").Position]</OutArgument>
         </Assign.To>
         <Assign.Value>
           <InArgument x:TypeArguments="x:Int32">1</InArgument>
         </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <Assign sap2010:Annotation.AnnotationText="Change [SRC_Log] Date/Number format to text." DisplayName="Assign Workbook.Worksheet(&quot;SRC_Log&quot;).Style.NumberFormat.NumberFormatId" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign sap2010:Annotation.AnnotationText="Change [SRC_Log] Date/Number format to text." DisplayName="Assign Workbook.Worksheet(&quot;SRC_Log&quot;).Style.NumberFormat.NumberFormatId" sap:VirtualizedContainerService.HintSize="416,206" sap2010:WorkflowViewState.IdRef="Assign_3">
         <Assign.To>
           <OutArgument x:TypeArguments="x:Int32">[Workbook.Worksheet("SRC_Log").Style.NumberFormat.NumberFormatId]</OutArgument>
         </Assign.To>
         <Assign.Value>
           <InArgument x:TypeArguments="x:Int32">49</InArgument>
         </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <InvokeMethod DisplayName="Invoke Method Save after Change position" sap2010:WorkflowViewState.IdRef="InvokeMethod_3" MethodName="Save">
+      <InvokeMethod DisplayName="Invoke Method Save after Change position" sap:VirtualizedContainerService.HintSize="416,160" sap2010:WorkflowViewState.IdRef="InvokeMethod_3" MethodName="Save">
         <InvokeMethod.TargetObject>
           <InArgument x:TypeArguments="ce:XLWorkbook">[Workbook]</InArgument>
         </InvokeMethod.TargetObject>
       </InvokeMethod>
     </Sequence>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
-    <sads:DebugSymbol.Symbol>d1lDOlxVc2Vyc1xrYXp1by50YWthaGFzaGlcRGVza3RvcFxTUkNfUEFZTUVOVF9QUk1UX0NSVFxTUkNfQ29tbW9uXFNSQ19Xcml0ZUxvZ1RvRXhjZWwueGFtbCRLA5kBDgIBAU00TUkCAQJPBU+iAQIBLFAFcxACARt0BXTVAQIBFHUFlgEQAgEGlwEFlwGeAQIBA096T58BAgEtVQdcEAIBKF0HZBACASRlB20MAgEfbgdyFgIBHHSsAXSwAQIBGnQwdEECARh0lQF0ngECARd0vgF00gECARV5B4ABEAIBEIEBB4gBEAIBDYkBB5ABEAIBCpEBB5UBFgIBB5cBeJcBmwECAQRaN1pZAgErVzhXQgIBKWI5YkICASdfOl9FAgElZRVlUQIBIGcLaxoCASFwN3BBAgEdfjd+WQIBE3s4e0ICARGGATGGATICAQ+DATKDAVoCAQ6OATGOATMCAQyLATKLAXMCAQuTATeTAUECAQhpPWlcAgEi</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="486,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot; end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="486,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="464,60" />
-      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="464,60" />
-      <sap2010:ViewStateData Id="InvokeMethod_1" sap:VirtualizedContainerService.HintSize="217,132" />
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,280">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeMethod_2" sap:VirtualizedContainerService.HintSize="464,132" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486,776">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WriteRange_1" sap:VirtualizedContainerService.HintSize="486,115">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,87">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,102">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InvokeMethod_3" sap:VirtualizedContainerService.HintSize="242,132" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="486,625">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="486,51">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="508,2044">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="SRC_AddLogToExcel_1" sap:VirtualizedContainerService.HintSize="548,2124" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

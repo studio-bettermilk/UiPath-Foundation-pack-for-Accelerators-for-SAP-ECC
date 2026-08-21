@@ -1,0 +1,400 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SU011Logon" this:SU011Logon.in_sFlagEnable_UsedOCCredential="1" this:SU011Logon.in_SAPLogonPath="C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe" this:SU011Logon.in_SAPConnectionName="MILK測試環境" this:SU011Logon.in_SAPLanguage="ZF" this:SU011Logon.in_SAPClient="310" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:this="clr-namespace:" xmlns:uas="clr-namespace:UiPath.Activities.System;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_sFlagEnable_UsedOCCredential" Type="InArgument(x:String)" />
+    <x:Property Name="in_SAPLogonPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_SAPConnectionName" Type="InArgument(x:String)" />
+    <x:Property Name="in_SAPLanguage" Type="InArgument(x:String)" />
+    <x:Property Name="in_SAPClient" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SU011Logon_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Activities.System</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.ComponentModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="SU011Logon" sap:VirtualizedContainerService.HintSize="1068,3242" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:CurrentJobInfo" Name="CurrentJobInfo" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:GetCurrentJobInfo DisplayName="取得目前工作資訊" sap:VirtualizedContainerService.HintSize="520,57" sap2010:WorkflowViewState.IdRef="GetCurrentJobInfo_1" Result="[CurrentJobInfo]" />
+    <ui:LogMessage DisplayName="記錄檔訊息" sap:VirtualizedContainerService.HintSize="520,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[CurrentJobInfo.WorkflowName+&quot;.xaml Begin&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Sequence DisplayName="SAP Logon" sap:VirtualizedContainerService.HintSize="520,3057" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="ui:PasswordCredentials" Name="pcCredential" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[in_sFlagEnable_UsedOCCredential = &quot;0&quot;]" DisplayName="If in_sFlagEnable_UsedOCCredential = &quot;0&quot;" sap:VirtualizedContainerService.HintSize="486,661" sap2010:WorkflowViewState.IdRef="If_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <If.Then>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,261" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uas:GetUsernamePasswordX OrchestratorCredentialName="{x:Null}" TimeoutInSeconds="{x:Null}" AutosubmitTimeoutSeconds="0" Credential="[pcCredential]" CredentialName="UiPath: SAPUser" CredentialsSource="CredentialsManager" DisplayName="取得使用者名稱/密碼 Windows" sap:VirtualizedContainerService.HintSize="416,201" sap2010:WorkflowViewState.IdRef="GetUsernamePasswordX_1" />
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,261" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uas:GetUsernamePasswordX TimeoutInSeconds="{x:Null}" AutosubmitTimeoutSeconds="0" Credential="[pcCredential]" CredentialName="UiPath: SAPUser" CredentialsSource="Orchestrator" DisplayName="取得使用者名稱/密碼 OC" sap:VirtualizedContainerService.HintSize="416,201" sap2010:WorkflowViewState.IdRef="GetUsernamePasswordX_2" OrchestratorCredentialName="SAPUSER" OrchestratorFolderPath="財務部" />
+          </Sequence>
+        </If.Else>
+      </If>
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,219" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,108" sap2010:WorkflowViewState.IdRef="Sequence_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NApplicationCard AttachMode="ByInstance" CloseMode="[UiPath.UIAutomationNext.Enums.NAppCloseMode.Never]" DisplayName="SAP" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" ScopeGuid="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Version="V2">
+              <uix:NApplicationCard.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,1388" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Activate DelayBefore="{x:Null}" DelayMS="{x:Null}" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="Activate_3">
+                      <ui:Activate.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="0c85a6ae-b2af-4a86-8da1-a1bd95005e49">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:Activate.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:Activate>
+                    <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click '用戶端'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="NClick_4" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Version="V5">
+                      <uix:NClick.Target>
+                        <uix:TargetAnchorable ContentHash="3001kCU950WV5OWXmmvzlg" DesignTimeRectangle="159, 152, 61, 32" ElementVisibilityArgument="Interactive" Guid="3f29c9b3-7c35-4bce-8359-822dba13ab18" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAD0AAAAgCAYAAAChKnCsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH8SURBVFhH7ZZdbsMgEIR73kqVcodIUQ6BlUNEziHsXoJT+JHO8BfAuOBKbiLBwyfba/Ayu8vij2VZVGt00a3QRbdCF90KXXQrdNG/IWXeHiG/lczZN5FqGh/qnn5bytV3/DN83Me9fmKqRU/DVQku0DHc1Bn4ZyAuV3UeZTwXAtxVYsHTbOZyrBhwP9OezFmMMP8sH/D1MEJxL5wP2i/WvoMdom9qCm2hc4scEYQka9pmha3FbeP8ScxNhWbvd/A/oktbI9wWrISZFYFso7qYyQnvhasqXH2F8f2xotPy5oKscwtLNidaoFQpYot48bQ95xYD9gfeItPxGDQ3lrS2I8uu2XkYxDjQJmCohq9TVebrRcNB1DAOFO2a2Mon4Ngo+AG6b2TsKZWisRB22yDC9eWNcezSwbgUwa1js0uM2Kd4HRS9FTgW2Q+2Rs5niXrR4RFCqjPNEo1tJYxoHlvm+/67M0qb+937xrrcUbaDStHPBXgqRa96QQVmjvGpM/oS0XBytx01tJVFZyqkgEQJn9mcWMb2XK/NtK6qJOg5qkSz3FbZChy7Hw9mKBLNMWmwSmSaUZ1o3F9OeB8nIkdZNP91cwtnU/EOeKxc1Wf0S0jbvixvwX8EI9pWnF4TgoMgHPobupvK4+MVHCf6jemiW6GLboUuuhUaFL2oH3ikA2y63dgIAAAAAElFTkSuQmCC" InformativeScreenshot="f28858a8ce26cf7fa0b1c19f43ca6dbd.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/en7DuSr3DE2utBj1sbf8XA" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;" SearchSteps="Image" TargetType="ImageBased" Version="V6" WaitForReadyArgument="Interactive" />
+                      </uix:NClick.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NClick>
+                    <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts Tab" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" InteractionMode="HardwareEvents" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Shortcuts="[d(hk)][k(Tab)][u(hk)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NKeyboardShortcuts>
+                    <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts Ctrl+A" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_2" InteractionMode="HardwareEvents" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Shortcuts="[d(hk)][d(ctrl)]a[u(ctrl)][u(hk)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NKeyboardShortcuts>
+                    <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts Del" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_3" InteractionMode="HardwareEvents" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Shortcuts="[d(hk)][k(Del)][u(hk)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NKeyboardShortcuts>
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into  310+Tab" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Text="310[k(tab)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NTypeInto>
+                    <Delay Duration="00:00:01" sap:VirtualizedContainerService.HintSize="416,123" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into  User+Tab" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,246" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Text="UI001[k(tab)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NTypeInto>
+                    <Delay Duration="00:00:01" sap:VirtualizedContainerService.HintSize="416,123" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into  PWD+Tab" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,246" sap2010:WorkflowViewState.IdRef="NTypeInto_5" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Text="Milk123456[k(tab)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NTypeInto>
+                    <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts Tab" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,248" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_13" InteractionMode="HardwareEvents" ScopeIdentifier="5c833b77-1a49-42d9-8c3b-c96a5c1f6be4" Shortcuts="[d(hk)][k(Enter)][u(hk)]" Version="V5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NKeyboardShortcuts>
+                  </Sequence>
+                </ActivityAction>
+              </uix:NApplicationCard.Body>
+              <uix:NApplicationCard.OCREngine>
+                <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                  <ActivityFunc.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                  </ActivityFunc.Argument>
+                </ActivityFunc>
+              </uix:NApplicationCard.OCREngine>
+              <uix:NApplicationCard.TargetApp>
+                <uix:TargetApp Area="-8, -8, 1936, 1056" ContentHash="5KE2M12SrkOUHf3UPZGgag" FilePath="C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE8SURBVFhHYxgFo2AUjIJBAxxrVls61ay5T2dcC7Ue7AAnoMB/emHHmjWz7KtXMkGtp68DgJbPsCtfzQi1GgLo5QCg5dMcy1cgLH//5UcECG89fa+5dsnR/5Ti0nkH/ztWrcJuefWaKXYVq1B9/v7Lz//Uwk/ffP6f3LX2v335cmyWT7KqQPI5DGAziBwMsjy+ddl/m6IFQMtWo1s+wbZ4CablIIDNMFLxk9ef/se1LMVuec2aPrMStGBHBtgMJAWDLI8FWV6M1fIeqDW4AdCQxSB89f7LfWsPXfm/9uBlknBsCzDYsVlevboLagVxwKZovotd6ZL/diWLScL25cuwWL6mA2os8QBoCFXKAWCwt0GNJA1QqSBqhhpHOqDUAUCfN0KNIg8AHaAJNGg+mTgXaswoGAWjYBSQCBgYAMLf0dVJBbU9AAAAAElFTkSuQmCC" InformativeScreenshot="9373045cb34d87248b936d1120dd5854.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/XaZw8Afu806ZGpLqo-ytyg" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;" Version="V3">
+                  <uix:TargetApp.Arguments>
+                    <InArgument x:TypeArguments="x:String" />
+                  </uix:TargetApp.Arguments>
+                  <uix:TargetApp.WorkingDirectory>
+                    <InArgument x:TypeArguments="x:String" />
+                  </uix:TargetApp.WorkingDirectory>
+                </uix:TargetApp>
+              </uix:NApplicationCard.TargetApp>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NApplicationCard>
+          </Sequence>
+        </ui:CommentOut.Body>
+      </ui:CommentOut>
+      <uix:NApplicationCard AttachMode="ByInstance" DisplayName="SAP 輕鬆存取  -  使用者功能表： UiPath" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="486,2085" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" ScopeGuid="6a6219c3-22b7-4a14-accb-674fb615e21b" Version="V2">
+        <uix:NApplicationCard.Body>
+          <ActivityAction x:TypeArguments="x:Object">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,1838" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:Activate DelayBefore="{x:Null}" DelayMS="{x:Null}" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="Activate_4">
+                <ui:Activate.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="0c85a6ae-b2af-4a86-8da1-a1bd95005e49">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:Activate.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:Activate>
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Edit'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,194" sap2010:WorkflowViewState.IdRef="NClick_8" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Version="V5">
+                <uix:NClick.Target>
+                  <uix:TargetAnchorable ContentHash="bmfZDtPKgkqELk4dclvj-w" DesignTimeRectangle="23, 94, 133, 20" ElementType="InputBox" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;&lt;wnd cls='Edit' /&gt;" Guid="f0a916ca-e5ab-47ed-9b4f-65f6bb41557a" InformativeScreenshot="d184b80cc4893f799cf7deea1eb781df.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/SsMrHALDoEChx-1Z7A3NYQ" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 輕鬆存取  -  使用者功能表： UiPath' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+                </uix:NClick.Target>
+              </uix:NClick>
+              <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'FBL5N FBLN ZFIR0001 fBL…'" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,246" sap2010:WorkflowViewState.IdRef="NTypeInto_6" InteractionMode="SameAsCard" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Text="FBL5N[k(enter)]" Version="V5">
+                <uix:NTypeInto.Target>
+                  <uix:TargetAnchorable ContentHash="e8F0uPK6UUKvYTp_HRaUAg" DesignTimeRectangle="20, 91, 156, 26" ElementType="DropDown" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;&lt;wnd cls='ComboBox' /&gt;" Guid="c9cf55d6-729c-4e7c-bd12-fbbd09afe0d2" InformativeScreenshot="1beb5072f84bfc07da09ff6179ccbec6.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/fBChjKXwxUm-WdreI85ong" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 輕鬆存取  -  使用者功能表： UiPath' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+                </uix:NTypeInto.Target>
+              </uix:NTypeInto>
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'unchecked(1)'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,194" sap2010:WorkflowViewState.IdRef="NClick_10" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Version="V5">
+                <uix:NClick.Target>
+                  <uix:TargetAnchorable ContentHash="wNgs55ZFQEi9PkHoLrU9HQ" DesignTimeRectangle="1241, 750, 38, 26" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='Footer' /&gt;&lt;wnd cls='Button' title='?瑁?' /&gt;" Guid="465f7ceb-48c9-407d-b2d3-906c627ea6c5" InformativeScreenshot="f88496094b1ba0774100c03a68c50e75.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/AgryKg4k0ESkcIRsRZgupA" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='顯示客戶明細項目' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+                    <uix:TargetAnchorable.PointOffset>
+                      <uix:PointOffset Position="BottomLeft" X="20" Y="-14" />
+                    </uix:TargetAnchorable.PointOffset>
+                  </uix:TargetAnchorable>
+                </uix:NClick.Target>
+              </uix:NClick>
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click '往前'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,194" sap2010:WorkflowViewState.IdRef="NClick_9" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Version="V5">
+                <uix:NClick.Target>
+                  <uix:TargetAnchorable ContentHash="_QWayMFlBUSBCxmxMeU79Q" DesignTimeRectangle="14, 39, 34, 34" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Button' idx='4' /&gt;" Guid="e04e807c-1917-4cfc-8c44-6314e2a951c7" InformativeScreenshot="6678c2e6c479d92373b67858548a1f06.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/ksjn9gE9FUayEKR44H65IQ" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='顯示客戶明細項目' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+                    <uix:TargetAnchorable.PointOffset>
+                      <uix:PointOffset Position="BottomLeft" X="17" Y="-17" />
+                    </uix:TargetAnchorable.PointOffset>
+                  </uix:TargetAnchorable>
+                </uix:NClick.Target>
+              </uix:NClick>
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'unchecked(2)'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,194" sap2010:WorkflowViewState.IdRef="NClick_11" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Version="V5">
+                <uix:NClick.Target>
+                  <uix:TargetAnchorable ContentHash="3bW59DsN90CScYbT1xUZBw" DesignTimeRectangle="1254, 91, 24, 26" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;&lt;wnd cls='Button' idx='9' /&gt;" Guid="e10ea664-8401-416e-8de3-d99b9e4d3ae2" InformativeScreenshot="ff7022ba7945508ae4658f9d6e0c5d4c.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/LSt1fp_gl0242HkErBM32Q" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 輕鬆存取  -  使用者功能表： UiPath' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+                    <uix:TargetAnchorable.PointOffset>
+                      <uix:PointOffset Position="BottomRight" X="-12" Y="-14" />
+                    </uix:TargetAnchorable.PointOffset>
+                  </uix:TargetAnchorable>
+                </uix:NClick.Target>
+              </uix:NClick>
+              <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Afx79B60000b'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,194" sap2010:WorkflowViewState.IdRef="NClick_12" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Version="V5">
+                <uix:NClick.Target>
+                  <uix:TargetAnchorable ContentHash="pIZmmsdDMEmGLJttiELz6A" DesignTimeRectangle="17, 57, 476, 160" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd ctrlid='101' /&gt;" Guid="c285bcd7-6ded-4141-b384-7c9d24b4170d" ImageBase64="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" InformativeScreenshot="cd6d04c49f490154af2aa2ae1534a470.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/uyd3Ju1Mj0WpkcZJknXYUw" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='#32770' title='登出' /&gt;" SearchSteps="Selector, Image" Version="V6" WaitForReadyArgument="Interactive" />
+                </uix:NClick.Target>
+              </uix:NClick>
+              <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,257" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_14" InteractionMode="HardwareEvents" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Shortcuts="[d(hk)][k(Tab)][u(hk)]" Version="V5" />
+              <uix:NKeyboardShortcuts ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,248" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_15" InteractionMode="HardwareEvents" ScopeIdentifier="6a6219c3-22b7-4a14-accb-674fb615e21b" Shortcuts="[d(hk)][k(Enter)][u(hk)]" Version="V5" />
+            </Sequence>
+          </ActivityAction>
+        </uix:NApplicationCard.Body>
+        <uix:NApplicationCard.OCREngine>
+          <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+            <ActivityFunc.Argument>
+              <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+            </ActivityFunc.Argument>
+          </ActivityFunc>
+        </uix:NApplicationCard.OCREngine>
+        <uix:NApplicationCard.TargetApp>
+          <uix:TargetApp Area="0, 0, 1298, 791" ContentHash="CI-6VKZDqU-2cVDSE-c3Hg" FilePath="C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE8SURBVFhHYxgFo2AUjIJBAxxrVls61ay5T2dcC7Ue7AAnoMB/emHHmjWz7KtXMkGtp68DgJbPsCtfzQi1GgLo5QCg5dMcy1cgLH//5UcECG89fa+5dsnR/5Ti0nkH/ztWrcJuefWaKXYVq1B9/v7Lz//Uwk/ffP6f3LX2v335cmyWT7KqQPI5DGAziBwMsjy+ddl/m6IFQMtWo1s+wbZ4CablIIDNMFLxk9ef/se1LMVuec2aPrMStGBHBtgMJAWDLI8FWV6M1fIeqDW4AdCQxSB89f7LfWsPXfm/9uBlknBsCzDYsVlevboLagVxwKZovotd6ZL/diWLScL25cuwWL6mA2os8QBoCFXKAWCwt0GNJA1QqSBqhhpHOqDUAUCfN0KNIg8AHaAJNGg+mTgXaswoGAWjYBSQCBgYAMLf0dVJBbU9AAAAAElFTkSuQmCC" InformativeScreenshot="c44291c88b0d2cc9d4a9940451576c16.jpg" Reference="ZgnWkxDXlkiV5bppRmjo-g/85eI9OatrU-h51nf5Gg87Q" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 輕鬆存取  -  使用者功能表： UiPath' /&gt;" Version="V3">
+            <uix:TargetApp.Arguments>
+              <InArgument x:TypeArguments="x:String" />
+            </uix:TargetApp.Arguments>
+            <uix:TargetApp.WorkingDirectory>
+              <InArgument x:TypeArguments="x:String" />
+            </uix:TargetApp.WorkingDirectory>
+          </uix:TargetApp>
+        </uix:NApplicationCard.TargetApp>
+      </uix:NApplicationCard>
+    </Sequence>
+    <ui:LogMessage DisplayName="記錄檔訊息" sap:VirtualizedContainerService.HintSize="520,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[CurrentJobInfo.WorkflowName+&quot;.xaml End&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

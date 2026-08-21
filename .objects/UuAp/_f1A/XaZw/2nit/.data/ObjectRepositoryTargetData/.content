@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="FbiT9l8dYkKeWeKcG21dZw" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" CVScreenId="262d6628-8c64-4754-9fca-d5d68e87c4f8" CvElementArea="1886, 102, 20, 19" CvType="Icon" DesignTimeRectangle="1884, 99, 24, 26" DesignTimeScaleFactor="1" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;&lt;wnd cls='Button' idx='3' /&gt;" Guid="d7df7871-8d63-40d7-bd93-661266456bd6" ImageBase64="" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;" SearchSteps="Selector, Image, CV" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.PointOffset>
+        <PointOffset />
+      </TargetAnchorable.PointOffset>
+      <imageRef attrName="InformativeScreenshot" originalValue="f49d71179833e1b4b352c7c6cb8665a3.jpg" xmlns="">04vcyWPyCuEq_2PJcIVeHJg</imageRef>
+    </TargetAnchorable>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

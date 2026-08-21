@@ -84,7 +84,7 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TestCase_SRC_BAPIv2_2_REGISTER" sap:VirtualizedContainerService.HintSize="1066,900" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TestCase_SRC_BAPIv2_2_REGISTER" sap:VirtualizedContainerService.HintSize="940,989" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="in_ConfigFilePath" />
       <Variable x:TypeArguments="x:String" Name="in_LoginUser" />
@@ -96,6 +96,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="512,89" sap2010:WorkflowViewState.IdRef="Comment_1" Text="???? " />
     <Sequence DisplayName="... Given" sap:VirtualizedContainerService.HintSize="512,504" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="ui:PasswordCredentials" Name="pcCredential" />
@@ -143,7 +144,7 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_REGISTER - Invoke Workflow File (SRC_BAPIv2.2_REGISTER\SRC_BAPIv2.2_REGISTER.xaml)" sap:VirtualizedContainerService.HintSize="433,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\SRC_BAPIv2.2_REGISTER.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_REGISTER - Invoke Workflow File (SRC_BAPIv2.2_REGISTER\SRC_BAPIv2.2_REGISTER.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\SRC_BAPIv2.2_REGISTER.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFilePath">[in_ConfigFilePath]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_LoginUser">[in_LoginUser]</InArgument>

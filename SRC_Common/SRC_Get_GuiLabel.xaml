@@ -1,11 +1,11 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="SRC_Get_GuiLabel" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_ControlID" Type="InArgument(x:String)" />
-    <x:Property Name="out_ColorIndex" Type="OutArgument(x:Int32)" />
-    <x:Property Name="out_ColorIntensified" Type="OutArgument(x:Boolean)" />
-    <x:Property Name="out_DisplayedText" Type="OutArgument(x:String)" />
-    <x:Property Name="out_IconName" Type="OutArgument(x:String)" />
-    <x:Property Name="out_Tooltip" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="要查詢的控件選擇器ID(字串)" Name="in_ControlID" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：顏色索引值(0~7)" Name="out_ColorIndex" Type="OutArgument(x:Int32)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：顏色是否加深(Boolean)" Name="out_ColorIntensified" Type="OutArgument(x:Boolean)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：畫面上實際顯示的文字" Name="out_DisplayedText" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：圖示名稱" Name="out_IconName" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：滑鼠停留時顯示的提示文字" Name="out_Tooltip" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -68,6 +68,7 @@
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -100,17 +101,49 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="376,1002" Id="Test_1" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Return the specified properties of Gui Label Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;in_ControlID as Selector ID &lt;String&gt;&#xA;out_ColorIndex as Color Index &lt;Int32&gt;&#xA;out_ColorIntensified as Color Intensified &lt;Boolean&gt;&#xA;out_DisplayedText as Displayed Text &lt;String&gt;&#xA;out_IconName as Icon Name &lt;String&gt;&#xA;out_Tooltip as Tool tip &lt;String&gt;&#xA;&#xA;&#xA;* ColorIndex summary&#xA;&#xA;Color Index  |  Color (Type)&#xA;0                    |  Background Color (COL_BACKGROUND) &#xA;1                    |  Gray                         (COL_HEADING)&#xA;2                    |  Light Gray               (COL_NORMAL)&#xA;3                    |  Yellow                      (COL_TOTAL)&#xA;4                    |  Blue Green              (COL_KEY)&#xA;5                    |  Green                       (COL_POSITIVE)&#xA;6                    |  Red                          (COL_NEGATIVE)&#xA;7                    |  Purple                      (COL_GROUP)" DisplayName="SRC_Get_GuiLabel" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程是一個SAP GUI元件屬性讀取工具，功能是：透過SAP GUI Scripting API，直接讀取畫面上指定控件(Control)的視覺屬性，例如顏色、顯示文字、圖示、提示文字等，這對判斷SAP畫面上某個欄位/標籤目前的狀態或訊息類型非常有用（例如：透過顏色判斷這是一筆錯誤訊息還是成功訊息）。)&#xA;Return the specified properties of Gui Label Object using SAP Gui Scripiting API. &#xA;&#xA;- Input/Output&#xA;in_ControlID as Selector ID &lt;String&gt;&#xA;out_ColorIndex as Color Index &lt;Int32&gt;&#xA;out_ColorIntensified as Color Intensified &lt;Boolean&gt;&#xA;out_DisplayedText as Displayed Text &lt;String&gt;&#xA;out_IconName as Icon Name &lt;String&gt;&#xA;out_Tooltip as Tool tip &lt;String&gt;&#xA;&#xA;&#xA;* ColorIndex summary&#xA;&#xA;Color Index  |  Color (Type)&#xA;0                    |  Background Color (COL_BACKGROUND) &#xA;1                    |  Gray                         (COL_HEADING)&#xA;2                    |  Light Gray               (COL_NORMAL)&#xA;3                    |  Yellow                      (COL_TOTAL)&#xA;4                    |  Blue Green              (COL_KEY)&#xA;5                    |  Green                       (COL_POSITIVE)&#xA;6                    |  Red                          (COL_NEGATIVE)&#xA;7                    |  Purple                      (COL_GROUP)" DisplayName="SRC_Get_GuiLabel" sap:VirtualizedContainerService.HintSize="939,2269" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_Get_GuiLabel" Name="WorkflowName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xA;Dim SapGuiAuto As Object = Nothing&#xA;Try&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xA; Dim application As Object = Nothing&#xA; Try&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xA;  Dim connection As Object = Nothing&#xA;  Try&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xA;   Dim session As Object = Nothing&#xA;   Try&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xA;    Dim ControlID As Object = Nothing&#xA;    Try&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[0]/&quot; &amp; in_ControlID})&#xA;     out_ColorIndex = CType(ControlID.GetType.InvokeMember(&quot;ColorIndex&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Integer)&#xA;     out_ColorIntensified = CType(ControlID.GetType.InvokeMember(&quot;ColorIntensified&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Boolean)&#xA;     out_DisplayedText = CType(ControlID.GetType.InvokeMember(&quot;DisplayedText&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_IconName = CType(ControlID.GetType.InvokeMember(&quot;IconName&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_Tooltip = CType(ControlID.GetType.InvokeMember(&quot;Tooltip&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;    Finally&#xA;     Try&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xA;     Catch ex As Exception&#xA;     End Try&#xA;    End Try&#xA;   Finally&#xA;    Try&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xA;    Catch ex As Exception&#xA;    End Try&#xA;   End Try   &#xA;  Finally&#xA;   Try&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xA;   Catch ex As Exception&#xA;   End Try&#xA;  End Try  &#xA; Finally&#xA;  Try&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xA;  Catch ex As Exception&#xA;  End Try&#xA; End Try&#xA;Finally&#xA; Try&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xA;  System.GC.Collect()&#xA;  System.GC.WaitForPendingFinalizers()&#xA; Catch ex As Exception&#xA; End Try&#xA;End Try" DisplayName="Invoke code for GuiLabel" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這支流程是一個SAP GUI元件屬性讀取工具，功能是：透過SAP GUI Scripting API，直接讀取畫面上指定控件(Control)的視覺屬性，例如顏色、顯示文字、圖示、提示文字等，這對判斷SAP畫面上某個欄位/標籤目前的狀態或訊息類型非常有用（例如：透過顏色判斷這是一筆錯誤訊息還是成功訊息）。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,323" sap2010:WorkflowViewState.IdRef="Comment_7" Text="這是 SRC_Common 共用函式庫裡的一支底層技術工具，主要用途：&#xA;讓其他「GUI操作路線」的流程（例如我們之前拆解的 SRC_CM_GET_TBL_E.xaml、SRC_CM_FNCMDL_EXE_E.xaml）能夠判斷SAP畫面上某個標籤/欄位目前顯示的狀態訊息&#xA;最典型的應用場景：判斷SAP執行結果訊息的顏色——例如執行BAPI或畫面操作後，SAP狀態列常會顯示一行文字，若這行文字的ColorIndex=6(紅色)，就代表是錯誤訊息；若是5(綠色)，就代表成功訊息。這比單純解析文字內容更可靠，因為顏色是SAP系統本身賦予的「語意標記」" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,206" sap2010:WorkflowViewState.IdRef="Comment_2" Text="數值 | 顏色 | SAP內部代號&#xD;&#xA;0 背景色 COL_BACKGROUND&#xD;&#xA;1 灰色 COL_HEADING(標題)&#xD;&#xA;2 淺灰色 COL_NORMAL(一般)&#xD;&#xA;3 黃色 COL_TOTAL(合計)&#xD;&#xA;4 藍綠色 COL_KEY(關鍵欄位)&#xD;&#xA;5 綠色 COL_POSITIVE(正面/成功)&#xD;&#xA;6 紅色 COL_NEGATIVE(負面/錯誤)&#xD;&#xA;7 紫色 COL_GROUP(群組)" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:Comment sap2010:Annotation.AnnotationText="這段程式碼的核心手法是一層一層透過COM物件反射(Reflection)往下挖到目標控件：&#xD;&#xA;&#xD;&#xA;SapGuiAuto (透過 GetObject(&quot;SAPGUI&quot;) 取得SAP GUI的COM自動化物件)&#xD;&#xA;  └─ application (呼叫 GetScriptingEngine 取得Scripting引擎)&#xD;&#xA;       └─ connection (取得 Children(0)，也就是第一個SAP連線)&#xD;&#xA;            └─ session (取得 Children(0)，也就是該連線下的第一個Session)&#xD;&#xA;                 └─ ControlID (用 findById(&quot;wnd[0]/&quot; &amp; in_ControlID) 找到指定控件)&#xD;&#xA;&#xD;&#xA;找到控件後，逐一透過反射讀取它的屬性：&#xD;&#xA;&gt; ColorIndex（顏色索引）→ out_ColorIndex&#xD;&#xA;&gt; ColorIntensified（顏色是否加深）→ out_ColorIntensified&#xD;&#xA;&gt; DisplayedText（顯示文字）→ out_DisplayedText&#xD;&#xA;&gt; IconName（圖示名稱）→ out_IconName&#xD;&#xA;&gt; Tooltip（提示文字）→ out_Tooltip&#xD;&#xA;" sap:VirtualizedContainerService.HintSize="450,461" sap2010:WorkflowViewState.IdRef="Comment_3" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="用巢狀的 Try...Finally 逐層釋放COM物件資源&#xD;&#xA;&gt; 每一層(ControlID→session→connection→application→SapGuiAuto)都用 Marshal.ReleaseComObject（最外層用FinalReleaseComObject）確實釋放，並手動呼叫 GC.Collect() + GC.WaitForPendingFinalizers() 強制回收記憶體&#xD;&#xA;&gt; 這是SAP GUI Scripting常見的最佳實務：因為COM物件不會被.NET的垃圾回收機制自動管理，若不手動釋放，長時間執行會造成記憶體洩漏，甚至導致SAP GUI Session卡死" sap:VirtualizedContainerService.HintSize="450,281" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap2010:Annotation.AnnotationText="為什麼要用「反射(Reflection)」而不是直接呼叫方法？&#xD;&#xA;因為 SAP GUI Scripting API 是COM介面，而不是標準的.NET組件（沒有強型別的.NET DLL可以直接using引用）。所以這支流程必須：&#xD;&#xA;1. 用 GetObject(&quot;SAPGUI&quot;) 動態取得SAP GUI的COM物件&#xD;&#xA;2. 全程用 .GetType.InvokeMember(...) 這種動態反射呼叫的方式，去存取屬性跟方法 這種寫法雖然囉嗦，但是業界處理SAP GUI Scripting的標準做法，UiPath本身也是透過類似機制讓UI Automation能操作SAP畫面。" sap:VirtualizedContainerService.HintSize="450,281" sap2010:WorkflowViewState.IdRef="Comment_5" Text="//&#xD;&#xA;">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'-Begin-----------------------------------------------------------------&#xA;Dim SapGuiAuto As Object = Nothing&#xA;Try&#xA; SapGuiAuto = GetObject(&quot;SAPGUI&quot;)&#xA; Dim application As Object = Nothing&#xA; Try&#xA;  application = SapGuiAuto.GetType.InvokeMember(&quot;GetScriptingEngine&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, SapGuiAuto, Nothing)&#xA;  Dim connection As Object = Nothing&#xA;  Try&#xA;   connection = application.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, application, {0})&#xA;   Dim session As Object = Nothing&#xA;   Try&#xA;    session = connection.GetType.InvokeMember(&quot;Children&quot;, Reflection.BindingFlags.GetProperty, Nothing, connection, {0})&#xA;    Dim ControlID As Object = Nothing&#xA;    Try&#xA;     ControlID = session.GetType.InvokeMember(&quot;findById&quot;, Reflection.BindingFlags.InvokeMethod, Nothing, session, {&quot;wnd[0]/&quot; &amp; in_ControlID})&#xA;     out_ColorIndex = CType(ControlID.GetType.InvokeMember(&quot;ColorIndex&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Integer)&#xA;     out_ColorIntensified = CType(ControlID.GetType.InvokeMember(&quot;ColorIntensified&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), Boolean)&#xA;     out_DisplayedText = CType(ControlID.GetType.InvokeMember(&quot;DisplayedText&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_IconName = CType(ControlID.GetType.InvokeMember(&quot;IconName&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;     out_Tooltip = CType(ControlID.GetType.InvokeMember(&quot;Tooltip&quot;, Reflection.BindingFlags.GetProperty, Nothing, ControlID, Nothing), String)&#xA;    Finally&#xA;     Try&#xA;      System.Runtime.InteropServices.Marshal.ReleaseComObject(ControlID)&#xA;     Catch ex As Exception&#xA;     End Try&#xA;    End Try&#xA;   Finally&#xA;    Try&#xA;     System.Runtime.InteropServices.Marshal.ReleaseComObject(session)&#xA;    Catch ex As Exception&#xA;    End Try&#xA;   End Try   &#xA;  Finally&#xA;   Try&#xA;    System.Runtime.InteropServices.Marshal.ReleaseComObject(connection)&#xA;   Catch ex As Exception&#xA;   End Try&#xA;  End Try  &#xA; Finally&#xA;  Try&#xA;   System.Runtime.InteropServices.Marshal.ReleaseComObject(application)&#xA;  Catch ex As Exception&#xA;  End Try&#xA; End Try&#xA;Finally&#xA; Try&#xA;  System.Runtime.InteropServices.Marshal.FinalReleaseComObject(SapGuiAuto)&#xA;  System.GC.Collect()&#xA;  System.GC.WaitForPendingFinalizers()&#xA; Catch ex As Exception&#xA; End Try&#xA;End Try" DisplayName="Invoke code for GuiLabel" sap:VirtualizedContainerService.HintSize="450,287" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_ControlID">[in_ControlID]</InArgument>
         <OutArgument x:TypeArguments="x:Int32" x:Key="out_ColorIndex">[out_ColorIndex]</OutArgument>
@@ -120,6 +153,13 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_Tooltip">[out_Tooltip]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]" />
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot; end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
 </Activity>

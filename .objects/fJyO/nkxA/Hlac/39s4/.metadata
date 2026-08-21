@@ -1,0 +1,13 @@
+﻿{
+  "Name": "篩選項目",
+  "Type": "Element",
+  "TaxonomyType": "Input",
+  "Id": "39s4yEPd5kOSmzYvkLD8Kw",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/39s4yEPd5kOSmzYvkLD8Kw",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/HlacORr0F0GdZbrJm8EMFA",
+  "Created": "2026-08-18T09:58:24.9332309Z",
+  "Updated": "2026-08-18T09:58:24.9332309Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

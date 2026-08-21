@@ -43,6 +43,8 @@
       <x:String>System.Xml.Linq</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -72,6 +74,22 @@
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -217,7 +235,7 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="526,3761" Id="ArgumentsCheck_1" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Check Arguments for SRC_DATAELEMENT_OUTPUT.&#xA;In case of error, throw BusinessRuleException.&#xA;&#xA;- input&#xA;in_TableName as name of target Table &lt;String&gt;&#xA;in_OutPath as file path of output file &lt;String&gt;&#xA;in_OutFileName as name of output file &lt;String&gt;&#xA;in_AppServer as AppServer &lt;String&gt;&#xA;in_Client as Client &lt;String&gt;&#xA;in_Language as Language &lt;String&gt;&#xA;in_Password as Password &lt;SecureString&gt;&#xA;in_SystemNumber as SystemNumber &lt;String&gt;&#xA;in_User as User &lt;String&gt;&#xA;in_FunctionXamlFilePath as Function xaml file path used for data output &lt;String&gt;" DisplayName="CheckArguments" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Check Arguments for SRC_DATAELEMENT_OUTPUT.&#xA;In case of error, throw BusinessRuleException.&#xA;&#xA;- input&#xA;in_TableName as name of target Table &lt;String&gt;&#xA;in_OutPath as file path of output file &lt;String&gt;&#xA;in_OutFileName as name of output file &lt;String&gt;&#xA;in_AppServer as AppServer &lt;String&gt;&#xA;in_Client as Client &lt;String&gt;&#xA;in_Language as Language &lt;String&gt;&#xA;in_Password as Password &lt;SecureString&gt;&#xA;in_SystemNumber as SystemNumber &lt;String&gt;&#xA;in_User as User &lt;String&gt;&#xA;in_FunctionXamlFilePath as Function xaml file path used for data output &lt;String&gt;" DisplayName="CheckArguments" sap:VirtualizedContainerService.HintSize="1085,3539" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)]" Name="CheckResults" />
       <Variable x:TypeArguments="x:String" Default="CheckArguments" Name="WorkflowName" />
@@ -228,8 +246,8 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <Assign DisplayName="Assign Set ErrorMessage" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
+    <Assign DisplayName="Assign Set ErrorMessage" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[ErrorMessage]</OutArgument>
       </Assign.To>
@@ -237,61 +255,66 @@
         <InArgument x:TypeArguments="x:String">There is an error in the setting value.</InArgument>
       </Assign.Value>
     </Assign>
-    <If sap2010:Annotation.AnnotationText="Check if table name is not entered" Condition="[String.IsNullOrWhiteSpace(in_TableName)]" DisplayName="If Check in_TableName" sap2010:WorkflowViewState.IdRef="If_6">
+    <If sap2010:Annotation.AnnotationText="Check if table name is not entered" Condition="[String.IsNullOrWhiteSpace(in_TableName)]" DisplayName="If Check in_TableName" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_6">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection TableName not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_5" Item="[ErrorMessage &amp; &quot; TableName[&quot; &amp; in_TableName &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection TableName not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_5" Item="[ErrorMessage &amp; &quot; TableName[&quot; &amp; in_TableName &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if path exists" Condition="[Not System.IO.Directory.Exists (in_OutPath)]" DisplayName="If Check in_OutPath" sap2010:WorkflowViewState.IdRef="If_1">
+    <If sap2010:Annotation.AnnotationText="Check if path exists" Condition="[Not System.IO.Directory.Exists (in_OutPath)]" DisplayName="If Check in_OutPath" sap:VirtualizedContainerService.HintSize="452,201" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection Path does not exist" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[ErrorMessage &amp; &quot; OutPath[&quot; &amp; in_OutPath &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if output File Name is not entered" Condition="[String.IsNullOrWhiteSpace(in_OutFileName)]" DisplayName="If Check in_OutFileName" sap2010:WorkflowViewState.IdRef="If_12">
+    <If sap2010:Annotation.AnnotationText="Check if output File Name is not entered" Condition="[String.IsNullOrWhiteSpace(in_OutFileName)]" DisplayName="If Check in_OutFileName" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_12">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection File name not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_11" Item="[ErrorMessage &amp; &quot; OutFileName[&quot; &amp; in_OutFileName &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection File name not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_11" Item="[ErrorMessage &amp; &quot; OutFileName[&quot; &amp; in_OutFileName &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if AppServer is not entered" Condition="[String.IsNullOrWhiteSpace(in_AppServer)]" DisplayName="If Check in_AppServer" sap2010:WorkflowViewState.IdRef="If_8">
+    <If sap2010:Annotation.AnnotationText="Check if AppServer is not entered" Condition="[String.IsNullOrWhiteSpace(in_AppServer)]" DisplayName="If Check in_AppServer" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_8">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection AppServer not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_7" Item="[ErrorMessage &amp; &quot; AppServer[&quot; &amp; in_AppServer &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection AppServer not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_7" Item="[ErrorMessage &amp; &quot; AppServer[&quot; &amp; in_AppServer &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if Clientis not entered" Condition="[String.IsNullOrWhiteSpace(in_Client)]" DisplayName="If Check in_Client" sap2010:WorkflowViewState.IdRef="If_9">
+    <If sap2010:Annotation.AnnotationText="Check if Clientis not entered" Condition="[String.IsNullOrWhiteSpace(in_Client)]" DisplayName="If Check in_Client" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_9">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection Client not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_8" Item="[ErrorMessage &amp; &quot; Client[&quot; &amp; in_Client &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection Client not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_8" Item="[ErrorMessage &amp; &quot; Client[&quot; &amp; in_Client &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if in_Language is &quot;EN&quot; or &quot;JA&quot;" Condition="[Not in_Language.ToUpper = &quot;JA&quot; AndAlso Not in_Language.ToUpper = &quot;EN&quot;]" DisplayName="If Check in_Language" sap2010:WorkflowViewState.IdRef="If_14">
+    <If sap2010:Annotation.AnnotationText="Check if in_Language is &quot;EN&quot; or &quot;JA&quot;" Condition="[Not in_Language.ToUpper = &quot;JA&quot; AndAlso Not in_Language.ToUpper = &quot;EN&quot; AndAlso Not in_Language.ToUpper = &quot;ZF&quot;]" DisplayName="If Check in_Language" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_14">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_13" Item="[ErrorMessage &amp; &quot; Language[&quot; &amp; in_Language &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_13" Item="[ErrorMessage &amp; &quot; Language[&quot; &amp; in_Language &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if Password is not entered " Condition="[in_Password.Length = 0]" DisplayName="If Check in_Password" sap2010:WorkflowViewState.IdRef="If_13">
+    <If sap2010:Annotation.AnnotationText="Check if Password is not entered " Condition="[in_Password.Length = 0]" DisplayName="If Check in_Password" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_13">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection Password not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_12" Item="[ErrorMessage &amp; &quot; Password&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection Password not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_12" Item="[ErrorMessage &amp; &quot; Password&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if SystemNumber is not entered " Condition="[String.IsNullOrWhiteSpace(in_SystemNumber)]" DisplayName="If Check in_SystemNumber" sap2010:WorkflowViewState.IdRef="If_10">
+    <If sap2010:Annotation.AnnotationText="Check if SystemNumber is not entered " Condition="[String.IsNullOrWhiteSpace(in_SystemNumber)]" DisplayName="If Check in_SystemNumber" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_10">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection  SystemNumber not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_9" Item="[ErrorMessage &amp; &quot; SystemNumber[&quot; &amp; in_SystemNumber &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection  SystemNumber not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_9" Item="[ErrorMessage &amp; &quot; SystemNumber[&quot; &amp; in_SystemNumber &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if User is not entered " Condition="[String.IsNullOrWhiteSpace(in_User)]" DisplayName="If Check in_User" sap2010:WorkflowViewState.IdRef="If_15">
+    <If sap2010:Annotation.AnnotationText="Check if User is not entered " Condition="[String.IsNullOrWhiteSpace(in_User)]" DisplayName="If Check in_User" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_15">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection User not set" sap2010:WorkflowViewState.IdRef="AddToCollection`1_14" Item="[ErrorMessage &amp; &quot; User[&quot; &amp; in_User &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection User not set" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_14" Item="[ErrorMessage &amp; &quot; User[&quot; &amp; in_User &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If sap2010:Annotation.AnnotationText="Check if FilePath exists" Condition="[Not System.IO.File.Exists(in_FunctionXamlFilePath)]" DisplayName="If Check in_FunctionXamlFilePath" sap2010:WorkflowViewState.IdRef="If_11">
+    <If sap2010:Annotation.AnnotationText="Check if FilePath exists" Condition="[Not System.IO.File.Exists(in_FunctionXamlFilePath)]" DisplayName="If Check in_FunctionXamlFilePath" sap:VirtualizedContainerService.HintSize="452,273" sap2010:WorkflowViewState.IdRef="If_11">
       <If.Then>
-        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection in_FunctionXamlFilePath Path exists" sap2010:WorkflowViewState.IdRef="AddToCollection`1_10" Item="[ErrorMessage &amp; &quot; in_FunctionXamlFilePath[&quot; &amp; in_FunctionXamlFilePath &amp; &quot;]&quot;]" />
+        <AddToCollection x:TypeArguments="x:String" Collection="[CheckResults]" DisplayName="Add To Collection in_FunctionXamlFilePath Path exists" sap:VirtualizedContainerService.HintSize="450,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_10" Item="[ErrorMessage &amp; &quot; in_FunctionXamlFilePath[&quot; &amp; in_FunctionXamlFilePath &amp; &quot;]&quot;]" />
       </If.Then>
     </If>
-    <If Condition="[CheckResults.Count &gt; 0]" DisplayName="If Result Check" sap2010:WorkflowViewState.IdRef="If_5">
+    <If Condition="[CheckResults.Count &gt; 0]" DisplayName="If Result Check" sap:VirtualizedContainerService.HintSize="452,342" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
-        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" Exception="[new UiPath.Core.BusinessRuleException(&quot;The following errors was found in Config Arguments:&quot; &amp; vbCr &amp; String.Join(vbCrLf, CheckResults))]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" Exception="[new UiPath.Core.BusinessRuleException(&quot;The following errors was found in Config Arguments:&quot; &amp; vbCr &amp; String.Join(vbCrLf, CheckResults))]" sap:VirtualizedContainerService.HintSize="450,91" sap2010:WorkflowViewState.IdRef="Throw_3" />
       </If.Then>
     </If>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="452,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
   </Sequence>
 </Activity>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="84IzeTXxgUayHeS_G1fB3A" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" CVScreenId="048cded7-8341-4d18-a3c6-0d33bd29bc43" CvElementArea="827, 6, 21, 19" CvType="CloseButton" DesignTimeRectangle="827, 7, 24, 24" DesignTimeScaleFactor="1" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;ctrl name='關閉' role='push button' /&gt;" Guid="c2c3cbfe-3ca4-40d8-a419-0cf0bd4c8f59" ImageBase64="" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 770' /&gt;" SearchSteps="Selector, Image, CV" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.PointOffset>
+        <PointOffset />
+      </TargetAnchorable.PointOffset>
+      <imageRef attrName="InformativeScreenshot" originalValue="437d0736e726ca91470cc5cfd901260f.jpg" xmlns="">0gEwd6Fp0KEKTHFAd_a3WgA</imageRef>
+    </TargetAnchorable>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

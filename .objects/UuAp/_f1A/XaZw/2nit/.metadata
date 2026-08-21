@@ -1,0 +1,16 @@
+﻿{
+  "Name": "出",
+  "Type": "Element",
+  "TaxonomyType": "Button",
+  "Id": "2nitQ8jolEq8Zbsq7FkBFQ",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/2nitQ8jolEq8Zbsq7FkBFQ",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/XaZw8Afu806ZGpLqo-ytyg",
+  "Created": "2026-08-17T10:26:19.9687391Z",
+  "Updated": "2026-08-17T10:26:40.0399472Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ],
+  "UpdatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

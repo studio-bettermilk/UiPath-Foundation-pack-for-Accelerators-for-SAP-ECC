@@ -1,0 +1,329 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_BAPI_USER_UNLOCK_v2_2_E" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usba="clr-namespace:UiPath.SAP.BAPI.Activities;assembly=UiPath.SAP.BAPI.Activities" xmlns:usbam="clr-namespace:UiPath.SAP.BAPI.Activities.Model;assembly=UiPath.SAP.BAPI.Activities" xmlns:usbc="clr-namespace:UiPath.SAP.BAPI.ConnectionService;assembly=UiPath.SAP.BAPI" xmlns:usbcss="clr-namespace:UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes;assembly=UiPath.SAP.BAPI" xmlns:usbm="clr-namespace:UiPath.SAP.BAPI.Model;assembly=UiPath.SAP.BAPI" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="現有的SAP連線物件，讓這支流程可以沿用外部已經建立好的BAPI連線(不需要重新登入)" Name="in_SapConnection" Type="InArgument(usbc:IConnectionService)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：整理成標準格式的BAPI回傳訊息清單" Name="out_RegistReturn" Type="OutArgument(scg:List(scg:Dictionary(x:String, x:String)))" />
+    <x:Property sap2010:Annotation.AnnotationText="呼叫BAPI所需的輸入參數集合，本流程實際只會用到其中的&quot;USERNAME&quot;這個Key" Name="in_Import" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="存放BAPI表格參數的資料表集合(本流程未實際使用到此參數)" Name="io_DataTable" Type="InOutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property sap2010:Annotation.AnnotationText="選用參數集合(本流程未實際使用到此參數)" Name="io_Option" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ForEach_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService</x:String>
+      <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="414,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="314,59" Id="InvokeSapBapi_3" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="414,168" Id="SapApplicationScope_2" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="414,60" Id="Assign_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="414,87" Id="InvokeWorkflowFile_1" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="414,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="436,988" Id="Sequence_429">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="476,1068" Id="ForEach_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Run &quot;Invoke SAP BAPI&quot;&#xA;&#xA;- Input/Output&#xA;in_SapConnection as SAP Connect Info &lt;IConnectionService&gt; &#xA;out_RegistReturn  as  BAPI return message &lt;List&lt;Dictionary&lt;String,Object&gt;&gt;&gt; &#xA;in_Import as BAPI input parameters &lt;Dictionary&lt;String,Object&gt;&gt; &#xA;io_DataTable as BAPI in/Out parameter Dictionary data table&lt;String,DataTable&gt;&gt; &#xA;io_Option as DataTable for optional parameter Dictionary&lt;Dictionary&lt;String,DataTable&gt;&gt;&#xA;" DisplayName="SRC_BAPI_USER_UNLOCK_v2.2_E" sap:VirtualizedContainerService.HintSize="1025,1860" sap2010:WorkflowViewState.IdRef="Sequence_429">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="SRC_BAPI_USER_UNLOCK_v2.2_E" Name="WorkflowName" />
+      <Variable x:TypeArguments="scg:List(usbcss:BapiRet2)" Name="BAPIResult" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這支流程的功能是：呼叫SAP標準BAPI函式BAPI_USER_UNLOCK，將指定SAP使用者帳號的鎖定狀態解除(解鎖)，並把BAPI回傳的訊息整理成標準格式輸出。這是這系列使用者維護工具中參數最精簡的一支。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,245" sap2010:WorkflowViewState.IdRef="Comment_4" Text="整個流程核心邏輯只有一次BAPI呼叫：借用既有SAP連線 → 呼叫BAPI_USER_UNLOCK並只傳入USERNAME → 把BAPI回傳的RETURN訊息轉換成標準格式輸出。因為只需要指定使用者帳號本身，不涉及任何額外的資料段設定，是整個BAPI使用者維護工具集裡邏輯最簡單、最直接的一支，適合用於單純的「解鎖」這種一次性、無需複雜參數的操作情境。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,89" sap2010:WorkflowViewState.IdRef="Comment_3" Text="//" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,89" sap2010:WorkflowViewState.IdRef="Comment_2" Text="//" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <usba:SapApplicationScope AdvancedParameters="{x:Null}" AppServer="{x:Null}" Client="{x:Null}" Language="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" Password="{x:Null}" SapConnectionService="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" StatefulConnection="{x:Null}" SystemId="{x:Null}" SystemNumber="{x:Null}" User="{x:Null}" sap2010:Annotation.AnnotationText="透過ExistingConnectionService=&quot;[in_SapConnection]&quot;沿用外部傳進來的既有連線，其餘連線設定(伺服器、Client、帳密等)全部留空，代表借用已登入好的Session，不重新建立連線" DisplayName="SAP Application Scope" ExistingConnectionService="[in_SapConnection]" sap:VirtualizedContainerService.HintSize="450,635" sap2010:WorkflowViewState.IdRef="SapApplicationScope_2">
+      <usba:SapApplicationScope.Body>
+        <ActivityAction x:TypeArguments="usbc:IConnectionService">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="usbc:IConnectionService" Name="ConnectionService" />
+          </ActivityAction.Argument>
+          <usba:InvokeSapBapi BapiDescription="{x:Null}" sap2010:Annotation.AnnotationText="呼叫的BAPI名稱：BAPI_USER_UNLOCK(SAP標準函式，功能是解除指定使用者帳號的鎖定狀態，例如因密碼輸入錯誤次數過多、或帳號被系統管理員鎖定等情況)&#xD;&#xA;實際勾選使用的參數，跟前面看過的&#xD;&#xA;&#xD;&#xA;BAPI_USER_UNLOCK家族流程一樣只有兩個：&#xD;&#xA;&#xD;&#xA;BAPI參數名稱 | 方向 | 資料型別 | 對應到本流程的變數  | 說明&#xD;&#xA;USERNAME | In(輸入) | String(長度12) | CType(in_Import(&quot;USERNAME&quot;), String) | 要被解鎖的SAP使用者帳號&#xD;&#xA;RETURN | InOut(進出) | List(BapiRet2) | BAPIResult | BAPI執行後回傳的訊息清單，每筆訊息包含TYPE(訊息類型：S成功/E錯誤/W警告/I資訊/A中止)、ID(訊息類別)、SYSTEM(來源系統)等欄位&#xD;&#xA;&#xD;&#xA;💡 由於只需要傳入USERNAME，這支BAPI的行為很單純：只要找到該使用者帳號，就會嘗試把它目前的鎖定狀態解除，不需要額外指定任何其他解鎖細節或條件。" BapiName="BAPI_USER_UNLOCK" BapiSelected="True" DisplayName="BAPI_USER_UNLOCK" sap:VirtualizedContainerService.HintSize="400,432" sap2010:WorkflowViewState.IdRef="InvokeSapBapi_3">
+            <usba:InvokeSapBapi.AllArguments>
+              <scg:Dictionary x:TypeArguments="x:String, usbam:BapiArgumentUiModel">
+                <x:Reference>__ReferenceID0<x:Key>USERNAME</x:Key></x:Reference>
+                <x:Reference>__ReferenceID1<x:Key>RETURN</x:Key></x:Reference>
+              </scg:Dictionary>
+            </usba:InvokeSapBapi.AllArguments>
+            <usba:InvokeSapBapi.OptionalArguments>
+              <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="0" />
+            </usba:InvokeSapBapi.OptionalArguments>
+            <usba:InvokeSapBapi.SelectedArgumentList>
+              <scg:List x:TypeArguments="usbam:BapiArgumentUiModel" Capacity="2">
+                <usbam:BapiArgumentUiModel FieldArguments="{x:Null}" x:Name="__ReferenceID0" DataType="String" DataTypeAsString="String" DecimalLength="0" Description="User name" Direction="In" DirectionAsString="In" IsSelected="False" Length="12" Name="USERNAME" Optional="False" ServiceDataType="">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InArgument x:TypeArguments="x:String">[CType(in_Import("USERNAME"), String)]</InArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                </usbam:BapiArgumentUiModel>
+                <usbam:BapiArgumentUiModel Length="{x:Null}" x:Name="__ReferenceID1" DataType="List_BapiRet2" DataTypeAsString="List&lt;BapiRet2&gt;" DecimalLength="0" Description="Return structure" Direction="InOut" DirectionAsString="In/Out" IsSelected="False" Name="RETURN" Optional="False" ServiceDataType="BAPIRET2">
+                  <usbam:BapiArgumentUiModel.ArgumentValue>
+                    <InOutArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[BAPIResult]</InOutArgument>
+                  </usbam:BapiArgumentUiModel.ArgumentValue>
+                  <usbam:BapiArgumentUiModel.FieldArguments>
+                    <scg:List x:TypeArguments="usbm:FieldArgument" Capacity="16">
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message type: S Success, E Error, W Warning, I Info, A Abort" Length="1" Name="TYPE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Class" Length="20" Name="ID" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Number" Length="3" Name="NUMBER" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Text" Length="220" Name="MESSAGE" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Application log: log number" Length="20" Name="LOG_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Application log: Internal message serial number" Length="6" Name="LOG_MSG_NO" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V1" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V2" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V3" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Message Variable" Length="50" Name="MESSAGE_V4" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Parameter Name" Length="32" Name="PARAMETER" />
+                      <usbm:FieldArgument DataType="Integer" DecimalLength="0" Description="Lines in parameter" Length="4" Name="ROW" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Field in parameter" Length="30" Name="FIELD" />
+                      <usbm:FieldArgument DataType="String" DecimalLength="0" Description="Logical system from which message originates" Length="10" Name="SYSTEM" />
+                    </scg:List>
+                  </usbam:BapiArgumentUiModel.FieldArguments>
+                </usbam:BapiArgumentUiModel>
+              </scg:List>
+            </usba:InvokeSapBapi.SelectedArgumentList>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </usba:InvokeSapBapi>
+        </ActivityAction>
+      </usba:SapApplicationScope.Body>
+      <usba:SapApplicationScope.DesignAdvancedParameters>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAdvancedParameters>
+      <usba:SapApplicationScope.DesignAppServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignAppServer>
+      <usba:SapApplicationScope.DesignClient>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignClient>
+      <usba:SapApplicationScope.DesignLanguage>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLanguage>
+      <usba:SapApplicationScope.DesignLogonGroup>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignLogonGroup>
+      <usba:SapApplicationScope.DesignMessageServer>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignMessageServer>
+      <usba:SapApplicationScope.DesignPassword>
+        <ss:SecureString />
+      </usba:SapApplicationScope.DesignPassword>
+      <usba:SapApplicationScope.DesignSapRouterString>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSapRouterString>
+      <usba:SapApplicationScope.DesignSncLibraryPath>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncLibraryPath>
+      <usba:SapApplicationScope.DesignSncMode>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncMode>
+      <usba:SapApplicationScope.DesignSncPartnerName>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncPartnerName>
+      <usba:SapApplicationScope.DesignSncQOP>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncQOP>
+      <usba:SapApplicationScope.DesignSncSso>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSncSso>
+      <usba:SapApplicationScope.DesignSystemId>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemId>
+      <usba:SapApplicationScope.DesignSystemNumber>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignSystemNumber>
+      <usba:SapApplicationScope.DesignUser>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </usba:SapApplicationScope.DesignUser>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </usba:SapApplicationScope>
+    <Assign sap2010:Annotation.AnnotationText="Assign out_RegistReturn：先建立一個空的List(Of Dictionary(Of String, String))，準備接收轉換後的結果" DisplayName="Assign out_RegistReturn" sap:VirtualizedContainerService.HintSize="450,236" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[out_RegistReturn]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[new List(of Dictionary(of String, String))]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="呼叫SRC_BAPIv2.2_REGISTER\ConvertBAPILogToBAPILogFormat.xaml這支共用的格式轉換工具，把BAPIResult(型別List(BapiRet2))轉換成out_RegistReturn標準格式，方便後續統一處理與寫入Log" DisplayName="Invoke workflow" sap:VirtualizedContainerService.HintSize="450,271" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_REGISTER\ConvertBAPILogToBAPILogFormat.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))" x:Key="out_ConvertedData">[out_RegistReturn]</OutArgument>
+        <InArgument x:TypeArguments="x:Object" x:Key="in_ConvertData">[BAPIResult]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

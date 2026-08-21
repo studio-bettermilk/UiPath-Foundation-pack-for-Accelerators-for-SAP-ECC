@@ -1,8 +1,8 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="SRC_WriteLogToText" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_LogFilePath" Type="InArgument(x:String)" />
-    <x:Property Name="in_LogFileName" Type="InArgument(x:String)" />
-    <x:Property Name="in_LogData" Type="InArgument(s:String[])" />
+    <x:Property sap2010:Annotation.AnnotationText="Log檔要存放的資料夾路徑(可以是相對路徑或完整路徑)" Name="in_LogFilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Log檔案的檔案名稱" Name="in_LogFileName" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Log資料內容，是一個字串陣列，陣列裡的每一個元素代表這一筆Log的一個欄位值" Name="in_LogData" Type="InArgument(s:String[])" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -65,6 +65,7 @@
       <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -126,7 +127,7 @@
       <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="542,1106" Id="SRC_WriteLog_1" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;This workflow is used to output the log data in a Text format.&#xA;&#xA;- Input/Output&#xA;in_LogData as Log Data in Array format&lt;String[]&gt;&#xA;in_LogFilePath as Relative or full path of Log File save destination&lt;String&gt;&#xA;in_LogFileName as Log File Name&lt;String&gt;" DisplayName="SRC_WriteLogToText" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程的功能是：把一批Log資料(字串陣列)轉換成CSV格式的一行文字，並附加寫入到指定的文字檔(Log檔)裡，是專門負責「把Log內容輸出成文字檔」的通用工具。)&#xA;This workflow is used to output the log data in a Text format.&#xA;&#xA;- Input/Output&#xA;in_LogData as Log Data in Array format&lt;String[]&gt;&#xA;in_LogFilePath as Relative or full path of Log File save destination&lt;String&gt;&#xA;in_LogFileName as Log File Name&lt;String&gt;" DisplayName="SRC_WriteLogToText" sap:VirtualizedContainerService.HintSize="1025,2260" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)]" Name="LogText" />
       <Variable x:TypeArguments="x:String" Default="SRC_WriteLogToText" Name="WorkflowName" />
@@ -134,27 +135,73 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[WorkflowName + &quot; start&quot;]" />
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Add each Log Item into a Collection." DisplayName="For Each item in in_LogData" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_LogData]">
+    <ui:Comment sap2010:Annotation.AnnotationText="順序 | 欄位名稱(LogPattern) | 存放內容說明&#xD;&#xA;1 | DateTime |記錄當下的時間戳記，格式yyyy-MM-dd HH:mm:ss(來自Datetime.Now.ToString(...))&#xD;&#xA;2 | SheetName | 實際存放的是流程名稱(WorkflowName)，用來標示這筆Log是哪支流程寫入的&#xD;&#xA;3 | Status | 執行狀態代碼：&quot;S&quot;= 成功(Success)，&quot;E&quot;= 錯誤(Error)&#xD;&#xA;4 | No | 存放HeaderIndex，也就是目前處理到的資料識別編號(對應輸入資料表裡的No欄位)&#xD;&#xA;5 | SAP MessageNo | 若是SAP系統回報的錯誤，存放exception.Data(&quot;MessageNo&quot;)(SAP訊息編號)；其他情況為空字串&quot;&quot;&#xD;&#xA;6 | SAP Message | 成功時存放StatusMessage(成功訊息)；SAP錯誤時存放exception.Data(&quot;StatusMessage&quot;)(SAP狀態列訊息)；一般應用程式錯誤時為空字串&quot;&quot;&#xD;&#xA;7 | Exception | 若是一般應用程式例外，存放exception.Message(.NET例外訊息內容)；其他情況為空字串&quot;&quot;&#xD;&#xA;8 | Screenshot | 發生錯誤時存放ScreenShotPath(錯誤截圖檔案路徑)；成功時為空字串&quot;&quot;&#xD;&#xA;&#xD;&#xA;依不同情境，實際填入的內容組合&#xD;&#xA;情境 | DateTime | SheetName | Status | No | SAP MessageNo | SAP Message | Exception | Screenshot&#xD;&#xA;✅ 成功 | 時間 | 流程名稱 | S | HeaderIndex | (空) StatusMessage | (空) | (空)&#xD;&#xA;❌ 一般應用程式錯誤 | 時間 | 流程名稱 | E HeaderIndex | (空) | (空) | exception.Message | 截圖路徑&#xD;&#xA;❌ SAP系統錯誤 | 時間 | 流程名稱 | E | HeaderIndex | SAP訊息編號 | SAP狀態列訊息 | (空) | 截圖路徑" sap:VirtualizedContainerService.HintSize="450,712" sap2010:WorkflowViewState.IdRef="Comment_2" Text="輸出 8欄位的標準格式(時間、流程名稱、狀態、識別編號、SAP訊息編號、SAP訊息內容、例外訊息、截圖路徑)">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//這支流程的邏輯很精簡：逐項檢查Log資料是否含逗號並做CSV跳脫處理 → 用逗號串接成一行 → 用Shift_JIS編碼附加寫入到指定的文字檔。因為使用AppendLine(附加寫入而非覆寫)，所以每次呼叫這支流程都會在Log檔的最後面新增一行，隨著流程反覆執行，最終會累積成一份完整的CSV格式Log記錄檔案。" />
+    <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="450,57" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[WorkflowName + &quot; start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Add each Log Item into a Collection.&#xA;&#xA;逐項處理，組成CSV格式的內容(ForEach)&#xA;&gt; 建立一個空的字串清單LogText(型別List(Of String))&#xA;&gt; 用 ForEach 迴圈跑過in_LogData陣列裡的每一個元素(item)：&#xA;&gt;&gt; 判斷：item.Contains(&quot;,&quot;)(這個Log項目本身的內容裡有沒有包含逗號)&#xA;&gt;&gt;&gt; 若有逗號：用Chr(34) &amp; item &amp; Chr(34)把這個項目前後加上雙引號(&quot;)再加入LogText清單。這是標準的CSV格式跳脫規則——如果欄位內容本身含有逗號，就必須用雙引號包起來，避免被誤判成多個欄位&#xA;&gt;&gt;&gt; 若沒有逗號：直接把原始item加入LogText清單，不做額外處理" DisplayName="For Each item in in_LogData" sap:VirtualizedContainerService.HintSize="450,727" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_LogData]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="item" />
           </ActivityAction.Argument>
-          <If Condition="[item.Contains(&quot;,&quot;)]" DisplayName="If Log Item contains colon" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[item.Contains(&quot;,&quot;)]" DisplayName="If Log Item contains colon" sap:VirtualizedContainerService.HintSize="334,285" sap2010:WorkflowViewState.IdRef="If_1">
             <If.Then>
-              <AddToCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Add Log Item into Collection" Collection="[LogText]" DisplayName="Add To Collection Log Item with double quotes" sap2010:WorkflowViewState.IdRef="AddToCollection`1_10" Item="[Chr(34) &amp; item &amp; Chr(34)]" />
+              <AddToCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Add Log Item into Collection" Collection="[LogText]" DisplayName="Add To Collection Log Item with double quotes" sap:VirtualizedContainerService.HintSize="332,67" sap2010:WorkflowViewState.IdRef="AddToCollection`1_10" Item="[Chr(34) &amp; item &amp; Chr(34)]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </AddToCollection>
             </If.Then>
             <If.Else>
-              <AddToCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Add Log Item into Collection" Collection="[LogText]" DisplayName="Add To Collection Log Item" sap2010:WorkflowViewState.IdRef="AddToCollection`1_9" Item="[item]" />
+              <AddToCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Add Log Item into Collection" Collection="[LogText]" DisplayName="Add To Collection Log Item" sap:VirtualizedContainerService.HintSize="332,67" sap2010:WorkflowViewState.IdRef="AddToCollection`1_9" Item="[item]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </AddToCollection>
             </If.Else>
           </If>
         </ActivityAction>
       </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:AppendLine File="{x:Null}" sap2010:Annotation.AnnotationText="Write to the log file" DisplayName="Append Line" Encoding="Shift_JIS" FileName="[in_LogFilePath + &quot;\&quot; + in_LogFileName]" sap2010:WorkflowViewState.IdRef="AppendLine_4" Text="[String.Join(&quot;,&quot;, LogText)]" UseDefaultEncoding="False" />
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[WorkflowName + &quot; end&quot;]" />
+    <ui:AppendLine File="{x:Null}" sap2010:Annotation.AnnotationText="Write to the log file&#xA;&#xA;寫入文字檔(AppendLine)&#xA;&gt; 用String.Join(&quot;,&quot;, LogText)把清單裡的所有項目，用逗號串接成一整行CSV格式的字串&#xA;&gt; 用AppendLine活動，把這行文字**附加寫入(Append)**到in_LogFilePath + &quot;\&quot; + in_LogFileName所組成的檔案路徑&#xA;&gt; 特別注意這裡指定了Encoding=&quot;Shift_JIS&quot;(並設定UseDefaultEncoding=&quot;False&quot;強制套用)，這代表輸出的文字檔會採用**日文編碼(Shift_JIS)**存檔，而不是系統預設編碼，這通常是因應日系企業SAP系統慣用編碼所做的特別設定" DisplayName="Append Line" Encoding="Shift_JIS" FileName="[in_LogFilePath + &quot;\&quot; + in_LogFileName]" sap:VirtualizedContainerService.HintSize="450,391" sap2010:WorkflowViewState.IdRef="AppendLine_4" Text="[String.Join(&quot;,&quot;, LogText)]" UseDefaultEncoding="False">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:AppendLine>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[WorkflowName + &quot; end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
 </Activity>

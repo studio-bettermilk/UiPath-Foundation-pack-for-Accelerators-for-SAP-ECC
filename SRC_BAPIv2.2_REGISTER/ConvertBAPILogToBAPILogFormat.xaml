@@ -1,85 +1,388 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ConvertBAPILogToBAPILogFormat"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:usbcss="clr-namespace:UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes;assembly=UiPath.SAP.BAPI"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ConvertBAPILogToBAPILogFormat" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usbcss="clr-namespace:UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes;assembly=UiPath.SAP.BAPI" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_ConvertData" Type="InArgument(x:Object)" />
-    <x:Property Name="out_ConvertedData" Type="OutArgument(scg:List(scg:Dictionary(x:String, x:String)))" />
+    <x:Property sap2010:Annotation.AnnotationText="要轉換的原始資料，型別不固定，可能是BapiRet1、BapiRet2單一物件，也可能是List(BapiRet1)、List(BapiRet2)、List(BapiReturn)、List(BapiReturn1)等各種清單型態(取決於呼叫端的BAPI回傳結構)" Name="in_ConvertData" Type="InArgument(x:Object)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：轉換完成的標準格式清單，每一筆訊息都是一個Dictionary，內含統一的Key(如Id/Code、Message、Type等)" Name="out_ConvertedData" Type="OutArgument(scg:List(scg:Dictionary(x:String, x:String)))" />
   </x:Members>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap2010:WorkflowViewState.IdRef>ConvertBAPIMessage_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
-      <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes</x:String>
-      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
       <AssemblyReference>System.Data</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-      <AssemblyReference>System</AssemblyReference>
       <AssemblyReference>System.Drawing</AssemblyReference>
-      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
-      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
       <AssemblyReference>UiPath.SAP.BAPI</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Convert the execution result of BAPI into string type.&#xA;&#xA;- Input/Output&#xA;in_ConvertData as Target Convert Data  &lt;Object&gt; &#xA;out_ConvertedData as Converted Data &lt;List&lt;Dictioary&lt;String, String&gt;&gt;" DisplayName="ConvertBAPILogToBAPILogFormat" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="477,91" Id="LogMessage_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="477,60" Id="Assign_6" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="200,50.4" Id="Throw_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,60" Id="Assign_312" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_313" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_314" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_315" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_316" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_317" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_318" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_319" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_320" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_321" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_322" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1111" Id="Sequence_49">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,22" Id="AddToCollection`1_23" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="286,78" Id="Sequence_50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,60" Id="Assign_323" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_324" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_325" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_326" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_327" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_328" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_329" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_330" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_331" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_332" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_333" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_334" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_335" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_336" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_337" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1511" Id="Sequence_51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,22" Id="AddToCollection`1_24" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="286,78" Id="Sequence_52">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,60" Id="Assign_338" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_339" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_340" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_341" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_342" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_343" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_344" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_345" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_346" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_347" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_348" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1126" Id="Sequence_53">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,22" Id="AddToCollection`1_25" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="286,78" Id="Sequence_54">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,60" Id="Assign_349" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_350" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_351" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_352" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_353" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_354" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_355" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_356" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_357" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_358" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_359" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_360" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,22" Id="AddToCollection`1_26" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1288" Id="Sequence_55">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,1422" Id="ForEach`1_12" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="339,1673" Id="Sequence_56">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,60" Id="Assign_361" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_362" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_363" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_364" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_365" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_366" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_367" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_368" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_369" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_370" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_371" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_372" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_373" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_374" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_375" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_376" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,22" Id="AddToCollection`1_27" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1688" Id="Sequence_57">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,1822" Id="ForEach`1_13">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="339,78" Id="Sequence_58">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,60" Id="Assign_377" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_378" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_379" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_380" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_381" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_382" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_383" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_384" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_385" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_386" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_387" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,22" Id="AddToCollection`1_28" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1188" Id="Sequence_59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,1322" Id="ForEach`1_14">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="339,1573" Id="Sequence_60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,60" Id="Assign_388" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_389" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_390" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_391" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_392" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_393" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_394" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_395" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_396" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_397" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_398" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,60" Id="Assign_399" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="242,22" Id="AddToCollection`1_29" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="264,1288" Id="Sequence_61">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="317,1422" Id="ForEach`1_16" />
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="339,78" Id="Sequence_62">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="477,270" Id="Switch`1_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="477,91" Id="LogMessage_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="499,858" Id="Sequence_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData sap:VirtualizedContainerService.HintSize="539,938" Id="ConvertBAPIMessage_1" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Convert the execution result of BAPI into string type.&#xA;&#xA;- Input/Output&#xA;in_ConvertData as Target Convert Data  &lt;Object&gt; &#xA;out_ConvertedData as Converted Data &lt;List&lt;Dictioary&lt;String, String&gt;&gt;" DisplayName="ConvertBAPILogToBAPILogFormat" sap:VirtualizedContainerService.HintSize="1025,11117" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="ConvertBAPILogToBAPILogFormat" Name="WorkflowName" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(of String, String)]" Name="OutputTemp" />
     </Sequence.Variables>
-    <ui:LogMessage DisplayName="Log message - Start" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]" />
-    <Assign DisplayName="Assign Create Output List" sap2010:WorkflowViewState.IdRef="Assign_6">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,264" sap2010:WorkflowViewState.IdRef="Comment_1" Text="這支流程的功能是：把SAP BAPI呼叫後回傳的各種「原生.NET型別」訊息結構(例如BapiRet1、BapiRet2、BapiReturn、BapiReturn1，或它們的清單型態)，統一轉換成這系列流程慣用的標準格式List(Dictionary(String, String))。這是一支萬用的BAPI回傳訊息格式轉換工具，讓不同BAPI函式回傳的各種不同結構，都能被後續的Log記錄、寫入Excel等流程用同一套邏輯處理。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="488,401" sap2010:WorkflowViewState.IdRef="Comment_4" Text="這支流程的核心設計理念是**「型別自適應轉換器(Type-Adaptive Converter)」**：因為SAP不同的BAPI函式所使用的RETURN訊息結構不盡相同(有單一物件、也有表格清單，型別名稱也各異)，這支流程透過TypeName()動態判斷實際傳入的型別，再分別套用對應的欄位對映邏輯，統一輸出成List(Dictionary(String,String))格式。這樣一來，前面所有呼叫BAPI的流程(如SRC_BAPI_USER_ACTGROUPS_ASSIGN/DELETE)都只需要呼叫這一支共用工具，就能把各自拿到的不同型別回傳訊息，轉換成同一套Log可以直接使用的標準格式，大幅降低重複開發轉換邏輯的成本，也讓整個框架具備良好的擴充性(未來若有新的BAPI回傳型別，只需在這支流程裡多加一個Switch.Case即可)。" />
+    <ui:Comment sap2010:Annotation.AnnotationText="依實際型別做分支處理(Switch) — 核心邏輯&#xD;&#xA;流程用一個Switch活動，依TypeName(in_ConvertData)(也就是用反射取得in_ConvertData實際的.NET型別名稱字串)來決定要走哪個分支處理，這是因為不同的BAPI函式回傳的訊息結構(RETURN/RETURN_TABLE)並非統一格式，SAP標準函式庫裡至少存在BapiRet1、BapiRet2、BapiReturn、BapiReturn1這幾種不同的結構定義(欄位名稱、有無某些欄位都略有差異)，所以需要針對每種型別各自寫一套轉換邏輯：&#xD;&#xA;&gt; Case &quot;BapiRet1&quot;：先用Ctype把in_ConvertData轉型成BapiRet1物件，再逐一把Id、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Number、Type等屬性值，寫入一個暫存的Dictionary(OutputTemp)(Key分別為&quot;Id=&quot;、&quot;LogMessageNumber=&quot;...)，最後把這個字典加入out_ConvertedData&#xD;&#xA;&gt; Case &quot;BapiRet2&quot;：類似邏輯，針對BapiRet2型別轉換(欄位結構與BapiRet1類似但可能略有差異)&#xD;&#xA;&gt; Case &quot;List&lt;BapiReturn&gt;&quot;：先轉型成List(Of BapiReturn)，再用ForEach逐一跑過清單裡的每個item，把每個item的Code、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Type等屬性值組成Dictionary，逐筆加入out_ConvertedData(這是清單型態的處理方式，因為BAPI的RETURN如果本身是表格結構，回傳的就會是一整個清單而不是單一物件)&#xD;&#xA;&gt; Case &quot;List&lt;BapiReturn1&gt;&quot;：同樣邏輯，針對List(Of BapiReturn1)型別，用ForEach逐筆轉換其中的Id、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Number、Type欄位(注意這裡雖然是BapiReturn1但Key卻用&quot;Code=&quot;而非&quot;Id=&quot;，屬於實作上的細節差異)&#xD;&#xA;&gt; 從先前分析SRC_BAPI_USER_ACTGROUPS_ASSIGN/DELETE可以確認，還會有Case &quot;List&lt;BapiRet2&gt;&quot;這個分支，是這系列BAPI最常用到的回傳型態&#xD;&#xA;&#xD;&#xA;每個分支的共通處理模式都是：&#xD;&#xA;1. 用Ctype把in_ConvertData強制轉型成該分支對應的正確型別&#xD;&#xA;2. 若是單一物件：直接取出各屬性值組成一個Dictionary，加入out_ConvertedData&#xD;&#xA;3. 若是清單(List(Of ...))：用ForEach逐筆處理，每一筆都組成一個Dictionary並加入out_ConvertedData(因此out_ConvertedData最終可能包含多筆訊息記錄，對應BAPI回傳的多筆Log訊息)" sap:VirtualizedContainerService.HintSize="488,869" sap2010:WorkflowViewState.IdRef="Comment_5" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="" DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="488,88" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[WorkflowName + &quot;  start&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <Assign DisplayName="Assign Create Output List" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[out_ConvertedData]</OutArgument>
       </Assign.To>
@@ -87,24 +390,48 @@
         <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[new list(of Dictionary(of String, String))]</InArgument>
       </Assign.Value>
     </Assign>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[TypeName(in_ConvertData)]" sap2010:WorkflowViewState.IdRef="Switch`1_5">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[TypeName(in_ConvertData)]" sap:VirtualizedContainerService.HintSize="488,9054" sap2010:WorkflowViewState.IdRef="Switch`1_5">
       <Switch.Default>
-        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw defalt" Exception="[new UiPath.Core.BusinessRuleException(&quot;Unsupported ReturnType.[&quot; &amp; TypeName(in_ConvertData) &amp; &quot;]&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_6" />
+        <Throw sap2010:Annotation.AnnotationText="BusinessRuleException&#xD;&#xA;&#xD;&#xA;例外情況(Switch.Default)&#xD;&#xA;&gt; 如果TypeName(in_ConvertData)不符合上述任何已知型別，會走到Switch.Default，用Throw丟出一個BusinessRuleException，訊息內容為&quot;Unsupported ReturnType.[實際型別名稱]&quot;，明確告知呼叫端這是一個目前尚未支援轉換的未知型別，避免默默失敗或產生錯誤資料" DisplayName="Throw defalt" Exception="[new UiPath.Core.BusinessRuleException(&quot;Unsupported ReturnType.[&quot; &amp; TypeName(in_ConvertData) &amp; &quot;]&quot;)]" sap:VirtualizedContainerService.HintSize="486,250" sap2010:WorkflowViewState.IdRef="Throw_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Throw>
       </Switch.Default>
-      <Sequence x:Key="BapiRet1" sap2010:Annotation.AnnotationText="Type BapiRet1" DisplayName="Sequence BapiRet1" sap2010:WorkflowViewState.IdRef="Sequence_50">
+      <Sequence x:Key="BapiRet1" sap2010:Annotation.AnnotationText="Type BapiRet1" DisplayName="81 Sequence BapiRet1" sap:VirtualizedContainerService.HintSize="486,2315" sap2010:WorkflowViewState.IdRef="Sequence_50">
         <Sequence.Variables>
           <Variable x:TypeArguments="usbcss:BapiRet1" Name="BapiRet1Value" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_312">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign sap2010:Annotation.AnnotationText="用Ctype把in_ConvertData轉型成BapiRet1物件" DisplayName="Assign Type conversion (BapiRet1)" sap:VirtualizedContainerService.HintSize="452,206" sap2010:WorkflowViewState.IdRef="Assign_312">
           <Assign.To>
             <OutArgument x:TypeArguments="usbcss:BapiRet1">[BapiRet1Value]</OutArgument>
           </Assign.To>
           <Assign.Value>
             <InArgument x:TypeArguments="usbcss:BapiRet1">[Ctype(in_ConvertData, UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiRet1)]</InArgument>
           </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet1." sap2010:WorkflowViewState.IdRef="Sequence_49">
-          <Assign DisplayName="Assign Id (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_313">
+        <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet1.&#xD;&#xA;&#xD;&#xA;再逐一把Id、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Number、Type等屬性值，寫入一個暫存的Dictionary(OutputTemp)(Key分別為&quot;Id=&quot;、&quot;LogMessageNumber=&quot;...)&#xD;&#xA;&#xD;&#xA;最後把這個字典加入out_ConvertedData" sap:VirtualizedContainerService.HintSize="452,1959" sap2010:WorkflowViewState.IdRef="Sequence_49">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign Id (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_313">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Id=")]</OutArgument>
             </Assign.To>
@@ -112,7 +439,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.Id]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign LogMessageNumber (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_314">
+          <Assign DisplayName="Assign LogMessageNumber (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_314">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber=")]</OutArgument>
             </Assign.To>
@@ -120,7 +447,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.LogMessageNumber]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign LogNumber (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_315">
+          <Assign DisplayName="Assign LogNumber (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_315">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
             </Assign.To>
@@ -128,7 +455,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.LogNumber]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Message (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_316">
+          <Assign DisplayName="Assign Message (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_316">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
             </Assign.To>
@@ -136,7 +463,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.Message]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable1 (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_317">
+          <Assign DisplayName="Assign MessageVariable1 (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_317">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
             </Assign.To>
@@ -144,7 +471,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.MessageVariable1]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable2 (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_318">
+          <Assign DisplayName="Assign MessageVariable2 (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_318">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable2=")]</OutArgument>
             </Assign.To>
@@ -152,7 +479,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.MessageVariable2]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable3 (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_319">
+          <Assign DisplayName="Assign MessageVariable3 (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_319">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable3=")]</OutArgument>
             </Assign.To>
@@ -160,7 +487,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.MessageVariable3]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable4 (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_320">
+          <Assign DisplayName="Assign MessageVariable4 (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_320">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable4=")]</OutArgument>
             </Assign.To>
@@ -168,7 +495,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.MessageVariable4]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Number (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_321">
+          <Assign DisplayName="Assign Number (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_321">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Number=")]</OutArgument>
             </Assign.To>
@@ -176,7 +503,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet1Value.Number]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Type (BapiRet1)" sap2010:WorkflowViewState.IdRef="Assign_322">
+          <Assign DisplayName="Assign Type (BapiRet1)" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_322">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Type=")]</OutArgument>
             </Assign.To>
@@ -185,22 +512,46 @@
             </Assign.Value>
           </Assign>
         </Sequence>
-        <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" Collection="[out_ConvertedData]" DisplayName="Add To Collection (BapiRet1)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_23" Item="[OutputTemp]" />
+        <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:Annotation.AnnotationText="最後把這個字典加入out_ConvertedData" Collection="[out_ConvertedData]" DisplayName="Add To Collection (BapiRet1)" sap:VirtualizedContainerService.HintSize="452,90" sap2010:WorkflowViewState.IdRef="AddToCollection`1_23" Item="[OutputTemp]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </AddToCollection>
       </Sequence>
-      <Sequence x:Key="BapiRet2" sap2010:Annotation.AnnotationText="Type BapiRet2" DisplayName="Sequence BapiRet2" sap2010:WorkflowViewState.IdRef="Sequence_52">
+      <Sequence x:Key="BapiRet2" sap2010:Annotation.AnnotationText="Type BapiRet2" DisplayName="82 Sequence BapiRet2" sap:VirtualizedContainerService.HintSize="486,539" sap2010:WorkflowViewState.IdRef="Sequence_52">
         <Sequence.Variables>
           <Variable x:TypeArguments="usbcss:BapiRet2" Name="BapiRet2Value" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_323">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign sap2010:Annotation.AnnotationText="先用Ctype把in_ConvertData轉型成BapiRet2物件" DisplayName="Assign Type conversion (BapiRet2)" sap:VirtualizedContainerService.HintSize="452,206" sap2010:WorkflowViewState.IdRef="Assign_323">
           <Assign.To>
             <OutArgument x:TypeArguments="usbcss:BapiRet2">[BapiRet2Value]</OutArgument>
           </Assign.To>
           <Assign.Value>
             <InArgument x:TypeArguments="usbcss:BapiRet2">[Ctype(in_ConvertData, UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiRet2)]</InArgument>
           </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet2." DisplayName="Sequence " sap2010:WorkflowViewState.IdRef="Sequence_51">
-          <Assign DisplayName="Assign Field (BapiRet2) " sap2010:WorkflowViewState.IdRef="Assign_324">
+        <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet2.&#xD;&#xA;&#xD;&#xA;再逐一把Id、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Number、Type等屬性值，寫入一個暫存的Dictionary(OutputTemp)(Key分別為&quot;Id=&quot;、&quot;LogMessageNumber=&quot;...)&#xD;&#xA;&#xD;&#xA;最後把這個字典加入out_ConvertedData" DisplayName="Sequence " sap:VirtualizedContainerService.HintSize="452,183" sap2010:WorkflowViewState.IdRef="Sequence_51">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign Field (BapiRet2) " sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_324">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Field=")]</OutArgument>
             </Assign.To>
@@ -208,7 +559,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.Field]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Id (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_325">
+          <Assign DisplayName="Assign Id (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_325">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Id=")]</OutArgument>
             </Assign.To>
@@ -216,7 +567,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.Id]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign LogMessageNumber (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_326">
+          <Assign DisplayName="Assign LogMessageNumber (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_326">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber=")]</OutArgument>
             </Assign.To>
@@ -224,7 +575,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.LogMessageNumber]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign LogNumber (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_327">
+          <Assign DisplayName="Assign LogNumber (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_327">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
             </Assign.To>
@@ -232,7 +583,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.LogNumber]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Message (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_328">
+          <Assign DisplayName="Assign Message (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_328">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
             </Assign.To>
@@ -240,7 +591,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.Message]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable1 (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_329">
+          <Assign DisplayName="Assign MessageVariable1 (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_329">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
             </Assign.To>
@@ -248,7 +599,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.MessageVariable1]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable2 (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_330">
+          <Assign DisplayName="Assign MessageVariable2 (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_330">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable2=")]</OutArgument>
             </Assign.To>
@@ -256,7 +607,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.MessageVariable2]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName=" Assign MessageVariable3 (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_331">
+          <Assign DisplayName=" Assign MessageVariable3 (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_331">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable3=")]</OutArgument>
             </Assign.To>
@@ -264,7 +615,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.MessageVariable3]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable4 (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_332">
+          <Assign DisplayName="Assign MessageVariable4 (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_332">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable4=")]</OutArgument>
             </Assign.To>
@@ -272,7 +623,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.MessageVariable4]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Number (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_333">
+          <Assign DisplayName="Assign Number (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_333">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Number=")]</OutArgument>
             </Assign.To>
@@ -280,7 +631,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.Number]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Parameter (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_334">
+          <Assign DisplayName="Assign Parameter (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_334">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Parameter=")]</OutArgument>
             </Assign.To>
@@ -288,7 +639,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.Parameter]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Row (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_335">
+          <Assign DisplayName="Assign Row (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_335">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Row=")]</OutArgument>
             </Assign.To>
@@ -296,7 +647,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.Row.ToString]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign System (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_336">
+          <Assign DisplayName="Assign System (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_336">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("System=")]</OutArgument>
             </Assign.To>
@@ -304,7 +655,7 @@
               <InArgument x:TypeArguments="x:String">[BapiRet2Value.System]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Type (BapiRet2)" sap2010:WorkflowViewState.IdRef="Assign_337">
+          <Assign DisplayName="Assign Type (BapiRet2)" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_337">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Type=")]</OutArgument>
             </Assign.To>
@@ -313,22 +664,46 @@
             </Assign.Value>
           </Assign>
         </Sequence>
-        <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" Collection="[out_ConvertedData]" DisplayName="Add To Collection(BapiRet2)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_24" Item="[OutputTemp]" />
+        <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:Annotation.AnnotationText="最後把這個字典加入out_ConvertedData" Collection="[out_ConvertedData]" DisplayName="Add To Collection(BapiRet2)" sap:VirtualizedContainerService.HintSize="452,90" sap2010:WorkflowViewState.IdRef="AddToCollection`1_24" Item="[OutputTemp]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </AddToCollection>
       </Sequence>
-      <Sequence x:Key="BapiReturn1" sap2010:Annotation.AnnotationText="Type BapiReturn1" DisplayName="Sequence BapiReturn1" sap2010:WorkflowViewState.IdRef="Sequence_54">
+      <Sequence x:Key="BapiReturn1" sap2010:Annotation.AnnotationText="Type BapiReturn1" DisplayName="83 Sequence BapiReturn1" sap:VirtualizedContainerService.HintSize="486,2315" sap2010:WorkflowViewState.IdRef="Sequence_54">
         <Sequence.Variables>
           <Variable x:TypeArguments="usbcss:BapiReturn1" Name="BapiReturn1Value" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign sap2010:Annotation.AnnotationText="用Ctype把in_ConvertData轉型成BapiReturn1物件" DisplayName="Assign Type conversion (BapiReturn1)" sap:VirtualizedContainerService.HintSize="452,206" sap2010:WorkflowViewState.IdRef="Assign_338">
           <Assign.To>
             <OutArgument x:TypeArguments="usbcss:BapiReturn1">[BapiReturn1Value]</OutArgument>
           </Assign.To>
           <Assign.Value>
             <InArgument x:TypeArguments="usbcss:BapiReturn1">[Ctype(in_ConvertData, UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiReturn1)]</InArgument>
           </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiReturn1." sap2010:WorkflowViewState.IdRef="Sequence_53">
-          <Assign DisplayName="Assign Id (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_339">
+        <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiReturn1.&#xD;&#xA;&#xD;&#xA;再逐一把Id、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Number、Type等屬性值，寫入一個暫存的Dictionary(OutputTemp)(Key分別為&quot;Id=&quot;、&quot;LogMessageNumber=&quot;...)&#xD;&#xA;&#xD;&#xA;最後把這個字典加入out_ConvertedData" sap:VirtualizedContainerService.HintSize="452,1959" sap2010:WorkflowViewState.IdRef="Sequence_53">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign Id (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_339">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Id=")]</OutArgument>
             </Assign.To>
@@ -336,7 +711,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.Id]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign LogMessageNumber (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_340">
+          <Assign DisplayName="Assign LogMessageNumber (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_340">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber")]</OutArgument>
             </Assign.To>
@@ -344,7 +719,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.LogMessageNumber]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign LogNumber (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_341">
+          <Assign DisplayName="Assign LogNumber (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_341">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
             </Assign.To>
@@ -352,7 +727,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.LogNumber]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Message (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_342">
+          <Assign DisplayName="Assign Message (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_342">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
             </Assign.To>
@@ -360,7 +735,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.Message]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable1 (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_343">
+          <Assign DisplayName="Assign MessageVariable1 (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_343">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
             </Assign.To>
@@ -368,7 +743,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.MessageVariable1]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable2 (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_344">
+          <Assign DisplayName="Assign MessageVariable2 (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_344">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable2=")]</OutArgument>
             </Assign.To>
@@ -376,7 +751,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.MessageVariable2]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable3 (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_345">
+          <Assign DisplayName="Assign MessageVariable3 (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_345">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable3=")]</OutArgument>
             </Assign.To>
@@ -384,7 +759,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.MessageVariable3]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign MessageVariable4 (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_346">
+          <Assign DisplayName="Assign MessageVariable4 (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_346">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable4=")]</OutArgument>
             </Assign.To>
@@ -392,7 +767,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.MessageVariable4]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Number (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_347">
+          <Assign DisplayName="Assign Number (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_347">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Number=")]</OutArgument>
             </Assign.To>
@@ -400,7 +775,7 @@
               <InArgument x:TypeArguments="x:String">[BapiReturn1Value.Number]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign Type (BapiReturn1)" sap2010:WorkflowViewState.IdRef="Assign_348">
+          <Assign DisplayName="Assign Type (BapiReturn1)" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_348">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[OutputTemp("Type=")]</OutArgument>
             </Assign.To>
@@ -409,28 +784,51 @@
             </Assign.Value>
           </Assign>
         </Sequence>
-        <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" Collection="[out_ConvertedData]" DisplayName="Add To Collection (BapiReturn1)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_25" Item="[OutputTemp]" />
+        <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" sap2010:Annotation.AnnotationText="最後把這個字典加入out_ConvertedData" Collection="[out_ConvertedData]" DisplayName="Add To Collection (BapiReturn1)" sap:VirtualizedContainerService.HintSize="452,90" sap2010:WorkflowViewState.IdRef="AddToCollection`1_25" Item="[OutputTemp]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </AddToCollection>
       </Sequence>
-      <Sequence x:Key="List(Of BapiRet1)" sap2010:Annotation.AnnotationText="Type List&lt;BapiRet1&gt;" DisplayName="Sequence  List&lt;BapiRet1 &gt;" sap2010:WorkflowViewState.IdRef="Sequence_56">
+      <Sequence x:Key="List(Of BapiRet1)" sap2010:Annotation.AnnotationText="Type List&lt;BapiRet1&gt;" DisplayName="84 Sequence  List&lt;BapiRet1 &gt;" sap:VirtualizedContainerService.HintSize="486,2543" sap2010:WorkflowViewState.IdRef="Sequence_56">
         <Sequence.Variables>
           <Variable x:TypeArguments="scg:List(usbcss:BapiRet1)" Name="BapiRet1ListValue" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_349">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign sap2010:Annotation.AnnotationText="用Ctype把in_ConvertData轉型成BapiRet1List物件" DisplayName="Assign Type conversion (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="452,206" sap2010:WorkflowViewState.IdRef="Assign_349">
           <Assign.To>
             <OutArgument x:TypeArguments="scg:List(usbcss:BapiRet1)">[BapiRet1ListValue]</OutArgument>
           </Assign.To>
           <Assign.Value>
             <InArgument x:TypeArguments="scg:List(usbcss:BapiRet1)">[Ctype(in_ConvertData, list (of UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiRet1))]</InArgument>
           </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </Assign>
-        <ui:ForEach x:TypeArguments="usbcss:BapiRet1" CurrentIndex="{x:Null}" DisplayName="For Each List&lt;BapiRet1 &gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[BapiRet1ListValue]">
+        <ui:ForEach x:TypeArguments="usbcss:BapiRet1" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="用ForEach逐一跑過清單裡的每個item，把每個item的Code、LogMessageNumber、LogNumber、Message、MessageVariable1~4、Type等屬性值組成Dictionary，逐筆加入out_ConvertedData(這是清單型態的處理方式，因為BAPI的RETURN如果本身是表格結構，回傳的就會是一整個清單而不是單一物件)" DisplayName="For Each List&lt;BapiRet1 &gt;" sap:VirtualizedContainerService.HintSize="452,2277" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[BapiRet1ListValue]">
           <ui:ForEach.Body>
             <ActivityAction x:TypeArguments="usbcss:BapiRet1">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="usbcss:BapiRet1" Name="item" />
               </ActivityAction.Argument>
-              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet1 List." sap2010:WorkflowViewState.IdRef="Sequence_55">
-                <Assign DisplayName="Assign Create (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_350">
+              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet1 List." DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,2061" sap2010:WorkflowViewState.IdRef="Sequence_55">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign Create (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_350">
                   <Assign.To>
                     <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[OutputTemp]</OutArgument>
                   </Assign.To>
@@ -438,7 +836,7 @@
                     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(of String, String)]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Id (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_351">
+                <Assign DisplayName="Assign Id (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_351">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Id=")]</OutArgument>
                   </Assign.To>
@@ -446,7 +844,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Id]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_352">
+                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_352">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber=")]</OutArgument>
                   </Assign.To>
@@ -454,7 +852,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogMessageNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogNumber (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_353">
+                <Assign DisplayName="Assign LogNumber (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_353">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
                   </Assign.To>
@@ -462,7 +860,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Message (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_354">
+                <Assign DisplayName="Assign Message (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_354">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
                   </Assign.To>
@@ -470,7 +868,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Message]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_355">
+                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_355">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
                   </Assign.To>
@@ -478,7 +876,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable1]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable2 (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_356">
+                <Assign DisplayName="Assign MessageVariable2 (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_356">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable2=")]</OutArgument>
                   </Assign.To>
@@ -486,7 +884,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable2]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable3 (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_357">
+                <Assign DisplayName="Assign MessageVariable3 (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_357">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable3=")]</OutArgument>
                   </Assign.To>
@@ -494,7 +892,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable3]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable4 (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_358">
+                <Assign DisplayName="Assign MessageVariable4 (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_358">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable4=")]</OutArgument>
                   </Assign.To>
@@ -502,7 +900,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable4]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Number (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_359">
+                <Assign DisplayName="Assign Number (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_359">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Number=")]</OutArgument>
                   </Assign.To>
@@ -510,7 +908,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Number]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Type (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_360">
+                <Assign DisplayName="Assign Type (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_360">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Type=")]</OutArgument>
                   </Assign.To>
@@ -518,17 +916,30 @@
                     <InArgument x:TypeArguments="x:String">[item.Type.ToString]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" Collection="[out_ConvertedData]" DisplayName="Add To Collection (List&lt;BapiRet1&gt;)" sap2010:WorkflowViewState.IdRef="AddToCollection`1_26" Item="[OutputTemp]" />
+                <AddToCollection x:TypeArguments="scg:Dictionary(x:String, x:String)" Collection="[out_ConvertedData]" DisplayName="Add To Collection (List&lt;BapiRet1&gt;)" sap:VirtualizedContainerService.HintSize="416,45" sap2010:WorkflowViewState.IdRef="AddToCollection`1_26" Item="[OutputTemp]" />
               </Sequence>
             </ActivityAction>
           </ui:ForEach.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:ForEach>
       </Sequence>
-      <Sequence x:Key="List(Of BapiRet2)" sap2010:Annotation.AnnotationText="Type List&lt;BapiRet2 &gt;" DisplayName="Sequence  List&lt;BapiRet2 &gt;" sap2010:WorkflowViewState.IdRef="Sequence_58">
+      <Sequence x:Key="List(Of BapiRet2)" sap2010:Annotation.AnnotationText="Type List&lt;BapiRet2 &gt;" DisplayName="85 Sequence  List&lt;BapiRet2 &gt;" sap:VirtualizedContainerService.HintSize="486,283" sap2010:WorkflowViewState.IdRef="Sequence_58">
         <Sequence.Variables>
           <Variable x:TypeArguments="scg:List(usbcss:BapiRet2)" Name="BapiRet2ListValue" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion(List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_361">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign DisplayName="Assign Type conversion(List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_361">
           <Assign.To>
             <OutArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[BapiRet2ListValue]</OutArgument>
           </Assign.To>
@@ -536,14 +947,20 @@
             <InArgument x:TypeArguments="scg:List(usbcss:BapiRet2)">[Ctype(in_ConvertData, list (of UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiRet2))]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:ForEach x:TypeArguments="usbcss:BapiRet2" CurrentIndex="{x:Null}" DisplayName="For Each (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="ForEach`1_13" Values="[BapiRet2ListValue]">
+        <ui:ForEach x:TypeArguments="usbcss:BapiRet2" CurrentIndex="{x:Null}" DisplayName="For Each (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="452,48" sap2010:WorkflowViewState.IdRef="ForEach`1_13" Values="[BapiRet2ListValue]">
           <ui:ForEach.Body>
             <ActivityAction x:TypeArguments="usbcss:BapiRet2">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="usbcss:BapiRet2" Name="item" />
               </ActivityAction.Argument>
-              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet2 List." sap2010:WorkflowViewState.IdRef="Sequence_57">
-                <Assign DisplayName="Assign Create (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_362">
+              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiRet2 List." DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,1496" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign Create (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_362">
                   <Assign.To>
                     <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[OutputTemp]</OutArgument>
                   </Assign.To>
@@ -551,7 +968,7 @@
                     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(of String, String)]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Field (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_363">
+                <Assign DisplayName="Assign Field (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_363">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Field=")]</OutArgument>
                   </Assign.To>
@@ -559,7 +976,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Field]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Id (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_364">
+                <Assign DisplayName="Assign Id (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_364">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Id=")]</OutArgument>
                   </Assign.To>
@@ -567,7 +984,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Id]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_365">
+                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_365">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber=")]</OutArgument>
                   </Assign.To>
@@ -575,7 +992,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogMessageNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogNumber (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_366">
+                <Assign DisplayName="Assign LogNumber (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_366">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
                   </Assign.To>
@@ -583,7 +1000,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Message (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_367">
+                <Assign DisplayName="Assign Message (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_367">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
                   </Assign.To>
@@ -591,7 +1008,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Message]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiRet2 &gt;)" sap2010:WorkflowViewState.IdRef="Assign_368">
+                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiRet2 &gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_368">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
                   </Assign.To>
@@ -667,13 +1084,25 @@
               </Sequence>
             </ActivityAction>
           </ui:ForEach.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:ForEach>
       </Sequence>
-      <Sequence x:Key="List(Of BapiReturn)" sap2010:Annotation.AnnotationText="Type List&lt;BapiReturn&gt;" DisplayName="Sequence  List&lt;BapiReturn&gt;" sap2010:WorkflowViewState.IdRef="Sequence_60">
+      <Sequence x:Key="List(Of BapiReturn)" sap2010:Annotation.AnnotationText="Type List&lt;BapiReturn&gt;" DisplayName="86 Sequence  List&lt;BapiReturn&gt;" sap:VirtualizedContainerService.HintSize="486,283" sap2010:WorkflowViewState.IdRef="Sequence_60">
         <Sequence.Variables>
           <Variable x:TypeArguments="scg:List(usbcss:BapiReturn)" Name="BapiReturnListValue" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_377">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign DisplayName="Assign Type conversion (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_377">
           <Assign.To>
             <OutArgument x:TypeArguments="scg:List(usbcss:BapiReturn)">[BapiReturnListValue]</OutArgument>
           </Assign.To>
@@ -681,14 +1110,20 @@
             <InArgument x:TypeArguments="scg:List(usbcss:BapiReturn)">[Ctype(in_ConvertData, list(of UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiReturn))]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:ForEach x:TypeArguments="usbcss:BapiReturn" CurrentIndex="{x:Null}" DisplayName="For Each (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="ForEach`1_14" Values="[BapiReturnListValue]">
+        <ui:ForEach x:TypeArguments="usbcss:BapiReturn" CurrentIndex="{x:Null}" DisplayName="For Each (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="452,48" sap2010:WorkflowViewState.IdRef="ForEach`1_14" Values="[BapiReturnListValue]">
           <ui:ForEach.Body>
             <ActivityAction x:TypeArguments="usbcss:BapiReturn">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="usbcss:BapiReturn" Name="item" />
               </ActivityAction.Argument>
-              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiReturn List." DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_59">
-                <Assign DisplayName="Assign Create (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_378">
+              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiReturn List." DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,1362" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign Create (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_378">
                   <Assign.To>
                     <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[OutputTemp]</OutArgument>
                   </Assign.To>
@@ -696,7 +1131,7 @@
                     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(of String, String)]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Code (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_379">
+                <Assign DisplayName="Assign Code (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_379">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Code=")]</OutArgument>
                   </Assign.To>
@@ -704,7 +1139,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Code]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_380">
+                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_380">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber=")]</OutArgument>
                   </Assign.To>
@@ -712,7 +1147,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogMessageNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogNumber (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_381">
+                <Assign DisplayName="Assign LogNumber (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_381">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
                   </Assign.To>
@@ -720,7 +1155,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Message (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_382">
+                <Assign DisplayName="Assign Message (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_382">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
                   </Assign.To>
@@ -728,7 +1163,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Message]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_383">
+                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_383">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
                   </Assign.To>
@@ -736,7 +1171,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable1]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable2 (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_384">
+                <Assign DisplayName="Assign MessageVariable2 (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_384">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable2=")]</OutArgument>
                   </Assign.To>
@@ -744,7 +1179,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable2]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable3 (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_385">
+                <Assign DisplayName="Assign MessageVariable3 (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_385">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable3=")]</OutArgument>
                   </Assign.To>
@@ -752,7 +1187,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable3]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable4 (List&lt;BapiReturn&gt;)" sap2010:WorkflowViewState.IdRef="Assign_386">
+                <Assign DisplayName="Assign MessageVariable4 (List&lt;BapiReturn&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_386">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable4=")]</OutArgument>
                   </Assign.To>
@@ -772,13 +1207,25 @@
               </Sequence>
             </ActivityAction>
           </ui:ForEach.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:ForEach>
       </Sequence>
-      <Sequence x:Key="List(Of BapiReturn1)" sap2010:Annotation.AnnotationText="Type List&lt;BapiReturn1&gt;" DisplayName="Sequence  List&lt;BapiReturn1&gt;" sap2010:WorkflowViewState.IdRef="Sequence_62">
+      <Sequence x:Key="List(Of BapiReturn1)" sap2010:Annotation.AnnotationText="Type List&lt;BapiReturn1&gt;" DisplayName="87 Sequence  List&lt;BapiReturn1&gt;" sap:VirtualizedContainerService.HintSize="486,283" sap2010:WorkflowViewState.IdRef="Sequence_62">
         <Sequence.Variables>
           <Variable x:TypeArguments="scg:List(usbcss:BapiReturn1)" Name="BapiReturn1ListValue" />
         </Sequence.Variables>
-        <Assign DisplayName="Assign Type conversion(List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_388">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign DisplayName="Assign Type conversion(List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_388">
           <Assign.To>
             <OutArgument x:TypeArguments="scg:List(usbcss:BapiReturn1)">[BapiReturn1ListValue]</OutArgument>
           </Assign.To>
@@ -786,14 +1233,20 @@
             <InArgument x:TypeArguments="scg:List(usbcss:BapiReturn1)">[Ctype(in_ConvertData, list(of UiPath.SAP.BAPI.ConnectionService.SapConnectionService.SapReturnTypes.BapiReturn1))]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:ForEach x:TypeArguments="usbcss:BapiReturn1" CurrentIndex="{x:Null}" DisplayName="For Each (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="ForEach`1_16" Values="[BapiReturn1ListValue]">
+        <ui:ForEach x:TypeArguments="usbcss:BapiReturn1" CurrentIndex="{x:Null}" DisplayName="For Each (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="452,48" sap2010:WorkflowViewState.IdRef="ForEach`1_16" Values="[BapiReturn1ListValue]">
           <ui:ForEach.Body>
             <ActivityAction x:TypeArguments="usbcss:BapiReturn1">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="usbcss:BapiReturn1" Name="item" />
               </ActivityAction.Argument>
-              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiReturn1 List." DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_61">
-                <Assign DisplayName="Assign Create (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_389">
+              <Sequence sap2010:Annotation.AnnotationText="Set the value of component for BapiReturn1 List." DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,969" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign Create (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_389">
                   <Assign.To>
                     <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[OutputTemp]</OutArgument>
                   </Assign.To>
@@ -801,7 +1254,7 @@
                     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[new Dictionary(of String, String)]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Id (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_390">
+                <Assign DisplayName="Assign Id (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_390">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Code=")]</OutArgument>
                   </Assign.To>
@@ -809,7 +1262,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Id]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_391">
+                <Assign DisplayName="Assign LogMessageNumber (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_391">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogMessageNumber=")]</OutArgument>
                   </Assign.To>
@@ -817,7 +1270,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogMessageNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign LogNumber (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_392">
+                <Assign DisplayName="Assign LogNumber (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_392">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("LogNumber=")]</OutArgument>
                   </Assign.To>
@@ -825,7 +1278,7 @@
                     <InArgument x:TypeArguments="x:String">[item.LogNumber]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign Message (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_393">
+                <Assign DisplayName="Assign Message (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_393">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("Message=")]</OutArgument>
                   </Assign.To>
@@ -833,7 +1286,7 @@
                     <InArgument x:TypeArguments="x:String">[item.Message]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_394">
+                <Assign DisplayName="Assign MessageVariable1 (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_394">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable1=")]</OutArgument>
                   </Assign.To>
@@ -841,7 +1294,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable1]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable2 (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_395">
+                <Assign DisplayName="Assign MessageVariable2 (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_395">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable2=")]</OutArgument>
                   </Assign.To>
@@ -849,7 +1302,7 @@
                     <InArgument x:TypeArguments="x:String">[item.MessageVariable2]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <Assign DisplayName="Assign MessageVariable3 (List&lt;BapiReturn1&gt;)" sap2010:WorkflowViewState.IdRef="Assign_396">
+                <Assign DisplayName="Assign MessageVariable3 (List&lt;BapiReturn1&gt;)" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Assign_396">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[OutputTemp("MessageVariable3=")]</OutArgument>
                   </Assign.To>
@@ -885,294 +1338,15 @@
               </Sequence>
             </ActivityAction>
           </ui:ForEach.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
         </ui:ForEach>
       </Sequence>
     </Switch>
-    <ui:LogMessage DisplayName="Log message - End" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
-    <sads:DebugSymbol.Symbol>d3tDOlxVc2Vyc1x5dWppLm1peWFtYS5VSVBBVEhcRGVza3RvcFwyMDE5MDkyNV9TUkNfQkFQSXYyLjJfUkVHSVNURVJcU1JDX0JBUEl2Mi4yX1JFR0lTVEVSXENvbnZlcnRCQVBJTG9nVG9CQVBJTG9nRm9ybWF0LnhhbWzBAkwD/QYOAgEBTjROUwIBA09OT3MCAQJRBVGkAQMBpwNSBVkOAwGjA1oF+gYOAgEH+wYF+wagAQIBBFF7UaEBAwGoA1dUV4ABAwGmA1RVVGgDAaQDWkhaZAIBCF4HvQESAwHvAr4BB70CEgMBqwK+AgedAxIDAfcBngMHjgQSAwG/AY8EB58FEgIBd6AFB4gGEgIBQ4kGB/kGEgIBC1wJXJ4CAgEJ+wZ5+wadAQIBBWIJaRIDAZ4Dagm7ARQDAfUCvAEJvAHoAQMB8ALCAQnJARIDAeoCygEJuwIUAwGxArwCCbwC5wEDAawCwgIJyQISAwGmAsoCCZsDFAMB/QGcAwmcA+sBAwH4AaIDCakDEgMB9AGqAwmNBBYDAcABkwQJmgQSAwG8AZsECZ4FFgIBeKQFCasFEgIBdKwFCYcGFgIBRI0GCZQGEgIBQJUGCfgGFgIBDFxvXPEBAgEKZztnogEDAaEDZDxkSwMBnwNrC3IUAwGaA3MLehQDAZYDewuCARQDAZIDgwELigEUAwGOA4sBC5IBFAMBigOTAQuaARQDAYYDmwELogEUAwGCA6MBC6oBFAMB/gKrAQuyARQDAfoCswELugEUAwH2ArwBWrwBbwMB8wK8AdcBvAHlAQMB8QLHATvHAaIBAwHtAsQBPMQBSwMB6wLLAQvSARQDAeYC0wEL2gEUAwHiAtsBC+IBFAMB3gLjAQvqARQDAdoC6wEL8gEUAwHWAvMBC/oBFAMB0gL7AQuCAhQDAc4CgwILigIUAwHKAosCC5ICFAMBxgKTAguaAhQDAcICmwILogIUAwG+AqMCC6oCFAMBugKrAguyAhQDAbYCswILugIUAwGyArwCWrwCbwMBrwK8AtYBvALkAQMBrQLHAj7HAqgBAwGpAsQCP8QCUQMBpwLLAgvSAhQDAaIC0wIL2gIUAwGeAtsCC+ICFAMBmgLjAgvqAhQDAZYC6wIL8gIUAwGSAvMCC/oCFAMBjgL7AguCAxQDAYoCgwMLigMUAwGGAosDC5IDFAMBggKTAwuaAxQDAf4BnANanANvAwH7AZwD2gGcA+gBAwH5AacDRacDtgEDAfYBpANGpANZAwH1AaoDsgGqA8cBAwHzAbADD4oEGgMBwQGYBEWYBLYBAwG+AZUERpUEWQMBvQGbBLQBmwTJAQMBuwGhBA+bBRoCAXmpBUepBbkBAgF2pgVIpgVdAgF1rAW3AawFzgECAXOyBQ+EBhoCAUWSBkiSBrsBAgFCjwZJjwZfAgFBlQa5AZUG0QECAT+bBg/1BhoCAQ1wNnBIAwGdA203bUoDAZsDeDZ4VgMBmQN1N3VYAwGXA4ABNoABTwMBlQN9N31RAwGTA4gBNogBTQMBkQOFATeFAU8DAY8DkAE2kAFWAwGNA40BN40BWAMBiwOYATaYAVYDAYkDlQE3lQFYAwGHA6ABNqABVgMBhQOdATedAVgDAYMDqAE2qAFWAwGBA6UBN6UBWAMB/wKwATawAUwDAf0CrQE3rQFOAwH7ArgBNrgBUwMB+QK1ATe1AUwDAfcC0AE20AFLAwHpAs0BN80BTQMB5wLYATbYAUgDAeUC1QE31QFKAwHjAuABNuABVgMB4QLdATfdAVgDAd8C6AE26AFPAwHdAuUBN+UBUQMB2wLwATbwAU0DAdkC7QE37QFPAwHXAvgBNvgBVgMB1QL1ATf1AVgDAdMCgAI2gAJWAwHRAv0BN/0BWAMBzwKIAjaIAlYDAc0ChQI3hQJYAwHLApACNpACVgMByQKNAjeNAlgDAccCmAI2mAJMAwHFApUCN5UCTgMBwwKgAjagAk8DAcECnQI3nQJRAwG/AqgCNqgCUgMBvQKlAjelAksDAbsCsAI2sAJMAwG5Aq0CN60CTgMBtwK4Aja4AlMDAbUCtQI3tQJMAwGzAtACNtACSwMBpQLNAjfNAkoDAaMC2AI22AJZAwGhAtUCN9UCVwMBnwLgAjbgAlIDAZ0C3QI33QJRAwGbAugCNugCUAMBmQLlAjflAk8DAZcC8AI28AJZAwGVAu0CN+0CWAMBkwL4Ajb4AlkDAZEC9QI39QJYAwGPAoADNoADWQMBjQL9Ajf9AlgDAYsCiAM2iANZAwGJAoUDN4UDWAMBhwKQAzaQA08DAYUCjQM3jQNOAwGDApgDNpgDVgMBgQKVAzeVA0wDAf8BsQMRuAMaAwHvAbkDEcADGgMB6wHBAxHIAxoDAecByQMR0AMaAwHjAdEDEdgDGgMB3wHZAxHgAxoDAdsB4QMR6AMaAwHXAekDEfADGgMB0wHxAxH4AxoDAc8B+QMRgAQaAwHLAYEEEYgEGgMBxwGJBBGJBPwBAwHCAaIEEakEGgMBtwGqBBGxBBoDAbMBsgQRuQQaAwGvAboEEcEEGgMBqwHCBBHJBBoDAacBygQR0QQaAwGjAdIEEdkEGgMBnwHaBBHhBBoDAZsB4gQR6QQaAwGXAeoEEfEEGgMBkwHyBBH5BBoDAY8B+gQRgQUaAwGLAYIFEYkFGgMBhwGKBRGRBRoDAYMBkgURmQUaAgF/mgURmgX9AQIBerMFEboFGgIBb7sFEcIFGgIBa8MFEcoFGgIBZ8sFEdIFGgIBY9MFEdoFGgIBX9sFEeIFGgIBW+MFEeoFGgIBV+sFEfIFGgIBU/MFEfoFGgIBT/sFEYIGGgIBS4MGEYMG/gECAUacBhGjBhoCATukBhGrBhoCATesBhGzBhoCATO0BhG7BhoCAS+8BhHDBhoCASvEBhHLBhoCASfMBhHTBhoCASPUBhHbBhoCAR/cBhHjBhoCARvkBhHrBhoCARfsBhHzBhoCARP0BhH0Bv8BAgEOtgNWtgN5AwHyAbMDV7MDYwMB8AG+Azy+A0UDAe4BuwM9uwNQAwHsAcYDPMYDUwMB6gHDAz3DA14DAegBzgM8zgNMAwHmAcsDPcsDVwMB5AHWAzzWA0oDAeIB0wM90wNVAwHgAd4DPN4DUwMB3gHbAz3bA14DAdwB5gM85gNTAwHaAeMDPeMDXgMB2AHuAzzuA1MDAdYB6wM96wNeAwHUAfYDPPYDUwMB0gHzAz3zA14DAdAB/gM8/gNJAwHOAfsDPfsDVAMBzAGGBDyGBFADAcoBgwQ9gwRSAwHIAYkEYokEdwMBxQGJBOsBiQT5AQMBwwGnBFanBHkDAboBpARXpARjAwG4Aa8EPK8ESAMBtgGsBD2sBFMDAbQBtwQ8twRFAwGyAbQEPbQEUAMBsAG/BDy/BFMDAa4BvAQ9vAReAwGsAccEPMcETAMBqgHEBD3EBFcDAagBzwQ8zwRKAwGmAcwEPcwEVQMBpAHXBDzXBFMDAaIB1AQ91AReAwGgAd8EPN8EUwMBngHcBD3cBF4DAZwB5wQ85wRTAwGaAeQEPeQEXgMBmAHvBDzvBFMDAZYB7AQ97AReAwGUAfcEPPcESQMBkgH0BD30BFQDAZAB/wQ8/wRMAwGOAfwEPfwEVwMBjAGHBTyHBU8DAYoBhAU9hAVRAwGIAY8FPI8FSQMBhgGMBT2MBVQDAYQBlwU8lwVQAwGCAZQFPZQFUgMBgAGaBWKaBXcCAX2aBewBmgX6AQIBe7gFVrgFeQIBcrUFV7UFYwIBcMAFPMAFRwIBbr0FPb0FUgIBbMgFPMgFUwIBasUFPcUFXgIBaNAFPNAFTAIBZs0FPc0FVwIBZNgFPNgFSgIBYtUFPdUFVQIBYOAFPOAFUwIBXt0FPd0FXgIBXOgFPOgFUwIBWuUFPeUFXgIBWPAFPPAFUwIBVu0FPe0FXgIBVPgFPPgFUwIBUvUFPfUFXgIBUIAGPIAGUAIBTv0FPf0FUgIBTIMGYoMGdwIBSYMG7QGDBvsBAgFHoQZWoQZ5AgE+ngZXngZjAgE8qQY8qQZFAgE6pgY9pgZSAgE4sQY8sQZTAgE2rgY9rgZeAgE0uQY8uQZMAgEytgY9tgZXAgEwwQY8wQZKAgEuvgY9vgZVAgEsyQY8yQZTAgEqxgY9xgZeAgEo0QY80QZTAgEmzgY9zgZeAgEk2QY82QZTAgEi1gY91gZeAgEg4QY84QZTAgEe3gY93gZeAgEc6QY86QZJAgEa5gY95gZUAgEY8QY88QZQAgEW7gY97gZSAgEU9AZi9AZ3AgER9AbuAfQG/AECAQ8=</sads:DebugSymbol.Symbol>
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[WorkflowName + &quot;  end&quot;]" />
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="477,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="477,60" />
-      <sap2010:ViewStateData Id="Throw_6" sap:VirtualizedContainerService.HintSize="200,50.4">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_312" sap:VirtualizedContainerService.HintSize="264,60" />
-      <sap2010:ViewStateData Id="Assign_313" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_314" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_315" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_316" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_317" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_318" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_319" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_320" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_321" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_322" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_49" sap:VirtualizedContainerService.HintSize="264,1111">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddToCollection`1_23" sap:VirtualizedContainerService.HintSize="264,22" />
-      <sap2010:ViewStateData Id="Sequence_50" sap:VirtualizedContainerService.HintSize="286,78">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_323" sap:VirtualizedContainerService.HintSize="264,60" />
-      <sap2010:ViewStateData Id="Assign_324" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_325" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_326" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_327" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_328" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_329" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_330" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_331" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_332" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_333" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_334" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_335" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_336" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_337" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_51" sap:VirtualizedContainerService.HintSize="264,1511">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddToCollection`1_24" sap:VirtualizedContainerService.HintSize="264,22" />
-      <sap2010:ViewStateData Id="Sequence_52" sap:VirtualizedContainerService.HintSize="286,78">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_338" sap:VirtualizedContainerService.HintSize="264,60" />
-      <sap2010:ViewStateData Id="Assign_339" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_340" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_341" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_342" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_343" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_344" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_345" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_346" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_347" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_348" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_53" sap:VirtualizedContainerService.HintSize="264,1126">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddToCollection`1_25" sap:VirtualizedContainerService.HintSize="264,22" />
-      <sap2010:ViewStateData Id="Sequence_54" sap:VirtualizedContainerService.HintSize="286,78">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_349" sap:VirtualizedContainerService.HintSize="317,60" />
-      <sap2010:ViewStateData Id="Assign_350" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_351" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_352" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_353" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_354" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_355" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_356" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_357" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_358" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_359" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_360" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="AddToCollection`1_26" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_55" sap:VirtualizedContainerService.HintSize="264,1288">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_12" sap:VirtualizedContainerService.HintSize="317,1422" />
-      <sap2010:ViewStateData Id="Sequence_56" sap:VirtualizedContainerService.HintSize="339,1673">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_361" sap:VirtualizedContainerService.HintSize="317,60" />
-      <sap2010:ViewStateData Id="Assign_362" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_363" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_364" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_365" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_366" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_367" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_368" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_369" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_370" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_371" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_372" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_373" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_374" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_375" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_376" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="AddToCollection`1_27" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_57" sap:VirtualizedContainerService.HintSize="264,1688">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_13" sap:VirtualizedContainerService.HintSize="317,1822">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_58" sap:VirtualizedContainerService.HintSize="339,78">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_377" sap:VirtualizedContainerService.HintSize="317,60" />
-      <sap2010:ViewStateData Id="Assign_378" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_379" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_380" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_381" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_382" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_383" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_384" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_385" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_386" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_387" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="AddToCollection`1_28" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_59" sap:VirtualizedContainerService.HintSize="264,1188">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_14" sap:VirtualizedContainerService.HintSize="317,1322">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_60" sap:VirtualizedContainerService.HintSize="339,1573">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_388" sap:VirtualizedContainerService.HintSize="317,60" />
-      <sap2010:ViewStateData Id="Assign_389" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_390" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_391" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_392" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_393" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_394" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_395" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_396" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_397" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_398" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_399" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="AddToCollection`1_29" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_61" sap:VirtualizedContainerService.HintSize="264,1288">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_16" sap:VirtualizedContainerService.HintSize="317,1422" />
-      <sap2010:ViewStateData Id="Sequence_62" sap:VirtualizedContainerService.HintSize="339,78">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Switch`1_5" sap:VirtualizedContainerService.HintSize="477,270">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="477,91">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="499,858">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ConvertBAPIMessage_1" sap:VirtualizedContainerService.HintSize="539,938" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

@@ -1,0 +1,13 @@
+﻿{
+  "Name": "登入(L)",
+  "Type": "Element",
+  "TaxonomyType": "Button",
+  "Id": "Tj9bvyv-sk2Vf4yzUp--pQ",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/Tj9bvyv-sk2Vf4yzUp--pQ",
+  "ParentRef": "ZgnWkxDXlkiV5bppRmjo-g/HlacORr0F0GdZbrJm8EMFA",
+  "Created": "2026-08-18T09:58:24.8441544Z",
+  "Updated": "2026-08-18T09:58:24.8441544Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

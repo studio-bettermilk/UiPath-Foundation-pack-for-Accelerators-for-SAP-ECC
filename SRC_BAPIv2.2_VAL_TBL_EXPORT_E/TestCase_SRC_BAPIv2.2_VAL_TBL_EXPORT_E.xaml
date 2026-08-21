@@ -94,60 +94,33 @@
       <AssemblyReference>UiPath.SAP.BAPI.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TestCase_SRC_BAPIv2_2_VAL_TBL_EXPORT_E" sap:VirtualizedContainerService.HintSize="1082,1266" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TestCase_SRC_BAPIv2_2_VAL_TBL_EXPORT_E" sap:VirtualizedContainerService.HintSize="940,1254" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="usbc:IConnectionService" Name="in_SAPService" />
-      <Variable x:TypeArguments="x:String" Name="in_LanguageKey">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">E</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="E" Name="in_LanguageKey" />
       <Variable x:TypeArguments="x:String" Name="in_FilePath" />
-      <Variable x:TypeArguments="x:String" Name="in_User">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">UI001</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="in_SystemNumber">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">01</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="in_Client">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">310</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="UI001" Name="in_User" />
+      <Variable x:TypeArguments="x:String" Default="01" Name="in_SystemNumber" />
+      <Variable x:TypeArguments="x:String" Default="310" Name="in_Client" />
       <Variable x:TypeArguments="ui:PasswordCredentials" Name="pcCredential" />
-      <Variable x:TypeArguments="x:String" Name="in_Language">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">EN</Literal>
-        </Variable.Default>
-      </Variable>
-      <Variable x:TypeArguments="x:String" Name="in_AppServer">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">10.10.10.6</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="EN" Name="in_Language" />
+      <Variable x:TypeArguments="x:String" Default="10.10.10.6" Name="in_AppServer" />
       <Variable x:TypeArguments="ss:SecureString" Name="in_Password" />
-      <Variable x:TypeArguments="x:String" Name="in_SystemID">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">DEV</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="DEV" Name="in_SystemID" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="... Given" sap:VirtualizedContainerService.HintSize="468,870" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <ui:Comment sap:VirtualizedContainerService.HintSize="450,89" sap2010:WorkflowViewState.IdRef="Comment_2" Text="OK" />
+    <Sequence DisplayName="... Given" sap:VirtualizedContainerService.HintSize="450,769" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uas:GetUsernamePasswordX CredentialName="{x:Null}" TimeoutInSeconds="{x:Null}" AutosubmitTimeoutSeconds="10" Credential="[pcCredential]" CredentialsSource="Orchestrator" DisplayName="Get Username/Password" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="GetUsernamePasswordX_1" OrchestratorCredentialName="SAPUSER" OrchestratorFolderPath="資訊部">
+      <uas:GetUsernamePasswordX CredentialName="{x:Null}" TimeoutInSeconds="{x:Null}" AutosubmitTimeoutSeconds="10" Credential="[pcCredential]" CredentialsSource="Orchestrator" DisplayName="Get Username/Password" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="GetUsernamePasswordX_1" OrchestratorCredentialName="SAPUSER" OrchestratorFolderPath="資訊部">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -155,7 +128,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </uas:GetUsernamePasswordX>
-      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -211,7 +184,7 @@
                 <OutArgument x:TypeArguments="x:String">[in_SystemID]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">Dev</InArgument>
+                <InArgument x:TypeArguments="x:String">DEV</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
           </scg:List>
@@ -223,7 +196,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:MultipleAssign>
-      <Assign sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[in_Language]</OutArgument>
         </Assign.To>
@@ -237,7 +210,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,57" sap2010:WorkflowViewState.IdRef="CommentOut_1">
         <ui:CommentOut.Body>
           <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_5">
             <sap:WorkflowViewStateService.ViewState>
@@ -268,7 +241,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:CommentOut>
-      <Assign sap2010:Annotation.AnnotationText="SPRAS &#xA;English =&gt; E&#xA;繁體中文 =&gt; M or F" sap:VirtualizedContainerService.HintSize="434,118" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign sap2010:Annotation.AnnotationText="SPRAS &#xA;English =&gt; E&#xA;繁體中文 =&gt; M or F" sap:VirtualizedContainerService.HintSize="416,118" sap2010:WorkflowViewState.IdRef="Assign_3">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[in_LanguageKey]</OutArgument>
         </Assign.To>
@@ -283,16 +256,22 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <ui:Comment sap:VirtualizedContainerService.HintSize="434,108" sap2010:WorkflowViewState.IdRef="Comment_1" Text="D:\RPA工作區\UiPath Foundation pack for Accelerators for SAP ECC\Output" />
-      <Assign DisplayName="Assign in_FilePath" sap:VirtualizedContainerService.HintSize="434,175" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <ui:Comment sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Comment_1" Text="D:\RPA工作區\UiPath Foundation pack for Accelerators for SAP ECC\Output" />
+      <Assign DisplayName="Assign in_FilePath" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_4">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[in_FilePath]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="x:String">["D:\RPA工作區\UiPath Foundation pack for Accelerators for SAP ECC\Output\FilePath_"+Datetime.Now.toString("yyyyMMdd-HHmmss-fff")+".xlsx"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["D:\RPA工作區\UiPath Foundation pack for Accelerators for SAP ECC\Output\FilePath_SRC_BAPI_VAL_TBL_EXPORT_E_"+Datetime.Now.toString("yyyyMMdd-HHmmss-fff")+".xlsx"]</InArgument>
         </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <usba:SapApplicationScope AdvancedParameters="{x:Null}" ExistingConnectionService="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" AppServer="[in_AppServer]" Client="[in_Client]" DesignAppServer="10.10.10.6" DesignClient="310" DesignLanguage="EN" DesignSystemId="DEV" DesignSystemNumber="01" DesignUser="UI001" DisplayName="SAP Application Scope" sap:VirtualizedContainerService.HintSize="434,149" sap2010:WorkflowViewState.IdRef="SapApplicationScope_1" Language="[in_Language]" Password="[in_Password]" SapConnectionService="[in_SAPService]" StatefulConnection="True" SystemId="[in_SystemID]" SystemNumber="[in_SystemNumber]" User="[in_User]">
+      <usba:SapApplicationScope AdvancedParameters="{x:Null}" ExistingConnectionService="{x:Null}" LogonGroup="{x:Null}" MessageServer="{x:Null}" SapRouterString="{x:Null}" SncLibraryPath="{x:Null}" SncMode="{x:Null}" SncPartnerName="{x:Null}" SncQop="{x:Null}" SncSso="{x:Null}" AppServer="10.10.10.6" Client="310" DesignAppServer="10.10.10.6" DesignClient="310" DesignLanguage="EN" DesignSystemId="DEV" DesignSystemNumber="01" DesignUser="UI001" DisplayName="SAP Application Scope" sap:VirtualizedContainerService.HintSize="416,48" sap2010:WorkflowViewState.IdRef="SapApplicationScope_2" Language="EN" Password="[in_Password]" SapConnectionService="[in_SAPService]" StatefulConnection="True" SystemId="DEV" SystemNumber="01" User="UI001">
         <usba:SapApplicationScope.Body>
           <ActivityAction x:TypeArguments="usbc:IConnectionService">
             <ActivityAction.Argument>
@@ -348,15 +327,21 @@
             <Literal x:TypeArguments="x:String" Value="" />
           </InArgument>
         </usba:SapApplicationScope.DesignSncSso>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
       </usba:SapApplicationScope>
     </Sequence>
-    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="468,260" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="450,260" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E - Invoke Workflow File (SRC_BAPIv2.2_VAL_TBL_EXPORT_E\SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml)" sap:VirtualizedContainerService.HintSize="434,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E\SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E - Invoke Workflow File (SRC_BAPIv2.2_VAL_TBL_EXPORT_E\SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SRC_BAPIv2.2_VAL_TBL_EXPORT_E\SRC_BAPIv2.2_VAL_TBL_EXPORT_E.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="usbc:IConnectionService" x:Key="in_SAPService">[in_SAPService]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[in_FilePath]</InArgument>
@@ -364,7 +349,7 @@
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>
-    <Sequence DisplayName="... Then" sap:VirtualizedContainerService.HintSize="468,113" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="... Then" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="e8F0uPK6UUKvYTp_HRaUAg" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="20, 91, 156, 26" ElementType="DropDown" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' title='AppToolbar' /&gt;&lt;wnd cls='ComboBox' /&gt;" Guid="c9cf55d6-729c-4e7c-bd12-fbbd09afe0d2" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 輕鬆存取  -  使用者功能表： UiPath' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="1beb5072f84bfc07da09ff6179ccbec6.jpg" xmlns="">08psS4CXKcEGCN3K9qN9Bxg</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">TypeInto</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

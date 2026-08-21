@@ -1,0 +1,11 @@
+﻿{
+  "Name": "SAP Logon 770 app",
+  "Type": "App",
+  "Id": "fJyOd157R0WkqWmgB8wrdQ",
+  "Reference": "ZgnWkxDXlkiV5bppRmjo-g/fJyOd157R0WkqWmgB8wrdQ",
+  "Created": "2026-08-18T09:58:24.6044505Z",
+  "Updated": "2026-08-18T09:58:24.6044505Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="pb_I3aGRgEOn66Y3f3ecRg" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="16, 136, 1904, 859" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;wnd cls='Afx:*' idx='5' /&gt;" Guid="38718a9b-792f-466c-8d4c-423ab4319d20" ScopeSelectorArgument="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="f8906e309f97f61a8a347f9307bc41ee.jpg" xmlns="">0-DCqa5ae70Ce1yUI9nPAww</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">TypeInto</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

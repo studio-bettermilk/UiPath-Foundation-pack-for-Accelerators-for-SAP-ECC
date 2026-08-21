@@ -1,10 +1,10 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="SRC_LoadExcelData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SRC_LoadExcelData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ce="clr-namespace:ClosedXML.Excel;assembly=ClosedXML" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_InputFilePath" Type="InArgument(x:String)" />
-    <x:Property Name="in_SelectorFilePath" Type="InArgument(x:String)" />
-    <x:Property Name="out_SheetNames" Type="OutArgument(scg:List(x:String))" />
-    <x:Property Name="out_InputData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
-    <x:Property Name="out_SelectorData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property sap2010:Annotation.AnnotationText="輸入檔案路徑(裡面填寫要輸入到SAP畫面的實際資料值)" Name="in_InputFilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="選擇器檔案路徑(裡面存放每個欄位對應的UI選擇器資訊)" Name="in_SelectorFilePath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：工作表名稱清單" Name="out_SheetNames" Type="OutArgument(scg:List(x:String))" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：輸入檔資料，型態為Dictionary&lt;工作表名, DataTable&gt;" Name="out_InputData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property sap2010:Annotation.AnnotationText="輸出：選擇器檔資料，型態為Dictionary&lt;工作表名, DataTable&gt;" Name="out_SelectorData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -42,6 +42,7 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -85,6 +86,13 @@
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
       <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap2010:WorkflowViewState.ViewStateManager>
@@ -209,15 +217,25 @@
       </sap2010:ViewStateData>
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
-  <Sequence sap2010:Annotation.AnnotationText="- Overview&#xA;Store the input file and selector file values ​​in a data table object.&#xA;Also check the column name and number of columns in the input file and selector file match.&#xA;&#xA;- Input/Output&#xA;in_InputFilePath as file path of input file &lt;String&gt;&#xA;in_SelectorFilePath as file path of selector file &lt;String&gt;&#xA;out_SheetNames as List of sheet names &lt;List&lt;String&gt;&gt;&#xA;out_InputData as Data read from input file &lt;Dictionay&lt;String,DataTable&gt;&gt;&#xA;out_SelectorData as Data read from selector file &lt;Dictionay&lt;String,DataTable&gt;&gt;" DisplayName="SRC_LoadExcelData" sap:VirtualizedContainerService.HintSize="1066,3682" sap2010:WorkflowViewState.IdRef="Sequence_4">
+  <Sequence sap2010:Annotation.AnnotationText="- Overview (這支流程是一個Excel資料載入與校驗工具，功能是：同時讀取「輸入檔」和「選擇器檔」這兩份Excel檔案的所有工作表資料，並確認兩份檔案的欄位名稱、欄位數量彼此對得起來，確保後續的GUI自動化流程在操作SAP畫面時，每個輸入資料欄位都有對應的選擇器可以使用。)&#xA;Store the input file and selector file values ​​in a data table object.&#xA;Also check the column name and number of columns in the input file and selector file match.&#xA;&#xA;- Input/Output&#xA;in_InputFilePath as file path of input file &lt;String&gt;&#xA;in_SelectorFilePath as file path of selector file &lt;String&gt;&#xA;out_SheetNames as List of sheet names &lt;List&lt;String&gt;&gt;&#xA;out_InputData as Data read from input file &lt;Dictionay&lt;String,DataTable&gt;&gt;&#xA;out_SelectorData as Data read from selector file &lt;Dictionay&lt;String,DataTable&gt;&gt;" DisplayName="SRC_LoadExcelData" sap:VirtualizedContainerService.HintSize="1025,6355" sap2010:WorkflowViewState.IdRef="Sequence_4">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="SRC_LoadExcelData" Name="WorkflowName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="522,206" sap2010:WorkflowViewState.IdRef="Comment_2" Text="這支流程是一個Excel資料載入與校驗工具，功能是：同時讀取「輸入檔」和「選擇器檔」這兩份Excel檔案的所有工作表資料，並確認兩份檔案的欄位名稱、欄位數量彼此對得起來，確保後續的GUI自動化流程在操作SAP畫面時，每個輸入資料欄位都有對應的選擇器可以使用。" />
+    <ui:Comment sap:VirtualizedContainerService.HintSize="522,401" sap2010:WorkflowViewState.IdRef="Comment_5" Text="這支流程的核心設計邏輯：雙向欄位一致性檢查&#xA;這支流程最關鍵的巧思在於做了「雙向」的欄位比對：&#xA;&gt; 正向檢查：確保「輸入檔的每個欄位」，選擇器檔裡都有對應設定 → 沒有就丟&quot;Missing column in selector file&quot;&#xA;&gt; 反向檢查：確保「選擇器檔的每一列」，輸入檔裡都有對應欄位 → 沒有就丟&quot;Missing column in input file&quot;&#xA;&#xA;這種雙向校驗確保了兩份檔案的欄位完全對齊、一個都不缺，因為如果只做單向檢查，可能會漏掉「選擇器檔多定義了一個輸入檔沒有的欄位」這種情況——雖然這種情況通常不影響執行，但很可能代表使用者設定檔案時打錯欄位名稱或版本不同步，提早攔截可以避免後續執行到一半才發現問題。" />
+    <ui:Comment sap2010:Annotation.AnnotationText="這是「GUI自動化操作路線」裡負責前置資料準備與檔案完整性驗證的核心共用元件：把使用者填好的「要輸入什麼值(輸入檔)」跟「要輸入到畫面上哪個位置(選擇器檔)」這兩份Excel檔案整合起來，變成後續流程可以直接使用的 Dictionary&lt;String, DataTable&gt; 結構，同時確保兩份檔案彼此吻合，避免因為欄位缺漏而讓自動化流程執行到一半失敗。" sap:VirtualizedContainerService.HintSize="522,215" sap2010:WorkflowViewState.IdRef="Comment_7" Text="//">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
     <ui:LogMessage DisplayName="Log message - Start" sap:VirtualizedContainerService.HintSize="522,57" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[WorkflowName + &quot;  start&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -226,10 +244,11 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <Sequence DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="522,608" sap2010:WorkflowViewState.IdRef="Sequence_50">
+    <Sequence sap2010:Annotation.AnnotationText=" 初始化三個輸出變數（Sequence_50）&#xA;out_InputData = 空字典&#xA;out_SelectorData = 空字典&#xA;out_SheetNames = 空清單" DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="522,685" sap2010:WorkflowViewState.IdRef="Sequence_50">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <Assign DisplayName="Assign out_InputData (Initialization)" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Assign_1">
@@ -257,7 +276,7 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <ui:ForEach x:TypeArguments="ce:IXLWorksheet" CurrentIndex="{x:Null}" DisplayName="For Each Sheet in Excel File" sap:VirtualizedContainerService.HintSize="522,463" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[New XLWorkbook(in_InputFilePath).Worksheets]">
+    <ui:ForEach x:TypeArguments="ce:IXLWorksheet" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="用 ClosedXML 開啟輸入檔，逐一遍歷所有工作表（ForEach，用 New XLWorkbook(in_InputFilePath).Worksheets）&#xA;&gt; 每個工作表都執行：&#xA;&gt;&gt; 用 ReadRange 讀取該工作表資料 → 存入 out_InputData(sheet.Name)&#xA;&gt;&gt; 用 AddToCollection 把工作表名稱加進 out_SheetNames" DisplayName="For Each Sheet in Excel File" sap:VirtualizedContainerService.HintSize="522,557" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[New XLWorkbook(in_InputFilePath).Worksheets]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="ce:IXLWorksheet">
           <ActivityAction.Argument>
@@ -280,15 +299,33 @@
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <RemoveFromCollection x:TypeArguments="x:String" Collection="[out_SheetNames]" DisplayName="Remove &quot;SRC_Log&quot;" sap:VirtualizedContainerService.HintSize="522,54" sap2010:WorkflowViewState.IdRef="RemoveFromCollection`1_2" Item="SRC_Log" />
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each eheet in out_SheetNames" sap:VirtualizedContainerService.HintSize="522,2311" sap2010:WorkflowViewState.IdRef="ForEach`1_20" Values="[out_SheetNames]">
+    <RemoveFromCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="用 RemoveFromCollection 把 &quot;SRC_Log&quot; 這個工作表名稱從 out_SheetNames 移除&#xA;&gt; 因為SRC_Log是專門用來記錄執行結果的工作表，不是真正的「輸入資料」，所以要排除在後續處理範圍外" Collection="[out_SheetNames]" DisplayName="Remove &quot;SRC_Log&quot;" sap:VirtualizedContainerService.HintSize="522,180" sap2010:WorkflowViewState.IdRef="RemoveFromCollection`1_2" Item="SRC_Log">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </RemoveFromCollection>
+    <ui:Comment sap2010:Annotation.AnnotationText=" 用 ForEach 逐一遍歷 out_SheetNames（已排除SRC_Log的工作表清單），對每張工作表做「選擇器比對」（Sequence_52，這也是本流程的核心校驗邏輯）：&#xA;1. 用 out_SelectorData(sheet) = out_InputData(sheet).Clone&#xA;&gt; 先複製輸入資料表的欄位結構(Clone只複製結構，不複製資料)，當作選擇器資料表的骨架，確保兩者欄位結構一致&#xA;2. 用 ReadRange 讀取選擇器檔案裡同名的工作表 → 存入暫存變數 dt_Temporary&#xA;&gt; ⚠️ 注意這裡有一段用 CommentOut 包起來、已停用的舊邏輯(AddDataRow兩筆空列)，代表這個地方曾經有過不同的實作方式，後來被註解掉不用了&#xA;3. 用 ForEach 逐一檢查 out_SelectorData(sheet) 的每一個欄位（column）：&#xA;&gt; 若欄位名稱是 &quot;No&quot; 或 &quot;SeqNo&quot; → 直接 Continue 跳過（這兩個是編號用的輔助欄位，不需要對應選擇器）&#xA;&gt; 否則，去 dt_Temporary（選擇器檔內容）裡查詢是否有一列的第一欄(通常是欄位名稱清單)等於這個欄位名稱：&#xA;&gt;&gt; 有找到 → 把對應的選擇器值(dt_Temporary第1欄的值)填入 out_SelectorData(sheet).Rows(0).Item(column.ColumnName)&#xA;&gt;&gt; 沒找到 → Throw 一個 BusinessRuleException：&quot;Missing column in selector file. Column name [欄位名稱]&quot;（選擇器檔案裡缺少這個欄位對應的選擇器設定）&#xA;4. 反過來，再用 ForEachRow 檢查 dt_Temporary（選擇器檔內容）的每一列：&#xA;&gt; 檢查 out_SelectorData(sheet) 的欄位清單裡，是否包含這一列標示的欄位名稱(row(0))&#xA;&gt;&gt; 有包含 → Continue(比對成功，跳過)&#xA;&gt;&gt; 沒包含 → Throw 一個 BusinessRuleException：&quot;Missing column in input file. Column name [欄位名稱]&quot;（輸入檔案裡缺少這個欄位，但選擇器檔案卻定義了它）" sap:VirtualizedContainerService.HintSize="522,722" sap2010:WorkflowViewState.IdRef="Comment_10" Text="// Write your comments in the Text property">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Comment>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each eheet in out_SheetNames" sap:VirtualizedContainerService.HintSize="522,3184" sap2010:WorkflowViewState.IdRef="ForEach`1_20" Values="[out_SheetNames]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="sheet" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Loop Main Process" sap:VirtualizedContainerService.HintSize="520,2180" sap2010:WorkflowViewState.IdRef="Sequence_52">
+          <Sequence DisplayName="Loop Main Process" sap:VirtualizedContainerService.HintSize="520,3053" sap2010:WorkflowViewState.IdRef="Sequence_52">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="dt_Temporary" />
             </Sequence.Variables>
@@ -297,30 +334,29 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Assign out_SelectorData(sheet)" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="Assign_18">
+            <Assign sap2010:Annotation.AnnotationText="用 out_SelectorData(sheet) = out_InputData(sheet).Clone&#xA;&gt; 先複製輸入資料表的欄位結構(Clone只複製結構，不複製資料)，當作選擇器資料表的骨架，確保兩者欄位結構一致" DisplayName="Assign out_SelectorData(sheet)" sap:VirtualizedContainerService.HintSize="486,269" sap2010:WorkflowViewState.IdRef="Assign_18">
               <Assign.To>
                 <OutArgument x:TypeArguments="sd:DataTable">[out_SelectorData(sheet)]</OutArgument>
               </Assign.To>
               <Assign.Value>
                 <InArgument x:TypeArguments="sd:DataTable">[out_InputData(sheet).Clone]</InArgument>
               </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </Assign>
             <ui:Comment sap:VirtualizedContainerService.HintSize="486,89" sap2010:WorkflowViewState.IdRef="Comment_1" Text="???????" />
-            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,604" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;&quot;}]" DataTable="[out_SelectorData(sheet)]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="486,221" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,383" sap2010:WorkflowViewState.IdRef="CommentOut_1">
               <ui:CommentOut.Body>
-                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,493" sap2010:WorkflowViewState.IdRef="Sequence_53">
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,272" sap2010:WorkflowViewState.IdRef="Sequence_53">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:AddDataRow DataRow="{x:Null}" DataTable="[out_SelectorData(sheet)]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,221" sap2010:WorkflowViewState.IdRef="AddDataRow_3">
-                    <ui:AddDataRow.ArrayRow>
-                      <InArgument x:TypeArguments="s:Object[]">
-                        <VisualBasicValue x:TypeArguments="s:Object[]" ExpressionText="{}{}" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
-                      </InArgument>
-                    </ui:AddDataRow.ArrayRow>
-                  </ui:AddDataRow>
                   <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{}]" DataTable="[out_SelectorData(sheet)]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,212" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
                 </Sequence>
               </ui:CommentOut.Body>
@@ -331,27 +367,37 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:CommentOut>
-            <ui:ReadRange AddHeaders="True" DataTable="[dt_Temporary]" DisplayName="Read Range SelectorData" sap:VirtualizedContainerService.HintSize="486,227" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="[sheet]" WorkbookPath="[in_SelectorFilePath]">
+            <ui:ReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="用 ReadRange 讀取選擇器檔案裡同名的工作表 → 存入暫存變數 dt_Temporary" DataTable="[dt_Temporary]" DisplayName="Read Range SelectorData" sap:VirtualizedContainerService.HintSize="486,272" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="[sheet]" WorkbookPath="[in_SelectorFilePath]">
               <ui:ReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
                 </InArgument>
               </ui:ReadRange.Range>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ReadRange>
-            <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Extract selectors from selector file.&#xA;Search condition is the same column name value as the input file." DisplayName="For Each column in out_SelectorData(sheet).Columns" sap:VirtualizedContainerService.HintSize="486,762" sap2010:WorkflowViewState.IdRef="ForEach`1_19" Values="[out_SelectorData(sheet).Columns]">
+            <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Extract selectors from selector file.&#xA;Search condition is the same column name value as the input file.&#xA;&#xA;用 ForEach 逐一檢查 out_SelectorData(sheet) 的每一個欄位（column）：&#xA;&gt; 若欄位名稱是 &quot;No&quot; 或 &quot;SeqNo&quot; → 直接 Continue 跳過（這兩個是編號用的輔助欄位，不需要對應選擇器）&#xA;&gt; 否則，去 dt_Temporary（選擇器檔內容）裡查詢是否有一列的第一欄(通常是欄位名稱清單)等於這個欄位名稱：&#xA;&gt;&gt; 有找到 → 把對應的選擇器值(dt_Temporary第1欄的值)填入 out_SelectorData(sheet).Rows(0).Item(column.ColumnName)&#xA;&gt;&gt; 沒找到 → Throw 一個 BusinessRuleException：&quot;Missing column in selector file. Column name [欄位名稱]&quot;（選擇器檔案裡缺少這個欄位對應的選擇器設定）" DisplayName="For Each column in out_SelectorData(sheet).Columns" sap:VirtualizedContainerService.HintSize="486,1128" sap2010:WorkflowViewState.IdRef="ForEach`1_19" Values="[out_SelectorData(sheet).Columns]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="sd:DataColumn">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
                   </ActivityAction.Argument>
-                  <If sap2010:Annotation.AnnotationText="Skip processing when Column Name is &quot;No&quot; or &quot;SeqNo&quot;" Condition="[{&quot;No&quot;, &quot;SeqNo&quot;}.contains(column.ColumnName)]" DisplayName="If Column Name contains No or SeqNo" sap:VirtualizedContainerService.HintSize="355,561" sap2010:WorkflowViewState.IdRef="If_8">
+                  <If sap2010:Annotation.AnnotationText="Skip processing when Column Name is &quot;No&quot; or &quot;SeqNo&quot;" Condition="[{&quot;No&quot;, &quot;SeqNo&quot;}.contains(column.ColumnName)]" DisplayName="If Column Name contains No or SeqNo" sap:VirtualizedContainerService.HintSize="339,637" sap2010:WorkflowViewState.IdRef="If_8">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <ui:Continue DisplayName="Continue For Each SelectorData" sap:VirtualizedContainerService.HintSize="342,25" sap2010:WorkflowViewState.IdRef="Continue_3" />
+                      <ui:Continue DisplayName="Continue For Each SelectorData" sap:VirtualizedContainerService.HintSize="336,25" sap2010:WorkflowViewState.IdRef="Continue_3" />
                     </If.Then>
                     <If.Else>
-                      <If Condition="[dt_Temporary.select(&quot;[&quot; &amp; dt_Temporary.Columns(0).ColumnName &amp; &quot;] = '&quot; &amp; column.ColumnName &amp; &quot;'&quot;).Count &gt; 0]" DisplayName="If selector data columns match" sap:VirtualizedContainerService.HintSize="342,385" sap2010:WorkflowViewState.IdRef="If_7">
+                      <If Condition="[dt_Temporary.select(&quot;[&quot; &amp; dt_Temporary.Columns(0).ColumnName &amp; &quot;] = '&quot; &amp; column.ColumnName &amp; &quot;'&quot;).Count &gt; 0]" DisplayName="If selector data columns match" sap:VirtualizedContainerService.HintSize="336,416" sap2010:WorkflowViewState.IdRef="If_7">
                         <If.Then>
-                          <Assign DisplayName="Assign out_SelectorData(sheet).Rows(0).Item(column.ColumnName)" sap:VirtualizedContainerService.HintSize="340,143" sap2010:WorkflowViewState.IdRef="Assign_19">
+                          <Assign DisplayName="Assign out_SelectorData(sheet).Rows(0).Item(column.ColumnName)" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="Assign_19">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:Object">[out_SelectorData(sheet).Rows(0).Item(column.ColumnName)]</OutArgument>
                             </Assign.To>
@@ -361,35 +407,69 @@
                           </Assign>
                         </If.Then>
                         <If.Else>
-                          <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Missing Column in SelectorData" Exception="[New UiPath.Core.BusinessRuleException(&quot;Missing column in selector file.  &quot; &amp; &quot;Column name [&quot; &amp; column.ColumnName &amp; &quot;]&quot;)]" sap:VirtualizedContainerService.HintSize="340,91" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                          <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Missing Column in SelectorData" Exception="[New UiPath.Core.BusinessRuleException(&quot;Missing column in selector file.  &quot; &amp; &quot;Column name [&quot; &amp; column.ColumnName &amp; &quot;]&quot;)]" sap:VirtualizedContainerService.HintSize="334,122" sap2010:WorkflowViewState.IdRef="Throw_3">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Throw>
                         </If.Else>
                       </If>
                     </If.Else>
                   </If>
                 </ActivityAction>
               </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Check if selector data and input data have the same column name." DataTable="[dt_Temporary]" DisplayName="For Each row in dt_Temporary" sap:VirtualizedContainerService.HintSize="486,263" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Check if selector data and input data have the same column name." DataTable="[dt_Temporary]" DisplayName="For Each row in dt_Temporary" sap:VirtualizedContainerService.HintSize="486,631" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
-                  <If sap2010:Annotation.AnnotationText="If there is a column that doesn't match, throw an Exception." Condition="[out_SelectorData(sheet).Columns.Contains(row(0).ToString)]" DisplayName="If input data columns match" sap2010:WorkflowViewState.IdRef="If_9">
+                  <If sap2010:Annotation.AnnotationText="If there is a column that doesn't match, throw an Exception." Condition="[out_SelectorData(sheet).Columns.Contains(row(0).ToString)]" DisplayName="If input data columns match" sap:VirtualizedContainerService.HintSize="336,343" sap2010:WorkflowViewState.IdRef="If_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <ui:Continue DisplayName="Continue For Each Row" sap2010:WorkflowViewState.IdRef="Continue_5" />
+                      <ui:Continue DisplayName="Continue For Each Row" sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="Continue_5" />
                     </If.Then>
                     <If.Else>
-                      <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Missing Column in InputData" Exception="[New UiPath.Core.BusinessRuleException(&quot;Missing column in input file.  &quot; &amp; &quot;Column name [&quot; &amp; row(0).ToString &amp; &quot;]&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                      <Throw sap2010:Annotation.AnnotationText="BusinessRuleException" DisplayName="Throw Missing Column in InputData" Exception="[New UiPath.Core.BusinessRuleException(&quot;Missing column in input file.  &quot; &amp; &quot;Column name [&quot; &amp; row(0).ToString &amp; &quot;]&quot;)]" sap:VirtualizedContainerService.HintSize="334,122" sap2010:WorkflowViewState.IdRef="Throw_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Throw>
                     </If.Else>
                   </If>
                 </ActivityAction>
               </ui:ForEachRow.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ForEachRow>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="452,166" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[WorkflowName + &quot;  end&quot;]" />
+    <ui:LogMessage DisplayName="Log message - End" sap:VirtualizedContainerService.HintSize="522,48" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[WorkflowName + &quot;  end&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
   </Sequence>
 </Activity>
